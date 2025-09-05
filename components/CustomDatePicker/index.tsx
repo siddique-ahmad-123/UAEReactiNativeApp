@@ -1,3 +1,4 @@
+import { fontSize, radius, spacingX, spacingY } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -56,10 +57,10 @@ const CustomDatePicker = ({
       >
         <Text style={selectedDate ? styles.dateText : styles.placeholderText}>
           {selectedDate
-            ? selectedDate.toLocaleDateString("en-GB") // dd/mm/yyyy format
+            ? selectedDate.toLocaleDateString("en-GB") // dd/mm/yyyy
             : placeholder}
         </Text>
-        <Ionicons name="calendar-outline" size={20} color="#3F1956" />
+        <Ionicons name="calendar-outline" size={fontSize.lg} color="#3F1956" />
       </TouchableOpacity>
 
       {/* Modal Date Picker */}
@@ -81,49 +82,49 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: 1.5,
     borderColor: "#ccc",
-    borderRadius: 8,
-    padding: 10,
-    marginVertical: 12,
+    borderRadius: radius.md,
+    paddingVertical: spacingY._5,
+    paddingHorizontal: spacingX._12,
+    marginVertical: spacingY._15,
     backgroundColor: "#fff",
   },
   full: {
-    width: "90%",
+    width: "100%",
   },
   half: {
-    width: "45%",
+    width: "48%",
   },
   labelContainer: {
     position: "absolute",
-    top: -10,
-    left: 12,
+    top: -spacingY._12,
+    left: spacingX._12,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#fff",
-    paddingHorizontal: 5,
+    paddingHorizontal: spacingX._5,
   },
   label: {
-    fontSize: 14,
+    fontSize: fontSize.sm,
     fontWeight: "600",
     color: "#3F1956",
   },
   labelLine: {
     height: 1.5,
     backgroundColor: "#ccc",
-    marginLeft: 6,
-    // flex: 1,
+    marginLeft: spacingX._7,
   },
   inputBox: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: 40,
+    height: spacingY._40,
   },
   placeholderText: {
-    fontSize: 16,
+    fontSize: fontSize.md,
     color: "#999",
   },
   dateText: {
-    fontSize: 16,
+    fontSize: fontSize.md,
     color: "#000",
   },
 });

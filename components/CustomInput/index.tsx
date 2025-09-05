@@ -1,3 +1,4 @@
+import { fontSize, radius, spacingX, spacingY } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
@@ -5,7 +6,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 
 interface CustomInputProps {
@@ -14,7 +15,6 @@ interface CustomInputProps {
   type?: "text" | "email" | "number" | "currency" | "password";
   variant?: "full" | "half";
   mandatory?: boolean;
-  secureTextEntry?: boolean;
 }
 
 const CustomInput = ({
@@ -68,9 +68,9 @@ const CustomInput = ({
           <TouchableOpacity onPress={() => setSecure(!secure)}>
             <Ionicons
               name={secure ? "eye" : "eye-off"}
-              size={20}
+              size={fontSize.lg}
               color="#555"
-              style={{ marginLeft: 8 }}
+              style={{ marginLeft: spacingX._7 }}
             />
           </TouchableOpacity>
         )}
@@ -84,10 +84,11 @@ export default CustomInput;
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1.5,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    padding: 10,
-    marginVertical: 12,
+    borderColor: "#DEDEDE",
+    borderRadius: radius.md,
+    paddingHorizontal: spacingX._12,
+    paddingVertical: spacingY._5,
+    marginVertical: spacingY._12,
     backgroundColor: "#fff",
   },
   full: {
@@ -98,27 +99,26 @@ const styles = StyleSheet.create({
   },
   labelContainer: {
     position: "absolute",
-    top: -10,
-    left: 12,
+    top: -spacingY._12,
+    left: spacingX._12,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#fff",
-    paddingHorizontal: 5,
+    paddingHorizontal: spacingX._5,
   },
   label: {
-    fontSize: 14,
+    fontSize: fontSize.sm,
     fontWeight: "600",
     color: "#3F1956",
   },
   labelLine: {
-    // flex: 1,
     height: 1.5,
     backgroundColor: "#ccc",
-    marginLeft: 6,
+    marginLeft: spacingX._7,
   },
   input: {
-    fontSize: 16,
-    paddingTop: 12,
+    fontSize: fontSize.md,
+    paddingTop: spacingY._12,
     color: "#333",
   },
   inputRow: {
@@ -126,6 +126,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   eyeButton: {
-    paddingHorizontal: 6,
+    paddingHorizontal: spacingX._5,
   },
 });
