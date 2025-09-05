@@ -58,7 +58,7 @@ const OTPScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../../assets/images/background.png")}
+        source={require("../../../assets/images/background.png")}
         style={styles.headerBackground}
         imageStyle={styles.imageStyle}
       >
@@ -76,7 +76,7 @@ const OTPScreen: React.FC = () => {
         </TouchableOpacity>
 
         <Image
-          source={require("../../assets/images/logo.png")}
+          source={require("../../../assets/images/logo.png")}
           style={styles.logo}
           resizeMode="contain"
         />
