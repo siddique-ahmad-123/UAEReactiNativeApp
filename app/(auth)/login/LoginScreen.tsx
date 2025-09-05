@@ -57,13 +57,14 @@ const LoginScreen: React.FC = () => {
             onPress={() => {}}
             variant="secondary"
             type="outlined"
-            size="md"
+            size="lg"
           />
           <CustomButton
             title="Log In"
             onPress={() => router.push("/(auth)/otp/otpScreen")}
             variant="primary"
             type="filled"
+            size="lg"
           />
         </View>
       </View>
