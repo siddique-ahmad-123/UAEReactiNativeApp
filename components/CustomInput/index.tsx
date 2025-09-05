@@ -91,10 +91,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   full: {
-    width: "90%",
+    width: "100%",
   },
   half: {
-    width: "45%",
+    width: "50%",
   },
   labelContainer: {
     position: "absolute",

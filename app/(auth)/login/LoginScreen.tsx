@@ -57,6 +57,7 @@ const LoginScreen: React.FC = () => {
             onPress={() => {}}
             variant="secondary"
             type="outlined"
+            size="md"
           />
           <CustomButton
             title="Log In"
