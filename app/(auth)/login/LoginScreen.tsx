@@ -13,6 +13,7 @@ import { colors } from "@/constants/Colors";
 
 import { styles } from "./Login.Styles";
 import CustomButton from "@/components/CustomButton";
+import CustomInput from "@/components/CustomInput";
 
 const LoginScreen: React.FC = () => {
   const router = useRouter();
@@ -60,7 +61,7 @@ const LoginScreen: React.FC = () => {
           />
           <CustomButton
             title="Log In"
-            onPress={() => router.push("/auth/OTPScreen")}
+            onPress={() => router.push("/(auth)/otp/otpScreen")}
             variant="primary"
             type="filled"
           />

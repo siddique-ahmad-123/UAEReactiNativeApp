@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ImageBackground,
   TouchableOpacity,
   TextInput,
@@ -10,7 +9,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { colors } from "@/constants/Colors";
-import { styles } from "../login/Login.Styles";
+import { styles } from "./otp.Styles";
 
 
 const OTPScreen: React.FC = () => {
