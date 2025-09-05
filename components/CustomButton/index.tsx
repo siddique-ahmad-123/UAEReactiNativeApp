@@ -2,7 +2,7 @@ import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import globalStyles from "./utils";
 import { radius } from "@/constants/Metrics";
-import { spacing } from "@/constants/Specing";
+import { spacing } from "@/constants/Spacing";
 
 type Props = {
   title?: string;
