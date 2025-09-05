@@ -1,3 +1,4 @@
+import { fontSize, radius, spacingX, spacingY } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -36,6 +37,7 @@ const CustomDropDown = ({
 
   return (
     <View style={[styles.container, getVariantStyle()]}>
+      {/* Label */}
       <View style={styles.labelContainer}>
         <Text style={styles.label}>
           {label}
@@ -57,7 +59,7 @@ const CustomDropDown = ({
           value={value}
           onChange={(item) => setValue(item.value)}
           renderRightIcon={() => (
-            <Ionicons name="chevron-down" size={20} color="#3F1956" />
+            <Ionicons name="chevron-down" size={fontSize.lg} color="#3F1956" />
           )}
         />
       ) : (
@@ -73,7 +75,7 @@ const CustomDropDown = ({
           value={value as string[]}
           onChange={(items) => setValue(items)}
           renderRightIcon={() => (
-            <Ionicons name="chevron-down" size={20} color="#3F1956" />
+            <Ionicons name="chevron-down" size={fontSize.lg} color="#3F1956" />
           )}
           selectedStyle={styles.selectedStyle}
         />
@@ -88,55 +90,56 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: 1.5,
     borderColor: "#ccc",
-    borderRadius: 8,
-    padding: 10,
-    marginVertical: 12,
+    borderRadius: radius.md,
+    paddingVertical: spacingY._5,
+    paddingHorizontal: spacingX._12,
+    marginVertical: spacingY._15,
     backgroundColor: "#fff",
   },
   full: {
-    width: "90%",
+    width: "100%",
   },
   half: {
-    width: "45%",
+    width: "48%",
   },
   labelContainer: {
     position: "absolute",
-    top: -10,
-    left: 12,
+    top: -spacingY._12,
+    left: spacingX._12,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#fff",
-    paddingHorizontal: 5,
+    paddingHorizontal: spacingX._5,
   },
   label: {
-    fontSize: 14,
+    fontSize: fontSize.sm,
     fontWeight: "600",
     color: "#3F1956",
   },
   labelLine: {
     height: 1.5,
     backgroundColor: "#ccc",
-    marginLeft: 6,
+    marginLeft: spacingX._7,
   },
   dropdown: {
-    height: 40,
+    height: spacingY._40,
   },
   placeholderStyle: {
-    fontSize: 16,
+    fontSize: fontSize.md,
     color: "#999",
   },
   selectedTextStyle: {
-    fontSize: 16,
+    fontSize: fontSize.md,
     color: "#000",
   },
   iconStyle: {
-    marginLeft: 8,
+    marginLeft: spacingX._7,
   },
   selectedStyle: {
-    borderRadius: 8,
+    borderRadius: radius.sm,
     backgroundColor: "#EDE7F6",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    margin: 4,
+    paddingHorizontal: spacingX._7,
+    paddingVertical: spacingY._7,
+    margin: spacingX._5,
   },
 });
