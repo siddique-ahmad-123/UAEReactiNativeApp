@@ -15,6 +15,7 @@ interface CustomInputProps {
   type?: "text" | "email" | "number" | "currency" | "password";
   variant?: "full" | "half";
   mandatory?: boolean;
+  secureTextEntry?:boolean
 }
 
 const CustomInput = ({
