@@ -6,10 +6,14 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
+
+
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    SpaceMono: require('../assets/fonts/karbon-regular-webfont.ttf'),
+    LatoRegular: require("../assets/fonts/Lato-Regular.ttf"),
+    LatoBold: require("../assets/fonts/Lato-Bold.ttf"),
   });
 
   if (!loaded) {
@@ -19,9 +23,11 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack initialRouteName="(auth)/login">
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+      <Stack initialRouteName="(main)/onboarding">
+      <Stack.Screen name="(auth)/otp" options={{ headerShown: false }} />
+      <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />
+      <Stack.Screen name="(main)/onboarding" options={{ headerShown: false }} />
+      <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

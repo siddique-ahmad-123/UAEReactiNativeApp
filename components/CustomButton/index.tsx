@@ -11,6 +11,7 @@ type Props = {
   variant?: "primary" | "secondary";
   type?: "filled" | "outlined";
   size?: "sm" | "md" | "lg";
+   style?: StyleProp<ViewStyle>;
 };
 
 export default function CustomButton({
@@ -19,6 +20,7 @@ export default function CustomButton({
   variant = "primary",
   type = "filled",
   size = "md",
+  style,
 }: Props) {
   let buttonStyle: StyleProp<ViewStyle>;
   let textStyle: StyleProp<TextStyle>;
@@ -30,12 +32,14 @@ export default function CustomButton({
       paddingHorizontal: spacing.md,
       borderRadius: radius._6,
       minWidth: 120,
+      minHeight:40
     },
     md: {
       paddingVertical: spacing.md,
       paddingHorizontal: spacing.lg,
-      borderRadius: radius._12,
-      minWidth: 152,
+      borderRadius: radius._6,
+      minWidth: 174,
+      minHeight:58
     },
     lg: {
       paddingVertical: spacing.md,
