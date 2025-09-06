@@ -1,3 +1,4 @@
+import SegmentedControl from "@/components/SegmentControl";
 import ServiceTile from "@/components/ServiceTile";
 import { StyleSheet, View } from "react-native";
 
@@ -31,6 +32,12 @@ const testScreen = () => {
         type="singleSelect"
         variant="full"
       /> */}
+
+      <SegmentedControl
+        label="Select Income Type"
+        options={["Salaried", "Self Employed"]}
+        onChange={(value) => console.log("Selected:", value)}
+      />
     </View>
   );
 };
