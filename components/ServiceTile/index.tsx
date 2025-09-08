@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start", // left aligned as per your screenshot
     justifyContent: "space-between",
     // width: spacingX._120 ?? 120,
-    width: 120,
+    width: spacingX._105,
   },
   iconWrapper: {
     backgroundColor: "#7E5A9B",
