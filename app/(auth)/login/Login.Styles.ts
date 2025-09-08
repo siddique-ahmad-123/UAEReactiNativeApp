@@ -1,8 +1,7 @@
 import { StyleSheet } from "react-native";
-import { colors } from "@/constants/Colors";
 
 export const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.white },
+  container: { flex: 1, backgroundColor: "white" },
 
   headerBackground: {
     width: "110%",
@@ -60,14 +59,14 @@ export const styles = StyleSheet.create({
 
   formContainer: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: "white",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     marginTop: -20,
     padding: 20,
   },
 
-  forgotPassword: { fontSize: 14, color: colors.text },
+  forgotPassword: { fontSize: 14, color: "text" },
 
   row: {
     flexDirection: "row",

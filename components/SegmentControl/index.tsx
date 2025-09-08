@@ -1,4 +1,4 @@
-import { fontSize, radius, spacingX, spacingY } from "@/constants/Metrics";
+import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -57,7 +57,7 @@ export default SegmentedControl;
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginVertical: spacingY._15,
+    marginVertical: spacingVertical.md,
     width: "90%",
     alignSelf: "center",
   },
@@ -65,19 +65,19 @@ const styles = StyleSheet.create({
     fontSize: fontSize.md,
     fontWeight: "700",
     color: "#3F1956",
-    marginBottom: spacingY._10,
+    marginBottom: spacingVertical.md,
   },
   container: {
     flexDirection: "row",
     backgroundColor: "#EDE6F5",
     borderRadius: radius.sm,
-    padding: spacingX._3,
+    padding: spacing.md,
   },
   option: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: spacingY._12,
+    paddingVertical: spacingVertical.md,
     borderRadius: radius.sm,
   },
   optionSelected: {

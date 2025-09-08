@@ -1,4 +1,4 @@
-import { fontSize, radius, spacingX, spacingY } from "@/constants/Metrics";
+import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -91,9 +91,9 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: "#ccc",
     borderRadius: radius.md,
-    paddingVertical: spacingY._5,
-    paddingHorizontal: spacingX._12,
-    marginVertical: spacingY._15,
+    paddingVertical: spacingVertical.md,
+    paddingHorizontal: spacing.lg,
+    marginVertical: spacingVertical.xl,
     backgroundColor: "#fff",
   },
   full: {
@@ -104,12 +104,12 @@ const styles = StyleSheet.create({
   },
   labelContainer: {
     position: "absolute",
-    top: -spacingY._12,
-    left: spacingX._12,
+    top: -spacingVertical.md,
+    left: spacing.md,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#fff",
-    paddingHorizontal: spacingX._5,
+    paddingHorizontal: spacing.md,
   },
   label: {
     fontSize: fontSize.sm,
@@ -119,10 +119,10 @@ const styles = StyleSheet.create({
   labelLine: {
     height: 1.5,
     backgroundColor: "#ccc",
-    marginLeft: spacingX._7,
+    marginLeft: spacing.md,
   },
   dropdown: {
-    height: spacingY._40,
+    height: spacingVertical.lg,
   },
   placeholderStyle: {
     fontSize: fontSize.md,
@@ -133,13 +133,13 @@ const styles = StyleSheet.create({
     color: "#000",
   },
   iconStyle: {
-    marginLeft: spacingX._7,
+    marginLeft: spacing.md,
   },
   selectedStyle: {
     borderRadius: radius.sm,
     backgroundColor: "#EDE7F6",
-    paddingHorizontal: spacingX._7,
-    paddingVertical: spacingY._7,
-    margin: spacingX._5,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacingVertical.md,
+    margin: spacing.md,
   },
 });

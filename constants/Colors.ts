@@ -1,101 +1,47 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
+const getLavenderRgba = (alpha: number) => `rgba(63, 25, 86, ${alpha})`;
+const getBorderLightColor = (num: number) => `rgba(0, 0, 0, ${num})`;
+const fadedOrange = (num: number) => `rgba(255, 243, 231,${num})`;
+const iconBackgroundColor = (num: number) => `rgba(72, 31, 94,${num})`;
+const greenOpacity = (num: number) => `rgba(221, 255, 218, ${num})`;
+const redOpacity = (num: number) => `rgba(255, 217, 222, ${num});`;
 
-import { verticalScale, scale } from "@/utils/styling";
+export const LightThemeColorConstants = {
+  primaryColor: "#3F1956",
+  secondaryColor: "#FECB26",
+  
+  primaryLightColor: "#E6D9F5",
+  secondaryLight: "#FFEDB1",
 
+  statusbar: "#51266C",
+  statusBarText: "#ffffffff",
 
+  background: "#ffffffff",
+  iconBackground: "#7E5A9B",
 
+  textPrimary:"#333333",
+  inputFieldBorder:"#DEDEDE",
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+  verifyCheck:"#2F9400",
+  verifyCheckLight:"#EAFFE0"
+ } as const;
 
-export const Colors = {
-  light: {
-    text: '#11181C',
-    background: '#FFFF',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
-  },
-  dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
-  },
-};
+export const DarkThemeColorConstants = {
+  primaryColor: "#3F1956",
+  secondaryColor: "#FECB26",
+  
+  primaryLightColor: "#E6D9F5",
+  secondaryLight: "#FFEDB1",
 
- 
-export const colors = {
-  primary: "#3D1053",
-  primaryLight: "#0ea5e9",
-  primaryDark: "#0369a1",
-  text: "#3F1956",
-  textLight: "#e5e5e5",
-  textLighter: "#d4d4d4",
-  white: "#FFFF",
-  black: "#000",
-  rose: "#ef4444",
-  green: "#16a34a",
-  gray:"#9498A9",
-  gray2:"#65666A",
-  inputTextcolor:"#B8B8B8",
-  neutral50: "#fafafa",
-  neutral100: "#f5f5f5",
-  neutral200: "#e5e5e5",
-  neutral300: "#d4d4d4",
-  neutral350: "#CCCCCC",
-  neutral400: "#a3a3a3",
-  neutral500: "#737373",
-  neutral600: "#525252",
-  neutral700: "#404040",
-  neutral800: "#262626",
-  neutral900: "#171717",
-};
- 
+  statusbar: "#51266C",
+  statusBarText: "#ffffffff",
 
- 
-export const theme = {
- 
-  colors: {
-    primary: "#1E40AF", // blue-800
-    secondary: "#64748B", // slate-500
-    background: "#F9FAFB", // gray-50
-    text: "#3F1956", // gray-900
-    white: "#FFFFFF",
-    error: "#DC2626", // red-600
-    success: "#16A34A", // green-600
-    warning: "#F59E0B",
-    inputTextcolor:"#B8B8B8" // amber-500
-  },
- 
-  shadows: {
-    sm: {
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: verticalScale(1) },
-      shadowOpacity: 0.15,
-      shadowRadius: scale(2),
-      elevation: 2,
-    },
-    md: {
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: verticalScale(3) },
-      shadowOpacity: 0.2,
-      shadowRadius: scale(4),
-      elevation: 4,
-    },
-    lg: {
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: verticalScale(6) },
-      shadowOpacity: 0.25,
-      shadowRadius: scale(8),
-      elevation: 8,
-    },
-  },
-};
+  background: "#ffffffff",
+  iconBackground: "#7E5A9B",
 
+  textPrimary:"#333333",
+  inputFieldBorder:"#DEDEDE",
+
+  verifyCheck:"#2F9400",
+  verifyCheckLight:"#EAFFE0"
+}as const;
+export type ThemeColors = typeof LightThemeColorConstants;

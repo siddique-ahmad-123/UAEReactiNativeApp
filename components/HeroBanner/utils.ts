@@ -1,4 +1,4 @@
-import { fontSize, radius, spacingX, spacingY } from "@/constants/Metrics";
+import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -6,25 +6,25 @@ export const styles = StyleSheet.create({
     // width: "100%",
     borderRadius: radius.lg,
     overflow: "hidden",
-    marginHorizontal: spacingX._15,
-    marginVertical: spacingY._15,
+    marginHorizontal: spacing.md,
+    marginVertical: spacingVertical.md,
   },
   bannerImage: {
     borderRadius: radius.lg,
   },
   overlayBox: {
     backgroundColor: "#3F1956",
-    paddingVertical: spacingY._15,
-    paddingHorizontal: spacingX._20,
+    paddingVertical: spacingVertical.md,
+    paddingHorizontal: spacing.md,
     borderRadius: radius.lg,
-    margin: spacingX._15,
+    margin: spacing.md,
     maxWidth: "50%",
-    marginBottom: spacingY._30,
+    marginBottom: spacingVertical.md,
   },
   messageText: {
     fontSize: fontSize.md,
     color: "#fff",
     fontWeight: "600",
-    marginBottom: spacingY._20,
+    marginBottom: spacingVertical.md,
   },
 });

@@ -1,4 +1,4 @@
-import { fontSize, radius, spacingX, spacingY } from "@/constants/Metrics";
+import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -83,9 +83,9 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: "#ccc",
     borderRadius: radius.md,
-    paddingVertical: spacingY._5,
-    paddingHorizontal: spacingX._12,
-    marginVertical: spacingY._15,
+    paddingVertical: spacingVertical.md,
+    paddingHorizontal: spacing.md,
+    marginVertical: spacingVertical.md,
     backgroundColor: "#fff",
   },
   full: {
@@ -96,12 +96,12 @@ const styles = StyleSheet.create({
   },
   labelContainer: {
     position: "absolute",
-    top: -spacingY._12,
-    left: spacingX._12,
+    top: -spacingVertical.md,
+    left: spacing.md,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#fff",
-    paddingHorizontal: spacingX._5,
+    paddingHorizontal: spacing.md,
   },
   label: {
     fontSize: fontSize.sm,
@@ -111,13 +111,13 @@ const styles = StyleSheet.create({
   labelLine: {
     height: 1.5,
     backgroundColor: "#ccc",
-    marginLeft: spacingX._7,
+    marginLeft: spacing.md,
   },
   inputBox: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: spacingY._40,
+    height: spacingVertical.md,
   },
   placeholderText: {
     fontSize: fontSize.md,

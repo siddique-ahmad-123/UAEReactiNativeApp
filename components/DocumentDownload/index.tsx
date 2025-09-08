@@ -1,4 +1,4 @@
-import { fontSize, radius, spacingX, spacingY } from "@/constants/Metrics";
+import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons"; // for the download icon
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "#F3E6FC",
-    paddingVertical: spacingY._12,
-    paddingHorizontal: spacingX._15,
+    paddingVertical: spacingVertical.md,
+    paddingHorizontal: spacing.md,
     borderRadius: radius.md,
-    marginVertical: spacingY._10,
+    marginVertical: spacingVertical.md,
   },
   text: {
     fontSize: fontSize.sm,

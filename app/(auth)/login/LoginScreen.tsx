@@ -8,9 +8,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useRouter } from "expo-router";
-
-import { colors } from "@/constants/Colors";
-
 import { styles } from "./Login.Styles";
 import CustomButton from "@/components/CustomButton";
 import CustomInput from "@/components/CustomInput";

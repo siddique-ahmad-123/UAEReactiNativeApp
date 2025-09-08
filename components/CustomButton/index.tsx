@@ -1,8 +1,8 @@
 import React from "react";
-import { Text, TouchableOpacity, StyleProp, ViewStyle, TextStyle } from "react-native";
+import { Text, TouchableOpacity, StyleProp, ViewStyle, TextStyle, StyleSheet } from "react-native";
 import globalStyles from "./utils";
-import { radius } from "@/constants/Metrics";
-import { spacing } from "@/constants/Spacing";
+import { useTheme } from "@react-navigation/native";
+import { radius, spacing, spacingVertical } from "@/constants/Metrics";
 
 type Props = {
   title?: string;
@@ -30,21 +30,21 @@ export default function CustomButton({
     sm: {
       paddingVertical: spacing.xs,
       paddingHorizontal: spacing.md,
-      borderRadius: radius._6,
+      borderRadius: radius.sm,
       minWidth: 120,
       minHeight:40
     },
     md: {
-      paddingVertical: spacing.md,
-      paddingHorizontal: spacing.lg,
-      borderRadius: radius._6,
+      paddingVertical: spacingVertical.md,
+      paddingHorizontal:spacing.lg,
+      borderRadius: radius.md,
       minWidth: 174,
       minHeight:58
     },
     lg: {
-      paddingVertical: spacing.md,
+      paddingVertical: spacingVertical.md,
       paddingHorizontal: spacing.xs,
-      borderRadius: radius._6,
+      borderRadius: radius.md,
       minWidth: 189,
     },
   };

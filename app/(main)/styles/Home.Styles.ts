@@ -1,15 +1,19 @@
-import { colors } from "@/constants/Colors";
 import { Dimensions, StyleSheet } from "react-native";
 const { width } = Dimensions.get("window");
+const colors = {  
+  white:"ffff",
+  primary: "#4F46E5",
+  gray: "#6B7280",
+}
 export const localStyles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.white },
+  container: { flex: 1, backgroundColor: "white" },
   bottomNav: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
     borderTopWidth: 1,
     borderColor: "#ddd",
-    backgroundColor: colors.white,
+    backgroundColor: "white",
     paddingBottom: 8,
     paddingTop: 6,
   },
@@ -38,7 +42,7 @@ export const localStyles = StyleSheet.create({
     color:colors.primary
   },
   avatar: { width: 50, height: 50, borderRadius: 25, marginRight: 12 },
-  welcome: { fontSize: 14, color: colors.gray2},
+  welcome: { fontSize: 14, color: colors.gray},
   username: { fontSize: 20, fontWeight: "400", color: colors.primary },
   banner: {
     margin: 16,

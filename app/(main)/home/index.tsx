@@ -4,7 +4,6 @@ import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { localStyles } from "../styles/Home.Styles";
 import { styles } from "../styles/onboarding.Styles";
-import { colors } from "@/constants/Colors";
 import ServiceTile from "@/components/ServiceTile";
 import HeroBanner from "@/components/HeroBanner";
 import ProductCard from "@/components/ProductCard";
@@ -57,7 +56,13 @@ const navItems = [
 
 export default function Dashboard() {
   const router = useRouter();
+  
   const [activeTab, setActiveTab] = useState("1");
+
+  const colors = {
+    primary: "#4F46E5",
+    gray: "#6B7280",
+  };
 
   return (
     <SafeAreaView style={styles.container}>
