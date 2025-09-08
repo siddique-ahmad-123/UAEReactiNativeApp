@@ -1,6 +1,5 @@
-import HeroBanner from "@/components/HeroBanner";
-import ProductCard from "@/components/ProductCard";
-import SegmentedControl from "@/components/SegmentControl";
+import CustomUpload from "@/components/CustomUpload";
+import LabeledSlider from "@/components/LabeledSlider";
 import ServiceTile from "@/components/ServiceTile";
 import { StyleSheet, View } from "react-native";
 
@@ -35,7 +34,7 @@ const testScreen = () => {
         variant="full"
       /> */}
 
-      <SegmentedControl
+      {/* <SegmentedControl
         label="Select Income Type"
         options={["Salaried", "Self Employed"]}
         onChange={(value) => console.log("Selected:", value)}
@@ -49,6 +48,17 @@ const testScreen = () => {
       <ProductCard
         title="Credit Card"
         image={require("../../assets/images/ProductImage.png")}
+      /> */}
+
+      <CustomUpload label="Passport" />
+
+      <LabeledSlider
+        label="Finance Amount"
+        min={10000}
+        max={200000}
+        step={1000}
+        unit="AED"
+        defaultValue={50000}
       />
     </View>
   );
