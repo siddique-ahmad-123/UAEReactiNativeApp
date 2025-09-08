@@ -70,6 +70,11 @@ const globalStyles = StyleSheet.create({
     fontWeight: "bold",
     color: "#fff",
   },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap:12
+  },
 });
 
 export default globalStyles;

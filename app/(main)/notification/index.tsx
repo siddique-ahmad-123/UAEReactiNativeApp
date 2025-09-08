@@ -1,20 +1,55 @@
 import React from "react";
-import { Text, View} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
- // Assuming styles.container is available
-import { localStyles } from "../styles/Calculator.Styles";
-import { styles } from "../styles/onboarding.Styles";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
+import { styles } from "../styles/Notification.Styles";
+import RequestCard from "@/components/RequestCard";
+import CustomButton from "@/components/CustomButton";
+// import your card
 
-
-export default function NotificationScreen() {
+const RequestsScreen = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={localStyles.content}>
-        <Text style={localStyles.title}>Calculator Screen</Text>
+    <SafeAreaView style={styles.safeArea}>
+      {/* Purple Header */}
+      <View style={styles.header}>
+        <View style={styles.headerTop}>
+          <Text style={styles.headerTitle}>Notifications</Text>
+          <TouchableOpacity>
+            <Text style={styles.closeButton}>✕</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.subHeader}>
+          Find all the Notifications that you have raised here.
+        </Text>
+      </View>
+
+      {/* White Container with Rounded Top */}
+      <View style={styles.container}>
+        {/* Show Request Card */}
+        <RequestCard
+          refNo="89765321"
+          date="03/09/2025"
+          status="Pending"
+          onPress={() => console.log("Details clicked")}
+        />
+
+        {/* Footer Button */}
+         <CustomButton
+        title="Back"
+        size="full"
+        variant="primary"
+        type="filled"
+        onPress={() => console.log("Check pressed")}
+        style={{ marginTop: 450 }}
+      />
+
       </View>
     </SafeAreaView>
   );
-}
+};
 
-// Local styles specific to this screen
-
+export default RequestsScreen;
