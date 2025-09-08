@@ -1,25 +1,19 @@
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { localStyles } from "../styles/Home.Styles";
 import { styles } from "../styles/onboarding.Styles";
 import { colors } from "@/constants/Colors";
 import ServiceTile from "@/components/ServiceTile";
-
+import HeroBanner from "@/components/HeroBanner";
+import ProductCard from "@/components/ProductCard";
 
 const services = [
   { id: "1", title: "Requests", iconName: "document-text-outline" },
   { id: "2", title: "Agreements", iconName: "file-tray-outline" },
   { id: "3", title: "Applications", iconName: "clipboard-outline" },
 ];
-
 
 const applyNow = [
   { id: "1", title: "Credit Card" },
@@ -29,11 +23,36 @@ const applyNow = [
 ];
 
 const navItems = [
-  { id: "1", title: "Home", icon: require("../../../assets/icons/home.png"), screen: "Dashboard" },
-  { id: "2", title: "Calculator", icon: require("../../../assets/icons/mobile.png"), screen: "Calculator" },
-  { id: "3", title: "Need Help", icon: require("../../../assets/icons/headphn.png"), screen: "Help" },
-  { id: "4", title: "Notifications", icon: require("../../../assets/icons/notification.png"), screen: "Notifications" },
-  { id: "5", title: "Menu", icon: require("../../../assets/icons/menu.png"), screen: "Menu" },
+  {
+    id: "1",
+    title: "Home",
+    icon: require("../../../assets/icons/home.png"),
+    screen: "Dashboard",
+  },
+  {
+    id: "2",
+    title: "Calculator",
+    icon: require("../../../assets/icons/mobile.png"),
+    screen: "Calculator",
+  },
+  {
+    id: "3",
+    title: "Need Help",
+    icon: require("../../../assets/icons/headphn.png"),
+    screen: "Help",
+  },
+  {
+    id: "4",
+    title: "Notifications",
+    icon: require("../../../assets/icons/notification.png"),
+    screen: "Notifications",
+  },
+  {
+    id: "5",
+    title: "Menu",
+    icon: require("../../../assets/icons/menu.png"),
+    screen: "Menu",
+  },
 ];
 
 export default function Dashboard() {
@@ -55,16 +74,10 @@ export default function Dashboard() {
           </View>
         </View>
 
-        {/* Banner */}
-        <View style={localStyles.banner}>
-          <Text style={localStyles.bannerText}>
-            Thank you for being associated with us.
-          </Text>
-          <Image
-            source={{ uri: "https://randomuser.me/api/portraits/men/75.jpg" }}
-            style={localStyles.bannerImage}
-          />
-        </View>
+        <HeroBanner
+          message="Thank you for being associated with us."
+          backgroundImage={require("../../../assets/images/HeroBanner.png")}
+        />
 
         {/* My Services */}
         <Text style={localStyles.sectionTitle}>My Services</Text>
@@ -82,14 +95,11 @@ export default function Dashboard() {
         <Text style={localStyles.sectionTitle}>Apply Now</Text>
         <View style={localStyles.grid}>
           {applyNow.map((item) => (
-            <TouchableOpacity key={item.id} style={localStyles.applyCard}>
-              <Image
-                source={{ uri: "https://randomuser.me/api/portraits/men/34.jpg" }}
-                style={localStyles.applyImage}
-              />
-              <View style={localStyles.overlay} />
-              <Text style={localStyles.applyText}>{item.title}</Text>
-            </TouchableOpacity>
+            <ProductCard
+              key={item.id}
+              title={item.title}
+              image={require("../../../assets/images/ProductImage.png")}
+            />
           ))}
         </View>
       </ScrollView>

@@ -85,12 +85,13 @@ serviceRow: {
   },
   serviceIcon: { fontSize: 20, color: colors.white, marginBottom: 5 },
   serviceText: { color: colors.white, fontSize: 14, fontWeight: "600" },
-  grid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-  },
+grid: {
+  flexDirection: "row",
+  flexWrap: "wrap",
+  justifyContent: "space-between",
+  paddingHorizontal: 20,
+  marginTop: 20,
+},
   applyCard: {
     width: (width - 48) / 2,
     height: 140,
