@@ -1,6 +1,5 @@
 import { scale, verticalScale } from "@/utils/styling";
 
-
 export const spacingX = {
   _3: scale(3),
   _5: scale(5),
@@ -13,6 +12,11 @@ export const spacingX = {
   _30: scale(30),
   _35: scale(35),
   _40: scale(40),
+  _60: scale(60),
+  _100: scale(100),
+  _105: scale(105),
+  _120: scale(120),
+  _160: scale(160),
 };
 
 export const spacingY = {
@@ -29,6 +33,7 @@ export const spacingY = {
   _40: verticalScale(40),
   _50: verticalScale(50),
   _60: verticalScale(60),
+  _160: verticalScale(160),
 };
 
 export const radius = {
@@ -54,4 +59,3 @@ export const fontSize = {
   xl: scale(22),
   xxl: scale(28),
 };
-

@@ -1,9 +1,10 @@
+import { spacingX, spacingY } from "@/constants/Metrics";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   card: {
-    width: 160,
-    height: 160,
+    width: spacingX._160,
+    height: spacingY._160,
     borderRadius: 16,
     overflow: "hidden",
     marginBottom: 16,
