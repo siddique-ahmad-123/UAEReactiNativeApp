@@ -32,7 +32,7 @@ export const Colors = {
 
  
 export const colors = {
-  primary: "#a3e635",
+  primary: "#3D1053",
   primaryLight: "#0ea5e9",
   primaryDark: "#0369a1",
   text: "#3F1956",
@@ -42,6 +42,8 @@ export const colors = {
   black: "#000",
   rose: "#ef4444",
   green: "#16a34a",
+  gray:"#9498A9",
+  gray2:"#65666A",
   inputTextcolor:"#B8B8B8",
   neutral50: "#fafafa",
   neutral100: "#f5f5f5",

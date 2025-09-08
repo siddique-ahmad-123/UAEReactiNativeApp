@@ -1,3 +1,4 @@
+import { colors } from "@/constants/Colors";
 import { fontSize, radius, spacingX, spacingY } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: fontSize.sm,
     fontWeight: "600",
-    color: "#fff",
+    color: colors.white,
     textAlign: "left",
   },
 });
