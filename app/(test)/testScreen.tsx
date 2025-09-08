@@ -1,3 +1,5 @@
+import HeroBanner from "@/components/HeroBanner";
+import ProductCard from "@/components/ProductCard";
 import SegmentedControl from "@/components/SegmentControl";
 import ServiceTile from "@/components/ServiceTile";
 import { StyleSheet, View } from "react-native";
@@ -37,6 +39,16 @@ const testScreen = () => {
         label="Select Income Type"
         options={["Salaried", "Self Employed"]}
         onChange={(value) => console.log("Selected:", value)}
+      />
+
+      <HeroBanner
+        message="Thank you for being associated with us."
+        backgroundImage={require("../../assets/images/HeroBanner.png")}
+      />
+
+      <ProductCard
+        title="Credit Card"
+        image={require("../../assets/images/ProductImage.png")}
       />
     </View>
   );
