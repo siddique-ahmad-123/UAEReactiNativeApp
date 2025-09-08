@@ -37,30 +37,30 @@ const LoginScreen: React.FC = () => {
 
       <View style={styles.formContainer}>
         <CustomInput
-          label="ID Number"
+          label="Emirates ID"
           placeholder="0000000000"
           secureTextEntry
         />
         <CustomInput
-          label="Password"
+          label="Mobile No"
           placeholder="********"
           secureTextEntry
         />
 
-        <TouchableOpacity style={{ alignSelf: "flex-end", marginBottom: 20 }}>
+        {/* <TouchableOpacity style={{ alignSelf: "flex-end", marginBottom: 20 }}>
           <Text style={styles.forgotPassword}>Forgot password?</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <View style={styles.row}>
           <CustomButton
-            title="Continue as a guest"
+            title="Login with UAE-PASS"
             onPress={() => {}}
             variant="secondary"
             type="outlined"
             size="lg"
           />
           <CustomButton
-            title="Log In"
+            title="Send OTP"
             onPress={() => router.push("/(auth)/otp/otpScreen")}
             variant="primary"
             type="filled"

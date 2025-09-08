@@ -1,0 +1,152 @@
+import { useRouter } from "expo-router";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { localStyles } from "../styles/Home.Styles";
+import { styles } from "../styles/onboarding.Styles";
+import { colors } from "@/constants/Colors";
+import ServiceTile from "@/components/ServiceTile";
+
+
+const services = [
+  { id: "1", title: "Requests", iconName: "document-text-outline" },
+  { id: "2", title: "Agreements", iconName: "file-tray-outline" },
+  { id: "3", title: "Applications", iconName: "clipboard-outline" },
+];
+
+
+const applyNow = [
+  { id: "1", title: "Credit Card" },
+  { id: "2", title: "Mortgages" },
+  { id: "3", title: "Auto Loans" },
+  { id: "4", title: "Personal Loans" },
+];
+
+const navItems = [
+  { id: "1", title: "Home", icon: require("../../../assets/icons/home.png"), screen: "Dashboard" },
+  { id: "2", title: "Calculator", icon: require("../../../assets/icons/mobile.png"), screen: "Calculator" },
+  { id: "3", title: "Need Help", icon: require("../../../assets/icons/headphn.png"), screen: "Help" },
+  { id: "4", title: "Notifications", icon: require("../../../assets/icons/notification.png"), screen: "Notifications" },
+  { id: "5", title: "Menu", icon: require("../../../assets/icons/menu.png"), screen: "Menu" },
+];
+
+export default function Dashboard() {
+  const router = useRouter();
+  const [activeTab, setActiveTab] = useState("1");
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View style={localStyles.header}>
+          <Image
+            source={{ uri: "https://randomuser.me/api/portraits/men/32.jpg" }}
+            style={localStyles.avatar}
+          />
+          <View>
+            <Text style={localStyles.welcome}>Welcome,</Text>
+            <Text style={localStyles.username}>Mohammad Sahil Munaf</Text>
+          </View>
+        </View>
+
+        {/* Banner */}
+        <View style={localStyles.banner}>
+          <Text style={localStyles.bannerText}>
+            Thank you for being associated with us.
+          </Text>
+          <Image
+            source={{ uri: "https://randomuser.me/api/portraits/men/75.jpg" }}
+            style={localStyles.bannerImage}
+          />
+        </View>
+
+        {/* My Services */}
+        <Text style={localStyles.sectionTitle}>My Services</Text>
+        <View style={localStyles.serviceRow}>
+          {services.map((item) => (
+            <ServiceTile
+              key={item.id}
+              title={item.title}
+              iconName={item.iconName}
+            />
+          ))}
+        </View>
+
+        {/* Apply Now */}
+        <Text style={localStyles.sectionTitle}>Apply Now</Text>
+        <View style={localStyles.grid}>
+          {applyNow.map((item) => (
+            <TouchableOpacity key={item.id} style={localStyles.applyCard}>
+              <Image
+                source={{ uri: "https://randomuser.me/api/portraits/men/34.jpg" }}
+                style={localStyles.applyImage}
+              />
+              <View style={localStyles.overlay} />
+              <Text style={localStyles.applyText}>{item.title}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
+
+      {/* Bottom Navbar */}
+      <View style={localStyles.bottomNav}>
+        {navItems.map((item) => {
+          const isActive = activeTab === item.id;
+          return (
+            <TouchableOpacity
+              key={item.id}
+              style={localStyles.navItem}
+              onPress={() => {
+                setActiveTab(item.id);
+
+                switch (item.title) {
+                  case "Calculator":
+                    router.push("/(main)/calculator");
+                    break;
+                  case "Notifications":
+                    router.push("/(main)/notification");
+                    break;
+                  case "Need Help":
+                    router.push("/(main)/NeedHelp");
+                    break;
+                  case "Menu":
+                    router.push("/(main)/menu");
+                    break;
+                  case "Home":
+                    router.push("/(main)/home");
+                    break;
+                  default:
+                    router.push("/(main)/home");
+                }
+              }}
+            >
+              <Image
+                source={item.icon}
+                style={[
+                  localStyles.navIcon,
+                  { tintColor: isActive ? colors.primary : colors.gray },
+                ]}
+                resizeMode="contain"
+              />
+              <Text
+                style={[
+                  localStyles.navText,
+                  { color: isActive ? colors.primary : colors.gray },
+                ]}
+              >
+                {item.title}
+              </Text>
+              {isActive && <View style={localStyles.activeUnderline} />}
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </SafeAreaView>
+  );
+}
