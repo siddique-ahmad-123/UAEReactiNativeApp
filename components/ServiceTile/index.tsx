@@ -7,19 +7,21 @@ import {
 } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { GestureResponderEvent, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "styled-components/native";
 
 interface ServiceTileProps {
   title: string;
   iconName: keyof typeof Ionicons.glyphMap;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
-const ServiceTile = ({ title, iconName }: ServiceTileProps) => {
+const ServiceTile = ({ title, iconName,onPress}: ServiceTileProps) => {
   const theme = useTheme();
   return (
     <TouchableOpacity
       style={[styles.container, { backgroundColor: theme.colors.primaryColor }]}
+      onPress={onPress}
     >
       <View
         style={[

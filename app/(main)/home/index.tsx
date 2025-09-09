@@ -9,11 +9,11 @@ import HeroBanner from "@/components/HeroBanner";
 import ProductCard from "@/components/ProductCard";
 import { useTheme } from "styled-components/native";
 
-
-const services = [
-  { id: "1", title: "Requests", iconName: "document-text-outline" },
-  { id: "2", title: "Agreements", iconName: "file-tray-outline" },
-  { id: "3", title: "Applications", iconName: "clipboard-outline" },
+type RouteNames = "/Request" | "/Agreement" | "/ExistingApplication";
+const services: { id: string; title: string; iconName: string; route: RouteNames }[] = [
+  { id: "1", title: "Requests", iconName: "document-text-outline", route: "/Request" },
+  { id: "2", title: "Agreements", iconName: "file-tray-outline", route: "/Agreement" },
+  { id: "3", title: "Applications", iconName: "clipboard-outline", route: "/ExistingApplication" },
 ];
 
 const applyNow = [
@@ -59,9 +59,11 @@ const navItems = [
 export default function Dashboard() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("1");
-const theme = useTheme();
+  const theme = useTheme();
   return (
-    <SafeAreaView style={[styles.container,{backgroundColor:theme.colors.background}]}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={localStyles.header}>
@@ -70,8 +72,22 @@ const theme = useTheme();
             style={localStyles.avatar}
           />
           <View>
-            <Text style={[localStyles.welcome,{color:theme.colors.inactiveNavIconColor}]}>Welcome,</Text>
-            <Text style={[localStyles.username,{color:theme.colors.primaryColor}]}>Mohammad Sahil Munaf</Text>
+            <Text
+              style={[
+                localStyles.welcome,
+                { color: theme.colors.inactiveNavIconColor },
+              ]}
+            >
+              Welcome,
+            </Text>
+            <Text
+              style={[
+                localStyles.username,
+                { color: theme.colors.primaryColor },
+              ]}
+            >
+              Mohammad Sahil Munaf
+            </Text>
           </View>
         </View>
 
@@ -88,6 +104,7 @@ const theme = useTheme();
               key={item.id}
               title={item.title}
               iconName={item.iconName}
+              onPress={() => router.push(item.route)}
             />
           ))}
         </View>
