@@ -1,15 +1,15 @@
 // src/forms/PersonalForm.tsx
-import React from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
-import { useForm, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { incomeDetailSchema } from '@/schemas/creditCard/incomeDetailSchema';
 import { useApplicationStore } from '@/store/applicationStore';
-import { incomeDetailSchema } from '@/schemas/incomeDetailSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { Button, Text, TextInput, View } from 'react-native';
 
 export const IncomeDetailForm = () => {
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
-
-  const { control, handleSubmit } = useForm({
+ const defaultValues = incomeDetailSchema.parse({});
+  const { control, handleSubmit, setValue, watch } = useForm({
     resolver: zodResolver(incomeDetailSchema),
     defaultValues: {
       name: formData.name || '',
