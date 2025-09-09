@@ -15,8 +15,13 @@ export default function RootLayout() {
   if (!loaded) return null;
 
   return (
+<<<<<<< HEAD
     <AppProvider >
       <Stack initialRouteName="(journey)/borrower">
+=======
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Stack initialRouteName="(main)/selectcreditcard">
+>>>>>>> master
         <Stack.Screen name="(auth)/otp" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />
         <Stack.Screen name="(main)/onboarding" options={{ headerShown: false }} />
@@ -25,7 +30,12 @@ export default function RootLayout() {
         <Stack.Screen name="(main)/notification" options={{ headerShown: false }} />
         <Stack.Screen name="(main)/NeedHelp" options={{ headerShown: false }} />
         <Stack.Screen name="(main)/menu" options={{ headerShown: false }} />
+<<<<<<< HEAD
         <Stack.Screen name="(journey)/borrower" options={{ headerShown: false }} />
+=======
+        <Stack.Screen name="(main)/selectcreditcard" options={{ headerShown: false }} />
+        <Stack.Screen name="(main)/NavScreen" options={{ headerShown: false }} />
+>>>>>>> master
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

@@ -1,17 +1,17 @@
 import React from "react";
-import { Text, TouchableOpacity, StyleProp, ViewStyle, TextStyle, StyleSheet } from "react-native";
+import { Text, TouchableOpacity, StyleProp, ViewStyle, TextStyle } from "react-native";
 import globalStyles from "./utils";
-import { useTheme } from "@react-navigation/native";
-import { radius, spacing, spacingVertical } from "@/constants/Metrics";
+import { radius } from "@/constants/Metrics";
+import { spacing } from "@/constants/Spacing";
 
 type Props = {
-  title?: string;
-  children?: React.ReactNode;
-  onPress: () => void;
+  title: string;
+  onPress: (event: GestureResponderEvent) => void;
   variant?: "primary" | "secondary";
   type?: "filled" | "outlined";
-  size?: "sm" | "md" | "lg";
-   style?: StyleProp<ViewStyle>;
+  size?: "sm" | "md" | "lg" | "xl" | "full"; // ✅ added full
+  style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
 };
 
 export default function CustomButton({
@@ -21,50 +21,55 @@ export default function CustomButton({
   type = "filled",
   size = "md",
   style,
+  textStyle,
 }: Props) {
-  let buttonStyle: StyleProp<ViewStyle>;
-  let textStyle: StyleProp<TextStyle>;
-
-  // ✅ Base sizing system
-  const sizeStyles = {
+  // ✅ Sizing system
+  const sizeStyles: Record<string, ViewStyle> = {
     sm: {
       paddingVertical: spacing.xs,
       paddingHorizontal: spacing.md,
-      borderRadius: radius.sm,
+      borderRadius: radius._6,
       minWidth: 120,
       minHeight:40
     },
     md: {
-      paddingVertical: spacingVertical.md,
-      paddingHorizontal:spacing.lg,
-      borderRadius: radius.md,
+      paddingVertical: spacing.md,
+      paddingHorizontal: spacing.lg,
+      borderRadius: radius._6,
       minWidth: 174,
       minHeight:58
     },
     lg: {
-      paddingVertical: spacingVertical.md,
+      paddingVertical: spacing.md,
       paddingHorizontal: spacing.xs,
-      borderRadius: radius.md,
+      borderRadius: radius._6,
       minWidth: 189,
     },
   };
 
-  const baseStyle = sizeStyles[size];
+  const baseStyle = sizeStyles[size] || sizeStyles.md;
+
+  // ✅ Variant + Type
+  let buttonStyle: StyleProp<ViewStyle> = [baseStyle];
+  let btnTextStyle: StyleProp<TextStyle>;
 
   if (variant === "primary" && type === "filled") {
-    buttonStyle = [globalStyles.button1, baseStyle];
-    textStyle = [globalStyles.buttonText];
+    buttonStyle = [globalStyles.button1, baseStyle, style];
+    btnTextStyle = [globalStyles.buttonText, textStyle];
   } else if (variant === "primary" && type === "outlined") {
-    buttonStyle = [globalStyles.outlinedButton, baseStyle];
-    textStyle = [globalStyles.outlinedText];
+    buttonStyle = [globalStyles.outlinedButton, baseStyle, style];
+    btnTextStyle = [globalStyles.outlinedText, textStyle];
+  } else if (variant === "secondary" && type === "filled") {
+    buttonStyle = [globalStyles.button2, baseStyle, style];
+    btnTextStyle = [globalStyles.buttonText, textStyle];
   } else {
-    buttonStyle = [globalStyles.outlinedButton, baseStyle];
-    textStyle = [globalStyles.buttonText];
+    buttonStyle = [globalStyles.outlinedButton, baseStyle, style];
+    btnTextStyle = [globalStyles.buttonText, textStyle];
   }
 
   return (
     <TouchableOpacity style={buttonStyle} onPress={onPress}>
-      <Text style={textStyle}>{title}</Text>
+      <Text style={btnTextStyle}>{title}</Text>
     </TouchableOpacity>
   );
 }

@@ -110,58 +110,7 @@ export default function Dashboard() {
       </ScrollView>
 
       {/* Bottom Navbar */}
-      <View style={localStyles.bottomNav}>
-        {navItems.map((item) => {
-          const isActive = activeTab === item.id;
-          return (
-            <TouchableOpacity
-              key={item.id}
-              style={localStyles.navItem}
-              onPress={() => {
-                setActiveTab(item.id);
-
-                switch (item.title) {
-                  case "Calculator":
-                    router.push("/(main)/calculator");
-                    break;
-                  case "Notifications":
-                    router.push("/(main)/notification");
-                    break;
-                  case "Need Help":
-                    router.push("/(main)/NeedHelp");
-                    break;
-                  case "Menu":
-                    router.push("/(main)/menu");
-                    break;
-                  case "Home":
-                    router.push("/(main)/home");
-                    break;
-                  default:
-                    router.push("/(main)/home");
-                }
-              }}
-            >
-              <Image
-                source={item.icon}
-                style={[
-                  localStyles.navIcon,
-                  { tintColor: isActive ? colors.primary : colors.gray },
-                ]}
-                resizeMode="contain"
-              />
-              <Text
-                style={[
-                  localStyles.navText,
-                  { color: isActive ? colors.primary : colors.gray },
-                ]}
-              >
-                {item.title}
-              </Text>
-              {isActive && <View style={localStyles.activeUnderline} />}
-            </TouchableOpacity>
-          );
-        })}
-      </View>
+      
     </SafeAreaView>
   );
 }
