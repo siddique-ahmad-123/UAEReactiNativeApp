@@ -1,6 +1,12 @@
-import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
+import {
+  fontSize,
+  radius,
+  spacing,
+  spacingVertical,
+} from "@/constants/Metrics";
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useTheme } from "styled-components/native";
 
 interface SegmentedControlProps {
   label: string;
@@ -24,25 +30,45 @@ const SegmentedControl = ({
     onChange(option);
   };
 
+  const theme = useTheme();
   return (
     <View style={styles.wrapper}>
       {/* Label */}
-      <Text style={styles.label}>
+      <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
         {label}
         {mandatory && <Text style={{ color: "red" }}> *</Text>}
       </Text>
 
       {/* Segmented Control */}
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          { backgroundColor: theme.colors.primaryLightColor },
+        ]}
+      >
         {options.map((option) => {
           const isSelected = option === selected;
           return (
             <TouchableOpacity
               key={option}
-              style={[styles.option, isSelected && styles.optionSelected]}
+              style={[
+                styles.option,
+                isSelected && [
+                  styles.optionSelected,
+                  { backgroundColor: theme.colors.primaryColor },
+                ],
+              ]}
               onPress={() => handleSelect(option)}
             >
-              <Text style={[styles.text, isSelected && styles.textSelected]}>
+              <Text
+                style={[
+                  [styles.text, { color: theme.colors.textPrimary }],
+                  isSelected && [
+                    styles.textSelected,
+                    { color: theme.colors.statusBarText },
+                  ],
+                ]}
+              >
                 {option}
               </Text>
             </TouchableOpacity>
@@ -64,12 +90,12 @@ const styles = StyleSheet.create({
   label: {
     fontSize: fontSize.md,
     fontWeight: "700",
-    color: "#3F1956",
+    // color: "#3F1956",
     marginBottom: spacingVertical.md,
   },
   container: {
     flexDirection: "row",
-    backgroundColor: "#EDE6F5",
+    // backgroundColor: "#EDE6F5",
     borderRadius: radius.sm,
     padding: spacing.md,
   },
@@ -81,14 +107,14 @@ const styles = StyleSheet.create({
     borderRadius: radius.sm,
   },
   optionSelected: {
-    backgroundColor: "#3F1956",
+    // backgroundColor: "#3F1956",
   },
   text: {
     fontSize: fontSize.sm,
     fontWeight: "600",
-    color: "#333",
+    // color: "#333",
   },
   textSelected: {
-    color: "#fff",
+    // color: "#fff",
   },
 });

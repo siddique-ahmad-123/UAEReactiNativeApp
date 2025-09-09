@@ -15,22 +15,22 @@ import { useTheme } from "styled-components/native";
 const NotificationScreen = () => {
   const theme = useTheme();
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={[styles.safeArea,{backgroundColor:theme.colors.primaryColor}]}>
       {/* Purple Header */}
       <View style={styles.header}>
         <View style={styles.headerTop}>
           <Text style={[styles.headerTitle, { color: theme.colors.textHeader }]}>Notifications</Text>
           <TouchableOpacity>
-            <Text style={styles.closeButton}>✕</Text>
+            <Text style={[styles.closeButton,{color:theme.colors.background}]}>✕</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.subHeader}>
+        <Text style={[styles.subHeader,{color:theme.colors.background}]}>
           Find all the Notifications that you have raised here.
         </Text>
       </View>
 
       {/* White Container with Rounded Top */}
-      <View style={styles.container}>
+      <View style={[styles.container,{backgroundColor:theme.colors.background}]}>
         {/* Show Request Card */}
         <RequestCard
           refNo="89765321"

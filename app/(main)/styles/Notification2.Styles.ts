@@ -103,34 +103,28 @@ export const localStyles = StyleSheet.create({
     fontWeight: "700",
     textAlign: "center",
     marginTop: 60,
-    color:"#000000"
   },
   subtitle: {
     fontSize: 16,
-    color: "#636363",
     textAlign: "center",
     marginVertical: 10,
     paddingHorizontal: 20,
   },
   textBox: {
     borderWidth: 1,
-    borderColor: "#DEDEDE",
     borderRadius: 6,
     minHeight: 197,
     padding: 12,
     marginTop: 24,
-    backgroundColor: "#fff",
     position: "relative",
   },
   label: {
     position: "absolute",
     top: -10,
     left: 10,
-    backgroundColor: "#FFFF",
     paddingHorizontal: 4,
     fontSize: 13,
-    fontWeight: "600",
-    color: "#3F1956", // purple
+    fontWeight: "600", // purple
   },
   value: {
     fontSize: 14,
@@ -139,12 +133,10 @@ export const localStyles = StyleSheet.create({
   },
  editableBox: {
   borderWidth: 1,
-  borderColor: "#ccc",
   borderRadius: 8,
   padding: 12,
   fontSize: 14,
   color: "#333",
-  backgroundColor: "#fff",
   marginTop: 6,
   minHeight: 60,
   textAlignVertical: "top", // keeps text at top

@@ -58,8 +58,8 @@ const EMICalculatorScreen: React.FC = () => {
           style={styles.avatar}
         />
         <View style={{ marginLeft: 12 }}>
-          <Text style={styles.greetingSmall}>Good Morning,</Text>
-          <Text style={styles.greetingName}>Abdul Rahman</Text>
+          <Text style={[styles.greetingSmall,{color:theme.colors.inactiveNavIconColor}]}>Good Morning,</Text>
+          <Text style={[styles.greetingName,{color:theme.colors.shadowColor}]}>Abdul Rahman</Text>
         </View>
       </View>
 
@@ -133,20 +133,20 @@ const EMICalculatorScreen: React.FC = () => {
               { borderColor: theme.colors.InputBorderColor },
             ]}
           >
-            <Text style={styles.resultLabel}>Monthly Installment</Text>
-            <View style={styles.resultCard}>
+            <Text style={[styles.resultLabel,{color:theme.colors.primaryColor}]}>Monthly Installment</Text>
+            <View style={[styles.resultCard,{borderColor:theme.colors.background}]}>
               <View>
-                <Text style={styles.resultAmount}>
+                <Text style={[styles.resultAmount,{color:theme.colors.shadowColor}]}>
                   {formatNumber(monthlyInstallment)}
                 </Text>
               </View>
-              <Text style={styles.resultUnit}>AED</Text>
+              <Text style={[styles.resultUnit,{color:theme.colors.primaryLightColor}]}>AED</Text>
             </View>
           </View>
 
           {/* Back button */}
-          <TouchableOpacity style={styles.backButton}>
-            <Text style={styles.backButtonText}>Back</Text>
+          <TouchableOpacity style={[styles.backButton,{backgroundColor:theme.colors.secondaryColor}]}>
+            <Text style={[styles.backButtonText,{color:theme.colors.primaryColor}]}>Back</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

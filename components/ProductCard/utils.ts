@@ -1,33 +1,38 @@
-import { spacing, spacingVertical } from "@/constants/Metrics";
+import {
+  fontSize,
+  radius,
+  spacing,
+  spacingVertical
+} from "@/constants/Metrics";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   card: {
-    width: spacing.lg,
-    height: spacingVertical.lg,
-    borderRadius: 16,
+    width: spacing.xxl,
+    height: spacingVertical.xxl,
+    borderRadius: radius.lg,
     overflow: "hidden",
-    marginBottom: 16,
+    marginBottom: spacing.md,
   },
   image: {
     flex: 1,
     justifyContent: "flex-end",
-    padding: 12,
+    padding: spacing.sm,
   },
   imageStyle: {
-    borderRadius: 16,
+    borderRadius: radius.lg,
   },
   overlay: {
-    // position: "absolute",
-    // bottom: -10,
-    // left: -10,
+    // if you want to restore these, convert like:
+    // bottom: -spacingExtra.s10,
+    // left: -spacingExtra.s10,
   },
   title: {
-    fontSize: 14,
+    fontSize: fontSize.sm,
     fontWeight: "600",
-    color: "#fff",
+    // color: "#fff",
     position: "absolute",
-    bottom: 20,
-    left: 15,
+    bottom: spacing.lg,
+    left: spacing.sm,
   },
 });

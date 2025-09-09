@@ -1,16 +1,27 @@
-import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
+import {
+  fontSize,
+  radius,
+  spacing,
+  spacingVertical,
+} from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons"; // for the download icon
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { useTheme } from "styled-components/native";
 
 interface DocumentDownloadProps {
   documentName: string;
 }
 
 const DocumentDownload = ({ documentName }: DocumentDownloadProps) => {
+  const theme = useTheme();
   return (
-    <TouchableOpacity style={styles.container}>
-      <Text style={styles.text}>{documentName}</Text>
+    <TouchableOpacity
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
+      <Text style={[styles.text, { color: theme.colors.primaryColor }]}>
+        {documentName}
+      </Text>
       <Ionicons name="arrow-down-outline" size={20} color="#3F1956" />
     </TouchableOpacity>
   );
@@ -23,7 +34,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#F3E6FC",
+    // backgroundColor: "#F3E6FC",
     paddingVertical: spacingVertical.md,
     paddingHorizontal: spacing.md,
     borderRadius: radius.md,
@@ -32,6 +43,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: fontSize.sm,
     fontWeight: "600",
-    color: "#3F1956",
+    // color: "#3F1956",
   },
 });

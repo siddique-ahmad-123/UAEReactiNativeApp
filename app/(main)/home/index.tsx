@@ -7,6 +7,8 @@ import { styles } from "../styles/onboarding.Styles";
 import ServiceTile from "@/components/ServiceTile";
 import HeroBanner from "@/components/HeroBanner";
 import ProductCard from "@/components/ProductCard";
+import { useTheme } from "styled-components/native";
+
 
 const services = [
   { id: "1", title: "Requests", iconName: "document-text-outline" },
@@ -56,16 +58,10 @@ const navItems = [
 
 export default function Dashboard() {
   const router = useRouter();
-
   const [activeTab, setActiveTab] = useState("1");
-
-  const colors = {
-    primary: "#4F46E5",
-    gray: "#6B7280",
-  };
-
+const theme = useTheme();
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container,{backgroundColor:theme.colors.background}]}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={localStyles.header}>
@@ -74,8 +70,8 @@ export default function Dashboard() {
             style={localStyles.avatar}
           />
           <View>
-            <Text style={localStyles.welcome}>Welcome,</Text>
-            <Text style={localStyles.username}>Mohammad Sahil Munaf</Text>
+            <Text style={[localStyles.welcome,{color:theme.colors.inactiveNavIconColor}]}>Welcome,</Text>
+            <Text style={[localStyles.username,{color:theme.colors.primaryColor}]}>Mohammad Sahil Munaf</Text>
           </View>
         </View>
 

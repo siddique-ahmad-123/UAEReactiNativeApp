@@ -1,6 +1,7 @@
 import Feather from "@expo/vector-icons/Feather";
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
+import { useTheme } from "styled-components/native";
 import { styles } from "./utils";
 
 interface CustomUploadProps {
@@ -8,10 +9,19 @@ interface CustomUploadProps {
 }
 
 const CustomUpload = ({ label }: CustomUploadProps) => {
+  const theme = useTheme();
   return (
-    <TouchableOpacity style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <Feather name="upload" size={24} color="#4B0082" />
+    <TouchableOpacity
+      style={[
+        styles.container,
+        { borderColor: theme.colors.inputFieldBorder },
+        { backgroundColor: theme.colors.background },
+      ]}
+    >
+      <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
+        {label}
+      </Text>
+      <Feather name="upload" size={24} color={theme.colors.primaryColor} />
     </TouchableOpacity>
   );
 };

@@ -17,7 +17,7 @@ const Notification2Screen = () => {
 
   const theme = useTheme();
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={[styles.safeArea,{backgroundColor:theme.colors.primaryColor}]}>
       {/* Purple Header */}
       <View style={styles.header}>
         <View style={styles.headerTop}>
@@ -26,23 +26,23 @@ const Notification2Screen = () => {
             <Text style={styles.closeButton}>✕</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.subHeader}>
+        <Text style={[styles.subHeader,{color:theme.colors.background}]}>
           Find all of your notifications here.
         </Text>
       </View>
 
       {/* White Container with Rounded Top */}
       <View style={styles.container}>
-        <Text style={localStyles.title2}>Your Request is under processing</Text>
-        <Text style={localStyles.subtitle}>
+        <Text style={[localStyles.title2,{color:theme.colors.shadowColor}]}>Your Request is under processing</Text>
+        <Text style={[localStyles.subtitle,{color:theme.colors.inactiveNavIconColor}]}>
           We will notify you once we receive any update on your request
         </Text>
 
         {/* Editable Description Box */}
-        <View style={localStyles.textBox}>
-          <Text style={localStyles.label}>Description</Text>
+        <View style={[localStyles.textBox,{borderColor:theme.colors.inputFieldBorder},{backgroundColor:theme.colors.background}]}>
+          <Text style={[localStyles.label,{backgroundColor:theme.colors.background},{color:theme.colors.primaryColor}]}>Description</Text>
           <TextInput
-            style={localStyles.editableBox}
+            style={[localStyles.editableBox,{borderColor:theme.colors.inputFieldBorder},{color:theme.colors.background}]}
             value={description}
             onChangeText={setDescription}
             multiline
@@ -53,7 +53,7 @@ const Notification2Screen = () => {
         <View style={localStyles.textBox}>
           <Text style={localStyles.label}>Resolution Provided</Text>
           <TextInput
-            style={localStyles.editableBox}
+            style={[localStyles.editableBox,{borderColor:theme.colors.inputFieldBorder},{color:theme.colors.background}]}
             value={resolution}
             editable={false} // 🔒 non-editable
             multiline

@@ -27,7 +27,7 @@ const MainScreen = () => {
   };
 const theme = useTheme()
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container,{backgroundColor:theme.colors.background}]}>
       <View style={styles.content}>{renderContent()}</View>
       <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
     </SafeAreaView>
@@ -35,7 +35,7 @@ const theme = useTheme()
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
+  container: { flex: 1 },
   content: { flex: 1 },
   dummy: { flex: 1, alignItems: "center", justifyContent: "center" }
 });

@@ -25,11 +25,9 @@ export const styles = StyleSheet.create({
     borderWidth: 2,
   },
   greetingSmall: {
-    color: "#666",
     fontSize: 13,
   },
   greetingName: {
-    color: "#2d2d2d",
     fontSize: 16,
     fontWeight: "700",
     marginTop: 2,
@@ -201,12 +199,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#f0f0f0",
     padding: 16,
     marginBottom: 18,
   },
   resultLabel: {
-    color: "#3F1956",
     fontSize: 18,
     marginBottom: 6,
     fontWeight: "600",
@@ -214,23 +210,19 @@ export const styles = StyleSheet.create({
   resultAmount: {
     fontSize: 18,
     fontWeight: "400",
-    color: "#000000",
   },
   resultUnit: {
     fontSize: 16,
-    color: "#B5B5B5",
     fontWeight: "500",
   },
 
   backButton: {
-    backgroundColor: "#FECB26",
     paddingVertical: 14,
     borderRadius: 10,
     marginBottom: 20,
     alignItems: "center",
   },
   backButtonText: {
-    color: "#3F1956",
     fontWeight: "800",
     fontSize: 16,
   },

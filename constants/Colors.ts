@@ -1,8 +1,7 @@
-
 export const LightThemeColorConstants = {
   primaryColor: "#3F1956",
   secondaryColor: "#FECB26",
-  
+
   primaryLightColor: "#E6D9F5",
   secondaryLight: "#FFEDB1",
 
@@ -15,17 +14,26 @@ export const LightThemeColorConstants = {
   textPrimary:"#333333",
   inputFieldBorder:"#DEDEDE",
 
-  textHeader:"#FFFF",
-  InputBorderColor:"#FFFF",
+  verifyCheck: "#2F9400",
+  verifyCheckLight: "#EAFFE0",
 
-  verifyCheck:"#2F9400",
-  verifyCheckLight:"#EAFFE0"
- } as const;
+  inactiveNavIconColor: "#9498A9",
+
+  placeholderColor: "#DEDEDE",
+
+  shadowColor: "#0000",
+
+  trackerBgColor: "#EFE8F3",
+
+  textHeader:"#FFFF",
+
+  InputBorderColor:""
+} as const;
 
 export const DarkThemeColorConstants = {
   primaryColor: "#3F1956",
   secondaryColor: "#FECB26",
-  
+
   primaryLightColor: "#E6D9F5",
   secondaryLight: "#FFEDB1",
 
@@ -35,10 +43,18 @@ export const DarkThemeColorConstants = {
   background: "#ffffffff",
   iconBackground: "#7E5A9B",
 
-  textPrimary:"#333333",
-  inputFieldBorder:"#DEDEDE",
+  textPrimary: "#333333",
+  inputFieldBorder: "#DEDEDE",
 
-  verifyCheck:"#2F9400",
-  verifyCheckLight:"#EAFFE0"
-}as const;
+  verifyCheck: "#2F9400",
+  verifyCheckLight: "#EAFFE0",
+
+  inactiveNavIconColor: "#9498A9",
+
+  placeholderColor: "#DEDEDE",
+
+  shadowColor: "#0000",
+
+  trackerBgColor: "#EFE8F3",
+} as const;
 export type ThemeColors = typeof LightThemeColorConstants;

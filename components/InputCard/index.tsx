@@ -1,13 +1,14 @@
 // components/InputCard.tsx
+import Slider from "@react-native-community/slider";
 import React, { useState } from "react";
 import {
-  View,
+  LayoutChangeEvent,
+  StyleSheet,
   Text,
   TextInput,
-  StyleSheet,
-  LayoutChangeEvent,
+  View,
 } from "react-native";
-import Slider from "@react-native-community/slider";
+import { useTheme } from "styled-components/native";
 
 type Props = {
   label: string;
@@ -20,8 +21,7 @@ type Props = {
   formatValue?: (v: number) => string;
 };
 
-const clamp = (v: number, a: number, b: number) =>
-  Math.max(a, Math.min(b, v));
+const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 
 const InputCard: React.FC<Props> = ({
   label,
@@ -35,15 +35,28 @@ const InputCard: React.FC<Props> = ({
 }) => {
   const [trackWidth, setTrackWidth] = useState(0);
 
+  const theme = useTheme();
+
   const onLayout = (e: LayoutChangeEvent) =>
     setTrackWidth(e.nativeEvent.layout.width);
 
   return (
-    <View style={styles.inputCard}>
+    <View
+      style={[
+        styles.inputCard,
+        { backgroundColor: theme.colors.background },
+        { shadowColor: theme.colors.shadowColor },
+      ]}
+    >
       <View style={styles.inputCardRow}>
         <Text style={styles.inputLabel}>{label}</Text>
 
-        <View style={styles.amountInputBox}>
+        <View
+          style={[
+            styles.amountInputBox,
+            { borderColor: theme.colors.inputFieldBorder },
+          ]}
+        >
           <TextInput
             value={formatValue ? formatValue(value) : String(value)}
             onChangeText={(val) => {
@@ -59,10 +72,16 @@ const InputCard: React.FC<Props> = ({
 
       {/* custom slider */}
       <View onLayout={onLayout} style={styles.sliderWrapper}>
-        <View style={styles.trackBackground} />
+        <View
+          style={[
+            styles.trackBackground,
+            { backgroundColor: theme.colors.trackerBgColor },
+          ]}
+        />
         <View
           style={[
             styles.trackActive,
+            { backgroundColor: theme.colors.primaryColor },
             {
               width:
                 trackWidth > 0
@@ -85,10 +104,10 @@ const InputCard: React.FC<Props> = ({
       </View>
 
       <View style={styles.rangeRow}>
-        <Text style={styles.rangeText}>
+        <Text style={[styles.rangeText, { color: theme.colors.textPrimary }]}>
           {formatValue ? formatValue(min) : min} {unit}
         </Text>
-        <Text style={styles.rangeText}>
+        <Text style={[styles.rangeText, { color: theme.colors.textPrimary }]}>
           {formatValue ? formatValue(max) : max} {unit}
         </Text>
       </View>
@@ -100,11 +119,11 @@ export default InputCard;
 
 const styles = StyleSheet.create({
   inputCard: {
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     borderRadius: 4,
     padding: 11,
     marginBottom: 16,
-    shadowColor: "#000",
+    // shadowColor: "#000",
     shadowOpacity: 0.05,
     shadowRadius: 4,
     elevation: 1,
@@ -119,7 +138,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "#ddd",
+    // borderColor: "#ddd",
     paddingHorizontal: 8,
     borderRadius: 8,
   },
@@ -133,12 +152,12 @@ const styles = StyleSheet.create({
   sliderWrapper: { marginTop: 12 },
   trackBackground: {
     height: 6,
-    backgroundColor: "#eee",
+    // backgroundColor: "#eee",
     borderRadius: 3,
   },
   trackActive: {
     height: 6,
-    backgroundColor: "#6a0dad",
+    // backgroundColor: "#6a0dad",
     borderRadius: 3,
     position: "absolute",
     left: 0,
@@ -150,5 +169,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 8,
   },
-  rangeText: { fontSize: 12, color: "#555" },
+  rangeText: {
+    fontSize: 12,
+    // color: "#555",
+  },
 });

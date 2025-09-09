@@ -1,15 +1,15 @@
-import React, { useRef, useState } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  Dimensions,
-  ImageBackground,
-  Image,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
+import React, { useRef, useState } from "react";
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  ImageBackground,
+  Text,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "../styles/onboarding.Styles";
 import { useTheme } from "styled-components/native";
 
@@ -68,8 +68,8 @@ const Carousel = () => {
       />
 
       <View style={styles.content}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.description}>{item.description}</Text>
+        <Text style={[styles.title,{color:theme.colors.shadowColor}]}>{item.title}</Text>
+        <Text style={[styles.description,{color:theme.colors.inactiveNavIconColor}]}>{item.description}</Text>
       </View>
     </View>
   );
@@ -94,7 +94,7 @@ const theme = useTheme();
             style={[
               styles.dot,
               {
-                backgroundColor: currentIndex === index ? "#5B2E91" : "#E5D4F4",
+                backgroundColor: currentIndex === index ? theme.colors.primaryColor : theme.colors.primaryLightColor,
                 width: currentIndex === index ? 39 : 10,
               },
             ]}

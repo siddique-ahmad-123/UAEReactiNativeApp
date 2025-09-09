@@ -4,8 +4,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   safeArea: {
-    flex: 1,
-    backgroundColor: "#4B006E", // Purple fills behind header
+    flex: 1, // Purple fills behind header
   },
   header: {
     paddingHorizontal: 16,
@@ -23,16 +22,13 @@ export const styles = StyleSheet.create({
   },
   closeButton: {
     fontSize: 20,
-    color: "#fff",
   },
   subHeader: {
-    color: "#fff",
     fontSize: 12,
     marginTop: 4,
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     borderTopLeftRadius: 38,
     borderTopRightRadius: 38,
     paddingTop: 30,
