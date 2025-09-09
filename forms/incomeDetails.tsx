@@ -7,14 +7,14 @@ import { useApplicationStore } from '@/store/applicationStore';
 import { incomeDetailSchema } from '@/schemas/incomeDetailSchema';
 
 export const IncomeDetailForm = () => {
-  const { updateField, nextStep, formData } = useApplicationStore();
+  const { updateField, nextStep, prevStep, formData } = useApplicationStore();
 
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(incomeDetailSchema),
     defaultValues: {
       name: formData.name || '',
       dob: formData.dob || '',
-      gender: formData.gender || 'Male',
+      gender: formData.gender || '',
       nationality: formData.nationality || '',
     },
   });

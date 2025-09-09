@@ -1,5 +1,9 @@
 import FormLayout from "@/components/Form/FormLayout";
+import { incomeDetailSchema } from "@/schemas/incomeDetailSchema";
+import { useApplicationStore } from "@/store/applicationStore";
+import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import {
   StyleSheet,
@@ -20,7 +24,21 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
   const [incomeMethod, setIncomeMethod] = useState<
     "Salary Transfer" | "UAE-FTS"
   >("Salary Transfer");
+  const { updateField, nextStep, prevStep, formData } = useApplicationStore();
 
+  const { control, handleSubmit } = useForm({
+    resolver: zodResolver(incomeDetailSchema),
+    defaultValues: {
+      name: formData.name || "",
+      dob: formData.dob || "",
+      gender: formData.gender || "",
+      nationality: formData.nationality || "",
+    },
+  });
+  const onSubmit = (values: any) => {
+    Object.entries(values).forEach(([k, v]) => updateField(k, v));
+    nextStep();
+  };
   return (
     <FormLayout
       stepNumber={2}
@@ -28,7 +46,7 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
       subTitle={t("borrowerDetails")}
       noOfBars={2}
       activeBarIndex={0}
-      onBack={() => navigation.goBack()}
+      onBack={() => prevStep}
       onClose={() => navigation.navigate("Home")}
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={() => navigation.navigate("LoanDetails")}
