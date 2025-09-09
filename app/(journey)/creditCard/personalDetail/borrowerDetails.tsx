@@ -6,13 +6,14 @@ import CustomUpload from "@/components/CustomUpload";
 import FormLayout from "@/components/Form/FormLayout";
 import SectionHeader from "@/components/SectionHeader";
 import SegmentedControl from "@/components/SegmentControl";
+import { spacingVertical } from "@/constants/Metrics";
 import { personalDetailsSchema } from "@/schemas/creditCard/personalDetailsSchema";
 import { useApplicationStore } from "@/store/applicationStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "i18next";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { GestureResponderEvent, StyleSheet } from "react-native";
+import { GestureResponderEvent, StyleSheet, View } from "react-native";
 
 const BorrowerPersonalInformation = ({ navigation }: any) => {
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
@@ -82,9 +83,11 @@ const BorrowerPersonalInformation = ({ navigation }: any) => {
         }}
       />
 
-      <CustomUpload label={"Emirates ID"} />
-      <CustomUpload label={"Passport"} />
-      <CustomUpload label={"Visa"} />
+      <View style={{ alignItems: "center", gap: spacingVertical.md }}>
+        <CustomUpload label={"Emirates ID"} />
+        <CustomUpload label={"Passport"} />
+        <CustomUpload label={"Visa"} />
+      </View>
 
       <CustomButton
         title={"Fetch Details"}
