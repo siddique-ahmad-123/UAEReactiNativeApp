@@ -1,5 +1,6 @@
 import {
   fontSize,
+  fontWeight,
   radius,
   spacing,
   spacingVertical,
@@ -32,16 +33,14 @@ export default SectionHeader;
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "#EBDCF9",
-    paddingVertical: spacingVertical.md,
+    paddingVertical: spacingVertical.xs,
     paddingHorizontal: spacing.md,
     borderRadius: radius.sm,
     marginVertical: spacingVertical.md,
     width: "100%",
   },
   text: {
-    fontSize: fontSize.sm,
-    fontWeight: "600",
-    // color: "#3F1956",
+    fontSize: fontSize.lg,
+    fontWeight: fontWeight.medium,
   },
 });

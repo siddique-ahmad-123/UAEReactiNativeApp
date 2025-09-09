@@ -11,8 +11,8 @@ const futureDate = dateFromString.refine((d) => d < new Date(), {
 });
 export const incomeDetailSchema = z.object({
   //salaried
-  incomeType: z.enum(["Salaried", "Self Employed"]),
-  empDetailFetchMethod: z.enum(["AECB", "Salary Certificate"]),
+  incomeType:  z.string(),
+  empDetailFetchMethod: z.string(),
   employerName: z.string().min(2, "Employer Name is required"),
   employedFrom: z.string().min(1, "Employed From required"),
   currentExp: z.number().min(0, "Current Experience is required"),

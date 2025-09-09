@@ -47,9 +47,9 @@ const EMICalculatorScreen: React.FC = () => {
   );
   const theme = useTheme();
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={[styles.safeArea,{backgroundColor:theme.colors.background}]}>
       {/* top purple strip (statusbar area) */}
-      <View style={styles.topPurple} />
+      <View style={[styles.topPurple,{backgroundColor:theme.colors.primaryColor}]} />
 
       {/* Greeting row with avatar */}
       <View style={styles.greetingRow}>
@@ -64,10 +64,10 @@ const EMICalculatorScreen: React.FC = () => {
       </View>
 
       {/* Purple EMI Card */}
-      <View style={styles.emiCard}>
+      <View style={[styles.emiCard,{backgroundColor:theme.colors.primaryColor}]}>
         <View style={{ flex: 1 }}>
-          <Text style={styles.emiTitle}>EMI Calculator</Text>
-          <Text style={styles.emiDesc} numberOfLines={4}>
+          <Text style={[styles.emiTitle,{color:theme.colors.background}]}>EMI Calculator</Text>
+          <Text style={[styles.emiDesc,{color:theme.colors.background}]} numberOfLines={4}>
             This calculator will help you to calculate the expected EMI on your
             loan amount by taking into consideration the Principal Amount, Loan
             Tenure and Interest.
@@ -128,7 +128,7 @@ const EMICalculatorScreen: React.FC = () => {
 
           <View
             style={[
-              styles.inputCard,
+              styles.inputCard,{shadowColor:theme.colors.shadowColor},
               { backgroundColor: theme.colors.background },
               { borderColor: theme.colors.borderColor },
             ]}

@@ -1,7 +1,7 @@
 import {
   fontSize,
+  fontWeight,
   radius,
-  spacing,
   spacingVertical,
 } from "@/constants/Metrics";
 import React, { useState } from "react";
@@ -31,21 +31,48 @@ const SegmentedControl = ({
   };
 
   const theme = useTheme();
+  const styles = StyleSheet.create({
+    wrapper: {
+      width: "100%",
+      alignSelf: "center",
+    },
+    label: {
+      fontSize: fontSize.md,
+      fontWeight: fontWeight.semiBold,
+      marginBottom: spacingVertical.sm,
+      color: theme.colors.primaryColor
+    },
+    container: {
+      flexDirection: "row",
+      borderRadius: radius.sm,
+      backgroundColor: theme.colors.primaryLightColor 
+    },
+    option: {
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: spacingVertical.sm,
+      borderRadius: radius.sm,
+    },
+    optionSelected: {
+      // backgroundColor: "#3F1956",
+    },
+    text: {
+      fontSize: fontSize.md,
+      fontWeight: fontWeight.semiBold,
+    },
+  });
   return (
     <View style={styles.wrapper}>
       {/* Label */}
-      <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
+      <Text style={styles.label}>
         {label}
         {mandatory && <Text style={{ color: "red" }}> *</Text>}
       </Text>
 
       {/* Segmented Control */}
       <View
-        style={[
-          styles.container,
-          { backgroundColor: theme.colors.primaryLightColor },
-        ]}
-      >
+        style={styles.container}>
         {options.map((option) => {
           const isSelected = option === selected;
           return (
@@ -64,7 +91,6 @@ const SegmentedControl = ({
                 style={[
                   [styles.text, { color: theme.colors.textPrimary }],
                   isSelected && [
-                    styles.textSelected,
                     { color: theme.colors.statusBarText },
                   ],
                 ]}
@@ -80,41 +106,3 @@ const SegmentedControl = ({
 };
 
 export default SegmentedControl;
-
-const styles = StyleSheet.create({
-  wrapper: {
-    marginVertical: spacingVertical.md,
-    width: "90%",
-    alignSelf: "center",
-  },
-  label: {
-    fontSize: fontSize.md,
-    fontWeight: "700",
-    // color: "#3F1956",
-    marginBottom: spacingVertical.md,
-  },
-  container: {
-    flexDirection: "row",
-    // backgroundColor: "#EDE6F5",
-    borderRadius: radius.sm,
-    padding: spacing.md,
-  },
-  option: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: spacingVertical.md,
-    borderRadius: radius.sm,
-  },
-  optionSelected: {
-    // backgroundColor: "#3F1956",
-  },
-  text: {
-    fontSize: fontSize.sm,
-    fontWeight: "600",
-    // color: "#333",
-  },
-  textSelected: {
-    // color: "#fff",
-  },
-});
