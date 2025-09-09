@@ -1,9 +1,3 @@
-const getLavenderRgba = (alpha: number) => `rgba(63, 25, 86, ${alpha})`;
-const getBorderLightColor = (num: number) => `rgba(0, 0, 0, ${num})`;
-const fadedOrange = (num: number) => `rgba(255, 243, 231,${num})`;
-const iconBackgroundColor = (num: number) => `rgba(72, 31, 94,${num})`;
-const greenOpacity = (num: number) => `rgba(221, 255, 218, ${num})`;
-const redOpacity = (num: number) => `rgba(255, 217, 222, ${num});`;
 
 export const LightThemeColorConstants = {
   primaryColor: "#3F1956",

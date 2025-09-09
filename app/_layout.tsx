@@ -17,14 +17,14 @@ export default function RootLayout() {
   return (
     <AppProvider >
       <Stack initialRouteName="(journey)/borrower">
-        {/* <Stack.Screen name="(auth)/otp" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)/otp" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />
         <Stack.Screen name="(main)/onboarding" options={{ headerShown: false }} />
         <Stack.Screen name="(main)/home" options={{ headerShown: false }} />
         <Stack.Screen name="(main)/calculator" options={{ headerShown: false }} />
         <Stack.Screen name="(main)/notification" options={{ headerShown: false }} />
         <Stack.Screen name="(main)/NeedHelp" options={{ headerShown: false }} />
-        <Stack.Screen name="(main)/menu" options={{ headerShown: false }} /> */}
+        <Stack.Screen name="(main)/menu" options={{ headerShown: false }} />
         <Stack.Screen name="(journey)/borrower" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
