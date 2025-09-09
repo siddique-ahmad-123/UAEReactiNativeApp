@@ -1,6 +1,10 @@
 {
   "incomeDetails": "Income Details",
   "borrowerDetails": "Borrower Details",
+  "coBorrowerDetails": "Co-Borrower Details",
   "back": "Back",
-  "saveAndNext": "Save & Next"
+  "saveAndNext": "Save & Next",
+  "personalDetails": "Personal Details",
+  "personalInformation": "Personal Information",
+  "addressInformation": "Address Information"
 }

@@ -61,7 +61,7 @@ const CustomDropDown = ({
       alignItems: "center",
       paddingHorizontal: spacing.xs,
     },
-    label: { fontSize: fontSize.sm, fontWeight: fontWeight.semiBold },
+    label: { fontSize: fontSize.sm, fontWeight: fontWeight.medium },
     labelLine: { height: 1.5, marginLeft: spacing.md },
     dropdown: { height: spacingVertical.lg },
     placeholderStyle: { fontSize: fontSize.md, color: "#999" },
