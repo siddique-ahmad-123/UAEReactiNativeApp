@@ -1,22 +1,5 @@
 import { scale, verticalScale } from "@/utils/styling";
 
-//example
-// const styles = StyleSheet.create({
-//   container: {
-//     paddingHorizontal: scale(16),   // horizontal spacing
-//     paddingVertical: verticalScale(12),  // vertical spacing
-//   },
-//   title: {
-//     fontSize: scale(18),           // font size based on width
-//     marginBottom: verticalScale(8), // spacing below
-//   },
-//   avatar: {
-//     width: scale(48),
-//     height: scale(48),             // keep same scale to remain square
-//     borderRadius: scale(24),
-//   },
-// });
-
 export const spacing = {
   none: 0,
   xs: scale(4),

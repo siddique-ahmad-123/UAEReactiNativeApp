@@ -2,7 +2,6 @@ import {
   fontSize,
   fontWeight,
   radius,
-  spacing,
   spacingVertical,
 } from "@/constants/Metrics";
 import React, { useState } from "react";
@@ -52,7 +51,7 @@ const SegmentedControl = ({
       flex: 1,
       alignItems: "center",
       justifyContent: "center",
-      paddingVertical: spacingVertical.md,
+      paddingVertical: spacingVertical.sm,
       borderRadius: radius.sm,
     },
     optionSelected: {

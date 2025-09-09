@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Example icon lib, optional
 import { useTheme } from "styled-components/native";
 import { fontSize, fontWeight, radius, spacing, spacingVertical } from "@/constants/Metrics";
-import { scale } from "@/utils/styling";
 
 interface MethodOption {
   id: string;
@@ -41,15 +40,15 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
     card: {
       flex: 1,
       borderRadius: radius.lg,
-      padding: 16,
+      padding: spacing.md,
       justifyContent: "center",
       elevation: 2, 
-      shadowColor: "#000", 
+      shadowColor: theme.colors.shadowColor, 
       shadowOpacity: 0.1,
       shadowRadius: radius.sm,
     },
     cardDefault: {
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.primaryLightColor,
     },
     cardSelected: {
       backgroundColor: theme.colors.primaryColor,
@@ -83,14 +82,14 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
                 <Ionicons
                   name={option.iconName as any}
                   size={28}
-                  color={isSelected ? "#fff" : "#5A5A5A"}
+                  color={isSelected ? theme.colors.background : theme.colors.primaryColor}
                   style={{ marginBottom: 8 }}
                 />
               )}
               <Text
                 style={[
                   styles.cardTitle,
-                  { color: isSelected ? "#fff" : "#000" },
+                  { color: isSelected ?theme.colors.background : theme.colors.primaryColor},
                 ]}
               >
                 {option.title}
@@ -98,7 +97,7 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
               <Text
                 style={[
                   styles.cardDescription,
-                  { color: isSelected ? "#fff" : "#444" },
+                  { color: isSelected ? theme.colors.background : theme.colors.primaryColor },
                 ]}
               >
                 {option.description}

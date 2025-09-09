@@ -37,13 +37,13 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
   };
   const employmentMethods = [
     {
-      id: "aecb",
+      id: "AECB",
       title: "AECB",
       description: "Details will be pulled from Credit Bureau",
       iconName: "card", // Ionicons name
     },
     {
-      id: "salary-certificate",
+      id: "Salary Certificate",
       title: "Salary Certificate",
       description: "Salary Certificate not older than 1 month to be uploaded",
       iconName: "document-text",
@@ -73,34 +73,7 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
         selectedId={empDetailFetchMethod}
         onSelect={(id) => setValue("empDetailFetchMethod", id)}
       />
-      <View style={styles.cardRow}>
-        <TouchableOpacity
-          style={[
-            styles.methodCard,
-            empDetailFetchMethod === "AECB" && styles.methodCardActive,
-          ]}
-          onPress={() => setValue("empDetailFetchMethod", "AECB")}
-        >
-
-          <Text style={styles.cardTitle}>AECB</Text>
-          <Text style={styles.cardDesc}>
-            Details will be pulled from Credit Bureau
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.methodCard,
-            empDetailFetchMethod === "Salary Certificate" &&
-              styles.methodCardActive,
-          ]}
-          onPress={() => setValue("empDetailFetchMethod", "Salary Certificate")}
-        >
-          <Text style={styles.cardTitle}>Salary Certificate</Text>
-          <Text style={styles.cardDesc}>
-            Salary Certificate not older than 1 month to be uploaded
-          </Text>
-        </TouchableOpacity>
-      </View>
+      
 
       <TouchableOpacity style={styles.fetchButton}>
         <Text style={styles.fetchButtonText}>Fetch Employment Details</Text>
