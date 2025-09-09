@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     borderRadius: radius.lg,
   },
   overlayBox: {
-    backgroundColor: "#3F1956",
+    // backgroundColor: "#3F1956",
     paddingVertical: spacingVertical.md,
     paddingHorizontal: spacing.md,
     borderRadius: radius.lg,
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
   },
   messageText: {
     fontSize: fontSize.md,
-    color: "#fff",
+    // color: "#fff",
     fontWeight: "600",
     marginBottom: spacingVertical.md,
   },

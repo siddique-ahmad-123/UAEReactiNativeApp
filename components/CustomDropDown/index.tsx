@@ -1,8 +1,14 @@
-import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
+import {
+  fontSize,
+  radius,
+  spacing,
+  spacingVertical,
+} from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Dropdown, MultiSelect } from "react-native-element-dropdown";
+import { useTheme } from "styled-components/native";
 
 interface CustomDropDownProps {
   label: string;
@@ -35,22 +41,44 @@ const CustomDropDown = ({
     }
   };
 
+  const theme = useTheme();
+
   return (
-    <View style={[styles.container, getVariantStyle()]}>
+    <View
+      style={[
+        styles.container,
+        { borderColor: theme.colors.inputFieldBorder },
+
+        getVariantStyle(),
+      ]}
+    >
       {/* Label */}
-      <View style={styles.labelContainer}>
-        <Text style={styles.label}>
+      <View
+        style={[
+          styles.labelContainer,
+          { backgroundColor: theme.colors.background },
+        ]}
+      >
+        <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
           {label}
           {mandatory && <Text style={{ color: "red" }}> *</Text>}
         </Text>
-        <View style={styles.labelLine} />
+        <View
+          style={[
+            styles.labelLine,
+            { backgroundColor: theme.colors.background },
+          ]}
+        />
       </View>
 
       {type === "singleSelect" ? (
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
+          selectedTextStyle={[
+            styles.selectedTextStyle,
+            { color: theme.colors.textPrimary },
+          ]}
           iconStyle={styles.iconStyle}
           data={data}
           labelField="label"
@@ -66,7 +94,10 @@ const CustomDropDown = ({
         <MultiSelect
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
+          selectedTextStyle={[
+            styles.selectedTextStyle,
+            { color: theme.colors.textPrimary },
+          ]}
           iconStyle={styles.iconStyle}
           data={data}
           labelField="label"
@@ -77,7 +108,10 @@ const CustomDropDown = ({
           renderRightIcon={() => (
             <Ionicons name="chevron-down" size={fontSize.lg} color="#3F1956" />
           )}
-          selectedStyle={styles.selectedStyle}
+          selectedStyle={[
+            styles.selectedStyle,
+            { backgroundColor: theme.colors.placeholderColor },
+          ]}
         />
       )}
     </View>
@@ -89,12 +123,12 @@ export default CustomDropDown;
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1.5,
-    borderColor: "#ccc",
+    // borderColor: "#ccc",
     borderRadius: radius.md,
     paddingVertical: spacingVertical.md,
     paddingHorizontal: spacing.lg,
     marginVertical: spacingVertical.xl,
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
   },
   full: {
     width: "100%",
@@ -108,17 +142,17 @@ const styles = StyleSheet.create({
     left: spacing.md,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     paddingHorizontal: spacing.md,
   },
   label: {
     fontSize: fontSize.sm,
     fontWeight: "600",
-    color: "#3F1956",
+    // color: "#3F1956",
   },
   labelLine: {
     height: 1.5,
-    backgroundColor: "#ccc",
+    // backgroundColor: "#ccc",
     marginLeft: spacing.md,
   },
   dropdown: {
@@ -130,14 +164,14 @@ const styles = StyleSheet.create({
   },
   selectedTextStyle: {
     fontSize: fontSize.md,
-    color: "#000",
+    // color: "#000",
   },
   iconStyle: {
     marginLeft: spacing.md,
   },
   selectedStyle: {
     borderRadius: radius.sm,
-    backgroundColor: "#EDE7F6",
+    // backgroundColor: "#EDE7F6",
     paddingHorizontal: spacing.md,
     paddingVertical: spacingVertical.md,
     margin: spacing.md,

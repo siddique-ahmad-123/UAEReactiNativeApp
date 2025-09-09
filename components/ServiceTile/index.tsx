@@ -1,8 +1,13 @@
-
-import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
+import {
+  fontSize,
+  radius,
+  spacing,
+  spacingVertical,
+} from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useTheme } from "styled-components/native";
 
 interface ServiceTileProps {
   title: string;
@@ -10,12 +15,22 @@ interface ServiceTileProps {
 }
 
 const ServiceTile = ({ title, iconName }: ServiceTileProps) => {
+  const theme = useTheme();
   return (
-    <TouchableOpacity style={styles.container}>
-      <View style={styles.iconWrapper}>
+    <TouchableOpacity
+      style={[styles.container, { backgroundColor: theme.colors.primaryColor }]}
+    >
+      <View
+        style={[
+          styles.iconWrapper,
+          { backgroundColor: theme.colors.iconBackground },
+        ]}
+      >
         <Ionicons name={iconName} size={spacing.lg} color="#fff" />
       </View>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={[styles.title, { color: theme.colors.statusBarText }]}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -24,7 +39,7 @@ export default ServiceTile;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#3F1956",
+    // backgroundColor: "#3F1956",
     borderRadius: radius.lg,
     paddingVertical: spacingVertical.md,
     paddingHorizontal: spacing.md,
@@ -34,7 +49,7 @@ const styles = StyleSheet.create({
     width: spacing.xl,
   },
   iconWrapper: {
-    backgroundColor: "#7E5A9B",
+    // backgroundColor: "#7E5A9B",
     padding: spacing.md,
     borderRadius: radius.md,
     marginBottom: spacingVertical.md,
@@ -44,7 +59,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: fontSize.xs,
     fontWeight: "600",
-    color: "white",
+    // color: "white",
     textAlign: "left",
   },
 });
