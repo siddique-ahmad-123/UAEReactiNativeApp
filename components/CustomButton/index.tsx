@@ -53,6 +53,14 @@ export default function CustomButton({
       borderRadius: radius.md,
       minWidth: 189,
     },
+
+    full: {
+      paddingVertical: spacing.md,
+      borderRadius: radius.md,
+      width: "100%",
+      minHeight: 54,
+      alignSelf: "stretch",
+    },
   };
 
   const baseStyle = sizeglobalStyles[size] || sizeglobalStyles.md;

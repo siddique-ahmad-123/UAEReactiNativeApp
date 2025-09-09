@@ -1,4 +1,6 @@
 
+import { spacing, spacingExtra, spacingVertical } from "@/constants/Metrics";
+import { scale } from "@/utils/styling";
 import React from "react";
 import { StyleSheet } from "react-native";
 
@@ -110,26 +112,25 @@ export const localStyles = StyleSheet.create({
     marginVertical: 10,
     paddingHorizontal: 20,
   },
-  textBox: {
+   textBox: {
     borderWidth: 1,
-    borderRadius: 6,
-    minHeight: 197,
+    borderRadius: 8,
+    minHeight: 180,
     padding: 12,
-    marginTop: 24,
+    marginTop: 20,
     position: "relative",
   },
   label: {
     position: "absolute",
-    top: -10,
-    left: 10,
-    paddingHorizontal: 4,
+    top: -10,        // moves it slightly above the border
+    left: 12,
     fontSize: 13,
-    fontWeight: "600", // purple
+    fontWeight: "600", // hides the border line behind text
+    paddingHorizontal: 4,    // small padding so background covers neatly
   },
   value: {
     fontSize: 14,
-    color: "#000",
-    marginTop: 10, // so text doesn’t overlap with label
+    marginTop: 10, // pushes text down so it doesn’t overlap with label
   },
  editableBox: {
   borderWidth: 1,

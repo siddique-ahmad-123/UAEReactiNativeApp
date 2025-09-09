@@ -1,15 +1,15 @@
-import CustomButton from "@/components/CustomButton";
-import { router } from "expo-router";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
-  Dimensions,
-  FlatList,
-  Image,
-  ImageBackground,
-  Text,
   View,
+  Text,
+  FlatList,
+  Dimensions,
+  ImageBackground,
+  Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import CustomButton from "@/components/CustomButton";
+import { router } from "expo-router";
 import { styles } from "../styles/onboarding.Styles";
 import { useTheme } from "styled-components/native";
 
@@ -48,6 +48,7 @@ const slides: Slide[] = [
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
+  const theme = useTheme();
 
   const handleScroll = (event: any) => {
     const index = Math.round(event.nativeEvent.contentOffset.x / width);
@@ -68,14 +69,30 @@ const Carousel = () => {
       />
 
       <View style={styles.content}>
-        <Text style={[styles.title,{color:theme.colors.shadowColor}]}>{item.title}</Text>
-        <Text style={[styles.description,{color:theme.colors.inactiveNavIconColor}]}>{item.description}</Text>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.description}>{item.description}</Text>
       </View>
     </View>
   );
-const theme = useTheme();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      let nextIndex = currentIndex + 1;
+      if (nextIndex >= slides.length) {
+        nextIndex = 0; // loop back to first slide
+      }
+      flatListRef.current?.scrollToIndex({
+        index: nextIndex,
+        animated: true,
+      });
+      setCurrentIndex(nextIndex);
+    }, 1000); // 1 second
+
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor:  theme.colors.background}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <FlatList
         data={slides}
         renderItem={renderItem}
@@ -94,14 +111,15 @@ const theme = useTheme();
             style={[
               styles.dot,
               {
-                backgroundColor: currentIndex === index ? theme.colors.primaryColor : theme.colors.primaryLightColor,
+                backgroundColor:
+                  currentIndex === index ? theme.colors.primaryColor : theme.colors.primaryLightColor,
                 width: currentIndex === index ? 39 : 10,
               },
             ]}
           />
         ))}
       </View>
-      <View style={[styles.row, { marginTop: 130, marginBottom:30 }]}>
+      <View style={[styles.row, { marginTop: 130, marginBottom: 30 }]}>
         <CustomButton
           title="Cancel"
           onPress={() => {}}
@@ -110,7 +128,7 @@ const theme = useTheme();
           size="md"
         />
         <CustomButton
-          title={currentIndex === slides.length - 1 ? "Get Started" : "Next"}
+          title="Get Started"
           onPress={() => {
             if (currentIndex === slides.length - 1) {
               router.push("/(auth)/login");

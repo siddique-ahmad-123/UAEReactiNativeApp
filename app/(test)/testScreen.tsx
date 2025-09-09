@@ -1,3 +1,6 @@
+import CustomDatePicker from "@/components/CustomDatePicker";
+import CustomDropDown from "@/components/CustomDropDown";
+import CustomInput from "@/components/CustomInput";
 import CustomUpload from "@/components/CustomUpload";
 import LabeledSlider from "@/components/LabeledSlider";
 import ServiceTile from "@/components/ServiceTile";
@@ -21,18 +24,20 @@ const testScreen = () => {
         <ServiceTile title="Applications" iconName="create-outline" />
       </View>
 
-      {/* <CustomInput label="Name"></CustomInput>
-      <CustomInput label="Password" type="password"></CustomInput> */}
+      {/* <CustomInput label="Name"></CustomInput> */}
+      <CustomInput label="Name" type="text" />
+      <CustomInput label="Name" type="text" variant="half" />
+      <CustomInput label="password" type="password" />
 
-      {/* <CustomDatePicker label="DOB" variant="full"></CustomDatePicker> */}
+      <CustomDatePicker label="DOB" variant="full"></CustomDatePicker>
 
-      {/* <CustomDropDown
+      <CustomDropDown
         label="Select Country"
         placeholder="Choose a country"
         data={countryOptions}
         type="singleSelect"
         variant="full"
-      /> */}
+      />
 
       {/* <SegmentedControl
         label="Select Income Type"

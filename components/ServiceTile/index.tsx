@@ -1,5 +1,6 @@
 import {
   fontSize,
+  fontWeight,
   radius,
   spacing,
   spacingVertical,
@@ -41,16 +42,15 @@ const styles = StyleSheet.create({
   container: {
     // backgroundColor: "#3F1956",
     borderRadius: radius.lg,
-    paddingVertical: spacingVertical.md,
-    paddingHorizontal: spacing.md,
-    alignItems: "flex-start", // left aligned as per your screenshot
+    paddingVertical: spacingVertical.sm,
+    paddingHorizontal: spacing.sm,
+    alignItems: "flex-start",
     justifyContent: "space-between",
-    // width: spacingX._120 ?? 120,
-    width: spacing.xl,
+    width: spacing.xxxxl,
   },
   iconWrapper: {
     // backgroundColor: "#7E5A9B",
-    padding: spacing.md,
+    padding: spacing.sm,
     borderRadius: radius.md,
     marginBottom: spacingVertical.md,
     alignItems: "center",
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: fontSize.xs,
-    fontWeight: "600",
+    fontWeight: fontWeight.semiBold,
     // color: "white",
     textAlign: "left",
   },

@@ -46,7 +46,7 @@ const NotificationScreen = () => {
         variant="primary"
         type="filled"
         onPress={() => console.log("Check pressed")}
-        style={{ marginTop: 500 }}
+        style={{ marginTop: 420 }}
       />
 
       </View>

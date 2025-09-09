@@ -26,17 +26,21 @@ export const spacing = {
   xl: scale(32),
   xxl: scale(40),
   xxxl: scale(60),
+  xxxxl: scale(104),
+  xxxxxl: scale(160),
 } as const;
 
 // 🔹 Vertical spacing (use for height,paddingY,marginY) in y direction
 export const spacingVertical = {
   xs: verticalScale(4),
   sm: verticalScale(8),
+  semi: verticalScale(12),
   md: verticalScale(16),
   lg: verticalScale(24),
   xl: verticalScale(32),
   xxl: verticalScale(40),
   xxxl: verticalScale(60),
+  xxxxl: verticalScale(160),
 } as const;
 
 // 🔹 Border radius (use for borderRadius)
@@ -48,9 +52,8 @@ export const radius = {
   xl: scale(16),
   xxl: scale(20),
   pill: scale(30),
-  round: scale(9999), 
+  round: scale(9999),
 } as const;
-
 
 export const fontSize = {
   xxs: scale(10),
@@ -93,6 +96,27 @@ export const spacingExtra = {
   s120: scale(120),
   s160: scale(160),
 } as const;
+
+export const borderWidth = {
+  none: 0,
+  hairline: 0.5,
+  thin: 1,
+  normal: 1.5,
+  thick: 2,
+  heavy: 3,
+  extra: 4,
+} as const;
+
+export const width = {
+  none: "0%",
+  xs: "10%",
+  sm: "20%",
+  md: "45%",
+  lg: "60%",
+  xl: "80%",
+  full: "100%",
+} as const;
+
 // ---------- 🧑‍💻 TypeScript Types for Autocomplete ----------
 
 export type SpacingKey = keyof typeof spacing;
@@ -101,3 +125,5 @@ export type SpacingVerticalKey = keyof typeof spacingVertical;
 export type RadiusKey = keyof typeof radius;
 export type FontSizeKey = keyof typeof fontSize;
 export type FontWeightKey = keyof typeof fontWeight;
+export type BorderWidthKey = keyof typeof borderWidth;
+export type WidthKey = keyof typeof width;
