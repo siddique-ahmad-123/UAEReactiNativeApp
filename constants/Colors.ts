@@ -43,8 +43,8 @@ export const DarkThemeColorConstants = {
   background: "#ffffffff",
   iconBackground: "#7E5A9B",
 
-  textPrimary: "#333333",
-  inputFieldBorder: "#DEDEDE",
+  textPrimary:"#333333",
+  inputFieldBorder:"#DEDEDE",
 
   verifyCheck: "#2F9400",
   verifyCheckLight: "#EAFFE0",
@@ -56,5 +56,9 @@ export const DarkThemeColorConstants = {
   shadowColor: "#0000",
 
   trackerBgColor: "#EFE8F3",
+
+  textHeader:"#FFFF",
+
+  InputBorderColor:""
 } as const;
 export type ThemeColors = typeof LightThemeColorConstants;

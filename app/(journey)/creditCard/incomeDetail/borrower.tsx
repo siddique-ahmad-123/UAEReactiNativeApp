@@ -13,6 +13,9 @@ import {
   View,
 } from "react-native";
 import FormInput from "./FormInput";
+import SegmentedControl from "@/components/SegmentControl";
+import SectionHeader from "@/components/SectionHeader";
+import MethodSelector from "@/components/MethodSelector";
 
 export default function BorrowerIncomeScreen({ navigation }: any) {
   const { t } = useTranslation();
@@ -21,15 +24,31 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
     resolver: zodResolver(incomeDetailSchema),
     defaultValues: {
       incomeType: formData.incomeType || "Salaried",
+      empDetailFetchMethod: formData.empDetailFetchMethod || "AECB",
     },
     shouldUnregister: true,
   });
   const incomeType = watch("incomeType");
   const empDetailFetchMethod = watch("empDetailFetchMethod");
+
   const onSubmit = (values: any) => {
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
     nextStep();
   };
+  const employmentMethods = [
+    {
+      id: "aecb",
+      title: "AECB",
+      description: "Details will be pulled from Credit Bureau",
+      iconName: "card", // Ionicons name
+    },
+    {
+      id: "salary-certificate",
+      title: "Salary Certificate",
+      description: "Salary Certificate not older than 1 month to be uploaded",
+      iconName: "document-text",
+    },
+  ];
   return (
     <FormLayout
       stepNumber={2}
@@ -42,48 +61,18 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
-      <Text style={styles.sectionTitle}>Select Income Type</Text>
-      <View style={styles.toggleRow}>
-        <TouchableOpacity
-          style={[
-            styles.toggleButton,
-            incomeType === "Salaried" && styles.toggleActive,
-          ]}
-          onPress={() => setValue("incomeType", "Salaried")}
-        >
-          <Text
-            style={[
-              styles.toggleText,
-              incomeType === "Salaried" && styles.toggleTextActive,
-            ]}
-          >
-            Salaried
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.toggleButton,
-            incomeType === "Self Employed" && styles.toggleActive,
-          ]}
-          onPress={() => setValue("incomeType", "Self Employed")}
-        >
-          <Text
-            style={[
-              styles.toggleText,
-              incomeType === "Self Employed" && styles.toggleTextActive,
-            ]}
-          >
-            Self Employed
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Employment Info */}
-      <Text style={styles.sectionTitle}>Employment Information</Text>
-      <Text style={styles.subTitle}>
-        Select Method to Fetch Employment Details
-      </Text>
-
+      <SegmentedControl
+        label={"Select Income Type"}
+        options={["Salaried", "Self Employed"]}
+        onChange={(value) => setValue("incomeType", value)}
+      />
+      <SectionHeader sectionName="Employment  Information"/>
+      <MethodSelector
+         title={"Select Method to Fetch Employment Details"}
+        options={employmentMethods}
+        selectedId={empDetailFetchMethod}
+        onSelect={(id) => setValue("empDetailFetchMethod", id)}
+      />
       <View style={styles.cardRow}>
         <TouchableOpacity
           style={[
@@ -92,6 +81,7 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
           ]}
           onPress={() => setValue("empDetailFetchMethod", "AECB")}
         >
+
           <Text style={styles.cardTitle}>AECB</Text>
           <Text style={styles.cardDesc}>
             Details will be pulled from Credit Bureau

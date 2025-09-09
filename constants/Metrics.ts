@@ -45,13 +45,15 @@ export const radius = {
   sm: scale(4),
   md: scale(8),
   lg: scale(12),
-  xl: scale(20),
+  xl: scale(16),
+  xxl: scale(20),
   pill: scale(30),
   round: scale(9999), 
 } as const;
 
 
 export const fontSize = {
+  xxs: scale(10),
   xs: scale(12),
   sm: scale(14),
   md: scale(16),

@@ -1,5 +1,4 @@
-import { radius } from "@/constants/Metrics";
-import { spacing } from "@/constants/Spacing";
+import { radius, spacing } from "@/constants/Metrics";
 import React from "react";
 import {
   GestureResponderEvent,
