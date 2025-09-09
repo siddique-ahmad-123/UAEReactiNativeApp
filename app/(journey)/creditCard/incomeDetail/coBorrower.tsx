@@ -2,7 +2,7 @@ import FormLayout from "@/components/Form/FormLayout";
 import { incomeDetailSchema } from "@/schemas/creditCard/incomeDetailSchema";
 import { useApplicationStore } from "@/store/applicationStore";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
@@ -16,13 +16,18 @@ import CustomDropDown from "@/components/CustomDropDown";
 import CustomDatePicker from "@/components/CustomDatePicker";
 import CustomUpload from "@/components/CustomUpload";
 
-export default function BorrowerIncomeScreen() {
+export default function CoBorrowerIncomeScreen({ navigation }: any) {
   const { t } = useTranslation();
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
-    resolver: zodResolver(incomeDetailSchema.partial()),
-    defaultValues: formData,
-    shouldUnregister: true,
+    resolver: zodResolver(incomeDetailSchema),
+    defaultValues: {
+      incomeType: formData.incomeType || "Salaried",
+      empDetailFetchMethod: formData.empDetailFetchMethod || "AECB",
+      incomeDetailFetchMethod: formData.incomeDetailFetchMethod || "Salary Transfer",
+      businessDetailFetchMethod: formData.businessDetailFetchMethod || "Upload Trade License",
+    },
+    //shouldUnregister: true,
   });
   const incomeType = watch("incomeType") ?? "Salaried";
   const empDetailFetchMethod = watch("empDetailFetchMethod") ?? "AECB";
@@ -123,11 +128,11 @@ export default function BorrowerIncomeScreen() {
     <FormLayout
       stepNumber={2}
       title={t("incomeDetails")}
-      subTitle={t("borrowerDetails")}
+      subTitle={"Co-Borrower"}
       noOfBars={2}
-      activeBarIndex={0}
+      activeBarIndex={1}
       onBack={() => prevStep}
-      onClose={() => ""}
+      onClose={() => navigation.navigate("Home")}
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
