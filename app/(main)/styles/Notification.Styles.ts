@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: 700,
   },
   closeButton: {
     fontSize: 20,
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     borderTopLeftRadius: 38,
     borderTopRightRadius: 38,
-    paddingTop: 30,
+    paddingTop: 40,
     paddingHorizontal: 16,
   },
   contentBox: {

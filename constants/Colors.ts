@@ -21,13 +21,15 @@ export const LightThemeColorConstants = {
 
   placeholderColor: "#DEDEDE",
 
-  shadowColor: "#0000",
+  shadowColor: "#000",
 
   trackerBgColor: "#EFE8F3",
 
   textHeader:"#FFFF",
 
-  InputBorderColor:""
+  InputBorderColor:"",
+
+  borderColor:"#CCCC"
 } as const;
 
 export const DarkThemeColorConstants = {
@@ -56,5 +58,7 @@ export const DarkThemeColorConstants = {
   shadowColor: "#0000",
 
   trackerBgColor: "#EFE8F3",
+
+  borderColor:"#CCCC"
 } as const;
 export type ThemeColors = typeof LightThemeColorConstants;
