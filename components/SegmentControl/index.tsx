@@ -23,7 +23,7 @@ const SegmentedControl = ({
   defaultValue,
   mandatory = false,
 }: SegmentedControlProps) => {
-  const [selected, setSelected] = useState(defaultValue || options[0]);
+  const [selected, setSelected] = useState(defaultValue);
 
   const handleSelect = (option: string) => {
     setSelected(option);

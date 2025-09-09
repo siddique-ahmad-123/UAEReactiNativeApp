@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Example icon lib, optional
 import { useTheme } from "styled-components/native";
@@ -24,6 +24,11 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
   selectedId,
   onSelect,
 }) => {
+  const [selected, setSelected] = useState(selectedId);
+  const handleSelect = (id: string) => {
+    setSelected(id);
+    onSelect(id);
+  }
   const theme = useTheme();
   const styles = StyleSheet.create({
     title: {
@@ -67,7 +72,7 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
       {title ? <Text style={styles.title}>{title}</Text> : null}
       <View style={styles.optionContainer}>
         {options.map((option) => {
-          const isSelected = option.id === selectedId;
+          const isSelected = option.id === selected;
           return (
             <TouchableOpacity
               key={option.id}
@@ -75,7 +80,7 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
                 styles.card,
                 isSelected ? styles.cardSelected : styles.cardDefault,
               ]}
-              onPress={() => onSelect(option.id)}
+              onPress={() => handleSelect(option.id)}
               activeOpacity={0.8}
             >
               {option.iconName && (

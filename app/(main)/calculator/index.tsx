@@ -15,6 +15,8 @@ import Slider from "@react-native-community/slider";
 import { styles } from "../styles/Calculator.Styles";
 import InputCard from "@/components/InputCard";
 import { useTheme } from "styled-components/native";
+import CustomButton from "@/components/CustomButton";
+import { router } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
@@ -145,9 +147,14 @@ const EMICalculatorScreen: React.FC = () => {
           </View>
 
           {/* Back button */}
-          <TouchableOpacity style={[styles.backButton,{backgroundColor:theme.colors.secondaryColor}]}>
-            <Text style={[styles.backButtonText,{color:theme.colors.primaryColor}]}>Back</Text>
-          </TouchableOpacity>
+          <CustomButton
+                  title="Back"
+                  size="full"
+                  variant="primary"
+                  type="filled"
+                  onPress={() => router.push("/NavScreen")}
+                  style={{ marginTop: 0}}
+                />
         </View>
       </ScrollView>
     </SafeAreaView>

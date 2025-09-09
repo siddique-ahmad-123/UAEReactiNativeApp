@@ -26,7 +26,7 @@ export default function CustomButton({
   onPress,
   variant = "primary",
   type = "filled",
-  size = "md",
+  size = "full",
   style,
   textStyle,
 }: Props) {

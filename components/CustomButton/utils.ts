@@ -1,3 +1,4 @@
+import { fontSize, fontWeight } from "@/constants/Metrics";
 import { StyleSheet } from "react-native";
 
 const globalStyles = StyleSheet.create({
@@ -6,7 +7,6 @@ const globalStyles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "#F5F5F5",
   },
 
   // 🔹 Text Styles
@@ -31,9 +31,8 @@ const globalStyles = StyleSheet.create({
     marginVertical: 5,
   },
   buttonText: {
-    fontSize: 16,
-    fontWeight: "700",
-    // color: "#3F1956",
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.bold,
   },
 
   button2: {

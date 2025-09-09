@@ -11,6 +11,7 @@ import RequestCard from "@/components/RequestCard";
 import CustomButton from "@/components/CustomButton";
 import { useTheme } from "styled-components/native";
 import MessageCard from "@/components/MessageCard";
+import { router } from "expo-router";
 // import your card
 
 const ExistingApplicantstScreen = () => {
@@ -40,7 +41,7 @@ const ExistingApplicantstScreen = () => {
         size="full"
         variant="primary"
         type="filled"
-        onPress={() => console.log("Check pressed")}
+        onPress={() =>  router.back()}
         style={{ marginTop: 490 }}
       />
 

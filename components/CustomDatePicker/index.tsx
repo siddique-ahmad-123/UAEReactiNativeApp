@@ -60,7 +60,7 @@ const CustomDatePicker = ({
       borderRadius: radius.md,
       paddingVertical: spacingVertical.md,
       paddingHorizontal: spacing.md,
-      marginVertical: spacingVertical.md,
+      marginVertical: spacingVertical.sm,
       backgroundColor: theme.colors.background,
     },
     full: { width: width.full },
@@ -75,7 +75,7 @@ const CustomDatePicker = ({
       marginBottom: spacing.sm,
       backgroundColor: theme.colors.background,
     },
-    label: { fontSize: fontSize.sm, fontWeight: fontWeight.semiBold },
+    label: { fontSize: fontSize.sm, fontWeight: fontWeight.medium },
     labelLine: { height: 1.5, marginLeft: spacing.md },
     inputBox: {
       flexDirection: theme.flexRow.flexDirection,
