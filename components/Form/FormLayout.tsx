@@ -49,6 +49,7 @@ export default function FormLayout({
       borderTopRightRadius: radius.pill,
       borderTopLeftRadius: radius.pill,
       backgroundColor: theme.colors.background,
+      gap: spacingVertical.sm,
     },
 
     buttonRow: {
@@ -96,7 +97,7 @@ export default function FormLayout({
           onInfoPress={onInfoPress}
         />
 
-        <ScrollView style={styles.scrollView}>
+        <ScrollView contentContainerStyle={styles.scrollView}>
           {children}
           {/* Footer Buttons */}
           <View style={styles.buttonRow}>

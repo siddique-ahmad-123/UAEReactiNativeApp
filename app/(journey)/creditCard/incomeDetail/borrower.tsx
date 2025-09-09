@@ -6,16 +6,15 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+  StyleSheet
 } from "react-native";
 import FormInput from "./FormInput";
 import SegmentedControl from "@/components/SegmentControl";
 import SectionHeader from "@/components/SectionHeader";
 import MethodSelector from "@/components/MethodSelector";
+import CustomButton from "@/components/CustomButton";
+import { spacingVertical } from "@/constants/Metrics";
+import CustomInput from "@/components/CustomInput";
 
 export default function BorrowerIncomeScreen({ navigation }: any) {
   const { t } = useTranslation();
@@ -28,8 +27,8 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
     },
     shouldUnregister: true,
   });
-  const incomeType = watch("incomeType");
-  const empDetailFetchMethod = watch("empDetailFetchMethod");
+  const incomeType = watch("incomeType") ?? "Salaried";
+  const empDetailFetchMethod = watch("empDetailFetchMethod") ?? "AECB";
 
   const onSubmit = (values: any) => {
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
@@ -64,46 +63,57 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
       <SegmentedControl
         label={"Select Income Type"}
         options={["Salaried", "Self Employed"]}
+        defaultValue={incomeType}
         onChange={(value) => setValue("incomeType", value)}
       />
-      <SectionHeader sectionName="Employment  Information"/>
+      <SectionHeader sectionName="Employment  Information" style={{ marginTop: spacingVertical.md }} />
       <MethodSelector
          title={"Select Method to Fetch Employment Details"}
         options={employmentMethods}
         selectedId={empDetailFetchMethod}
         onSelect={(id) => setValue("empDetailFetchMethod", id)}
       />
-      
-
-      <TouchableOpacity style={styles.fetchButton}>
-        <Text style={styles.fetchButtonText}>Fetch Employment Details</Text>
-      </TouchableOpacity>
+      <CustomButton
+        title="Fetch Employment Details"
+        onPress={() => alert("Fetching Employment Details...")}
+      />
 
       {incomeType === "Salaried" ? (
         <>
-          <FormInput
+          <CustomInput
             control={control}
             name="employerName"
+            label="Employer Name"
             placeholder="Employer Name"
+            type="text"
           />
-          <FormInput
+          {/* <CustomInput
             control={control}
             name="employedFrom"
             placeholder="Employed From"
-          />
-          <FormInput
+
+          /> */}
+          <CustomInput
             control={control}
             name="currentExp"
+            label="Current Experience (Months)"
             placeholder="Current Experience (Months)"
-            keyboardType="numeric"
+            type ="number"
           />
-          <FormInput
+          <CustomInput
             control={control}
             name="totalExp"
+            label="Total Experience (Months)"
             placeholder="Total Experience (Months)"
-            keyboardType="numeric"
+            type ="number"
           />
-          <FormInput control={control} name="emirate" placeholder="Emirates" />
+          <CustomInput
+            control={control}
+            name="emirate"
+            label="Emirates"
+            placeholder="Emirates"
+            type ="text"
+          />
         </>
       ) : (
         <>

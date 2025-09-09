@@ -48,7 +48,7 @@ const CustomInput = ({
       borderRadius: radius.md,
       paddingHorizontal: spacing.md,
       paddingVertical: spacingVertical.xs,
-      marginVertical: spacingVertical.md,
+      marginVertical: spacingVertical.xs, 
     },
     full: {
       width: width.full,
@@ -58,15 +58,15 @@ const CustomInput = ({
     },
     labelContainer: {
       position: "absolute",
-      top: -spacingVertical.sm,
+      top: -spacingVertical.semi,
       left: spacing.md,
       flexDirection: theme.flexRow.flexDirection,
       alignItems: "center",
       paddingHorizontal: spacing.xs,
     },
     label: {
-      fontSize: fontSize.sm,
-      fontWeight: fontWeight.semiBold,
+      fontSize: fontSize.md,
+      fontWeight: fontWeight.medium,
     },
     labelLine: {
       // height: 1.5,
@@ -74,7 +74,7 @@ const CustomInput = ({
     },
     input: {
       fontSize: fontSize.md,
-      paddingTop: spacingVertical.md,
+      fontWeight: fontWeight.normal,
     },
     inputRow: {
       flexDirection: theme.flexRow.flexDirection,

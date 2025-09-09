@@ -11,15 +11,17 @@ import { useTheme } from "styled-components/native";
 
 interface SectionHeaderProps {
   sectionName: string;
+  style?: object;
 }
 
-const SectionHeader = ({ sectionName }: SectionHeaderProps) => {
+const SectionHeader = ({ sectionName, style }: SectionHeaderProps) => {
   const theme = useTheme();
   return (
     <View
       style={[
         styles.container,
         { backgroundColor: theme.colors.primaryLightColor },
+        style,
       ]}
     >
       <Text style={[styles.text, { color: theme.colors.primaryColor }]}>
@@ -36,7 +38,6 @@ const styles = StyleSheet.create({
     paddingVertical: spacingVertical.xs,
     paddingHorizontal: spacing.md,
     borderRadius: radius.sm,
-    marginVertical: spacingVertical.md,
     width: "100%",
   },
   text: {
