@@ -11,7 +11,7 @@ import RequestCard from "@/components/RequestCard";
 import CustomButton from "@/components/CustomButton";
 // import your card
 
-const RequestsScreen = () => {
+const NotificationScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       {/* Purple Header */}
@@ -44,7 +44,7 @@ const RequestsScreen = () => {
         variant="primary"
         type="filled"
         onPress={() => console.log("Check pressed")}
-        style={{ marginTop: 450 }}
+        style={{ marginTop: 500 }}
       />
 
       </View>
@@ -52,4 +52,4 @@ const RequestsScreen = () => {
   );
 };
 
-export default RequestsScreen;
+export default NotificationScreen;

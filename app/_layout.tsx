@@ -22,17 +22,9 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack initialRouteName="(main)/selectcreditcard">
-        <Stack.Screen name="(auth)/otp" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />
-        <Stack.Screen name="(main)/onboarding" options={{ headerShown: false }} />
-        <Stack.Screen name="(main)/home" options={{ headerShown: false }} />
-        <Stack.Screen name="(main)/calculator" options={{ headerShown: false }} />
-        <Stack.Screen name="(main)/notification" options={{ headerShown: false }} />
-        <Stack.Screen name="(main)/NeedHelp" options={{ headerShown: false }} />
-        <Stack.Screen name="(main)/menu" options={{ headerShown: false }} />
-        <Stack.Screen name="(main)/selectcreditcard" options={{ headerShown: false }} />
-        <Stack.Screen name="(main)/NavScreen" options={{ headerShown: false }} />
+      <Stack initialRouteName="(main)">
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(main)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
