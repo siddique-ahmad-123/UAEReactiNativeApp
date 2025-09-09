@@ -130,7 +130,7 @@ const EMICalculatorScreen: React.FC = () => {
             style={[
               styles.inputCard,
               { backgroundColor: theme.colors.background },
-              { borderColor: theme.colors.InputBorderColor },
+              { borderColor: theme.colors.borderColor },
             ]}
           >
             <Text style={[styles.resultLabel,{color:theme.colors.primaryColor}]}>Monthly Installment</Text>

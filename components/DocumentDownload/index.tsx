@@ -17,7 +17,7 @@ const DocumentDownload = ({ documentName }: DocumentDownloadProps) => {
   const theme = useTheme();
   return (
     <TouchableOpacity
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      style={[styles.container, { backgroundColor: theme.colors.primaryLightColor }]}
     >
       <Text style={[styles.text, { color: theme.colors.primaryColor }]}>
         {documentName}
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    // backgroundColor: "#F3E6FC",
     paddingVertical: spacingVertical.md,
     paddingHorizontal: spacing.md,
     borderRadius: radius.md,
@@ -43,6 +42,5 @@ const styles = StyleSheet.create({
   text: {
     fontSize: fontSize.sm,
     fontWeight: "600",
-    // color: "#3F1956",
   },
 });
