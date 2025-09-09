@@ -23,14 +23,11 @@ export const styles = StyleSheet.create({
     height: 44,
     borderRadius: 22,
     borderWidth: 2,
-    borderColor: "#fff",
   },
   greetingSmall: {
-    color: "#666",
     fontSize: 13,
   },
   greetingName: {
-    color: "#2d2d2d",
     fontSize: 16,
     fontWeight: "700",
     marginTop: 2,
@@ -67,7 +64,6 @@ export const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     borderTopLeftRadius: 18,
     borderTopRightRadius: 18,
     paddingHorizontal: 18,
@@ -75,12 +71,10 @@ export const styles = StyleSheet.create({
   },
 
   inputCard: {
-    backgroundColor: "#fff",
     borderRadius: 12,
     padding: 14,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: "#f0f0f0",
     shadowColor: "#000",
     shadowOpacity: 0.03,
     shadowOffset: { width: 0, height: 2 },
@@ -103,7 +97,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   selectedChip: {
-    backgroundColor: "#FEE9C3",
+
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 18,
@@ -205,12 +199,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#f0f0f0",
     padding: 16,
     marginBottom: 18,
   },
   resultLabel: {
-    color: "#3F1956",
     fontSize: 18,
     marginBottom: 6,
     fontWeight: "600",
@@ -218,23 +210,19 @@ export const styles = StyleSheet.create({
   resultAmount: {
     fontSize: 18,
     fontWeight: "400",
-    color: "#000000",
   },
   resultUnit: {
     fontSize: 16,
-    color: "#B5B5B5",
     fontWeight: "500",
   },
 
   backButton: {
-    backgroundColor: "#FECB26",
     paddingVertical: 14,
     borderRadius: 10,
     marginBottom: 20,
     alignItems: "center",
   },
   backButtonText: {
-    color: "#3F1956",
     fontWeight: "800",
     fontSize: 16,
   },

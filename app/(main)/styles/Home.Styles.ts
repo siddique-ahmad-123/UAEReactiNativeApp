@@ -42,8 +42,8 @@ export const localStyles = StyleSheet.create({
     color:colors.primary
   },
   avatar: { width: 50, height: 50, borderRadius: 25, marginRight: 12 },
-  welcome: { fontSize: 14, color: colors.gray},
-  username: { fontSize: 20, fontWeight: "400", color: colors.primary },
+  welcome: { fontSize: 14},
+  username: { fontSize: 20, fontWeight: "400"},
   banner: {
     margin: 16,
     borderRadius: 12,

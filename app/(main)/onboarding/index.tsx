@@ -10,8 +10,8 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useTheme } from "styled-components/native";
 import { styles } from "../styles/onboarding.Styles";
+import { useTheme } from "styled-components/native";
 
 const { width, height } = Dimensions.get("window");
 
@@ -68,14 +68,12 @@ const Carousel = () => {
       />
 
       <View style={styles.content}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.description}>{item.description}</Text>
+        <Text style={[styles.title,{color:theme.colors.shadowColor}]}>{item.title}</Text>
+        <Text style={[styles.description,{color:theme.colors.inactiveNavIconColor}]}>{item.description}</Text>
       </View>
     </View>
   );
-
-  const theme = useTheme();
-
+const theme = useTheme();
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor:  theme.colors.background}}>
       <FlatList
@@ -96,7 +94,7 @@ const Carousel = () => {
             style={[
               styles.dot,
               {
-                backgroundColor: currentIndex === index ? "#5B2E91" : "#E5D4F4",
+                backgroundColor: currentIndex === index ? theme.colors.primaryColor : theme.colors.primaryLightColor,
                 width: currentIndex === index ? 39 : 10,
               },
             ]}

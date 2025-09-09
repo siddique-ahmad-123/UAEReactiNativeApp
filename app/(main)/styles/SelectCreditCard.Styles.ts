@@ -1,4 +1,4 @@
-import { colors } from "@/constants/Colors";
+
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -19,14 +19,12 @@ export const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: colors.white,
   },
   closeButton: {
     fontSize: 20,
     color: "#fff",
   },
   subHeader: {
-    color: colors.white,
     fontSize: 12,
     marginTop: 4,
     paddingBottom: 24,
@@ -44,7 +42,6 @@ export const styles = StyleSheet.create({
   card: {
     width: 332,
     height: 568,
-    backgroundColor: colors.white,
     borderRadius: 12,
     padding: 16,
     marginBottom: 20,

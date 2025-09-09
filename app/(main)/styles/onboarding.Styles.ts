@@ -5,7 +5,6 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
   },
   slide: {
     alignItems: "center",
@@ -35,14 +34,12 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: "700",
-    color: "#3D3D4E",
     marginBottom: 10,
     textAlign: "center",
     fontFamily:"LatoBold"
   },
   description: {
     fontSize: 18,
-    color: "#67657C",
     textAlign: "center",
     paddingHorizontal: 20,
     fontFamily:"LatoRegular"
