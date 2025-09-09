@@ -1,4 +1,4 @@
-import { fontSize, radius, spacingX, spacingY } from "@/constants/Metrics";
+import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -19,10 +19,10 @@ export default SectionHeader;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#EBDCF9",
-    paddingVertical: spacingY._10,
-    paddingHorizontal: spacingX._12,
+    paddingVertical: spacingVertical.md,
+    paddingHorizontal: spacing.md,
     borderRadius: radius.sm,
-    marginVertical: spacingY._10,
+    marginVertical: spacingVertical.md,
     width: "100%",
   },
   text: {

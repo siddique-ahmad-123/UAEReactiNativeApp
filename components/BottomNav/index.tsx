@@ -18,6 +18,7 @@ type Props = {
 };
 
 const BottomNav: React.FC<Props> = ({ activeTab, setActiveTab }) => {
+  
   return (
     <SafeAreaView edges={["bottom"]} style={{ backgroundColor: "#fff" }}>
       <View style={localStyles.bottomNav}>

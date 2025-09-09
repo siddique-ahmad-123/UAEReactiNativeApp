@@ -1,5 +1,5 @@
-import { colors } from "@/constants/Colors";
-import { fontSize, radius, spacingX, spacingY } from "@/constants/Metrics";
+
+import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -13,7 +13,7 @@ const ServiceTile = ({ title, iconName }: ServiceTileProps) => {
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.iconWrapper}>
-        <Ionicons name={iconName} size={spacingX._25} color="#fff" />
+        <Ionicons name={iconName} size={spacing.lg} color="#fff" />
       </View>
       <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
@@ -26,25 +26,25 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#3F1956",
     borderRadius: radius.lg,
-    paddingVertical: spacingY._20,
-    paddingHorizontal: spacingX._15,
+    paddingVertical: spacingVertical.md,
+    paddingHorizontal: spacing.md,
     alignItems: "flex-start", // left aligned as per your screenshot
     justifyContent: "space-between",
     // width: spacingX._120 ?? 120,
-    width: spacingX._105,
+    width: spacing.xl,
   },
   iconWrapper: {
     backgroundColor: "#7E5A9B",
-    padding: spacingX._10,
+    padding: spacing.md,
     borderRadius: radius.md,
-    marginBottom: spacingY._10,
+    marginBottom: spacingVertical.md,
     alignItems: "center",
     justifyContent: "center",
   },
   title: {
     fontSize: fontSize.xs,
     fontWeight: "600",
-    color: colors.white,
+    color: "white",
     textAlign: "left",
   },
 });

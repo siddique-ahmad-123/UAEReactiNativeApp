@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  Text,
-  TouchableOpacity,
-  StyleProp,
-  ViewStyle,
-  TextStyle,
-  GestureResponderEvent,
-} from "react-native";
-import globalStyles from "./utils"; // your global styles
+import { Text, TouchableOpacity, StyleProp, ViewStyle, TextStyle } from "react-native";
+import globalStyles from "./utils";
 import { radius } from "@/constants/Metrics";
 import { spacing } from "@/constants/Spacing";
 
@@ -33,42 +26,24 @@ export default function CustomButton({
   // ✅ Sizing system
   const sizeStyles: Record<string, ViewStyle> = {
     sm: {
-      paddingVertical: 4,
-      paddingHorizontal: 8,
-      borderRadius: 6,
-      minWidth: 60,
-      minHeight: 28,
-      alignSelf: "flex-start",
+      paddingVertical: spacing.xs,
+      paddingHorizontal: spacing.md,
+      borderRadius: radius._6,
+      minWidth: 120,
+      minHeight:40
     },
     md: {
       paddingVertical: spacing.md,
       paddingHorizontal: spacing.lg,
       borderRadius: radius._6,
-      minWidth: 160,
-      minHeight: 48,
-      alignSelf: "center",
+      minWidth: 174,
+      minHeight:58
     },
     lg: {
       paddingVertical: spacing.md,
-      paddingHorizontal: spacing.xl,
+      paddingHorizontal: spacing.xs,
       borderRadius: radius._6,
-      minWidth: 200,
-      minHeight: 56,
-      alignSelf: "center",
-    },
-    xl: {
-      paddingVertical: spacing.lg,
-      borderRadius: radius._6,
-      width: "90%",
-      minHeight: 64,
-      alignSelf: "center",
-    },
-    full: {
-      paddingVertical: spacing.lg,
-      borderRadius: radius._6,
-      width: "100%", // ✅ takes full width
-      minHeight: 34,
-      alignSelf: "stretch",
+      minWidth: 189,
     },
   };
 

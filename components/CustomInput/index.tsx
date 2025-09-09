@@ -1,4 +1,4 @@
-import { fontSize, radius, spacingX, spacingY } from "@/constants/Metrics";
+import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
@@ -71,7 +71,7 @@ const CustomInput = ({
               name={secure ? "eye" : "eye-off"}
               size={fontSize.lg}
               color="#555"
-              style={{ marginLeft: spacingX._7 }}
+              style={{ marginLeft: spacing.md }}
             />
           </TouchableOpacity>
         )}
@@ -87,9 +87,9 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: "#DEDEDE",
     borderRadius: radius.md,
-    paddingHorizontal: spacingX._12,
-    paddingVertical: spacingY._5,
-    marginVertical: spacingY._12,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacingVertical.md,
+    marginVertical: spacingVertical.md,
     backgroundColor: "#fff",
   },
   full: {
@@ -100,12 +100,12 @@ const styles = StyleSheet.create({
   },
   labelContainer: {
     position: "absolute",
-    top: -spacingY._12,
-    left: spacingX._12,
+    top: -spacingVertical.md,
+    left: spacing.md,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#fff",
-    paddingHorizontal: spacingX._5,
+    paddingHorizontal: spacing.md,
   },
   label: {
     fontSize: fontSize.sm,
@@ -115,11 +115,11 @@ const styles = StyleSheet.create({
   labelLine: {
     height: 1.5,
     backgroundColor: "#ccc",
-    marginLeft: spacingX._7,
+    marginLeft: spacing.md,
   },
   input: {
     fontSize: fontSize.md,
-    paddingTop: spacingY._12,
+    paddingTop: spacingVertical.md,
     color: "#333",
   },
   inputRow: {
@@ -127,6 +127,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   eyeButton: {
-    paddingHorizontal: spacingX._5,
+    paddingHorizontal: spacing.md,
   },
 });
