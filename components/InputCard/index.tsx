@@ -45,6 +45,7 @@ const InputCard: React.FC<Props> = ({
       style={[
         styles.inputCard,
         { backgroundColor: theme.colors.background },
+        { borderColor: theme.colors.inputFieldBorder },
         { shadowColor: theme.colors.shadowColor },
       ]}
     >
@@ -120,6 +121,7 @@ export default InputCard;
 const styles = StyleSheet.create({
   inputCard: {
     // backgroundColor: "#fff",
+    borderWidth: 1.5,
     borderRadius: 4,
     padding: 11,
     marginBottom: 16,

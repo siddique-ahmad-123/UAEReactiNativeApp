@@ -1,15 +1,16 @@
 import {
   fontSize,
+  fontWeight,
   radius,
   spacing,
-  spacingVertical
+  spacingVertical,
 } from "@/constants/Metrics";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   card: {
-    width: spacing.xxl,
-    height: spacingVertical.xxl,
+    width: spacing.xxxxxl,
+    height: spacingVertical.xxxxl,
     borderRadius: radius.lg,
     overflow: "hidden",
     marginBottom: spacing.md,
@@ -17,7 +18,7 @@ export const styles = StyleSheet.create({
   image: {
     flex: 1,
     justifyContent: "flex-end",
-    padding: spacing.sm,
+    // padding: spacing.sm,
   },
   imageStyle: {
     borderRadius: radius.lg,
@@ -29,7 +30,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontSize: fontSize.sm,
-    fontWeight: "600",
+    fontWeight: fontWeight.semiBold,
     // color: "#fff",
     position: "absolute",
     bottom: spacing.lg,
