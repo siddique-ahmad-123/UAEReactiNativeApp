@@ -56,7 +56,7 @@ const navItems = [
 
 export default function Dashboard() {
   const router = useRouter();
-  
+
   const [activeTab, setActiveTab] = useState("1");
 
   const colors = {
@@ -110,7 +110,6 @@ export default function Dashboard() {
       </ScrollView>
 
       {/* Bottom Navbar */}
-      
     </SafeAreaView>
   );
 }

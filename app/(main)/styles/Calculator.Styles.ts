@@ -23,7 +23,6 @@ export const styles = StyleSheet.create({
     height: 44,
     borderRadius: 22,
     borderWidth: 2,
-    borderColor: "#fff",
   },
   greetingSmall: {
     color: "#666",
@@ -67,7 +66,6 @@ export const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     borderTopLeftRadius: 18,
     borderTopRightRadius: 18,
     paddingHorizontal: 18,
@@ -75,12 +73,10 @@ export const styles = StyleSheet.create({
   },
 
   inputCard: {
-    backgroundColor: "#fff",
     borderRadius: 12,
     padding: 14,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: "#f0f0f0",
     shadowColor: "#000",
     shadowOpacity: 0.03,
     shadowOffset: { width: 0, height: 2 },
@@ -103,7 +99,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   selectedChip: {
-    backgroundColor: "#FEE9C3",
+
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 18,

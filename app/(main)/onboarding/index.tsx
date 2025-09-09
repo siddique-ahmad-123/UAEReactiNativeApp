@@ -10,8 +10,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
-import { colors } from "@/constants/Colors";
 import { styles } from "../styles/onboarding.Styles";
+import { useTheme } from "styled-components/native";
 
 const { width, height } = Dimensions.get("window");
 
@@ -73,9 +73,9 @@ const Carousel = () => {
       </View>
     </View>
   );
-
+const theme = useTheme();
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor:  theme.colors.background}}>
       <FlatList
         data={slides}
         renderItem={renderItem}

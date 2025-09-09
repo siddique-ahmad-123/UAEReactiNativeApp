@@ -1,6 +1,5 @@
 import CustomButton from "@/components/CustomButton";
 import globalStyles from "@/components/CustomButton/utils";
-import { colors } from "@/constants/Colors";
 import React, { useRef, useState } from "react";
 import {
   View,
@@ -13,6 +12,7 @@ import {
 } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { styles } from "../styles/SelectCreditCard.Styles";
+import { useTheme } from "styled-components/native";
 
 const { width } = Dimensions.get("window");
 
@@ -52,7 +52,7 @@ const RequestsScreen = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const renderItem = (item: CardItem) => (
-    <View style={styles.card}>
+    <View style={[styles.card,{backgroundColor:theme.colors.background}]}>
       <Image source={item.image} style={styles.cardImage} resizeMode="contain" />
       <Text style={styles.cardTitle}>{item.title}</Text>
       <Text style={styles.cardDescription}>{item.description}</Text>
@@ -66,15 +66,15 @@ const RequestsScreen = () => {
       </View>
     </View>
   );
-
+const theme = useTheme();
   return (
     <SafeAreaView style={styles.safeArea}>
       {/* Purple Header */}
       <View style={styles.header}>
         <View style={styles.headerTop}>
-          <Text style={styles.headerTitle}>Select your Card</Text>
+          <Text style={[styles.headerTitle,{color:theme.colors.background}]}>Select your Card</Text>
         </View>
-        <Text style={styles.subHeader}>
+        <Text style={[styles.subHeader,{color:theme.colors.background}]}>
           We have cards for every need, explore here
         </Text>
       </View>
@@ -102,7 +102,7 @@ const RequestsScreen = () => {
         {/* Pagination Dots */}
         <View style={styles.pagination}>
           {cards.map((_, index) => (
-            <View
+            <View 
               key={index}
               style={[
                 styles.dot,

@@ -15,6 +15,9 @@ export const LightThemeColorConstants = {
   textPrimary:"#333333",
   inputFieldBorder:"#DEDEDE",
 
+  textHeader:"#FFFF",
+  InputBorderColor:"#FFFF",
+
   verifyCheck:"#2F9400",
   verifyCheckLight:"#EAFFE0"
  } as const;

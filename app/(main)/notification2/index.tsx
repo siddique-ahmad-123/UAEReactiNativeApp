@@ -9,17 +9,19 @@ import {
 import { styles } from "../styles/Notification.Styles";
 import CustomButton from "@/components/CustomButton";
 import { localStyles } from "../styles/Notification2.Styles";
+import { useTheme } from "styled-components/native";
 
 const Notification2Screen = () => {
   const [description, setDescription] = useState("Need help for Credit Card");
   const [resolution, setResolution] = useState("Pending...");
 
+  const theme = useTheme();
   return (
     <SafeAreaView style={styles.safeArea}>
       {/* Purple Header */}
       <View style={styles.header}>
         <View style={styles.headerTop}>
-          <Text style={styles.headerTitle}>Notifications</Text>
+          <Text style={[styles.headerTitle,{color:theme.colors.background}]}>Notifications</Text>
           <TouchableOpacity>
             <Text style={styles.closeButton}>✕</Text>
           </TouchableOpacity>

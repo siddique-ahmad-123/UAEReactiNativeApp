@@ -8,8 +8,8 @@ import {
   Image,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { colors } from "@/constants/Colors";
 import { styles } from "./otp.Styles";
+import { useTheme } from "styled-components/native";
 
 
 const OTPScreen: React.FC = () => {
@@ -54,6 +54,7 @@ const OTPScreen: React.FC = () => {
       }
     }
   };
+  const theme = useTheme();
 
   return (
     <View style={styles.container}>
@@ -106,8 +107,8 @@ const OTPScreen: React.FC = () => {
               maxLength={1}
               textAlign="center"
               autoFocus={index === 0}
-              selectionColor={digit ? "#fff" : colors.white}
-              placeholderTextColor={digit ? "#fff" : "#000"}
+              selectionColor={digit ? theme.colors.background : theme.colors.background }
+              placeholderTextColor={digit ? theme.colors.background : "#000"}
             />
           ))}
         </View>

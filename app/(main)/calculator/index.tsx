@@ -9,19 +9,19 @@ import {
   TouchableOpacity,
   LayoutChangeEvent,
   Dimensions,
-   ScrollView,
+  ScrollView,
 } from "react-native";
 import Slider from "@react-native-community/slider";
 import { styles } from "../styles/Calculator.Styles";
 import InputCard from "@/components/InputCard";
+import { useTheme } from "styled-components/native";
 
 const { width } = Dimensions.get("window");
 
 const formatNumber = (n: number) =>
   n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-const clamp = (v: number, a: number, b: number) =>
-  Math.max(a, Math.min(b, v));
+const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 
 const EMICalculatorScreen: React.FC = () => {
   // State
@@ -38,19 +38,16 @@ const EMICalculatorScreen: React.FC = () => {
   function calculateEMI(principal: number, annualRate: number, months: number) {
     const r = annualRate / 100 / 12;
     if (r === 0) return principal / months;
-    const emi = (principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+    const emi =
+      (principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
     return emi;
   }
-  const monthlyInstallment = Math.round(calculateEMI(financeAmount, profitRate, tenure));
-
-  // Slider layout handlers
-  // const onLayoutFA = (e: LayoutChangeEvent) => setTrackWidthFA(e.nativeEvent.layout.width);
-  // const onLayoutTen = (e: LayoutChangeEvent) => setTrackWidthTen(e.nativeEvent.layout.width);
-  // const onLayoutPR = (e: LayoutChangeEvent) => setTrackWidthPR(e.nativeEvent.layout.width);
-
+  const monthlyInstallment = Math.round(
+    calculateEMI(financeAmount, profitRate, tenure)
+  );
+  const theme = useTheme();
   return (
     <SafeAreaView style={styles.safeArea}>
-
       {/* top purple strip (statusbar area) */}
       <View style={styles.topPurple} />
 
@@ -71,8 +68,9 @@ const EMICalculatorScreen: React.FC = () => {
         <View style={{ flex: 1 }}>
           <Text style={styles.emiTitle}>EMI Calculator</Text>
           <Text style={styles.emiDesc} numberOfLines={4}>
-            This calculator will help you to calculate the expected EMI on your loan amount
-            by taking into consideration the Principal Amount, Loan Tenure and Interest.
+            This calculator will help you to calculate the expected EMI on your
+            loan amount by taking into consideration the Principal Amount, Loan
+            Tenure and Interest.
           </Text>
         </View>
 
@@ -82,15 +80,20 @@ const EMICalculatorScreen: React.FC = () => {
           resizeMode="contain"
         />
       </View>
-<ScrollView
+      <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingBottom: 100 }}
         showsVerticalScrollIndicator={false}
       >
-      {/* White container (rounded top) */}
-      <View style={styles.container}>
-        {/* Finance Amount card */}
-       <InputCard
+        {/* White container (rounded top) */}
+        <View
+          style={[
+            styles.container,
+            { backgroundColor: theme.colors.background },
+          ]}
+        >
+          {/* Finance Amount card */}
+          <InputCard
             label="Finance Amount"
             value={financeAmount}
             min={10000}
@@ -101,8 +104,8 @@ const EMICalculatorScreen: React.FC = () => {
             formatValue={formatNumber}
           />
 
-        {/* Tenure card */}
-        <InputCard
+          {/* Tenure card */}
+          <InputCard
             label="Tenure (Months)"
             value={tenure}
             min={12}
@@ -112,9 +115,8 @@ const EMICalculatorScreen: React.FC = () => {
             onChange={setTenure}
           />
 
-
-        {/* Profit Rate card */}
-         <InputCard
+          {/* Profit Rate card */}
+          <InputCard
             label="Profit Rate"
             value={profitRate}
             min={1}
@@ -124,26 +126,32 @@ const EMICalculatorScreen: React.FC = () => {
             onChange={setProfitRate}
           />
 
-        <View style={styles.inputCard}>
-          <Text style={styles.resultLabel}>Monthly Installment</Text>
-          <View style={styles.resultCard}>
-          <View>
-            
-            <Text style={styles.resultAmount}>{formatNumber(monthlyInstallment)}</Text>
+          <View
+            style={[
+              styles.inputCard,
+              { backgroundColor: theme.colors.background },
+              { borderColor: theme.colors.InputBorderColor },
+            ]}
+          >
+            <Text style={styles.resultLabel}>Monthly Installment</Text>
+            <View style={styles.resultCard}>
+              <View>
+                <Text style={styles.resultAmount}>
+                  {formatNumber(monthlyInstallment)}
+                </Text>
+              </View>
+              <Text style={styles.resultUnit}>AED</Text>
+            </View>
           </View>
-          <Text style={styles.resultUnit}>AED</Text>
-        </View>
-    </View>
 
-        {/* Back button */}
-        <TouchableOpacity style={styles.backButton}>
-          <Text style={styles.backButtonText}>Back</Text>
-        </TouchableOpacity>
-      </View>
+          {/* Back button */}
+          <TouchableOpacity style={styles.backButton}>
+            <Text style={styles.backButtonText}>Back</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 export default EMICalculatorScreen;
-

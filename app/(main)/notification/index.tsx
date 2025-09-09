@@ -9,15 +9,17 @@ import {
 import { styles } from "../styles/Notification.Styles";
 import RequestCard from "@/components/RequestCard";
 import CustomButton from "@/components/CustomButton";
+import { useTheme } from "styled-components/native";
 // import your card
 
 const NotificationScreen = () => {
+  const theme = useTheme();
   return (
     <SafeAreaView style={styles.safeArea}>
       {/* Purple Header */}
       <View style={styles.header}>
         <View style={styles.headerTop}>
-          <Text style={styles.headerTitle}>Notifications</Text>
+          <Text style={[styles.headerTitle, { color: theme.colors.textHeader }]}>Notifications</Text>
           <TouchableOpacity>
             <Text style={styles.closeButton}>✕</Text>
           </TouchableOpacity>

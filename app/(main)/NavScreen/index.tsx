@@ -4,6 +4,7 @@ import BottomNav from "@/components/BottomNav";
 import EMICalculatorScreen from "../calculator";
 import Dashboard from "../home";
 import RequestsScreen from "../notification";
+import { useTheme } from "styled-components/native";
 
 const MainScreen = () => {
   const [activeTab, setActiveTab] = useState("Home");
@@ -15,16 +16,16 @@ const MainScreen = () => {
       case "Calculator":
         return <EMICalculatorScreen />;
       case "Need Help":
-        return <View style={styles.dummy}><></></View>; // replace later
+        return <View style={styles.dummy}><></></View>; 
       case "Notifications":
-        return <RequestsScreen />; // replace later
+        return <RequestsScreen />; 
       case "Menu":
-        return <View style={styles.dummy}><></></View>; // replace later
+        return <View style={styles.dummy}><></></View>; 
       default:
         return <Dashboard />;
     }
   };
-
+const theme = useTheme()
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>{renderContent()}</View>

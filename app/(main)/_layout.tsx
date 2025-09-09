@@ -12,6 +12,7 @@ export default function LoginLayout() {
       <Stack.Screen name="notification2" />
       <Stack.Screen name="menu" />
       <Stack.Screen name="selectcreditcard" />
+      <Stack.Screen name="SelectRequiredAmount" />
     </Stack>
   );
 }

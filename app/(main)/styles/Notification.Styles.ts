@@ -1,4 +1,4 @@
-import { colors } from "@/constants/Colors";
+import { useTheme } from "styled-components/native";
 import React from "react";
 import { StyleSheet } from "react-native";
 
@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: colors.white,
   },
   closeButton: {
     fontSize: 20,
