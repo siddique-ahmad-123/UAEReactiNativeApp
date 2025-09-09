@@ -10,6 +10,7 @@ import { styles } from "../styles/Notification.Styles";
 import RequestCard from "@/components/RequestCard";
 import CustomButton from "@/components/CustomButton";
 import { useTheme } from "styled-components/native";
+import { router } from "expo-router";
 // import your card
 
 const NotificationScreen = () => {
@@ -45,7 +46,7 @@ const NotificationScreen = () => {
         size="full"
         variant="primary"
         type="filled"
-        onPress={() => console.log("Check pressed")}
+        onPress={() =>  router.push("/NavScreen")}
         style={{ marginTop: 420 }}
       />
 

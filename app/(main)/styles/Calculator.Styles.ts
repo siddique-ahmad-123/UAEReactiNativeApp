@@ -4,11 +4,9 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#fff",
   },
   topPurple: {
     height: 8,
-    backgroundColor: "#4B006E",
   },
 
   greetingRow: {
@@ -34,7 +32,6 @@ export const styles = StyleSheet.create({
   },
 
   emiCard: {
-    backgroundColor: "#4B006E",
     marginHorizontal: 18,
     borderRadius: 12,
     padding: 16,
@@ -45,13 +42,11 @@ export const styles = StyleSheet.create({
     marginBottom: 12,
   },
   emiTitle: {
-    color: "#FFFFFF",
     fontSize: 20,
     fontWeight: "800",
     marginBottom: 6,
   },
   emiDesc: {
-    color: "#fff",
     fontSize: 14,
     lineHeight: 18,
     opacity: 0.95,
@@ -75,7 +70,6 @@ export const styles = StyleSheet.create({
     padding: 14,
     marginBottom: 12,
     borderWidth: 1,
-    shadowColor: "#000",
     shadowOpacity: 0.03,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
@@ -85,112 +79,6 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 6,
-  },
-  inputLabel: {
-    fontSize: 18,
-    color: "#3F1956",
-    fontWeight: "500",
-  },
-
-  amountInputWrap: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  selectedChip: {
-
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 18,
-    marginRight: 10,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  selectedChipText: {
-    color: "#C47D00",
-    fontWeight: "700",
-    fontSize: 12,
-  },
-  selectedChipUnit: {
-    color: "#C47D00",
-    fontSize: 11,
-    marginLeft: 4,
-  },
-
-  amountInputBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#EEE",
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 8,
-    minWidth: 110,
-    justifyContent: "center",
-  },
-  amountInput: {
-    fontSize: 14,
-    fontWeight: "700",
-    color: "#222",
-    padding: 0,
-    marginRight: 6,
-  },
-  amountUnit: {
-    fontSize: 12,
-    color: "#666",
-  },
-
-  amountInputBoxSmall: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#EEE",
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    borderRadius: 8,
-    minWidth: 80,
-    justifyContent: "center",
-  },
-  amountInputSmall: {
-    fontSize: 14,
-    fontWeight: "700",
-    color: "#222",
-    padding: 0,
-    marginRight: 6,
-    width: 36,
-    textAlign: "center",
-  },
-  amountUnitSmall: {
-    fontSize: 12,
-    color: "#666",
-  },
-
-  sliderWrapper: {
-    height: 36,
-    justifyContent: "center",
-    marginTop: 6,
-    marginBottom: 6,
-    position: "relative",
-  },
-  trackBackground: {
-    height: 8,
-    backgroundColor: "#F0EDED",
-    borderRadius: 12,
-  },
-  trackActive: {
-    position: "absolute",
-    left: 0,
-    height: 8,
-    backgroundColor: "#8924C6",
-    borderRadius: 12,
-  },
-
-  rangeRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  rangeText: {
-    fontSize: 16,
-    color: "#333333",
   },
 
   resultCard: {

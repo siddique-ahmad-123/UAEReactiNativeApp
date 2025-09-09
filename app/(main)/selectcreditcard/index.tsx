@@ -13,6 +13,7 @@ import {
 import Carousel from "react-native-reanimated-carousel";
 import { styles } from "../styles/SelectCreditCard.Styles";
 import { useTheme } from "styled-components/native";
+import { router } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
@@ -60,7 +61,7 @@ const RequestsScreen = () => {
         <TouchableOpacity style={styles.knowMoreBtn}>
           <Text style={styles.knowMoreText}>Know More</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.applyBtn}>
+        <TouchableOpacity style={styles.applyBtn}  onPress={() => router.push("/SelectRequiredAmount")}>
           <Text style={styles.applyText}>Apply Now</Text>
         </TouchableOpacity>
       </View>
@@ -118,14 +119,11 @@ const theme = useTheme();
   size="full"
   variant="primary"
   type="filled"
-  onPress={() => console.log("Back pressed")}
+  onPress={() => router.push("/NavScreen")}
   style={{ marginTop: 30 }}
 />
       </View>
     </SafeAreaView>
   );
 };
-
-
-
 export default RequestsScreen;
