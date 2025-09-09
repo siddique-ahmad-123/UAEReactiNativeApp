@@ -11,8 +11,8 @@ export const LightThemeColorConstants = {
   background: "#ffffffff",
   iconBackground: "#7E5A9B",
 
-  textPrimary:"#333333",
-  inputFieldBorder:"#DEDEDE",
+  textPrimary: "#333333",
+  inputFieldBorder: "#DEDEDE",
 
   verifyCheck: "#2F9400",
   verifyCheckLight: "#EAFFE0",
@@ -25,11 +25,11 @@ export const LightThemeColorConstants = {
 
   trackerBgColor: "#EFE8F3",
 
-  textHeader:"#FFFF",
+  textHeader: "#FFFF",
 
-  InputBorderColor:"",
+  borderColor:"#CCCC",
 
-  borderColor:"#CCCC"
+  errorTextColor: "#FF3333",
 } as const;
 
 export const DarkThemeColorConstants = {
@@ -55,7 +55,7 @@ export const DarkThemeColorConstants = {
 
   placeholderColor: "#DEDEDE",
 
-  shadowColor: "#0000",
+  shadowColor: "#000",
 
   trackerBgColor: "#EFE8F3",
 

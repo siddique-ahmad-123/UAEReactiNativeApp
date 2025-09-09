@@ -1,16 +1,22 @@
 import {
+  borderWidth,
   fontSize,
+  fontWeight,
   radius,
   spacing,
   spacingVertical,
+  width,
 } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
+import { Controller } from "react-hook-form";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { useTheme } from "styled-components/native";
 
 interface CustomDatePickerProps {
+  control?: any; // react-hook-form control (optional)
+  name?: string; // only required if using control
   label: string;
   placeholder?: string;
   minDate?: Date;
@@ -20,15 +26,18 @@ interface CustomDatePickerProps {
 }
 
 const CustomDatePicker = ({
+  control,
+  name,
   label,
-  placeholder = "Select date...",
+  placeholder = "Select a date...",
   minDate,
   maxDate,
   variant = "full",
   mandatory = false,
 }: CustomDatePickerProps) => {
+  const [localDate, setLocalDate] = useState<Date | null>(null);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const theme = useTheme();
 
   const getVariantStyle = () => {
     switch (variant) {
@@ -40,119 +49,138 @@ const CustomDatePicker = ({
     }
   };
 
-  const handleConfirm = (date: Date) => {
-    setSelectedDate(date);
+  const handleConfirm = (date: Date, onChange?: (d: Date) => void) => {
+    onChange ? onChange(date) : setLocalDate(date);
     setDatePickerVisibility(false);
   };
 
-  const theme = useTheme();
+  const styles = StyleSheet.create({
+    container: {
+      borderWidth: borderWidth.normal,
+      borderRadius: radius.md,
+      paddingVertical: spacingVertical.md,
+      paddingHorizontal: spacing.md,
+      marginVertical: spacingVertical.md,
+      backgroundColor: theme.colors.background,
+    },
+    full: { width: width.full },
+    half: { width: width.md },
+    labelContainer: {
+      position: "absolute",
+      top: -spacingVertical.semi,
+      left: spacing.md,
+      flexDirection: theme.flexRow.flexDirection,
+      alignItems: "center",
+      paddingHorizontal: spacing.xs,
+      marginBottom: spacing.sm,
+      backgroundColor: theme.colors.background,
+    },
+    label: { fontSize: fontSize.sm, fontWeight: fontWeight.semiBold },
+    labelLine: { height: 1.5, marginLeft: spacing.md },
+    inputBox: {
+      flexDirection: theme.flexRow.flexDirection,
+      justifyContent: "space-between",
+      alignItems: "center",
+      height: spacingVertical.lg,
+    },
+    placeholderText: { fontSize: fontSize.sm },
+    dateText: { fontSize: fontSize.md },
+    errorText: {
+      color: theme.colors.errorTextColor,
+      fontSize: fontSize.xs,
+      marginTop: spacingVertical.xs,
+      marginLeft: spacing.sm,
+    },
+  });
 
-  return (
-    <View
-      style={[
-        styles.container,
-        { borderColor: theme.colors.inputFieldBorder },
-        getVariantStyle(),
-      ]}
-    >
-      {/* Label */}
-      <View style={styles.labelContainer}>
-        <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
-          {label}
-          {mandatory && <Text style={{ color: "red" }}> *</Text>}
-        </Text>
-        <View
-          style={[
-            styles.labelLine,
-            { backgroundColor: theme.colors.inputFieldBorder },
-          ]}
+  const renderPicker = (
+    value: Date | null,
+    onChange?: (d: Date) => void,
+    error?: any
+  ) => (
+    <View>
+      <View
+        style={[
+          styles.container,
+          getVariantStyle(),
+          {
+            borderColor: error
+              ? theme.colors.errorTextColor
+              : theme.colors.inputFieldBorder,
+          },
+        ]}
+      >
+        {/* Label */}
+        <View style={styles.labelContainer}>
+          <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
+            {label}
+            {mandatory && (
+              <Text style={{ color: theme.colors.errorTextColor }}> *</Text>
+            )}
+          </Text>
+          <View
+            style={[
+              styles.labelLine,
+              { backgroundColor: theme.colors.inputFieldBorder },
+            ]}
+          />
+        </View>
+
+        {/* Touchable Input */}
+        <TouchableOpacity
+          style={styles.inputBox}
+          onPress={() => setDatePickerVisibility(true)}
+        >
+          <Text
+            style={
+              value
+                ? [styles.dateText, { color: theme.colors.textPrimary }]
+                : [
+                    styles.placeholderText,
+                    { color: theme.colors.placeholderColor },
+                  ]
+            }
+          >
+            {value ? value.toLocaleDateString("en-GB") : placeholder}
+          </Text>
+          <Ionicons
+            name="calendar-outline"
+            size={fontSize.lg}
+            color={theme.colors.primaryColor}
+          />
+        </TouchableOpacity>
+
+        {/* Date Picker Modal */}
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          minimumDate={minDate}
+          maximumDate={maxDate}
+          onConfirm={(date) => handleConfirm(date, onChange)}
+          onCancel={() => setDatePickerVisibility(false)}
         />
       </View>
 
-      {/* Input Box */}
-      <TouchableOpacity
-        style={styles.inputBox}
-        onPress={() => setDatePickerVisibility(true)}
-      >
-        <Text
-          style={
-            selectedDate
-              ? [styles.dateText, { color: theme.colors.textPrimary }]
-              : [
-                  styles.placeholderText,
-                  { color: theme.colors.placeholderColor },
-                ]
-          }
-        >
-          {selectedDate
-            ? selectedDate.toLocaleDateString("en-GB") // dd/mm/yyyy
-            : placeholder}
-        </Text>
-        <Ionicons name="calendar-outline" size={fontSize.lg} color="#3F1956" />
-      </TouchableOpacity>
-
-      {/* Modal Date Picker */}
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="date"
-        minimumDate={minDate}
-        maximumDate={maxDate}
-        onConfirm={handleConfirm}
-        onCancel={() => setDatePickerVisibility(false)}
-      />
+      {/* Error message */}
+      {error && <Text style={styles.errorText}>{error.message}</Text>}
     </View>
   );
+
+  // Controlled via react-hook-form
+  if (control && name) {
+    return (
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: { onChange, value }, fieldState: { error } }) =>
+          renderPicker(value ?? null, onChange, error)
+        }
+      />
+    );
+  }
+
+  // Uncontrolled fallback
+  return renderPicker(localDate, undefined, undefined);
 };
 
 export default CustomDatePicker;
-
-const styles = StyleSheet.create({
-  container: {
-    borderWidth: 1.5,
-    // borderColor: "#ccc",
-    borderRadius: radius.md,
-    paddingVertical: spacingVertical.md,
-    paddingHorizontal: spacing.md,
-    marginVertical: spacingVertical.md,
-    // backgroundColor: "#fff",
-  },
-  full: {
-    width: "100%",
-  },
-  half: {
-    width: "48%",
-  },
-  labelContainer: {
-    position: "absolute",
-    top: -spacingVertical.md,
-    left: spacing.md,
-    flexDirection: "row",
-    alignItems: "center",
-    // backgroundColor: "#fff",
-    paddingHorizontal: spacing.md,
-  },
-  label: {
-    fontSize: fontSize.sm,
-    fontWeight: "600",
-    // color: "#3F1956",
-  },
-  labelLine: {
-    height: 1.5,
-    // backgroundColor: "#ccc",
-    marginLeft: spacing.md,
-  },
-  inputBox: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: spacingVertical.md,
-  },
-  placeholderText: {
-    fontSize: fontSize.md,
-    // color: "#999",
-  },
-  dateText: {
-    fontSize: fontSize.md,
-    // color: "#000",
-  },
-});

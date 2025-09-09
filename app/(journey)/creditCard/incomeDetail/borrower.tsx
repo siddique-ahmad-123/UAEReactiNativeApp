@@ -1,5 +1,5 @@
 import FormLayout from "@/components/Form/FormLayout";
-import { incomeDetailSchema } from "@/schemas/incomeDetailSchema";
+import { incomeDetailSchema } from "@/schemas/creditCard/incomeDetailSchema";
 import { useApplicationStore } from "@/store/applicationStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
@@ -12,29 +12,20 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import FormInput from "./FormInput";
 
 export default function BorrowerIncomeScreen({ navigation }: any) {
   const { t } = useTranslation();
-  const [incomeType, setIncomeType] = useState<"Salaried" | "Self Employed">(
-    "Salaried"
-  );
-  const [employmentMethod, setEmploymentMethod] = useState<
-    "AECB" | "Salary Certificate"
-  >("AECB");
-  const [incomeMethod, setIncomeMethod] = useState<
-    "Salary Transfer" | "UAE-FTS"
-  >("Salary Transfer");
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
-
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, setValue, watch } = useForm({
     resolver: zodResolver(incomeDetailSchema),
     defaultValues: {
-      name: formData.name || "",
-      dob: formData.dob || "",
-      gender: formData.gender || "",
-      nationality: formData.nationality || "",
+      incomeType: formData.incomeType || "Salaried",
     },
+    shouldUnregister: true,
   });
+  const incomeType = watch("incomeType");
+  const empDetailFetchMethod = watch("empDetailFetchMethod");
   const onSubmit = (values: any) => {
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
     nextStep();
@@ -49,7 +40,7 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
       onBack={() => prevStep}
       onClose={() => navigation.navigate("Home")}
       onInfoPress={() => alert("Info about this step")}
-      onSaveAndNext={() => navigation.navigate("LoanDetails")}
+      onSaveAndNext={handleSubmit(onSubmit)}
     >
       <Text style={styles.sectionTitle}>Select Income Type</Text>
       <View style={styles.toggleRow}>
@@ -58,7 +49,7 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
             styles.toggleButton,
             incomeType === "Salaried" && styles.toggleActive,
           ]}
-          onPress={() => setIncomeType("Salaried")}
+          onPress={() => setValue("incomeType", "Salaried")}
         >
           <Text
             style={[
@@ -74,7 +65,7 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
             styles.toggleButton,
             incomeType === "Self Employed" && styles.toggleActive,
           ]}
-          onPress={() => setIncomeType("Self Employed")}
+          onPress={() => setValue("incomeType", "Self Employed")}
         >
           <Text
             style={[
@@ -97,9 +88,9 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
         <TouchableOpacity
           style={[
             styles.methodCard,
-            employmentMethod === "AECB" && styles.methodCardActive,
+            empDetailFetchMethod === "AECB" && styles.methodCardActive,
           ]}
-          onPress={() => setEmploymentMethod("AECB")}
+          onPress={() => setValue("empDetailFetchMethod", "AECB")}
         >
           <Text style={styles.cardTitle}>AECB</Text>
           <Text style={styles.cardDesc}>
@@ -109,10 +100,10 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
         <TouchableOpacity
           style={[
             styles.methodCard,
-            employmentMethod === "Salary Certificate" &&
+            empDetailFetchMethod === "Salary Certificate" &&
               styles.methodCardActive,
           ]}
-          onPress={() => setEmploymentMethod("Salary Certificate")}
+          onPress={() => setValue("empDetailFetchMethod", "Salary Certificate")}
         >
           <Text style={styles.cardTitle}>Salary Certificate</Text>
           <Text style={styles.cardDesc}>
@@ -125,66 +116,72 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
         <Text style={styles.fetchButtonText}>Fetch Employment Details</Text>
       </TouchableOpacity>
 
-      {/* Employment Fields */}
-      <TextInput style={styles.input} placeholder="Employer Name" />
-      <TextInput style={styles.input} placeholder="Employed From" />
-      <TextInput
-        style={styles.input}
-        placeholder="Current Experience (Months)"
-        keyboardType="numeric"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Total Experience (Months)"
-        keyboardType="numeric"
-      />
-      <TextInput style={styles.input} placeholder="Emirates" />
-
-      {/* Income Details */}
-      <Text style={styles.sectionTitle}>Income Details</Text>
-      <Text style={styles.subTitle}>Select Method to Fetch Income Details</Text>
-
-      <View style={styles.cardRow}>
-        <TouchableOpacity
-          style={[
-            styles.methodCard,
-            incomeMethod === "Salary Transfer" && styles.methodCardActive,
-          ]}
-          onPress={() => setIncomeMethod("Salary Transfer")}
-        >
-          <Text style={styles.cardTitle}>Salary Transfer</Text>
-          <Text style={styles.cardDesc}>
-            Details will be pulled from Bank & AECB
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.methodCard,
-            incomeMethod === "UAE-FTS" && styles.methodCardActive,
-          ]}
-          onPress={() => setIncomeMethod("UAE-FTS")}
-        >
-          <Text style={styles.cardTitle}>UAE-FTS</Text>
-          <Text style={styles.cardDesc}>
-            Details will be pulled via UAE-FTS & AECB
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <TouchableOpacity style={styles.fetchButton}>
-        <Text style={styles.fetchButtonText}>Fetch Salary Details</Text>
-      </TouchableOpacity>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Monthly Salary (Bank Transfer)"
-        keyboardType="numeric"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Monthly Salary (AECB)"
-        keyboardType="numeric"
-      />
+      {incomeType === "Salaried" ? (
+        <>
+          <FormInput
+            control={control}
+            name="employerName"
+            placeholder="Employer Name"
+          />
+          <FormInput
+            control={control}
+            name="employedFrom"
+            placeholder="Employed From"
+          />
+          <FormInput
+            control={control}
+            name="currentExp"
+            placeholder="Current Experience (Months)"
+            keyboardType="numeric"
+          />
+          <FormInput
+            control={control}
+            name="totalExp"
+            placeholder="Total Experience (Months)"
+            keyboardType="numeric"
+          />
+          <FormInput control={control} name="emirate" placeholder="Emirates" />
+        </>
+      ) : (
+        <>
+          <FormInput
+            control={control}
+            name="nameOfBusiness"
+            placeholder="Name of Business"
+          />
+          <FormInput
+            control={control}
+            name="legalForm"
+            placeholder="Legal Form"
+          />
+          <FormInput
+            control={control}
+            name="emiratesBusiness"
+            placeholder="Emirates"
+          />
+          <FormInput
+            control={control}
+            name="dateOfEstabilishment"
+            placeholder="Date of Establishment (YYYY-MM-DD)"
+          />
+          <FormInput
+            control={control}
+            name="vintage"
+            placeholder="Vintage"
+            keyboardType="numeric"
+          />
+          <FormInput
+            control={control}
+            name="licenseNo"
+            placeholder="License No"
+          />
+          <FormInput
+            control={control}
+            name="natureOfBusiness"
+            placeholder="Nature of Business"
+          />
+        </>
+      )}
     </FormLayout>
   );
 }
