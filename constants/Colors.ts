@@ -58,5 +58,11 @@ export const DarkThemeColorConstants = {
   shadowColor: "#000",
 
   trackerBgColor: "#EFE8F3",
+
+  textHeader: "#FFFF",
+
+  borderColor:"#CCCC",
+
+  errorTextColor: "#FF3333",
 } as const;
 export type ThemeColors = typeof LightThemeColorConstants;
