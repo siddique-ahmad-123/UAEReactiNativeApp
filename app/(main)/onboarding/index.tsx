@@ -1,16 +1,16 @@
-import React, { useRef, useState } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  Dimensions,
-  ImageBackground,
-  Image,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
-import { colors } from "@/constants/Colors";
+import React, { useRef, useState } from "react";
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  ImageBackground,
+  Text,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme } from "styled-components/native";
 import { styles } from "../styles/onboarding.Styles";
 
 const { width, height } = Dimensions.get("window");
@@ -74,8 +74,10 @@ const Carousel = () => {
     </View>
   );
 
+  const theme = useTheme();
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor:  theme.colors.background}}>
       <FlatList
         data={slides}
         renderItem={renderItem}

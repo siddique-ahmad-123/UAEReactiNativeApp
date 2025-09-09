@@ -6,7 +6,7 @@ const globalStyles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5F5F5",
+    // backgroundColor: "#F5F5F5",
   },
 
   // 🔹 Text Styles
@@ -20,11 +20,9 @@ const globalStyles = StyleSheet.create({
     fontWeight: "300",
     color: "#666",
   },
- 
 
   // 🔹 Button Styles
- button1: {
-    backgroundColor: "#FECB26",
+  button1: {
     width: 189,
     height: 58,
     borderRadius: 6,
@@ -35,11 +33,11 @@ const globalStyles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: "700",
-    color: "#3F1956",
+    // color: "#3F1956",
   },
 
-   button2: {
-    backgroundColor: "#FFFFFF",
+  button2: {
+    // backgroundColor: "#FFFFFF",
     width: 174,
     height: 58,
     borderRadius: 6,
@@ -47,10 +45,10 @@ const globalStyles = StyleSheet.create({
     justifyContent: "center",
     marginVertical: 5,
   },
-   outlinedButton: {
+  outlinedButton: {
     borderWidth: 1,
-    borderColor: "blue",
-    backgroundColor: "#FFFFFF",
+    // borderColor: "blue",
+    // backgroundColor: "#FFFFFF",
     width: 174,
     height: 58,
     borderRadius: 6,
@@ -61,7 +59,7 @@ const globalStyles = StyleSheet.create({
   outlinedText: {
     fontSize: 18,
     fontWeight: "900",
-    color: "#3F1956",
+    // color: "#3F1956",
   },
 
   // 🔹 App Bar Customization (Optional)
@@ -73,7 +71,7 @@ const globalStyles = StyleSheet.create({
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    gap:12
+    gap: 12,
   },
 });
 

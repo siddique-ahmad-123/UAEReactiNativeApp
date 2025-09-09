@@ -1,8 +1,16 @@
-import React from "react";
-import { Text, TouchableOpacity, StyleProp, ViewStyle, TextStyle } from "react-native";
-import globalStyles from "./utils";
 import { radius } from "@/constants/Metrics";
 import { spacing } from "@/constants/Spacing";
+import React from "react";
+import {
+  GestureResponderEvent,
+  StyleProp,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  ViewStyle,
+} from "react-native";
+import { useTheme } from "styled-components/native";
+import globalStyles from "./utils";
 
 type Props = {
   title: string;
@@ -23,48 +31,87 @@ export default function CustomButton({
   style,
   textStyle,
 }: Props) {
+  const theme = useTheme();
   // ✅ Sizing system
-  const sizeStyles: Record<string, ViewStyle> = {
+  const sizeglobalStyles: Record<string, ViewStyle> = {
     sm: {
       paddingVertical: spacing.xs,
       paddingHorizontal: spacing.md,
-      borderRadius: radius._6,
+      borderRadius: radius.md,
       minWidth: 120,
-      minHeight:40
+      minHeight: 40,
     },
     md: {
       paddingVertical: spacing.md,
       paddingHorizontal: spacing.lg,
-      borderRadius: radius._6,
+      borderRadius: radius.md,
       minWidth: 174,
-      minHeight:58
+      minHeight: 58,
     },
     lg: {
       paddingVertical: spacing.md,
       paddingHorizontal: spacing.xs,
-      borderRadius: radius._6,
+      borderRadius: radius.md,
       minWidth: 189,
     },
   };
 
-  const baseStyle = sizeStyles[size] || sizeStyles.md;
+  const baseStyle = sizeglobalStyles[size] || sizeglobalStyles.md;
 
   // ✅ Variant + Type
   let buttonStyle: StyleProp<ViewStyle> = [baseStyle];
   let btnTextStyle: StyleProp<TextStyle>;
 
   if (variant === "primary" && type === "filled") {
-    buttonStyle = [globalStyles.button1, baseStyle, style];
-    btnTextStyle = [globalStyles.buttonText, textStyle];
+    buttonStyle = [
+      globalStyles.button1,
+      { backgroundColor: theme.colors.secondaryColor },
+      baseStyle,
+      style,
+    ];
+    btnTextStyle = [
+      globalStyles.buttonText,
+      { color: theme.colors.primaryColor },
+      textStyle,
+    ];
   } else if (variant === "primary" && type === "outlined") {
-    buttonStyle = [globalStyles.outlinedButton, baseStyle, style];
-    btnTextStyle = [globalStyles.outlinedText, textStyle];
+    buttonStyle = [
+      globalStyles.outlinedButton,
+      { borderColor: theme.colors.primaryColor },
+      { backgroundColor: theme.colors.background },
+      baseStyle,
+      style,
+    ];
+    btnTextStyle = [
+      globalStyles.outlinedText,
+      { color: theme.colors.primaryColor },
+      textStyle,
+    ];
   } else if (variant === "secondary" && type === "filled") {
-    buttonStyle = [globalStyles.button2, baseStyle, style];
-    btnTextStyle = [globalStyles.buttonText, textStyle];
+    buttonStyle = [
+      globalStyles.button2,
+      { backgroundColor: theme.colors.background },
+      baseStyle,
+      style,
+    ];
+    btnTextStyle = [
+      globalStyles.buttonText,
+      { color: theme.colors.primaryColor },
+      textStyle,
+    ];
   } else {
-    buttonStyle = [globalStyles.outlinedButton, baseStyle, style];
-    btnTextStyle = [globalStyles.buttonText, textStyle];
+    buttonStyle = [
+      globalStyles.outlinedButton,
+      { borderColor: theme.colors.primaryColor },
+      { backgroundColor: theme.colors.background },
+      baseStyle,
+      style,
+    ];
+    btnTextStyle = [
+      globalStyles.buttonText,
+      { color: theme.colors.primaryColor },
+      textStyle,
+    ];
   }
 
   return (

@@ -1,8 +1,14 @@
-import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
+import {
+  fontSize,
+  radius,
+  spacing,
+  spacingVertical,
+} from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useTheme } from "styled-components/native";
 
 interface CustomDatePickerProps {
   label: string;
@@ -39,15 +45,28 @@ const CustomDatePicker = ({
     setDatePickerVisibility(false);
   };
 
+  const theme = useTheme();
+
   return (
-    <View style={[styles.container, getVariantStyle()]}>
+    <View
+      style={[
+        styles.container,
+        { borderColor: theme.colors.inputFieldBorder },
+        getVariantStyle(),
+      ]}
+    >
       {/* Label */}
       <View style={styles.labelContainer}>
-        <Text style={styles.label}>
+        <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
           {label}
           {mandatory && <Text style={{ color: "red" }}> *</Text>}
         </Text>
-        <View style={styles.labelLine} />
+        <View
+          style={[
+            styles.labelLine,
+            { backgroundColor: theme.colors.inputFieldBorder },
+          ]}
+        />
       </View>
 
       {/* Input Box */}
@@ -55,7 +74,16 @@ const CustomDatePicker = ({
         style={styles.inputBox}
         onPress={() => setDatePickerVisibility(true)}
       >
-        <Text style={selectedDate ? styles.dateText : styles.placeholderText}>
+        <Text
+          style={
+            selectedDate
+              ? [styles.dateText, { color: theme.colors.textPrimary }]
+              : [
+                  styles.placeholderText,
+                  { color: theme.colors.placeholderColor },
+                ]
+          }
+        >
           {selectedDate
             ? selectedDate.toLocaleDateString("en-GB") // dd/mm/yyyy
             : placeholder}
@@ -81,12 +109,12 @@ export default CustomDatePicker;
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1.5,
-    borderColor: "#ccc",
+    // borderColor: "#ccc",
     borderRadius: radius.md,
     paddingVertical: spacingVertical.md,
     paddingHorizontal: spacing.md,
     marginVertical: spacingVertical.md,
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
   },
   full: {
     width: "100%",
@@ -100,17 +128,17 @@ const styles = StyleSheet.create({
     left: spacing.md,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     paddingHorizontal: spacing.md,
   },
   label: {
     fontSize: fontSize.sm,
     fontWeight: "600",
-    color: "#3F1956",
+    // color: "#3F1956",
   },
   labelLine: {
     height: 1.5,
-    backgroundColor: "#ccc",
+    // backgroundColor: "#ccc",
     marginLeft: spacing.md,
   },
   inputBox: {
@@ -121,10 +149,10 @@ const styles = StyleSheet.create({
   },
   placeholderText: {
     fontSize: fontSize.md,
-    color: "#999",
+    // color: "#999",
   },
   dateText: {
     fontSize: fontSize.md,
-    color: "#000",
+    // color: "#000",
   },
 });

@@ -1,4 +1,9 @@
-import { fontSize, radius, spacing, spacingVertical } from "@/constants/Metrics";
+import {
+  fontSize,
+  radius,
+  spacing,
+  spacingVertical,
+} from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
@@ -6,8 +11,9 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
+import { useTheme } from "styled-components/native";
 
 interface CustomInputProps {
   label: string;
@@ -15,7 +21,7 @@ interface CustomInputProps {
   type?: "text" | "email" | "number" | "currency" | "password";
   variant?: "full" | "half";
   mandatory?: boolean;
-  secureTextEntry?:boolean
+  secureTextEntry?: boolean;
 }
 
 const CustomInput = ({
@@ -38,19 +44,41 @@ const CustomInput = ({
     }
   };
 
+  const theme = useTheme();
   return (
-    <View style={[styles.container, getVariantStyle()]}>
-      <View style={styles.labelContainer}>
-        <Text style={styles.label}>
+    <View
+      style={[
+        styles.container,
+        { borderColor: theme.colors.inputFieldBorder },
+        { backgroundColor: theme.colors.background },
+        getVariantStyle(),
+      ]}
+    >
+      <View
+        style={[
+          styles.labelContainer,
+          { backgroundColor: theme.colors.background },
+        ]}
+      >
+        <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
           {label}
           {mandatory && <Text style={{ color: "red" }}> *</Text>}
         </Text>
-        <View style={styles.labelLine} />
+        <View
+          style={[
+            styles.labelLine,
+            { backgroundColor: theme.colors.background },
+          ]}
+        />
       </View>
 
       <View style={styles.inputRow}>
         <TextInput
-          style={[styles.input, type === "password" && { flex: 1 }]}
+          style={[
+            styles.input,
+            { color: theme.colors.textPrimary },
+            type === "password" && { flex: 1 },
+          ]}
           placeholder={placeholder}
           placeholderTextColor="#aaa"
           value={value}
@@ -85,12 +113,12 @@ export default CustomInput;
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1.5,
-    borderColor: "#DEDEDE",
+    // borderColor: "#DEDEDE",
     borderRadius: radius.md,
     paddingHorizontal: spacing.md,
     paddingVertical: spacingVertical.md,
     marginVertical: spacingVertical.md,
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
   },
   full: {
     width: "100%",
@@ -104,23 +132,23 @@ const styles = StyleSheet.create({
     left: spacing.md,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     paddingHorizontal: spacing.md,
   },
   label: {
     fontSize: fontSize.sm,
     fontWeight: "600",
-    color: "#3F1956",
+    // color: "#3F1956",
   },
   labelLine: {
     height: 1.5,
-    backgroundColor: "#ccc",
+    // backgroundColor: "#ccc",
     marginLeft: spacing.md,
   },
   input: {
     fontSize: fontSize.md,
     paddingTop: spacingVertical.md,
-    color: "#333",
+    // color: "#333",
   },
   inputRow: {
     flexDirection: "row",
