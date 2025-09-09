@@ -16,6 +16,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 interface FormHeaderProps {
   stepNumber: number;
   title: string;
@@ -44,11 +45,15 @@ export default function FormLayout({
   const { t } = useTranslation();
   const styles = StyleSheet.create({
     container: { flex: 1, backgroundColor: theme.colors.primaryColor },
-    scrollView: {
-      padding: spacing.md,
+    scrollViewConatiner: {
       borderTopRightRadius: radius.pill,
       borderTopLeftRadius: radius.pill,
       backgroundColor: theme.colors.background,
+      flex: 1,
+      overflow: "hidden",
+    },
+    scrollView: {
+      padding: spacing.md,
       gap: spacingVertical.sm,
     },
 
@@ -96,25 +101,30 @@ export default function FormLayout({
           onClose={onClose}
           onInfoPress={onInfoPress}
         />
-
-        <ScrollView contentContainerStyle={styles.scrollView}>
-          {children}
-          {/* Footer Buttons */}
-          <View style={styles.buttonRow}>
-            <TouchableOpacity
-              style={[styles.actionButton, styles.backButton]}
-              onPress={onBack}
-            >
-              <Text style={styles.backButtonText}>{t("back")}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.actionButton, styles.nextButton]}
-              onPress={onSaveAndNext}
-            >
-              <Text style={styles.nextButtonText}>{t("saveAndNext")}</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
+        <View style={styles.scrollViewConatiner}>
+          <KeyboardAwareScrollView
+            contentContainerStyle={styles.scrollView}
+            extraScrollHeight={spacingVertical.xxxxl}
+            enableOnAndroid
+          >
+            {children}
+            {/* Footer Buttons */}
+            <View style={styles.buttonRow}>
+              <TouchableOpacity
+                style={[styles.actionButton, styles.backButton]}
+                onPress={onBack}
+              >
+                <Text style={styles.backButtonText}>{t("back")}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.actionButton, styles.nextButton]}
+                onPress={onSaveAndNext}
+              >
+                <Text style={styles.nextButtonText}>{t("saveAndNext")}</Text>
+              </TouchableOpacity>
+            </View>
+          </KeyboardAwareScrollView>
+        </View>
       </View>
     </ScreenWrapper>
   );

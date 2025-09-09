@@ -69,7 +69,6 @@ const OTPScreen: React.FC = () => {
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => {
-            console.log("Back pressed");
             router.back(); 
           }}
         >
@@ -114,7 +113,7 @@ const OTPScreen: React.FC = () => {
         </View>
 
         <Text style={styles.resendLabel}>Did not receive the code?</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push("/NavScreen")}>
           <Text style={styles.resendText}>Resend Code</Text>
         </TouchableOpacity>
         <Text style={styles.timer}>02:00</Text>

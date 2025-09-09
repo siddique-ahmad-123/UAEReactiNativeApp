@@ -12,6 +12,7 @@ import InputCard from "@/components/InputCard";
 import CustomButton from "@/components/CustomButton";
 import { gstyles } from "../styles/selectRequiredLoan";
 import DocumentDownload from "@/components/DocumentDownload";
+import { router } from "expo-router";
 
 // Format number with commas
 const formatNumber = (n: number) =>
@@ -34,7 +35,7 @@ const SelectRequiredAmount = () => {
           >
             Select Required Amount
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push("/selectcreditcard")}>
             <Text style={[styles.closeButton, { color: theme.colors.background }]}>
               ✕
             </Text>

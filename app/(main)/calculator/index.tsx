@@ -15,6 +15,8 @@ import Slider from "@react-native-community/slider";
 import { styles } from "../styles/Calculator.Styles";
 import InputCard from "@/components/InputCard";
 import { useTheme } from "styled-components/native";
+import CustomButton from "@/components/CustomButton";
+import { router } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
@@ -47,9 +49,9 @@ const EMICalculatorScreen: React.FC = () => {
   );
   const theme = useTheme();
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={[styles.safeArea,{backgroundColor:theme.colors.background}]}>
       {/* top purple strip (statusbar area) */}
-      <View style={styles.topPurple} />
+      <View style={[styles.topPurple,{backgroundColor:theme.colors.primaryColor}]} />
 
       {/* Greeting row with avatar */}
       <View style={styles.greetingRow}>
@@ -64,10 +66,10 @@ const EMICalculatorScreen: React.FC = () => {
       </View>
 
       {/* Purple EMI Card */}
-      <View style={styles.emiCard}>
+      <View style={[styles.emiCard,{backgroundColor:theme.colors.primaryColor}]}>
         <View style={{ flex: 1 }}>
-          <Text style={styles.emiTitle}>EMI Calculator</Text>
-          <Text style={styles.emiDesc} numberOfLines={4}>
+          <Text style={[styles.emiTitle,{color:theme.colors.background}]}>EMI Calculator</Text>
+          <Text style={[styles.emiDesc,{color:theme.colors.background}]} numberOfLines={4}>
             This calculator will help you to calculate the expected EMI on your
             loan amount by taking into consideration the Principal Amount, Loan
             Tenure and Interest.
@@ -128,7 +130,7 @@ const EMICalculatorScreen: React.FC = () => {
 
           <View
             style={[
-              styles.inputCard,
+              styles.inputCard,{shadowColor:theme.colors.shadowColor},
               { backgroundColor: theme.colors.background },
               { borderColor: theme.colors.borderColor },
             ]}
@@ -145,9 +147,14 @@ const EMICalculatorScreen: React.FC = () => {
           </View>
 
           {/* Back button */}
-          <TouchableOpacity style={[styles.backButton,{backgroundColor:theme.colors.secondaryColor}]}>
-            <Text style={[styles.backButtonText,{color:theme.colors.primaryColor}]}>Back</Text>
-          </TouchableOpacity>
+          <CustomButton
+                  title="Back"
+                  size="full"
+                  variant="primary"
+                  type="filled"
+                  onPress={() => router.push("/NavScreen")}
+                  style={{ marginTop: 0}}
+                />
         </View>
       </ScrollView>
     </SafeAreaView>

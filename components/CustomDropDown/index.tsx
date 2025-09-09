@@ -47,11 +47,9 @@ const CustomDropDown = ({
     container: {
       borderWidth: borderWidth.normal,
       borderRadius: radius.md,
-      paddingVertical: spacingVertical.md,
-      paddingHorizontal: spacing.lg,
-      marginVertical: spacingVertical.sm,
+      paddingVertical: spacingVertical.semi,
+      paddingHorizontal: spacing.md,
       backgroundColor: theme.colors.background,
-      borderColor: theme.colors.inputFieldBorder,
     },
     full: { width: width.full },
     half: { width: width.md },
@@ -143,7 +141,7 @@ const CustomDropDown = ({
               <Ionicons
                 name="chevron-down"
                 size={fontSize.lg}
-                color="#3F1956"
+                color={theme.colors.primaryColor}
               />
             )}
           />

@@ -16,6 +16,7 @@ const services: { id: string; title: string; iconName: string; route: RouteNames
   { id: "3", title: "Applications", iconName: "clipboard-outline", route: "/ExistingApplication" },
 ];
 
+
 const applyNow = [
   { id: "1", title: "Credit Card" },
   { id: "2", title: "Mortgages" },
@@ -117,6 +118,7 @@ export default function Dashboard() {
               key={item.id}
               title={item.title}
               image={require("../../../assets/images/ProductImage.png")}
+              onPress={() => router.push("/selectcreditcard")}
             />
           ))}
         </View>
