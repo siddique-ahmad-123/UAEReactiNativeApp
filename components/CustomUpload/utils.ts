@@ -1,8 +1,11 @@
 import {
+  borderWidth,
   fontSize,
+  fontWeight,
   radius,
   spacing,
   spacingVertical,
+  width,
 } from "@/constants/Metrics";
 import { StyleSheet } from "react-native";
 
@@ -13,14 +16,12 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: spacingVertical.lg,
     paddingHorizontal: spacing.md,
-    borderWidth: 1,
-    // borderColor: "#ccc",
+    borderWidth: borderWidth.thin,
     borderRadius: radius.lg,
-    // backgroundColor: "#fff",
-    width: "90%",
+    width: width.full,
   },
   label: {
-    fontSize: fontSize.md,
-    // color: "#333",
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.normal,
   },
 });

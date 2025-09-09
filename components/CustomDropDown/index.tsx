@@ -47,21 +47,19 @@ const CustomDropDown = ({
     container: {
       borderWidth: borderWidth.normal,
       borderRadius: radius.md,
-      paddingVertical: spacingVertical.md,
-      paddingHorizontal: spacing.lg,
-      marginVertical: spacingVertical.xl,
+      paddingVertical: spacingVertical.semi,
+      paddingHorizontal: spacing.md,
       backgroundColor: theme.colors.background,
-      borderColor: theme.colors.inputFieldBorder,
     },
     full: { width: width.full },
     half: { width: width.md },
     labelContainer: {
       position: "absolute",
-      top: -spacingVertical.md,
+      top: -spacingVertical.semi,
       left: spacing.md,
       flexDirection: theme.flexRow.flexDirection,
       alignItems: "center",
-      paddingHorizontal: spacing.md,
+      paddingHorizontal: spacing.xs,
     },
     label: { fontSize: fontSize.sm, fontWeight: fontWeight.semiBold },
     labelLine: { height: 1.5, marginLeft: spacing.md },
@@ -143,7 +141,7 @@ const CustomDropDown = ({
               <Ionicons
                 name="chevron-down"
                 size={fontSize.lg}
-                color="#3F1956"
+                color={theme.colors.primaryColor}
               />
             )}
           />

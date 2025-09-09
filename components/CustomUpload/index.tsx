@@ -3,6 +3,7 @@ import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import { useTheme } from "styled-components/native";
 import { styles } from "./utils";
+import { spacing } from "@/constants/Metrics";
 
 interface CustomUploadProps {
   label: string;
@@ -21,7 +22,7 @@ const CustomUpload = ({ label }: CustomUploadProps) => {
       <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
         {label}
       </Text>
-      <Feather name="upload" size={24} color={theme.colors.primaryColor} />
+      <Feather name="upload" size={spacing.lg} color={theme.colors.primaryColor} />
     </TouchableOpacity>
   );
 };

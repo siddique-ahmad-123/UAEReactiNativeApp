@@ -5,9 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import {
-  StyleSheet
-} from "react-native";
+import { StyleSheet } from "react-native";
 import FormInput from "./FormInput";
 import SegmentedControl from "@/components/SegmentControl";
 import SectionHeader from "@/components/SectionHeader";
@@ -15,6 +13,9 @@ import MethodSelector from "@/components/MethodSelector";
 import CustomButton from "@/components/CustomButton";
 import { spacingVertical } from "@/constants/Metrics";
 import CustomInput from "@/components/CustomInput";
+import CustomDropDown from "@/components/CustomDropDown";
+import CustomDatePicker from "@/components/CustomDatePicker";
+import CustomUpload from "@/components/CustomUpload";
 
 export default function BorrowerIncomeScreen({ navigation }: any) {
   const { t } = useTranslation();
@@ -66,53 +67,64 @@ export default function BorrowerIncomeScreen({ navigation }: any) {
         defaultValue={incomeType}
         onChange={(value) => setValue("incomeType", value)}
       />
-      <SectionHeader sectionName="Employment  Information" style={{ marginTop: spacingVertical.md }} />
+      <SectionHeader
+        sectionName="Employment  Information"
+        style={{ marginTop: spacingVertical.md }}
+      />
       <MethodSelector
-         title={"Select Method to Fetch Employment Details"}
+        title={"Select Method to Fetch Employment Details"}
         options={employmentMethods}
         selectedId={empDetailFetchMethod}
         onSelect={(id) => setValue("empDetailFetchMethod", id)}
       />
+      {empDetailFetchMethod === "Salary Certificate" && (
+        <CustomUpload label="Upload Salary Certificate" />
+      )}
       <CustomButton
         title="Fetch Employment Details"
         onPress={() => alert("Fetching Employment Details...")}
       />
-
       {incomeType === "Salaried" ? (
         <>
           <CustomInput
             control={control}
             name="employerName"
             label="Employer Name"
-            placeholder="Employer Name"
             type="text"
+            placeholder="Newgen Software"
           />
-          {/* <CustomInput
+          <CustomDatePicker
             control={control}
             name="employedFrom"
-            placeholder="Employed From"
-
-          /> */}
+            label="Employed From"
+          />
           <CustomInput
             control={control}
             name="currentExp"
             label="Current Experience (Months)"
-            placeholder="Current Experience (Months)"
-            type ="number"
+            placeholder="20"
+            type="number"
           />
           <CustomInput
             control={control}
             name="totalExp"
             label="Total Experience (Months)"
-            placeholder="Total Experience (Months)"
-            type ="number"
+            placeholder="36"
+            type="number"
           />
-          <CustomInput
+          <CustomDropDown
             control={control}
             name="emirate"
             label="Emirates"
-            placeholder="Emirates"
-            type ="text"
+            data={[
+              { label: "Dubai", value: "Dubai" },
+              { label: "Abu Dhabi", value: "Abu Dhabi" },
+              { label: "Sharjah", value: "Sharjah" },
+              { label: "Ajman", value: "Ajman" },
+              { label: "Umm Al-Quwain", value: "Umm Al-Quwain" },
+              { label: "Fujairah", value: "Fujairah" },
+              { label: "Ras Al Khaimah", value: "Ras Al Khaimah" },
+            ]}
           />
         </>
       ) : (
