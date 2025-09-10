@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { localStyles } from "../styles/Home.Styles";
@@ -8,14 +8,34 @@ import ServiceTile from "@/components/ServiceTile";
 import HeroBanner from "@/components/HeroBanner";
 import ProductCard from "@/components/ProductCard";
 import { useTheme } from "styled-components/native";
+import { useApplicationStore } from "@/store/applicationStore";
 
 type RouteNames = "/Request" | "/Agreement" | "/ExistingApplication";
-const services: { id: string; title: string; iconName: string; route: RouteNames }[] = [
-  { id: "1", title: "Requests", iconName: "document-text-outline", route: "/Request" },
-  { id: "2", title: "Agreements", iconName: "file-tray-outline", route: "/Agreement" },
-  { id: "3", title: "Applications", iconName: "clipboard-outline", route: "/ExistingApplication" },
+const services: {
+  id: string;
+  title: string;
+  iconName: string;
+  route: RouteNames;
+}[] = [
+  {
+    id: "1",
+    title: "Requests",
+    iconName: "document-text-outline",
+    route: "/Request",
+  },
+  {
+    id: "2",
+    title: "Agreements",
+    iconName: "file-tray-outline",
+    route: "/Agreement",
+  },
+  {
+    id: "3",
+    title: "Applications",
+    iconName: "clipboard-outline",
+    route: "/ExistingApplication",
+  },
 ];
-
 
 const applyNow = [
   { id: "1", title: "Credit Card" },
@@ -61,6 +81,9 @@ export default function Dashboard() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("1");
   const theme = useTheme();
+  const { resetForm } = useApplicationStore();
+
+
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: theme.colors.background }]}
@@ -98,7 +121,14 @@ export default function Dashboard() {
         />
 
         {/* My Services */}
-        <Text style={localStyles.sectionTitle}>My Services</Text>
+        <Text
+          style={[
+            localStyles.sectionTitle,
+            { color: theme.colors.primaryColor },
+          ]}
+        >
+          My Services
+        </Text>
         <View style={localStyles.serviceRow}>
           {services.map((item) => (
             <ServiceTile
@@ -118,7 +148,10 @@ export default function Dashboard() {
               key={item.id}
               title={item.title}
               image={require("../../../assets/images/ProductImage.png")}
-              onPress={() => router.push("/selectcreditcard")}
+              onPress={() => {
+              resetForm(); // resets and navigates home
+              router.push("/(journey)/creditCard/selectCreditCard"); // start first step
+        }}
             />
           ))}
         </View>

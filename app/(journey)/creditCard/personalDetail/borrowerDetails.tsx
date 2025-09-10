@@ -10,19 +10,17 @@ import { spacingVertical } from "@/constants/Metrics";
 import { personalDetailsSchema } from "@/schemas/creditCard/personalDetailsSchema";
 import { useApplicationStore } from "@/store/applicationStore";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { router } from "expo-router";
 import { t } from "i18next";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { GestureResponderEvent, StyleSheet, View } from "react-native";
 
-const BorrowerPersonalInformation = ({ navigation }: any) => {
+const BorrowerPersonalInformation = () => {
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
-    resolver: zodResolver(personalDetailsSchema),
-    defaultValues: {
-      //   incomeType: formData.incomeType || "Salaried",
-      //   empDetailFetchMethod: formData.empDetailFetchMethod || "AECB",
-    },
+   // resolver: zodResolver(personalDetailsSchema),
+    defaultValues: formData,
     shouldUnregister: true,
   });
 
@@ -65,13 +63,13 @@ const BorrowerPersonalInformation = ({ navigation }: any) => {
 
   return (
     <FormLayout
-      stepNumber={2}
+      stepNumber={1}
       title={t("personalDetails")}
       subTitle={t("borrowerDetails")}
       noOfBars={2}
       activeBarIndex={0}
-      onBack={() => prevStep}
-      onClose={() => navigation.navigate("Home")}
+      onBack={() => prevStep()}
+      onClose={() => router.push("/")}
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >

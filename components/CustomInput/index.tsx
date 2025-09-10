@@ -49,7 +49,7 @@ const CustomInput = ({
       borderRadius: radius.md,
       paddingHorizontal: spacing.md,
       paddingVertical: spacingVertical.xs,
-      marginVertical: spacingVertical.sm, 
+      // marginVertical: spacingVertical.sm, 
     },
     full: {
       width: width.full,

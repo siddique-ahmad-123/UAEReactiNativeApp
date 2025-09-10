@@ -49,9 +49,16 @@ const EMICalculatorScreen: React.FC = () => {
   );
   const theme = useTheme();
   return (
-    <SafeAreaView style={[styles.safeArea,{backgroundColor:theme.colors.background}]}>
+    <SafeAreaView
+      style={[styles.safeArea, { backgroundColor: theme.colors.background }]}
+    >
       {/* top purple strip (statusbar area) */}
-      <View style={[styles.topPurple,{backgroundColor:theme.colors.primaryColor}]} />
+      <View
+        style={[
+          styles.topPurple,
+          { backgroundColor: theme.colors.primaryColor },
+        ]}
+      />
 
       {/* Greeting row with avatar */}
       <View style={styles.greetingRow}>
@@ -60,16 +67,34 @@ const EMICalculatorScreen: React.FC = () => {
           style={styles.avatar}
         />
         <View style={{ marginLeft: 12 }}>
-          <Text style={[styles.greetingSmall,{color:theme.colors.inactiveNavIconColor}]}>Good Morning,</Text>
-          <Text style={[styles.greetingName,{color:theme.colors.shadowColor}]}>Abdul Rahman</Text>
+          <Text
+            style={[
+              styles.greetingSmall,
+              { color: theme.colors.inactiveNavIconColor },
+            ]}
+          >
+            Good Morning,
+          </Text>
+          <Text
+            style={[styles.greetingName, { color: theme.colors.shadowColor }]}
+          >
+            Abdul Rahman
+          </Text>
         </View>
       </View>
 
       {/* Purple EMI Card */}
-      <View style={[styles.emiCard,{backgroundColor:theme.colors.primaryColor}]}>
+      <View
+        style={[styles.emiCard, { backgroundColor: theme.colors.primaryColor }]}
+      >
         <View style={{ flex: 1 }}>
-          <Text style={[styles.emiTitle,{color:theme.colors.background}]}>EMI Calculator</Text>
-          <Text style={[styles.emiDesc,{color:theme.colors.background}]} numberOfLines={4}>
+          <Text style={[styles.emiTitle, { color: theme.colors.background }]}>
+            EMI Calculator
+          </Text>
+          <Text
+            style={[styles.emiDesc, { color: theme.colors.background }]}
+            numberOfLines={4}
+          >
             This calculator will help you to calculate the expected EMI on your
             loan amount by taking into consideration the Principal Amount, Loan
             Tenure and Interest.
@@ -130,31 +155,50 @@ const EMICalculatorScreen: React.FC = () => {
 
           <View
             style={[
-              styles.inputCard,{shadowColor:theme.colors.shadowColor},
+              styles.inputCard,
+              { shadowColor: theme.colors.shadowColor },
               { backgroundColor: theme.colors.background },
               { borderColor: theme.colors.borderColor },
             ]}
           >
-            <Text style={[styles.resultLabel,{color:theme.colors.primaryColor}]}>Monthly Installment</Text>
-            <View style={[styles.resultCard,{borderColor:theme.colors.background}]}>
+            <Text
+              style={[styles.resultLabel, { color: theme.colors.primaryColor }]}
+            >
+              Monthly Installment
+            </Text>
+            <View
+              style={[
+                styles.resultCard,
+                { borderColor: theme.colors.borderColor },
+              ]}
+            >
               <View>
-                <Text style={[styles.resultAmount,{color:theme.colors.shadowColor}]}>
+                <Text
+                  style={[
+                    styles.resultAmount,
+                    { color: theme.colors.shadowColor },
+                  ]}
+                >
                   {formatNumber(monthlyInstallment)}
                 </Text>
               </View>
-              <Text style={[styles.resultUnit,{color:theme.colors.primaryLightColor}]}>AED</Text>
+              <Text
+                style={[styles.resultUnit, { color: theme.colors.borderColor }]}
+              >
+                AED
+              </Text>
             </View>
           </View>
 
           {/* Back button */}
           <CustomButton
-                  title="Back"
-                  size="full"
-                  variant="primary"
-                  type="filled"
-                  onPress={() => router.push("/NavScreen")}
-                  style={{ marginTop: 0}}
-                />
+            title="Back"
+            size="full"
+            variant="primary"
+            type="filled"
+            onPress={() => router.push("/NavScreen")}
+            style={{ marginTop: 0 }}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

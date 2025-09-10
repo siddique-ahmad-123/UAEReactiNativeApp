@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 export const localStyles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", alignItems: "center" },
   text: { fontSize: 22, fontWeight: "bold" },
-    content: {
+  content: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -15,4 +15,3 @@ export const localStyles = StyleSheet.create({
     color: "#333",
   },
 });
-

@@ -12,7 +12,7 @@ const ScreenWrapper = ({style,children}:ScreenWrapperProps) => {
   const theme = useTheme();
     return (
         <SafeAreaView style={[ styles.container, style]}>
-            <StatusBar  backgroundColor={theme.colors.statusbar}/>
+            <StatusBar backgroundColor={theme.colors.statusbar} barStyle="dark-content" />
             {children}
         </SafeAreaView>
     );

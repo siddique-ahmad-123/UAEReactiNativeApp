@@ -6,14 +6,15 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import { styles } from "../styles/Notification.Styles";
 import { useTheme } from "styled-components/native";
 import InputCard from "@/components/InputCard";
 import CustomButton from "@/components/CustomButton";
-import { gstyles } from "../styles/selectRequiredLoan";
 import DocumentDownload from "@/components/DocumentDownload";
 import { router } from "expo-router";
 import Checkbox from 'expo-checkbox';
+import { gstyles } from "@/app/(main)/styles/selectRequiredLoan";
+import { styles } from "@/app/(main)/styles/Notification.Styles";
+import { useApplicationStore } from "@/store/applicationStore";
 
 // Format number with commas
 const formatNumber = (n: number) =>
@@ -23,7 +24,7 @@ const SelectRequiredAmount = () => {
   const [financeAmount, setFinanceAmount] = useState<number>(50000);
   const [isChecked, setChecked] = useState(false); // ✅ checkbox state
   const theme = useTheme();
-
+  const { nextStep,prevStep } = useApplicationStore();
   return (
     <SafeAreaView
       style={[styles.safeArea, { backgroundColor: theme.colors.primaryColor }]}
@@ -88,19 +89,20 @@ const SelectRequiredAmount = () => {
         <View style={[gstyles.row, { marginTop: 30, marginBottom: 20 }]}>
           <CustomButton
             title="Cancel"
-            onPress={() => {}}
+            onPress={() => prevStep()}
             variant="secondary"
             type="outlined"
             size="md"
           />
           <CustomButton
             title="Next"
-            onPress={() => {
-              if (!isChecked) {
-                alert("Please accept the terms before proceeding.");
-                return;
-              }
-            }}
+            onPress={() => 
+              // if (!isChecked) {
+              //   alert("Please accept the terms before proceeding.");
+              //   return;
+              // }
+              nextStep()
+            }
             variant="primary"
             type="filled"
             size="md"

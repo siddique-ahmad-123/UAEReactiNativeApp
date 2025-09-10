@@ -1,7 +1,4 @@
-  
 import { StyleSheet } from "react-native";
-
-
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -10,8 +7,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
-    width:422,
-    height:352
+    width: 422,
+    height: 352,
   },
   content: {
     flex: 1,
@@ -36,27 +33,27 @@ export const styles = StyleSheet.create({
     fontWeight: "700",
     marginBottom: 10,
     textAlign: "center",
-    fontFamily:"LatoBold"
+    fontFamily: "LatoBold",
   },
   description: {
     fontSize: 18,
     textAlign: "center",
     paddingHorizontal: 20,
-    fontFamily:"LatoRegular"
+    fontFamily: "LatoRegular",
   },
   pagination: {
-  flexDirection: "row",
-  justifyContent: "center",
-  alignItems: "center",
-  marginTop: 20,
-},
-dot: {
-  height: 11,
-  width:11,
-  borderRadius: 5,
-  marginHorizontal: 5,
-  color:"#E8D7F2"
-},
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  dot: {
+    height: 11,
+    width: 11,
+    borderRadius: 5,
+    marginHorizontal: 5,
+    color: "#E8D7F2",
+  },
   buttonRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -85,9 +82,9 @@ dot: {
     fontWeight: "700",
   },
   row: {
-  flexDirection: "row",
-  justifyContent: "center", // keeps them grouped in center
-  alignItems: "center",
-  gap: 15
-}
+    flexDirection: "row",
+    justifyContent: "center", // keeps them grouped in center
+    alignItems: "center",
+    gap: 15,
+  },
 });

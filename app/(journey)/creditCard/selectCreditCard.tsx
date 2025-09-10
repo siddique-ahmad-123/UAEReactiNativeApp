@@ -11,9 +11,10 @@ import {
   Dimensions,
 } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
-import { styles } from "../styles/SelectCreditCard.Styles";
 import { useTheme } from "styled-components/native";
 import { router } from "expo-router";
+import { styles } from "@/app/(main)/styles/SelectCreditCard.Styles";
+import { useApplicationStore } from "@/store/applicationStore";
 
 const { width } = Dimensions.get("window");
 
@@ -51,7 +52,7 @@ const cards: CardItem[] = [
 const RequestsScreen = () => {
   const carouselRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-
+  const { nextStep } = useApplicationStore();
   const renderItem = (item: CardItem) => (
     <View style={[styles.card, { backgroundColor: theme.colors.background }]}>
       <Image
@@ -85,7 +86,7 @@ const RequestsScreen = () => {
             styles.applyBtn,
             { backgroundColor: theme.colors.secondaryColor },
           ]}
-          onPress={() => router.push("/SelectRequiredAmount")}
+          onPress={() => nextStep()}
         >
           <Text
             style={[styles.applyText, { color: theme.colors.primaryColor }]}

@@ -1,10 +1,8 @@
-
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#4B006E", // Purple fills behind header
   },
   header: {
     paddingHorizontal: 16,
@@ -20,10 +18,6 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
   },
-  closeButton: {
-    fontSize: 20,
-    color: "#fff",
-  },
   subHeader: {
     fontSize: 12,
     marginTop: 4,
@@ -31,7 +25,6 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     borderTopLeftRadius: 38,
     borderTopRightRadius: 38,
     paddingTop: 30,
@@ -57,15 +50,16 @@ export const styles = StyleSheet.create({
     height: 150,
     marginBottom: 12,
   },
+   closeButton: {
+    fontSize: 20,
+  },
   cardTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#4B006E",
     marginBottom: 8,
   },
   cardDescription: {
     fontSize: 10,
-    color: "#333",
     textAlign: "center",
     marginBottom: 16,
   },
@@ -79,23 +73,19 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     marginRight: 8,
     borderWidth: 1,
-    borderColor: "#4B006E",
     borderRadius: 6,
     alignItems: "center",
   },
   knowMoreText: {
-    color: "#3F1956",
     fontWeight: "bold",
   },
   applyBtn: {
     flex: 1,
     paddingVertical: 10,
-    backgroundColor: "#FECB26",
     borderRadius: 6,
     alignItems: "center",
   },
   applyText: {
-    color: "#3F1956",
     fontWeight: "bold",
   },
 
@@ -110,11 +100,9 @@ export const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: "#ccc",
     marginHorizontal: 4,
   },
   activeDot: {
-    backgroundColor: "#4B006E",
     width: 10,
     height: 10,
   },
