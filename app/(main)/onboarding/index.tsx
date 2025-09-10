@@ -137,14 +137,15 @@ const Carousel = () => {
         <CustomButton
           title="Get Started"
           onPress={() => {
-            if (currentIndex === slides.length - 1) {
-              router.push("/(auth)/login");
-            } else {
-              flatListRef.current?.scrollToIndex({
-                index: currentIndex + 1,
-                animated: true,
-              });
-            }
+            // if (currentIndex === slides.length - 1) {
+            //   router.push("/(auth)/login");
+            // } else {
+            //   flatListRef.current?.scrollToIndex({
+            //     index: currentIndex + 1,
+            //     animated: true,
+            //   });
+            // }
+             router.push("/(auth)/login");
           }}
           variant="primary"
           type="filled"

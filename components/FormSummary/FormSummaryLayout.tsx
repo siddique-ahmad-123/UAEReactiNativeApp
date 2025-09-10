@@ -1,18 +1,13 @@
 import { FormHeader } from "@/components/Form/Header/FormHeader";
 import ScreenWrapper from "@/components/ScreenWrapper";
-import {
-  fontSize,
-  fontWeight,
-  radius,
-  spacing,
-  spacingVertical,
-} from "@/constants/Metrics";
+import { radius, spacing, spacingVertical, width } from "@/constants/Metrics";
 import { useTheme } from "styled-components/native";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import CustomButton from "../CustomButton";
+import { verticalScale } from "@/utils/styling";
 
 interface FormHeaderProps {
   onSaveAndBack: () => void;
@@ -27,12 +22,16 @@ export default function FormSummaryLayout({
   const { t } = useTranslation();
 
   const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: theme.colors.primaryColor },
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.borderColor,
+    },
     scrollViewContainer: {
       flex: 1,
       backgroundColor: theme.colors.background,
       borderTopRightRadius: radius.pill,
       borderTopLeftRadius: radius.pill,
+      marginTop: spacingVertical.xl,
     },
     scrollViewContent: {
       padding: spacing.md,
@@ -41,12 +40,21 @@ export default function FormSummaryLayout({
     },
     buttonRow: {
       flexDirection: theme.flexRow.flexDirection,
-      justifyContent: "space-between",
+      justifyContent: "center",
       paddingHorizontal: spacing.md,
       paddingVertical: spacingVertical.md,
       backgroundColor: theme.colors.background,
     },
- 
+    handlercontainer: {
+      width: width.full,
+      alignItems: "center", 
+    },
+    handle: {
+      width: width.sm, 
+      height: 6, 
+      borderRadius: radius.md,
+      backgroundColor: theme.colors.borderColor, // light grey
+    },
   });
 
   return (
@@ -60,17 +68,19 @@ export default function FormSummaryLayout({
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
+            <View style={styles.handlercontainer}>
+              <View style={styles.handle} />
+            </View>
             {children}
           </KeyboardAwareScrollView>
 
-          {/* Footer stays pinned outside scroll */}
           <View style={styles.buttonRow}>
             <CustomButton
               title="Save & Back"
               onPress={onSaveAndBack}
               variant="primary"
               type="filled"
-              size="lg"
+              size="xl"
             />
           </View>
         </View>
