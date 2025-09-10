@@ -136,13 +136,13 @@ const EMICalculatorScreen: React.FC = () => {
             ]}
           >
             <Text style={[styles.resultLabel,{color:theme.colors.primaryColor}]}>Monthly Installment</Text>
-            <View style={[styles.resultCard,{borderColor:theme.colors.background}]}>
+            <View style={[styles.resultCard,{borderColor:theme.colors.borderColor}]}>
               <View>
                 <Text style={[styles.resultAmount,{color:theme.colors.shadowColor}]}>
                   {formatNumber(monthlyInstallment)}
                 </Text>
               </View>
-              <Text style={[styles.resultUnit,{color:theme.colors.primaryLightColor}]}>AED</Text>
+              <Text style={[styles.resultUnit,{color:theme.colors.borderColor}]}>AED</Text>
             </View>
           </View>
 
