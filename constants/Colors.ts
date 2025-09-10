@@ -30,6 +30,8 @@ export const LightThemeColorConstants = {
   borderColor:"#DDDD",
 
   errorTextColor: "#FF3333",
+
+  secondaryText:"#636363"
 } as const;
 
 export const DarkThemeColorConstants = {
@@ -64,5 +66,6 @@ export const DarkThemeColorConstants = {
   borderColor:"#CCCC",
 
   errorTextColor: "#FF3333",
+    secondaryText:"#636363"
 } as const;
 export type ThemeColors = typeof LightThemeColorConstants;
