@@ -15,7 +15,6 @@ const stepRoutes = [
   "/(journey)/creditCard/additionalDocuments/additionalDocUpload",
   "/(journey)/creditCard/dispatchDetail/dispatchDetails",
   "/(journey)/creditCard/applicationSummary/applicationSummary",
-  "/(journey)/creditCard/applicationSummary/dispatchSummary",
 ] as const;
 
 interface ApplicationState {
