@@ -15,8 +15,9 @@ import CustomInput from "@/components/CustomInput";
 import CustomDropDown from "@/components/CustomDropDown";
 import CustomDatePicker from "@/components/CustomDatePicker";
 import CustomUpload from "@/components/CustomUpload";
+import { router } from "expo-router";
 
-export default function CoBorrowerIncomeScreen({ navigation }: any) {
+export default function CoBorrowerIncomeScreen() {
   const { t } = useTranslation();
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
@@ -126,8 +127,8 @@ export default function CoBorrowerIncomeScreen({ navigation }: any) {
       subTitle={"Co-Borrower"}
       noOfBars={2}
       activeBarIndex={1}
-      onBack={() => prevStep}
-      onClose={() => navigation.navigate("Home")}
+      onBack={() => prevStep()}
+      onClose={() => router.replace("/")}
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >

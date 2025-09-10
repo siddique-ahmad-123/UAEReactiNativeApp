@@ -32,11 +32,11 @@ export const localStyles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 16,
     marginTop: 12,
-    color:"#3F1956"
+    color: "#3F1956",
   },
   avatar: { width: 50, height: 50, borderRadius: 25, marginRight: 12 },
-  welcome: { fontSize: 14},
-  username: { fontSize: 20, fontWeight: "400"},
+  welcome: { fontSize: 14 },
+  username: { fontSize: 20, fontWeight: "400" },
   banner: {
     margin: 16,
     borderRadius: 12,
@@ -60,14 +60,14 @@ export const localStyles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
   },
-serviceRow: {
-  width: 124,
-  height: 118,
-  flexDirection: "row",
-  justifyContent: "space-between",
-  paddingHorizontal:16,
-  gap:13     // Add some vertical spacing
-},
+  serviceRow: {
+    width: 124,
+    height: 118,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    gap: 13, // Add some vertical spacing
+  },
   serviceCard: {
     borderRadius: 12,
     width: 100,
@@ -77,13 +77,13 @@ serviceRow: {
   },
   serviceIcon: { fontSize: 20, marginBottom: 5 },
   serviceText: { fontSize: 14, fontWeight: "600" },
-grid: {
-  flexDirection: "row",
-  flexWrap: "wrap",
-  justifyContent: "space-between",
-  paddingHorizontal: 20,
-  marginTop: 20,
-},
+  grid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    marginTop: 20,
+  },
   applyCard: {
     width: (width - 48) / 2,
     height: 140,

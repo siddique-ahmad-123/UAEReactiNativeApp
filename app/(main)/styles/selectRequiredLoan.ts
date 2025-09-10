@@ -1,16 +1,13 @@
-  
 import { StyleSheet } from "react-native";
 
-
 export const gstyles = StyleSheet.create({
- 
   row: {
-  flexDirection: "row",
-  justifyContent: "center", // keeps them grouped in center
-  alignItems: "center",
-  gap: 15
-},
-checkboxContainer: {
+    flexDirection: "row",
+    justifyContent: "center", // keeps them grouped in center
+    alignItems: "center",
+    gap: 15,
+  },
+  checkboxContainer: {
     flexDirection: "row",
     alignItems: "flex-start",
     marginTop: 20,
@@ -20,4 +17,7 @@ checkboxContainer: {
     flex: 1,
     fontSize: 12,
   },
+  checkbox: {
+margin: 8,
+},
 });

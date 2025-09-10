@@ -1,9 +1,8 @@
-
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   safeArea: {
-    flex: 1, 
+    flex: 1,
   },
   header: {
     paddingHorizontal: 16,
@@ -50,6 +49,9 @@ export const styles = StyleSheet.create({
     width: "80%",
     height: 150,
     marginBottom: 12,
+  },
+   closeButton: {
+    fontSize: 20,
   },
   cardTitle: {
     fontSize: 24,

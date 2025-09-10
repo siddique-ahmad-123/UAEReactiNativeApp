@@ -5,6 +5,10 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 // Step route list (must match your folder-based routes)
 const stepRoutes = [
+  "/(journey)/creditCard/selectCreditCard",
+  "/(journey)/creditCard/selectRequiredAmount",
+  "/(journey)/creditCard/personalDetail/borrowerDetails",
+  "/(journey)/creditCard/personalDetail/coBorrowerDetails",
   "/(journey)/creditCard/incomeDetail/borrower",
   "/(journey)/creditCard/incomeDetail/coBorrower",
 ] as const;

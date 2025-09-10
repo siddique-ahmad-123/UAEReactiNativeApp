@@ -112,7 +112,9 @@ const Carousel = () => {
               styles.dot,
               {
                 backgroundColor:
-                  currentIndex === index ? theme.colors.primaryColor : theme.colors.primaryLightColor,
+                  currentIndex === index
+                    ? theme.colors.primaryColor
+                    : theme.colors.primaryLightColor,
                 width: currentIndex === index ? 39 : 10,
               },
             ]}

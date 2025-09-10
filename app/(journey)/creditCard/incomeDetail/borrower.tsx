@@ -15,6 +15,7 @@ import CustomInput from "@/components/CustomInput";
 import CustomDropDown from "@/components/CustomDropDown";
 import CustomDatePicker from "@/components/CustomDatePicker";
 import CustomUpload from "@/components/CustomUpload";
+import { router } from "expo-router";
 
 export default function BorrowerIncomeScreen() {
   const { t } = useTranslation();
@@ -128,7 +129,7 @@ export default function BorrowerIncomeScreen() {
       noOfBars={2}
       activeBarIndex={0}
       onBack={() => prevStep()}
-      onClose={() => resetForm()}
+      onClose={() => router.replace("/")}
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
