@@ -57,7 +57,6 @@ export const localStyles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "700",
     marginLeft: 16,
-    marginTop: 20,
     marginBottom: 10,
   },
   serviceRow: {

@@ -11,10 +11,12 @@ import { useTheme } from "styled-components/native";
 import { useApplicationStore } from "@/store/applicationStore";
 
 type RouteNames = "/Request" | "/Agreement" | "/ExistingApplication";
+import { Ionicons } from "@expo/vector-icons";
+
 const services: {
   id: string;
   title: string;
-  iconName: string;
+  iconName: keyof typeof Ionicons.glyphMap;
   route: RouteNames;
 }[] = [
   {
@@ -41,7 +43,7 @@ const applyNow = [
   { id: "1", title: "Credit Card" },
   { id: "2", title: "Mortgages" },
   { id: "3", title: "Auto Loans" },
-  { id: "4", title: "Personal Loans" },
+  { id: "4", title: "Personal \nLoans" },
 ];
 
 const navItems = [
