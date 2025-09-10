@@ -27,7 +27,7 @@ export const LightThemeColorConstants = {
 
   textHeader: "#FFFF",
 
-  borderColor:"#CCCC",
+  borderColor:"#DDDD",
 
   errorTextColor: "#FF3333",
 } as const;

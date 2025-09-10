@@ -1,10 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
 const { width } = Dimensions.get("window");
-const colors = {  
-  white:"ffff",
-  primary: "#4F46E5",
-  gray: "#6B7280",
-}
 export const localStyles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "white" },
   bottomNav: {
@@ -12,7 +7,6 @@ export const localStyles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     borderTopWidth: 1,
-    borderColor: "#ddd",
     backgroundColor: "white",
     paddingBottom: 8,
     paddingTop: 6,
@@ -30,7 +24,6 @@ export const localStyles = StyleSheet.create({
     bottom: 0,
     height: 2,
     width: "40%",
-    backgroundColor: colors.primary,
     borderRadius: 2,
   },
 
@@ -39,7 +32,7 @@ export const localStyles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 16,
     marginTop: 12,
-    color:colors.primary
+    color:"#3F1956"
   },
   avatar: { width: 50, height: 50, borderRadius: 25, marginRight: 12 },
   welcome: { fontSize: 14},
@@ -47,7 +40,6 @@ export const localStyles = StyleSheet.create({
   banner: {
     margin: 16,
     borderRadius: 12,
-    backgroundColor: colors.white,
     flexDirection: "row",
     alignItems: "center",
     padding: 16,
@@ -56,9 +48,7 @@ export const localStyles = StyleSheet.create({
   bannerText: {
     flex: 1,
     fontSize: 14,
-    color: colors.white,
     fontWeight: "600",
-    backgroundColor: colors.primary,
     padding: 10,
     borderRadius: 8,
   },
@@ -69,7 +59,6 @@ export const localStyles = StyleSheet.create({
     marginLeft: 16,
     marginTop: 20,
     marginBottom: 10,
-    color: colors.primary,
   },
 serviceRow: {
   width: 124,
@@ -80,15 +69,14 @@ serviceRow: {
   gap:13     // Add some vertical spacing
 },
   serviceCard: {
-    backgroundColor: colors.primary,
     borderRadius: 12,
     width: 100,
     height: 80,
     justifyContent: "center",
     alignItems: "center",
   },
-  serviceIcon: { fontSize: 20, color: colors.white, marginBottom: 5 },
-  serviceText: { color: colors.white, fontSize: 14, fontWeight: "600" },
+  serviceIcon: { fontSize: 20, marginBottom: 5 },
+  serviceText: { fontSize: 14, fontWeight: "600" },
 grid: {
   flexDirection: "row",
   flexWrap: "wrap",
@@ -113,7 +101,6 @@ grid: {
     position: "absolute",
     bottom: 10,
     left: 10,
-    color: colors.white,
     fontSize: 16,
     fontWeight: "700",
   },
