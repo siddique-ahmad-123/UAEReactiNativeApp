@@ -9,6 +9,7 @@ interface MethodOption {
   title: string;
   description: string;
   iconName?: string; // Ionicons name, optional
+  amount?: string; // for future use
 }
 
 interface MethodSelectorProps {
@@ -66,6 +67,11 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
     cardDescription: {
       fontSize: fontSize.xxs,
     },
+    cardAmount:{
+      fontSize: fontSize.lg,
+      fontWeight: fontWeight.bold,
+      marginBottom: spacingVertical.xs,
+    }
   });
   return (
     <View>
@@ -107,6 +113,16 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
               >
                 {option.description}
               </Text>
+              {option.amount && (
+                <Text
+                  style={[
+                    styles.cardAmount,
+                    { color: isSelected ? theme.colors.background : theme.colors.primaryColor },
+                  ]}
+                >
+                  {option.amount}
+                </Text>
+              )}
             </TouchableOpacity>
           );
         })}
