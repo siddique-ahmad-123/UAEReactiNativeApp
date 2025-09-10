@@ -117,7 +117,14 @@ export default function Dashboard() {
         />
 
         {/* My Services */}
-        <Text style={[localStyles.sectionTitle,{color:theme.colors.primaryColor}]}>My Services</Text>
+        <Text
+          style={[
+            localStyles.sectionTitle,
+            { color: theme.colors.primaryColor },
+          ]}
+        >
+          My Services
+        </Text>
         <View style={localStyles.serviceRow}>
           {services.map((item) => (
             <ServiceTile

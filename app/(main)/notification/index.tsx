@@ -16,22 +16,34 @@ import { router } from "expo-router";
 const NotificationScreen = () => {
   const theme = useTheme();
   return (
-    <SafeAreaView style={[styles.safeArea,{backgroundColor:theme.colors.primaryColor}]}>
+    <SafeAreaView
+      style={[styles.safeArea, { backgroundColor: theme.colors.primaryColor }]}
+    >
       {/* Purple Header */}
       <View style={styles.header}>
         <View style={styles.headerTop}>
-          <Text style={[styles.headerTitle, { color: theme.colors.textHeader }]}>Notifications</Text>
+          <Text
+            style={[styles.headerTitle, { color: theme.colors.textHeader }]}
+          >
+            Notifications
+          </Text>
           <TouchableOpacity>
-            <Text style={[styles.closeButton,{color:theme.colors.background}]}>✕</Text>
+            <Text
+              style={[styles.closeButton, { color: theme.colors.background }]}
+            >
+              ✕
+            </Text>
           </TouchableOpacity>
         </View>
-        <Text style={[styles.subHeader,{color:theme.colors.background}]}>
+        <Text style={[styles.subHeader, { color: theme.colors.background }]}>
           Find all the Notifications that you have raised here.
         </Text>
       </View>
 
       {/* White Container with Rounded Top */}
-      <View style={[styles.container,{backgroundColor:theme.colors.background}]}>
+      <View
+        style={[styles.container, { backgroundColor: theme.colors.background }]}
+      >
         {/* Show Request Card */}
         <RequestCard
           refNo="89765321"
@@ -41,15 +53,14 @@ const NotificationScreen = () => {
         />
 
         {/* Footer Button */}
-         <CustomButton
-        title="Back"
-        size="full"
-        variant="primary"
-        type="filled"
-        onPress={() =>  router.push("/NavScreen")}
-        style={{ marginTop: 420 }}
-      />
-
+        <CustomButton
+          title="Back"
+          size="full"
+          variant="primary"
+          type="filled"
+          onPress={() => router.push("/NavScreen")}
+          style={{ marginTop: 420 }}
+        />
       </View>
     </SafeAreaView>
   );

@@ -17,34 +17,45 @@ import { router } from "expo-router";
 const AgreementScreen = () => {
   const theme = useTheme();
   return (
-    <SafeAreaView style={[styles.safeArea,{backgroundColor:theme.colors.primaryColor}]}>
+    <SafeAreaView
+      style={[styles.safeArea, { backgroundColor: theme.colors.primaryColor }]}
+    >
       {/* Purple Header */}
       <View style={styles.header}>
         <View style={styles.headerTop}>
-          <Text style={[styles.headerTitle, { color: theme.colors.textHeader }]}>Agreement</Text>
+          <Text
+            style={[styles.headerTitle, { color: theme.colors.textHeader }]}
+          >
+            Agreement
+          </Text>
           <TouchableOpacity>
-            <Text style={[styles.closeButton,{color:theme.colors.background}]}>✕</Text>
+            <Text
+              style={[styles.closeButton, { color: theme.colors.background }]}
+            >
+              ✕
+            </Text>
           </TouchableOpacity>
         </View>
-        <Text style={[styles.subHeader,{color:theme.colors.background}]}>
+        <Text style={[styles.subHeader, { color: theme.colors.background }]}>
           Find all the Notifications that you have raised here.
         </Text>
       </View>
 
       {/* White Container with Rounded Top */}
-      <View style={[styles.container,{backgroundColor:theme.colors.background}]}>
+      <View
+        style={[styles.container, { backgroundColor: theme.colors.background }]}
+      >
         {/* Show Request Card */}
         <MessageCard message="You don’t have any new requests as of now" />
         {/* Footer Button */}
-         <CustomButton
-        title="Back"
-        size="full"
-        variant="primary"
-        type="filled"
-        onPress={() => router.back()}
-        style={{ marginTop: 490 }}
-      />
-
+        <CustomButton
+          title="Back"
+          size="full"
+          variant="primary"
+          type="filled"
+          onPress={() => router.back()}
+          style={{ marginTop: 490 }}
+        />
       </View>
     </SafeAreaView>
   );

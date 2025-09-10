@@ -13,6 +13,7 @@ import CustomButton from "@/components/CustomButton";
 import { gstyles } from "../styles/selectRequiredLoan";
 import DocumentDownload from "@/components/DocumentDownload";
 import { router } from "expo-router";
+import Checkbox from 'expo-checkbox';
 
 // Format number with commas
 const formatNumber = (n: number) =>
@@ -36,7 +37,9 @@ const SelectRequiredAmount = () => {
             Select Required Amount
           </Text>
           <TouchableOpacity onPress={() => router.push("/selectcreditcard")}>
-            <Text style={[styles.closeButton, { color: theme.colors.background }]}>
+            <Text
+              style={[styles.closeButton, { color: theme.colors.background }]}
+            >
               ✕
             </Text>
           </TouchableOpacity>
@@ -58,19 +61,24 @@ const SelectRequiredAmount = () => {
           onChange={setFinanceAmount}
           formatValue={formatNumber}
         />
-<View style={{ marginTop: 70 }} />
+        <View style={{ marginTop: 70 }} />
         <DocumentDownload documentName="Download Terms & Conditions" />
         <DocumentDownload documentName="Download Fees & Charges" />
         <DocumentDownload documentName="Download Key Fact Statement" />
 
-      
         <View style={gstyles.checkboxContainer}>
-          {/* <CheckBox
-            value={isChecked}
-            onValueChange={setChecked}
-             tintColors={{ true: "#3F1956", false: "#999" }} 
-          /> */}
-          <Text style={[gstyles.checkboxLabel,{color:theme.colors.primaryColor}]}>
+          <Checkbox
+           style={gstyles.checkbox}
+          value={isChecked}
+         onValueChange={setChecked}
+          color={isChecked ? '#4630EB' : undefined}
+         />
+          <Text
+            style={[
+              gstyles.checkboxLabel,
+              { color: theme.colors.primaryColor },
+            ]}
+          >
             I agree with below provided Terms and Conditions, Fees and Charges
             Sheet and Key Fact Statement.
           </Text>

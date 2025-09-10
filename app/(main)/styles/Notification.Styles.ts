@@ -35,5 +35,3 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 });
-
-
