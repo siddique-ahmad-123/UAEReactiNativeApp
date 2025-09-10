@@ -3,6 +3,10 @@ import { Stack } from "expo-router";
 export default function LoginLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="submitApplication4" />
+      <Stack.Screen name="submitApplication3" />
+      <Stack.Screen name="submitApplication2" />
+      <Stack.Screen name="submitApplication" />
       <Stack.Screen name="onboarding" />
       <Stack.Screen name="Request" />
       <Stack.Screen name="calculator" />

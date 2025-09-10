@@ -21,7 +21,7 @@ const formatNumber = (n: number) =>
 
 const SelectRequiredAmount = () => {
   const [financeAmount, setFinanceAmount] = useState<number>(50000);
-  const [isChecked, setChecked] = useState(false); // ✅ checkbox state
+  const [isChecked, setChecked] = useState(false); 
   const theme = useTheme();
 
   return (
