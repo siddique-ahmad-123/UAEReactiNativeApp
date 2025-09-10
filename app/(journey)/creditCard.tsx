@@ -1,16 +1,17 @@
 // App.tsx
 import React from 'react';
-import { SafeAreaView } from 'react-native';
 import { useApplicationStore } from '@/store/applicationStore';
-import { IncomeDetailForm } from '@/forms/incomeDetails';
+import BorrowerIncomeScreen from './creditCard/incomeDetail/borrower';
+import CoBorrowerIncomeScreen from './creditCard/incomeDetail/coBorrower';
 
 
 export default function CreditCard() {
   const { stepIndex } = useApplicationStore();
 
   const steps = [
-    <IncomeDetailForm key="personal" />,
+    <BorrowerIncomeScreen key="borrowerIncome" />,
+    <CoBorrowerIncomeScreen key="coBorrowerIncome"/>
   ];
 
-  return <SafeAreaView style={{ flex: 1 }}>{steps[stepIndex]}</SafeAreaView>;
+  return steps[stepIndex];
 }

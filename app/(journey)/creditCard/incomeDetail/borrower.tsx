@@ -31,6 +31,7 @@ export default function BorrowerIncomeScreen() {
   
 
   const onSubmit = (values: any) => {
+    console.log("Income Details Submitted:", values);
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
     nextStep();
   };
