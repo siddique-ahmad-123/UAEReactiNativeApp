@@ -18,9 +18,9 @@ import CustomUpload from "@/components/CustomUpload";
 
 export default function BorrowerIncomeScreen() {
   const { t } = useTranslation();
-  const { updateField, nextStep, prevStep, formData } = useApplicationStore();
+  const { updateField, nextStep, prevStep, formData,resetForm } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
-    resolver: zodResolver(incomeDetailSchema.partial()),
+    // resolver: zodResolver(incomeDetailSchema.partial()),
     defaultValues: formData,
     shouldUnregister: true,
   });
@@ -127,8 +127,8 @@ export default function BorrowerIncomeScreen() {
       subTitle={t("borrowerDetails")}
       noOfBars={2}
       activeBarIndex={0}
-      onBack={() => prevStep}
-      onClose={() => ""}
+      onBack={() => prevStep()}
+      onClose={() => resetForm()}
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >

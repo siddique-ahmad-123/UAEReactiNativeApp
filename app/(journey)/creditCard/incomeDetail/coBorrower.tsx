@@ -20,14 +20,9 @@ export default function CoBorrowerIncomeScreen({ navigation }: any) {
   const { t } = useTranslation();
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
-    resolver: zodResolver(incomeDetailSchema),
-    defaultValues: {
-      incomeType: formData.incomeType || "Salaried",
-      empDetailFetchMethod: formData.empDetailFetchMethod || "AECB",
-      incomeDetailFetchMethod: formData.incomeDetailFetchMethod || "Salary Transfer",
-      businessDetailFetchMethod: formData.businessDetailFetchMethod || "Upload Trade License",
-    },
-    //shouldUnregister: true,
+    // resolver: zodResolver(incomeDetailSchema), 
+    defaultValues: formData,
+    shouldUnregister: true,
   });
   const incomeType = watch("incomeType") ?? "Salaried";
   const empDetailFetchMethod = watch("empDetailFetchMethod") ?? "AECB";
