@@ -23,7 +23,7 @@ export const spacingVertical = {
   xl: verticalScale(32),
   xxl: verticalScale(40),
   xxxl: verticalScale(60),
-  xxxxl: verticalScale(160),
+  xxxxl: verticalScale(150),
 } as const;
 
 // 🔹 Border radius (use for borderRadius)

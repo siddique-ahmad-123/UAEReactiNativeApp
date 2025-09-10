@@ -10,33 +10,17 @@ import {
 import { useTheme } from "styled-components/native";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import CustomButton from "../CustomButton";
 
 interface FormHeaderProps {
-  stepNumber: number;
-  title: string;
-  subTitle: string;
-  noOfBars: number;
-  activeBarIndex: number;
-  onBack: () => void;
-  onClose: () => void;
-  onInfoPress?: () => void;
-  onSaveAndNext: () => void;
+  onSaveAndBack: () => void;
   children?: React.ReactNode;
 }
 
-export default function FormLayout({
-  stepNumber,
-  title,
-  subTitle,
-  noOfBars,
-  activeBarIndex,
-  onBack,
-  onClose,
-  onInfoPress,
-  onSaveAndNext,
+export default function FormSummaryLayout({
+  onSaveAndBack,
   children,
 }: FormHeaderProps) {
   const theme = useTheme();
@@ -62,21 +46,12 @@ export default function FormLayout({
       paddingVertical: spacingVertical.md,
       backgroundColor: theme.colors.background,
     },
+ 
   });
 
   return (
     <ScreenWrapper>
       <View style={styles.container}>
-        <FormHeader
-          stepNumber={stepNumber}
-          title={title}
-          subTitle={subTitle}
-          noOfBars={noOfBars}
-          activeBarIndex={activeBarIndex}
-          onBack={onBack}
-          onClose={onClose}
-          onInfoPress={onInfoPress}
-        />
         <View style={styles.scrollViewContainer}>
           <KeyboardAwareScrollView
             contentContainerStyle={styles.scrollViewContent}
@@ -91,18 +66,11 @@ export default function FormLayout({
           {/* Footer stays pinned outside scroll */}
           <View style={styles.buttonRow}>
             <CustomButton
-              title="Back"
-              onPress={onBack}
-              variant="secondary"
-              type="outlined"
-              size="md"
-            />
-            <CustomButton
-              title="Save & Next"
-              onPress={onSaveAndNext}
+              title="Save & Back"
+              onPress={onSaveAndBack}
               variant="primary"
               type="filled"
-              size="md"
+              size="lg"
             />
           </View>
         </View>

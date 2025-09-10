@@ -1,3 +1,4 @@
+import { spacingVertical } from "@/constants/Metrics";
 import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
@@ -19,9 +20,8 @@ export const styles = StyleSheet.create({
   logo: {
     width: 208,
     height: 82,
-    alignSelf: "flex-end",
-    marginTop: 25.25,
-    marginLeft: 222,
+    alignSelf: "center",
+    marginBottom:spacingVertical.xxl,
   },
   image: {
     width: "100%",

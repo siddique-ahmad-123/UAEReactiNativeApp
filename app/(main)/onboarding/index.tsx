@@ -12,6 +12,8 @@ import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
 import { styles } from "../styles/onboarding.Styles";
 import { useTheme } from "styled-components/native";
+import Pentagon from "@/components/Pentagon";
+import { spacingVertical } from "@/constants/Metrics";
 
 const { width, height } = Dimensions.get("window");
 
@@ -57,11 +59,6 @@ const Carousel = () => {
 
   const renderItem = ({ item }: { item: Slide }) => (
     <View style={{ width, alignItems: "center" }}>
-      <Image
-        source={require("../../../assets/images/newgenLogo.png")}
-        style={styles.logo}
-        resizeMode="contain"
-      />
       <ImageBackground
         source={require("../../../assets/images/onborBack.png")}
         style={{ width: "100%", height: height * 0.4 }}
@@ -86,13 +83,22 @@ const Carousel = () => {
         animated: true,
       });
       setCurrentIndex(nextIndex);
-    }, 1000); // 1 second
+    }, 2000); // 2 seconds
 
     return () => clearInterval(interval);
   }, [currentIndex]);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.background }}>
+      <Image
+        source={require("../../../assets/images/newgenLogo.png")}
+        style={styles.logo}
+        resizeMode="contain"
+        
+      />
+      <Pentagon color={theme.colors.primaryLightColor} cornerRadius={100} rotateAngle={45} top={spacingVertical.xxxl} left={-20} />
+      <Pentagon color={theme.colors.primaryLightColor} cornerRadius={100} rotateAngle={45} bottom={200} right={-30} />
+      <Pentagon size={50} color={theme.colors.primaryColor} cornerRadius={100} rotateAngle={90} bottom={140} right={-10} />
       <FlatList
         data={slides}
         renderItem={renderItem}
@@ -103,7 +109,6 @@ const Carousel = () => {
         onScroll={handleScroll}
         ref={flatListRef}
       />
-
       <View style={styles.pagination}>
         {slides.map((_, index) => (
           <View
