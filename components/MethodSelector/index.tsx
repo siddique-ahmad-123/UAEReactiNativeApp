@@ -9,10 +9,12 @@ interface MethodOption {
   title: string;
   description: string;
   iconName?: string; // Ionicons name, optional
+  amount?: string; // for future use
 }
 
 interface MethodSelectorProps {
   title?: string;
+  titleCenter?: boolean;
   options: MethodOption[];
   selectedId?: string;
   onSelect: (id: string) => void;
@@ -21,6 +23,7 @@ interface MethodSelectorProps {
 const MethodSelector: React.FC<MethodSelectorProps> = ({
   title = "Select Method",
   options,
+  titleCenter = false,
   selectedId,
   onSelect,
 }) => {
@@ -36,6 +39,8 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
       fontWeight: fontWeight.semiBold,
       marginBottom: spacingVertical.sm,
       color: theme.colors.primaryColor,
+      textAlign: titleCenter ? "center" : "left",
+      width: "100%",
     },
     optionContainer: {
       flexDirection: theme.flexRow.flexDirection,
@@ -66,6 +71,11 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
     cardDescription: {
       fontSize: fontSize.xxs,
     },
+    cardAmount:{
+      fontSize: fontSize.sm,
+      fontWeight: fontWeight.bold,
+      marginBottom: spacingVertical.xs,
+    }
   });
   return (
     <View>
@@ -107,6 +117,16 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
               >
                 {option.description}
               </Text>
+              {option.amount && (
+                <Text
+                  style={[
+                    styles.cardAmount,
+                    { color: isSelected ? theme.colors.background : theme.colors.primaryColor },
+                  ]}
+                >
+                  {option.amount}
+                </Text>
+              )}
             </TouchableOpacity>
           );
         })}

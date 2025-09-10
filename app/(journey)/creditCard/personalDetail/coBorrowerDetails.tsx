@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
 import { t } from "i18next";
 import React from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { GestureResponderEvent, StyleSheet, Text, View } from "react-native";
 
 const CoBorrowerPersonalInformation = () => {
@@ -28,7 +28,7 @@ const CoBorrowerPersonalInformation = () => {
     nextStep();
   };
 
-  const coBorrower = watch("coBorrower") ?? "Yes";
+  const coBorrower = watch("coBorrower") ?? "No";
 
   const genderOptions = [
     { label: "Male", value: "Male" },
@@ -74,18 +74,11 @@ const CoBorrowerPersonalInformation = () => {
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
-      <Controller
-        control={control}
-        name="coBorrower"
-        defaultValue="No"
-        render={({ field: { onChange, coBorrower } }) => (
-          <SegmentedControl
-            label="Do you want to add Co-Borrower"
-            options={["Yes", "No"]}
-            defaultValue={"No"}
-            onChange={onChange}
-          />
-        )}
+      <SegmentedControl
+        label="Do you want to add Co-Borrower"
+        options={["Yes", "No"]}
+        defaultValue={coBorrower}
+        onChange={(v) => setValue("coBorrower", v)}
       />
 
       {coBorrower === "Yes" && (

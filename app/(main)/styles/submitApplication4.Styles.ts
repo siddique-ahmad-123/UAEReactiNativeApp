@@ -72,5 +72,20 @@ export const styles = StyleSheet.create({
   },
   text:{
     fontSize: 16, fontWeight: 400, color: "#B8B8B8"
-  }
+  },
+  textbox3: {
+    fontSize: 16,
+    fontWeight: "500",
+    textAlign: "center",
+    marginTop: 10,
+  },
+  linkTextView: {
+    alignItems: "center",
+    marginTop: 20,
+  },
+  linktext: { alignItems: "center", fontSize: 16, fontWeight: "700",marginBottom:50 },
+    row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 });

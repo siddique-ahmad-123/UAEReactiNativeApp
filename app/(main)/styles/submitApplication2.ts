@@ -34,43 +34,25 @@ export const styles = StyleSheet.create({
     paddingTop: 40,
     paddingHorizontal: 16,
   },
-
-  centerBox: {
+  image: {
     alignItems: "center",
     marginTop: 30,
-  },
-  successImage: {
-    width: 80,
-    height: 80,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginTop: 15,
-  },
-  subtitle: {
-    fontSize: 14,
-    color: "#666",
-    textAlign: "center",
-    marginTop: 6,
-  },
-
-  textbox: {
-    fontSize: 16,
-    fontWeight: "500",
-    textAlign: "center",
-    marginTop: 6,
   },
   textbox2: {
     fontSize: 24,
     fontWeight: "700",
     marginTop: 15,
   },
-  image:{
-    alignItems: "center",
-     marginTop: 30
+  textbox3: {
+    fontSize: 16,
+    fontWeight: "500",
+    textAlign: "center",
+    marginTop: 10,
   },
-  text:{
-    fontSize: 16, fontWeight: 400, color: "#B8B8B8"
-  }
+  linkTextView: {
+    alignItems: "center",
+    marginTop: 60,
+    marginBottom: 120,
+  },
+  linktext: { alignItems: "center", fontSize: 18, fontWeight: "700" },
 });
