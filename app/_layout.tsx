@@ -17,16 +17,9 @@ export default function RootLayout() {
   return (
     <AppProvider>
       <Stack initialRouteName="(main)">
-<<<<<<< HEAD
-        <Stack.Screen
-          name="(journey)/creditCard/incomeDetail/borrower"
-          options={{ headerShown: false }}
-        />
-=======
-        <Stack.Screen name="(journey)/creditCard/incomeDetail/borrower" options={{ headerShown: false }} />
->>>>>>> origin
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(main)" options={{ headerShown: false }} />
+        <Stack.Screen name="(journey)" options={{ headerShown: false }}/>
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
