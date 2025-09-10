@@ -31,7 +31,7 @@ const globalStyles = StyleSheet.create({
     marginVertical: 5,
   },
   buttonText: {
-    fontSize: fontSize.md,
+    fontSize: fontSize.sm,
     fontWeight: fontWeight.bold,
   },
 
