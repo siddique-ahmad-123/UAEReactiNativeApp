@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { localStyles } from "../styles/Home.Styles";
@@ -8,6 +8,7 @@ import ServiceTile from "@/components/ServiceTile";
 import HeroBanner from "@/components/HeroBanner";
 import ProductCard from "@/components/ProductCard";
 import { useTheme } from "styled-components/native";
+import { useApplicationStore } from "@/store/applicationStore";
 
 type RouteNames = "/Request" | "/Agreement" | "/ExistingApplication";
 const services: {
@@ -80,6 +81,9 @@ export default function Dashboard() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("1");
   const theme = useTheme();
+  const { resetForm } = useApplicationStore();
+
+
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: theme.colors.background }]}
@@ -144,7 +148,10 @@ export default function Dashboard() {
               key={item.id}
               title={item.title}
               image={require("../../../assets/images/ProductImage.png")}
-              onPress={() => router.push("/selectcreditcard")}
+              onPress={() => {
+              resetForm(); // resets and navigates home
+              router.push("/(journey)/creditCard/selectCreditCard"); // start first step
+        }}
             />
           ))}
         </View>

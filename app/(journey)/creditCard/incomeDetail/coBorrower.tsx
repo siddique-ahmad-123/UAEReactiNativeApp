@@ -2,7 +2,7 @@ import FormLayout from "@/components/Form/FormLayout";
 import { incomeDetailSchema } from "@/schemas/creditCard/incomeDetailSchema";
 import { useApplicationStore } from "@/store/applicationStore";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
@@ -17,11 +17,11 @@ import CustomDatePicker from "@/components/CustomDatePicker";
 import CustomUpload from "@/components/CustomUpload";
 import { router } from "expo-router";
 
-export default function BorrowerIncomeScreen() {
+export default function CoBorrowerIncomeScreen() {
   const { t } = useTranslation();
-  const { updateField, nextStep, prevStep, formData,resetForm } = useApplicationStore();
+  const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
-    // resolver: zodResolver(incomeDetailSchema.partial()),
+    // resolver: zodResolver(incomeDetailSchema), 
     defaultValues: formData,
     shouldUnregister: true,
   });
@@ -32,7 +32,6 @@ export default function BorrowerIncomeScreen() {
   
 
   const onSubmit = (values: any) => {
-    console.log("Income Details Submitted:", values);
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
     nextStep();
   };
@@ -125,9 +124,9 @@ export default function BorrowerIncomeScreen() {
     <FormLayout
       stepNumber={2}
       title={t("incomeDetails")}
-      subTitle={t("borrowerDetails")}
+      subTitle={"Co-Borrower"}
       noOfBars={2}
-      activeBarIndex={0}
+      activeBarIndex={1}
       onBack={() => prevStep()}
       onClose={() => router.replace("/")}
       onInfoPress={() => alert("Info about this step")}

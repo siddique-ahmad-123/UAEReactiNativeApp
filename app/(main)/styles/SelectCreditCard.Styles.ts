@@ -50,6 +50,9 @@ export const styles = StyleSheet.create({
     height: 150,
     marginBottom: 12,
   },
+   closeButton: {
+    fontSize: 20,
+  },
   cardTitle: {
     fontSize: 24,
     fontWeight: "bold",
