@@ -6,5 +6,10 @@
   "saveAndNext": "Save & Next",
   "personalDetails": "Personal Details",
   "personalInformation": "Personal Information",
-  "addressInformation": "Address Information"
+  "addressInformation": "Address Information",
+  "expenseDetails": "Expense Details",
+  "lifeStyleExpenses": "Life Style Expenses",
+  "additionalDocuments": "Additional Documents",
+  "documentsUpload": "Documents Upload",
+  "dispatchDetails": "Dispatch Details"
 }
