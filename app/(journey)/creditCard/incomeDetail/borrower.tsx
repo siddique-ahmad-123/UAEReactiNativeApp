@@ -1,21 +1,19 @@
+import CustomButton from "@/components/CustomButton";
+import CustomDatePicker from "@/components/CustomDatePicker";
+import CustomDropDown from "@/components/CustomDropDown";
+import CustomInput from "@/components/CustomInput";
+import CustomUpload from "@/components/CustomUpload";
 import FormLayout from "@/components/Form/FormLayout";
-import { incomeDetailSchema } from "@/schemas/creditCard/incomeDetailSchema";
+import MethodSelector from "@/components/MethodSelector";
+import SectionHeader from "@/components/SectionHeader";
+import SegmentedControl from "@/components/SegmentControl";
+import { spacingVertical } from "@/constants/Metrics";
 import { useApplicationStore } from "@/store/applicationStore";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { router } from "expo-router";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
-import SegmentedControl from "@/components/SegmentControl";
-import SectionHeader from "@/components/SectionHeader";
-import MethodSelector from "@/components/MethodSelector";
-import CustomButton from "@/components/CustomButton";
-import { spacingVertical } from "@/constants/Metrics";
-import CustomInput from "@/components/CustomInput";
-import CustomDropDown from "@/components/CustomDropDown";
-import CustomDatePicker from "@/components/CustomDatePicker";
-import CustomUpload from "@/components/CustomUpload";
-import { router } from "expo-router";
 
 export default function BorrowerIncomeScreen() {
   const { t } = useTranslation();

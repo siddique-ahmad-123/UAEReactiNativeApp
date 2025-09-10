@@ -11,5 +11,7 @@
   "lifeStyleExpenses": "Life Style Expenses",
   "additionalDocuments": "Additional Documents",
   "documentsUpload": "Documents Upload",
-  "dispatchDetails": "Dispatch Details"
+  "dispatchDetails": "Dispatch Details",
+  "applicationSummary": "Application Summary",
+  "summary": "Summary"
 }

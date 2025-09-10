@@ -31,6 +31,8 @@ const DispatchDetails = () => {
     nextStep();
   };
 
+  const dispatchType = watch("dispatchType") ?? "Mailing Address";
+
   const emiratesOptions = [
     { label: "Dubai", value: "Dubai" },
     { label: "Saudi Arabia", value: "Saudi Arabia" },
@@ -130,81 +132,86 @@ const DispatchDetails = () => {
       <SegmentedControl
         label={"Select Dispatch Address"}
         options={["Mailing Address", "Branch Collect"]}
-        onChange={function (value: string): void {
-          throw new Error("Function not implemented.");
-        }}
+        defaultValue={dispatchType}
+        onChange={(value) => setValue("dispatchType", value)}
       />
 
-      <View style={styles.checkBoxContainer}>
-        <Checkbox
-          value={mailing}
-          onValueChange={() => setMailing(!mailing)}
-          color={mailing === true ? theme.colors.primaryColor : undefined}
-        />
-        <Text style={styles.checkBoxText}>
-          Select Mailing Address to Dispatch Card
-        </Text>
-      </View>
+      {dispatchType === "Mailing Address" ? (
+        <>
+          <View style={styles.checkBoxContainer}>
+            <Checkbox
+              value={mailing}
+              onValueChange={() => setMailing(!mailing)}
+              color={mailing === true ? theme.colors.primaryColor : undefined}
+            />
+            <Text style={styles.checkBoxText}>
+              Select Mailing Address to Dispatch Card
+            </Text>
+          </View>
 
-      <CustomInput
-        control={control}
-        name="addressLine1"
-        label="Address Line 1"
-        placeholder="Enter your address"
-        type="text"
-      />
-      <CustomInput
-        control={control}
-        name="addressLine2"
-        label="Address Line 2"
-        placeholder="Enter your address"
-        type="text"
-      />
+          <CustomInput
+            control={control}
+            name="addressLine1"
+            label="Address Line 1"
+            placeholder="Enter your address"
+            type="text"
+          />
+          <CustomInput
+            control={control}
+            name="addressLine2"
+            label="Address Line 2"
+            placeholder="Enter your address"
+            type="text"
+          />
 
-      <CustomDropDown
-        label={"Emirates"}
-        data={emiratesOptions}
-        control={control}
-      />
-      <CustomDropDown
-        label={"Country"}
-        data={countryOptions}
-        control={control}
-      />
+          <CustomDropDown
+            label={"Emirates"}
+            data={emiratesOptions}
+            control={control}
+          />
+          <CustomDropDown
+            label={"Country"}
+            data={countryOptions}
+            control={control}
+          />
+        </>
+      ) : (
+        <>
+          <View style={styles.checkBoxContainer}>
+            <Checkbox
+              value={branch}
+              onValueChange={() => setBranch(!branch)}
+              color={branch === true ? theme.colors.primaryColor : undefined}
+            />
+            <Text style={styles.checkBoxText}>
+              Select below Branch to Dispatch Card
+            </Text>
+          </View>
 
-      <View style={styles.checkBoxContainer}>
-        <Checkbox
-          value={branch}
-          onValueChange={() => setBranch(!branch)}
-          color={branch === true ? theme.colors.primaryColor : undefined}
-        />
-        <Text style={styles.checkBoxText}>
-          Select below Branch to Dispatch Card
-        </Text>
-      </View>
+          <CustomDropDown
+            label={"Emirates"}
+            data={emiratesOptions}
+            control={control}
+          />
+          <CustomDropDown
+            label={"Branch Name"}
+            data={branchOptions}
+            control={control}
+          />
 
-      <CustomDropDown
-        label={"Emirates"}
-        data={emiratesOptions}
-        control={control}
-      />
-      <CustomDropDown
-        label={"Branch Name"}
-        data={branchOptions}
-        control={control}
-      />
-
-      <View>
-        <Text style={{ textAlign: "center" }}>
-          Collection Timings - 9 AM to 4 PM (Monday to Friday)
-        </Text>
-      </View>
-      <View>
-        <Text style={{ textAlign: "center" }}>
-          Card will be re-dispatched to Head Office if not collected within 30
-          days
-        </Text>
-      </View>
+          <View>
+            <Text style={{ textAlign: "center" }}>
+              Collection Timings - 9 AM to 4 PM (Monday to Friday)
+            </Text>
+          </View>
+          <View>
+            <Text style={{ textAlign: "center" }}>
+              Card will be re-dispatched to Head Office if not collected within
+              30 days
+            </Text>
+          </View>
+        </>
+      )}
     </FormLayout>
   );
 };

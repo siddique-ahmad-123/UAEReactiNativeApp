@@ -20,6 +20,8 @@ const AdditionalDocUpload = () => {
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
     nextStep();
   };
+
+  const borrowerType = watch("borrowerType") ?? "Borrower";
   return (
     <FormLayout
       stepNumber={4}
@@ -35,22 +37,27 @@ const AdditionalDocUpload = () => {
       <SegmentedControl
         label={"Select Applicant"}
         options={["Borrower", "Co-Borrower"]}
-        onChange={function (value: string): void {
-          throw new Error("Function not implemented.");
-        }}
+        defaultValue={borrowerType}
+        onChange={(value) => setValue("borrowerType", value)}
       />
 
-      {/* Borrower Upload  */}
-      <CustomUpload label={"Salary Certificate"} />
-      <CustomUpload label={"Bank Statement"} />
-      <CustomUpload label={"Additional Income Proof"} />
-      <CustomUpload label={"Trade License"} />
-
-      {/* Co-Borrower Upload */}
-      <CustomUpload label={"Salary Certificate"} />
-      <CustomUpload label={"Bank Statement"} />
-      <CustomUpload label={"Additional Income Proof"} />
-      <CustomUpload label={"Trade License"} />
+      {borrowerType === "Borrower" ? (
+        <>
+          {/* Borrower Upload  */}
+          <CustomUpload label={"Salary Certificate"} />
+          <CustomUpload label={"Bank Statement"} />
+          <CustomUpload label={"Additional Income Proof"} />
+          <CustomUpload label={"Trade License"} />
+        </>
+      ) : (
+        <>
+          {/* Co-Borrower Upload */}
+          <CustomUpload label={"Salary Certificate"} />
+          <CustomUpload label={"Bank Statement"} />
+          <CustomUpload label={"Additional Income Proof"} />
+          <CustomUpload label={"Trade License"} />
+        </>
+      )}
     </FormLayout>
   );
 };

@@ -7,9 +7,8 @@ import FormLayout from "@/components/Form/FormLayout";
 import SectionHeader from "@/components/SectionHeader";
 import SegmentedControl from "@/components/SegmentControl";
 import { spacingVertical } from "@/constants/Metrics";
-import { personalDetailsSchema } from "@/schemas/creditCard/personalDetailsSchema";
+import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
 import { t } from "i18next";
 import React from "react";
@@ -19,7 +18,7 @@ import { GestureResponderEvent, StyleSheet, View } from "react-native";
 const BorrowerPersonalInformation = () => {
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
-   // resolver: zodResolver(personalDetailsSchema),
+    // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
     shouldUnregister: true,
   });
@@ -97,7 +96,7 @@ const BorrowerPersonalInformation = () => {
       <SectionHeader sectionName={t("personalInformation")} />
       <CustomInput
         control={control}
-        name="name"
+        name={fieldNames.borrowerName}
         label="Name"
         placeholder="Name"
         type="text"
@@ -110,11 +109,21 @@ const BorrowerPersonalInformation = () => {
         placeholder="Age"
         type="number"
       />
-      <CustomDropDown label={"Gender"} data={genderOptions} />
-      <CustomDropDown label={"Nationality"} data={nationalityOptions} />
+      <CustomDropDown
+        name="gender"
+        label={"Gender"}
+        data={genderOptions}
+        control={control}
+      />
+      <CustomDropDown
+        label={"Nationality"}
+        data={nationalityOptions}
+        control={control}
+      />
       <CustomDropDown
         label={"Residence Country"}
         data={residenceCountryOptions}
+        control={control}
       />
       <CustomInput
         control={control}
@@ -219,8 +228,16 @@ const BorrowerPersonalInformation = () => {
         type="text"
       />
 
-      <CustomDropDown label={"Emirates"} data={emiratesOptions} />
-      <CustomDropDown label={"Country"} data={countryOptions} />
+      <CustomDropDown
+        label={"Emirates"}
+        data={emiratesOptions}
+        control={control}
+      />
+      <CustomDropDown
+        label={"Country"}
+        data={countryOptions}
+        control={control}
+      />
 
       <SectionHeader sectionName="EFR Check" />
       <CustomButton
@@ -232,6 +249,7 @@ const BorrowerPersonalInformation = () => {
       <CustomDropDown
         label={"Verification Status"}
         data={verificationOptions}
+        control={control}
       />
     </FormLayout>
   );
