@@ -36,7 +36,7 @@ const BottomNav: React.FC<Props> = ({ activeTab, setActiveTab }) => {
       edges={["bottom"]}
       style={{ backgroundColor: theme.colors.background }}
     >
-      <View style={localStyles.bottomNav}>
+      <View style={[localStyles.bottomNav,{borderColor:theme.colors.borderColor}]}>
         {navItems.map((item) => {
           const isActive = activeTab === item.title;
           return (
@@ -69,7 +69,7 @@ const BottomNav: React.FC<Props> = ({ activeTab, setActiveTab }) => {
               >
                 {item.title}
               </Text>
-              {isActive && <View style={localStyles.activeUnderline} />}
+              {isActive && <View style={[localStyles.activeUnderline,{backgroundColor:theme.colors.primaryColor}]} />}
             </TouchableOpacity>
           );
         })}

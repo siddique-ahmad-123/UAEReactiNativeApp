@@ -70,7 +70,7 @@ const SelectRequiredAmount = () => {
             onValueChange={setChecked}
              tintColors={{ true: "#3F1956", false: "#999" }} 
           /> */}
-          <Text style={gstyles.checkboxLabel}>
+          <Text style={[gstyles.checkboxLabel,{color:theme.colors.primaryColor}]}>
             I agree with below provided Terms and Conditions, Fees and Charges
             Sheet and Key Fact Statement.
           </Text>
