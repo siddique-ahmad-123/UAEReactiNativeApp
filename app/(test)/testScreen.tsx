@@ -1,27 +1,47 @@
-import CustomDatePicker from "@/components/CustomDatePicker";
-import CustomDropDown from "@/components/CustomDropDown";
-import CustomInput from "@/components/CustomInput";
-import CustomUpload from "@/components/CustomUpload";
-import FormSummaryLayout from "@/components/FormSummary/FormSummaryLayout";
-import LabeledSlider from "@/components/LabeledSlider";
-import SegmentedControl from "@/components/SegmentControl";
-import ServiceTile from "@/components/ServiceTile";
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import { StyleSheet, View } from "react-native";
+import DynamicSliderCard from "./amountCard2";
+import { GestureHandlerRootView, ScrollView } from "react-native-gesture-handler";
+import { useState } from "react";
 
 const testScreen = () => {
-  const countryOptions = [
-    { label: "India", value: "IN" },
-    { label: "United States", value: "US" },
-    { label: "Germany", value: "DE" },
-  ];
+const [financeAmount, setFinanceAmount] = useState(50000);
+  const [tenure, setTenure] = useState(36);
+  const [rate, setRate] = useState(7.5);
+
   return (
-    <FormSummaryLayout onSaveAndBack={()=>""}>
-       <SegmentedControl
-        label="Select Income Type"
-        options={["Salaried", "Self Employed"]}
-        onChange={(value) => console.log("Selected:", value)}
+    <GestureHandlerRootView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1, padding: 16 }}>
+      <DynamicSliderCard
+        title="Finance Amount"
+        value={financeAmount}
+        setValue={setFinanceAmount}
+        min={10000}
+        max={200000}
+        step={1000}
+        unit="AED"
       />
-    </FormSummaryLayout>
+      <DynamicSliderCard
+        title="Tenure (Months)"
+        value={tenure}
+        setValue={setTenure}
+        min={12}
+        max={120}
+        step={1}
+        unit="Mon"
+      />
+      <DynamicSliderCard
+        title="Interest Rate"
+        value={rate}
+        setValue={setRate}
+        min={1}
+        max={20}
+        step={0.1}
+        unit="%"
+      />
+    </ScrollView>
+    </GestureHandlerRootView>
   );
 };
 

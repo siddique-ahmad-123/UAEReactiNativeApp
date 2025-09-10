@@ -29,6 +29,8 @@ export const LightThemeColorConstants = {
 
   borderColor:"#DDDD",
 
+  sliderColor:"#8924C6",
+
   errorTextColor: "#FF3333",
 } as const;
 
@@ -62,6 +64,8 @@ export const DarkThemeColorConstants = {
   textHeader: "#FFFF",
 
   borderColor:"#CCCC",
+
+  sliderColor:"#8924C6",
 
   errorTextColor: "#FF3333",
 } as const;
