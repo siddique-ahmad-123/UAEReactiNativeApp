@@ -9,7 +9,6 @@ export default function JourneyLayout() {
        <Stack.Screen name="creditCard/personalDetail/coBorrowerDetails" />
       <Stack.Screen name="creditCard/incomeDetail/borrower" />
       <Stack.Screen name="creditCard/incomeDetail/coBorrower" />
-     
     </Stack>
   );
 }
