@@ -1,6 +1,7 @@
 import { useTheme } from "styled-components/native";
 import React from "react";
 import { Dimensions, StyleSheet } from "react-native";
+
 import { radius, spacing } from "@/constants/Metrics";
 const { width, height } = Dimensions.get("window");
 export const styles = StyleSheet.create({

@@ -1,71 +1,47 @@
-import CustomDatePicker from "@/components/CustomDatePicker";
-import CustomDropDown from "@/components/CustomDropDown";
-import CustomInput from "@/components/CustomInput";
-import CustomUpload from "@/components/CustomUpload";
-import LabeledSlider from "@/components/LabeledSlider";
-import ServiceTile from "@/components/ServiceTile";
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import { StyleSheet, View } from "react-native";
+import DynamicSliderCard from "./amountCard2";
+import { GestureHandlerRootView, ScrollView } from "react-native-gesture-handler";
+import { useState } from "react";
 
 const testScreen = () => {
-  const countryOptions = [
-    { label: "India", value: "IN" },
-    { label: "United States", value: "US" },
-    { label: "Germany", value: "DE" },
-  ];
+const [financeAmount, setFinanceAmount] = useState(50000);
+  const [tenure, setTenure] = useState(36);
+  const [rate, setRate] = useState(7.5);
+
   return (
-    <View>
-      {/* <SectionHeader sectionName="New Section"></SectionHeader> */}
-
-      {/* <DocumentDownload documentName="Pan Card"></DocumentDownload> */}
-
-      <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-        <ServiceTile title="Requests" iconName="document-text-outline" />
-        <ServiceTile title="Agreements" iconName="document-attach-outline" />
-        <ServiceTile title="Applications" iconName="create-outline" />
-      </View>
-
-      {/* <CustomInput label="Name"></CustomInput> */}
-      <CustomInput label="Name" type="text" />
-      <CustomInput label="Name" type="text" variant="half" />
-      <CustomInput label="password" type="password" />
-
-      <CustomDatePicker label="DOB" variant="full"></CustomDatePicker>
-
-      <CustomDropDown
-        label="Select Country"
-        placeholder="Choose a country"
-        data={countryOptions}
-        type="singleSelect"
-        variant="full"
-      />
-
-      {/* <SegmentedControl
-        label="Select Income Type"
-        options={["Salaried", "Self Employed"]}
-        onChange={(value) => console.log("Selected:", value)}
-      />
-
-      <HeroBanner
-        message="Thank you for being associated with us."
-        backgroundImage={require("../../assets/images/HeroBanner.png")}
-      />
-
-      <ProductCard
-        title="Credit Card"
-        image={require("../../assets/images/ProductImage.png")}
-      /> */}
-
-      <CustomUpload label="Passport" />
-
-      <LabeledSlider
-        label="Finance Amount"
+    <GestureHandlerRootView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1, padding: 16 }}>
+      <DynamicSliderCard
+        title="Finance Amount"
+        value={financeAmount}
+        setValue={setFinanceAmount}
         min={10000}
         max={200000}
         step={1000}
         unit="AED"
-        defaultValue={50000}
       />
-    </View>
+      <DynamicSliderCard
+        title="Tenure (Months)"
+        value={tenure}
+        setValue={setTenure}
+        min={12}
+        max={120}
+        step={1}
+        unit="Mon"
+      />
+      <DynamicSliderCard
+        title="Interest Rate"
+        value={rate}
+        setValue={setRate}
+        min={1}
+        max={20}
+        step={0.1}
+        unit="%"
+      />
+    </ScrollView>
+    </GestureHandlerRootView>
   );
 };
 

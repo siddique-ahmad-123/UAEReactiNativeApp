@@ -121,6 +121,7 @@ const NotificationScreen = () => {
           <CustomButton
             title="Accept Offer"
             onPress={() => {}}
+
             variant="primary"
             type="filled"
             size="lg"

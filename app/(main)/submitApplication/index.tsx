@@ -127,7 +127,7 @@ const NotificationScreen = () => {
             size="full"
             variant="primary"
             type="filled"
-            onPress={() => {}}
+            onPress={() => router.push("/NavScreen")}
             style={{ marginTop: 20 }}
           />
         </ScrollView>
