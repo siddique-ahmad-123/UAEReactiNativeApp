@@ -1,18 +1,14 @@
 import { useRouter } from "expo-router";
-import React, { useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, {  useState } from "react";
+import { View, Text, Image,ScrollView } from "react-native";
 import { localStyles } from "../styles/Home.Styles";
-import { styles } from "../styles/onboarding.Styles";
 import ServiceTile from "@/components/ServiceTile";
 import HeroBanner from "@/components/HeroBanner";
 import ProductCard from "@/components/ProductCard";
 import { useTheme } from "styled-components/native";
 import { useApplicationStore } from "@/store/applicationStore";
-
-type RouteNames = "/Request" | "/Agreement" | "/ExistingApplication";
 import { Ionicons } from "@expo/vector-icons";
-
+type RouteNames = "/Request" | "/Agreement" | "/ExistingApplication";
 const services: {
   id: string;
   title: string;
@@ -44,39 +40,6 @@ const applyNow = [
   { id: "2", title: "Mortgages" },
   { id: "3", title: "Auto Loans" },
   { id: "4", title: "Personal \nLoans" },
-];
-
-const navItems = [
-  {
-    id: "1",
-    title: "Home",
-    icon: require("../../../assets/icons/home.png"),
-    screen: "Dashboard",
-  },
-  {
-    id: "2",
-    title: "Calculator",
-    icon: require("../../../assets/icons/mobile.png"),
-    screen: "Calculator",
-  },
-  {
-    id: "3",
-    title: "Need Help",
-    icon: require("../../../assets/icons/headphn.png"),
-    screen: "Help",
-  },
-  {
-    id: "4",
-    title: "Notifications",
-    icon: require("../../../assets/icons/notification.png"),
-    screen: "Notifications",
-  },
-  {
-    id: "5",
-    title: "Menu",
-    icon: require("../../../assets/icons/menu.png"),
-    screen: "Menu",
-  },
 ];
 
 export default function Dashboard() {
@@ -114,8 +77,6 @@ export default function Dashboard() {
         message="Thank you for being associated with us."
         backgroundImage={require("../../../assets/images/HeroBanner.png")}
       />
-
-      {/* My Services */}
       <Text
         style={[localStyles.sectionTitle, { color: theme.colors.primaryColor }]}
       >
@@ -139,8 +100,8 @@ export default function Dashboard() {
             title={item.title}
             image={require("../../../assets/images/ProductImage.png")}
             onPress={() => {
-              resetForm(); // resets and navigates home
-              router.push("/(journey)/creditCard/selectCreditCard"); // start first step
+              resetForm(); 
+              router.push("/(journey)/creditCard/selectCreditCard"); 
             }}
           />
         ))}
