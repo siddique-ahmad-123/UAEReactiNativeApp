@@ -4,10 +4,17 @@ import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
 import ScreenWrapper from "@/components/ScreenWrapper";
+import { toastConfig } from "@/components/Toast/toastConfig";
 import { AppProvider } from "@/theme/AppProvider";
+import { initSyncListener } from "@/utils/networkListener";
+import { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Toast from "react-native-toast-message";
 
 export default function RootLayout() {
+  useEffect(() => {
+    initSyncListener();
+  }, []);
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/karbon-regular-webfont.ttf"),
     LatoRegular: require("../assets/fonts/Lato-Regular.ttf"),
@@ -28,6 +35,7 @@ export default function RootLayout() {
             <Stack.Screen name="+not-found" />
           </Stack>
           <StatusBar style="auto" />
+          <Toast config={toastConfig}/>
         </ScreenWrapper>
       </GestureHandlerRootView>
     </AppProvider>

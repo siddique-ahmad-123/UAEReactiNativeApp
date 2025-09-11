@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, SafeAreaView } from "react-native"; // your existing Calculator
+import { View, StyleSheet } from "react-native"; 
 import BottomNav from "@/components/BottomNav";
 import EMICalculatorScreen from "../calculator";
 import Dashboard from "../home";
@@ -25,17 +25,22 @@ const MainScreen = () => {
         return <Dashboard />;
     }
   };
-const theme = useTheme()
+
+  const theme = useTheme();
+
   return (
-    <SafeAreaView style={[styles.container,{backgroundColor:theme.colors.background}]}>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={styles.content}>{renderContent()}</View>
-      <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
-    </SafeAreaView>
+      {activeTab === "Home" && (
+        <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
+      )}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  
+  container: { flex: 1},
   content: { flex: 1 },
   dummy: { flex: 1, alignItems: "center", justifyContent: "center" }
 });

@@ -1,45 +1,21 @@
-import { radius, spacing } from "@/constants/Metrics";
+import {
+  fontSize,
+  fontWeight,
+  radius,
+  spacing,
+  spacingVertical,
+  width,
+} from "@/constants/Metrics";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
   },
-  header: {
-    paddingHorizontal: spacing.md,
-    paddingTop: spacing.xxxl,
-    paddingBottom: spacing.md,
-  },
-  headerTop: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  subHeader: {
-    fontSize: 12,
-    marginTop: 4,
-    paddingBottom: 24,
-  },
-  container: {
-    flex: 1,
-            borderTopLeftRadius: radius.pill,
-            borderTopRightRadius: radius.pill,
-            paddingTop: spacing.xxl,
-            paddingHorizontal: spacing.md,
-  },
-
-  /** Card styles */
   card: {
-    width: 332,
-    height: 568,
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 20,
-    elevation: 3,
+    borderRadius: radius.md,
+    padding: spacing.md,
+    elevation: 4,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -47,24 +23,32 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   cardImage: {
-    width: "80%",
-    height: 150,
-    marginBottom: 12,
+    width: width.full,
+    height: 200,
+    marginBottom: spacingVertical.md,
   },
-   closeButton: {
+  closeButton: {
     fontSize: 20,
   },
   cardTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 8,
+    fontSize: fontSize.lg,
+    fontWeight: fontWeight.bold,
+    marginBottom: spacingVertical.md,
   },
   cardDescription: {
-    fontSize: 10,
+    fontSize: fontSize.xs,
+    fontWeight: fontWeight.semiBold,
     textAlign: "center",
-    marginBottom: 16,
+    marginBottom: spacingVertical.sm,
+  },
+  cardDescription2: {
+    fontSize: fontSize.xs,
+    fontWeight: fontWeight.semiBold,
+    textAlign: "center",
+    marginBottom: spacingVertical.xs,
   },
   buttonRow: {
+    marginTop: spacingVertical.md,
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
@@ -92,10 +76,13 @@ export const styles = StyleSheet.create({
 
   /** Pagination Dots */
   pagination: {
+    position:"absolute",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: 16,
+    // marginTop: -300,
+    left:"50%",
+    bottom:"32%"
   },
   dot: {
     width: 8,

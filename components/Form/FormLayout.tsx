@@ -49,6 +49,7 @@ export default function FormLayout({
       backgroundColor: theme.colors.background,
       borderTopRightRadius: radius.pill,
       borderTopLeftRadius: radius.pill,
+      overflow:"hidden"
     },
     scrollViewContent: {
       padding: spacing.md,

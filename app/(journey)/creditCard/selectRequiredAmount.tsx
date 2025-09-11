@@ -6,6 +6,7 @@ import Checkbox from "expo-checkbox";
 import DynamicSliderCard from "@/components/CustomSliderCard/DynamicSliderCard";
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import { useApplicationStore } from "@/store/applicationStore";
+import { spacingVertical } from "@/constants/Metrics";
 
 const SelectRequiredAmount = () => {
   const [financeAmount, setFinanceAmount] = useState<number>(50000);
@@ -27,6 +28,11 @@ const SelectRequiredAmount = () => {
     checkbox: {
       margin: 8,
     },
+    bottomContainer:{
+      flex:1,
+      gap:spacingVertical.sm,
+      marginTop:"50%"
+    }
   });
   return (
     <CustomMainChild
@@ -46,22 +52,23 @@ const SelectRequiredAmount = () => {
         step={1000}
         unit="AED"
       />
-      <View style={{ marginTop: 70 }} />
-      <DocumentDownload documentName="Download Terms & Conditions" />
-      <DocumentDownload documentName="Download Fees & Charges" />
-      <DocumentDownload documentName="Download Key Fact Statement" />
+      <View style={styles.bottomContainer}>
+        <DocumentDownload documentName="Download Terms & Conditions" />
+        <DocumentDownload documentName="Download Fees & Charges" />
+        <DocumentDownload documentName="Download Key Fact Statement" />
 
-      <View style={styles.checkboxContainer}>
-        <Checkbox
-          style={styles.checkbox}
-          value={isChecked}
-          onValueChange={setChecked}
-          color={isChecked ? theme.colors.primaryColor : undefined}
-        />
-        <Text style={styles.checkboxLabel}>
-          I agree with below provided Terms and Conditions, Fees and Charges
-          Sheet and Key Fact Statement.
-        </Text>
+        <View style={styles.checkboxContainer}>
+          <Checkbox
+            style={styles.checkbox}
+            value={isChecked}
+            onValueChange={setChecked}
+            color={isChecked ? theme.colors.primaryColor : undefined}
+          />
+          <Text style={styles.checkboxLabel}>
+            I agree with below provided Terms and Conditions, Fees and Charges
+            Sheet and Key Fact Statement.
+          </Text>
+        </View>
       </View>
     </CustomMainChild>
   );
