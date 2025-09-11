@@ -1,3 +1,4 @@
+import { borderWidth, fontSize, fontWeight, radius, spacing } from "@/constants/Metrics";
 import { Dimensions, StyleSheet } from "react-native";
 const { width } = Dimensions.get("window");
 export const localStyles = StyleSheet.create({
@@ -6,10 +7,10 @@ export const localStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    borderTopWidth: 1,
+    borderTopWidth: borderWidth.thin,
     backgroundColor: "white",
-    paddingBottom: 8,
-    paddingTop: 6,
+    paddingBottom: spacing.sm,
+    paddingTop: spacing.sm,
   },
   navItem: {
     flex: 1,
@@ -17,26 +18,25 @@ export const localStyles = StyleSheet.create({
     justifyContent: "center",
     position: "relative",
   },
-  navIcon: { width: 22, height: 22, marginBottom: 4 },
-  navText: { fontSize: 12, fontWeight: "500" },
+  navIcon: { width: 22, height: 22, marginBottom: spacing.xs },
+  navText: { fontSize: fontSize.xs, fontWeight: fontWeight.medium },
   activeUnderline: {
     position: "absolute",
     bottom: 0,
     height: 2,
     width: "40%",
-    borderRadius: 2,
+    borderRadius: radius.sm,
   },
 
   header: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 16,
-    marginTop: 12,
-    color: "#3F1956",
+    paddingHorizontal: spacing.md,
+    marginTop: spacing.md,
   },
-  avatar: { width: 50, height: 50, borderRadius: 25, marginRight: 12 },
+  avatar: { width: 50, height: 50, borderRadius: radius.xxxl, marginRight: 12 },
   welcome: { fontSize: 14 },
-  username: { fontSize: 20, fontWeight: "400" },
+  username: { fontSize: fontSize.lg, fontWeight: fontWeight.normal },
   banner: {
     margin: 16,
     borderRadius: 12,

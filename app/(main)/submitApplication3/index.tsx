@@ -120,7 +120,8 @@ const NotificationScreen = () => {
           />
           <CustomButton
             title="Accept Offer"
-            onPress={() => router.push("/(auth)/otp/otpScreen")}
+            onPress={() => {}}
+
             variant="primary"
             type="filled"
             size="lg"

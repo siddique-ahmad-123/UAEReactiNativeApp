@@ -11,11 +11,11 @@ import {
 import CustomButton from "@/components/CustomButton";
 import { useTheme } from "styled-components/native";
 import { router } from "expo-router";
-import { styles } from "../styles/submitApplication.Styles";
 import MethodSelector from "@/components/MethodSelector";
 import DocumentDownload from "@/components/DocumentDownload";
+import { styles } from "@/app/(main)/styles/submitApplication.Styles";
 
-const NotificationScreen = () => {
+const ApplicationApproved = () => {
   const [selectedMethod, setSelectedMethod] = React.useState<
     string | undefined
   >();
@@ -78,7 +78,7 @@ const NotificationScreen = () => {
           {/* Approved Icon & Title */}
           <View style={styles.image}>
             <Image
-              source={require("../../../assets/images/approved-icon.png")}
+              source={require("../../../../assets/images/approved-icon.png")}
               style={styles.successImage}
               resizeMode="contain"
             />
@@ -105,7 +105,7 @@ const NotificationScreen = () => {
           {/* Card Image */}
           <View style={{ alignItems: "center", marginTop: 30 }}>
             <Image
-              source={require("../../../assets/images/card3.png")}
+              source={require("../../../../assets/images/card3.png")}
               style={styles.imageSpex}
               resizeMode="contain"
             />
@@ -127,7 +127,7 @@ const NotificationScreen = () => {
             size="full"
             variant="primary"
             type="filled"
-            onPress={() => router.push("/NavScreen")}
+            onPress={() => router.push("/congratulations")}
             style={{ marginTop: 20 }}
           />
         </ScrollView>
@@ -136,4 +136,4 @@ const NotificationScreen = () => {
   );
 };
 
-export default NotificationScreen;
+export default ApplicationApproved;
