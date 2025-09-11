@@ -14,6 +14,7 @@ import { useTheme } from "styled-components/native";
 import { router } from "expo-router";
 import { styles } from "@/app/(main)/styles/SelectCreditCard.Styles";
 import { useApplicationStore } from "@/store/applicationStore";
+import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 
 const { width } = Dimensions.get("window");
 
@@ -98,71 +99,44 @@ const RequestsScreen = () => {
   );
   const theme = useTheme();
   return (
-    <SafeAreaView
-      style={[styles.safeArea, { backgroundColor: theme.colors.primaryColor }]}
+    <CustomMainChild
+      title="Select your credit card"
+      subTitle="We have cards for every need, explore here"
+      noOfButtons={1}
+      singleButtonTitle="Back"
+      onClose={() => router.back()}
+      onPressSingleButton={() => router.push("/NavScreen")}
     >
-      {/* Purple Header */}
-      <View style={styles.header}>
-        <View style={styles.headerTop}>
-          <Text
-            style={[styles.headerTitle, { color: theme.colors.background }]}
-          >
-            Select your Card
-          </Text>
-        </View>
-        <Text style={[styles.subHeader, { color: theme.colors.background }]}>
-          We have cards for every need, explore here
-        </Text>
+      <Carousel
+        ref={carouselRef}
+        width={width - 70}
+        height={568}
+        data={cards}
+        renderItem={({ item }) => renderItem(item)}
+        mode="parallax"
+        loop={false}
+        onProgressChange={(_, absoluteProgress) => {
+          setActiveIndex(Math.round(absoluteProgress));
+        }}
+        modeConfig={{
+          parallaxScrollingScale: 0.9,
+          parallaxScrollingOffset: 40,
+        }}
+      />
+      <View style={styles.pagination}>
+        {cards.map((_, index) => (
+          <View
+            key={index}
+            style={[
+              styles.dot,
+              { backgroundColor: theme.colors.borderColor },
+              activeIndex === index && styles.activeDot,
+              { backgroundColor: theme.colors.primaryColor },
+            ]}
+          />
+        ))}
       </View>
-
-      {/* White Container with Rounded Top */}
-      <View
-        style={[styles.container, { backgroundColor: theme.colors.background }]}
-      >
-        {/* Carousel of cards */}
-        <Carousel
-          ref={carouselRef}
-          width={width - 70} // make card narrower than screen
-          height={568}
-          data={cards}
-          renderItem={({ item }) => renderItem(item)}
-          mode="parallax"
-          loop={false}
-          onProgressChange={(_, absoluteProgress) => {
-            setActiveIndex(Math.round(absoluteProgress));
-          }}
-          modeConfig={{
-            parallaxScrollingScale: 0.9, // scale down side cards
-            parallaxScrollingOffset: 40, // creates the gap between cards
-          }}
-        />
-
-        {/* Pagination Dots */}
-        <View style={styles.pagination}>
-          {cards.map((_, index) => (
-            <View
-              key={index}
-              style={[
-                styles.dot,
-                { backgroundColor: theme.colors.borderColor },
-                activeIndex === index && styles.activeDot,
-                { backgroundColor: theme.colors.primaryColor },
-              ]}
-            />
-          ))}
-        </View>
-
-        {/* Footer Button */}
-        <CustomButton
-          title="Back"
-          size="full"
-          variant="primary"
-          type="filled"
-          onPress={() => router.push("/NavScreen")}
-          style={{ marginTop: 30 }}
-        />
-      </View>
-    </SafeAreaView>
+    </CustomMainChild>
   );
 };
 export default RequestsScreen;
