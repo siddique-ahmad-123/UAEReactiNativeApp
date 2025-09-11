@@ -17,10 +17,13 @@ import { spacingVertical } from "@/constants/Metrics";
 
 const { width, height } = Dimensions.get("window");
 
+import { ImageSourcePropType } from "react-native";
+
 type Slide = {
   id: string;
   title: string;
   description: string;
+  imgpath: ImageSourcePropType;
 };
 
 const slides: Slide[] = [
@@ -29,21 +32,25 @@ const slides: Slide[] = [
     title: "Credit Cards",
     description:
       "Get Credit Cards Approvals instantly and start accessing our innovative offerings",
+    imgpath: require("../../../assets/images/StaringCarosoul/CreditCard.png"),
   },
   {
     id: "2",
-    title: "Loans",
+    title: "Mortgages",
     description: "Quick approvals for personal and business loans.",
+    imgpath: require("../../../assets/images/StaringCarosoul/Mortgages.png"),
   },
   {
     id: "3",
-    title: "Investments",
+    title: "Auto Loans",
     description: "Grow your wealth with our smart investment tools.",
+    imgpath: require("../../../assets/images/StaringCarosoul/AutoLoans.png"),
   },
   {
     id: "4",
-    title: "Insurance",
+    title: "Personal Loans",
     description: "Protect your future with tailored insurance plans.",
+    imgpath: require("../../../assets/images/StaringCarosoul/PersonalLoans.png"),
   },
 ];
 
@@ -60,9 +67,9 @@ const Carousel = () => {
   const renderItem = ({ item }: { item: Slide }) => (
     <View style={{ width, alignItems: "center" }}>
       <ImageBackground
-        source={require("../../../assets/images/onborBack.png")}
+        source={item.imgpath}
         style={{ width: "100%", height: height * 0.4 }}
-        resizeMode="cover"
+        resizeMode="contain"
       />
 
       <View style={styles.content}>
@@ -94,11 +101,29 @@ const Carousel = () => {
         source={require("../../../assets/images/newgenLogo.png")}
         style={styles.logo}
         resizeMode="contain"
-        
       />
-      <Pentagon color={theme.colors.primaryLightColor} cornerRadius={100} rotateAngle={45} top={spacingVertical.xxxl} left={-20} />
-      <Pentagon color={theme.colors.primaryLightColor} cornerRadius={100} rotateAngle={45} bottom={200} right={-30} />
-      <Pentagon size={50} color={theme.colors.primaryColor} cornerRadius={100} rotateAngle={90} bottom={140} right={-10} />
+      <Pentagon
+        color={theme.colors.primaryLightColor}
+        cornerRadius={100}
+        rotateAngle={45}
+        top={spacingVertical.xxxl}
+        left={-20}
+      />
+      <Pentagon
+        color={theme.colors.primaryLightColor}
+        cornerRadius={100}
+        rotateAngle={45}
+        bottom={200}
+        right={-30}
+      />
+      <Pentagon
+        size={50}
+        color={theme.colors.primaryColor}
+        cornerRadius={100}
+        rotateAngle={90}
+        bottom={140}
+        right={-10}
+      />
       <FlatList
         data={slides}
         renderItem={renderItem}
@@ -145,7 +170,7 @@ const Carousel = () => {
             //     animated: true,
             //   });
             // }
-             router.push("/(auth)/login");
+            router.push("/(auth)/login");
           }}
           variant="primary"
           type="filled"
