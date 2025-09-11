@@ -38,6 +38,7 @@
     "expo-updates": "^0.28.17",
     "expo-web-browser": "~14.2.0",
     "i18next": "^25.5.2",
+    "moti": "^0.30.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-hook-form": "^7.62.0",

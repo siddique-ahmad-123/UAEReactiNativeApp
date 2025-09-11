@@ -36,10 +36,10 @@ const services: {
 ];
 
 const applyNow = [
-  { id: "1", title: "Credit Card" },
-  { id: "2", title: "Mortgages" },
-  { id: "3", title: "Auto Loans" },
-  { id: "4", title: "Personal \nLoans" },
+  { id: "1", title: "Credit Card",imgPath:require("../../../assets/images/MainScreenCard/Card.png") },
+  { id: "2", title: "Mortgages",imgPath:require("../../../assets/images/MainScreenCard/Mortgage.png") },
+  { id: "3", title: "Auto Loans",imgPath:require("../../../assets/images/MainScreenCard/AutoLoan.png")},
+  { id: "4", title: "Personal \nLoans" ,imgPath:require("../../../assets/images/MainScreenCard/PersonalLoan.png")},
 ];
 
 export default function Dashboard() {
@@ -98,7 +98,7 @@ export default function Dashboard() {
           <ProductCard
             key={item.id}
             title={item.title}
-            image={require("../../../assets/images/ProductImage.png")}
+            image={item.imgPath}
             onPress={() => {
               resetForm(); 
               router.push("/(journey)/creditCard/selectCreditCard"); 

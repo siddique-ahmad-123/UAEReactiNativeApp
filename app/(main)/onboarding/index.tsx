@@ -6,6 +6,8 @@ import {
   Dimensions,
   ImageBackground,
   Image,
+  Platform,
+  BackHandler,
 } from "react-native";
 import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
@@ -82,7 +84,7 @@ const Carousel = () => {
     const interval = setInterval(() => {
       let nextIndex = currentIndex + 1;
       if (nextIndex >= slides.length) {
-        nextIndex = 0; 
+        nextIndex = 0;
       }
       flatListRef.current?.scrollToIndex({
         index: nextIndex,
@@ -94,10 +96,15 @@ const Carousel = () => {
     return () => clearInterval(interval);
   }, [currentIndex]);
 
+  const exitApp = () => {
+    if (Platform.OS === "android") {
+      BackHandler.exitApp();
+    }
+  };
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <Image
-        source={require("../../../assets/images/newgenLogo.png")}
+        source={require("../../../assets/images/newgenLogo1.png")}
         style={styles.logo}
         resizeMode="contain"
       />
@@ -153,7 +160,7 @@ const Carousel = () => {
       <View style={[styles.row, { marginTop: 130, marginBottom: 30 }]}>
         <CustomButton
           title="Cancel"
-          onPress={() => {}}
+          onPress={exitApp}
           variant="secondary"
           type="outlined"
           size="md"
