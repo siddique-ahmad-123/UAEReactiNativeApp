@@ -1,14 +1,14 @@
+import { fontSize, fontWeight, spacing } from "@/constants/Metrics";
 import { StyleSheet } from "react-native";
 
 export const localStyles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#4B006E", // Purple fills behind header
   },
   header: {
-    paddingHorizontal: 16,
-    paddingTop: 70,
-    paddingBottom: 50,
+    paddingHorizontal: spacing.md,
+        paddingTop: spacing.xxxl,
+        paddingBottom: spacing.xxl,
   },
   headerTop: {
     flexDirection: "row",
@@ -22,7 +22,7 @@ export const localStyles = StyleSheet.create({
 
   title2: {
     fontSize: 24,
-    fontWeight: "700",
+    fontWeight: fontWeight.bold,
     textAlign: "center",
     marginTop: 60,
   },
@@ -45,7 +45,7 @@ export const localStyles = StyleSheet.create({
     top: -10,
     left: 12,
     fontSize: 13,
-    fontWeight: "600",
+    fontWeight: fontWeight.medium,
     paddingHorizontal: 4,
   },
   value: {

@@ -1,3 +1,4 @@
+import { borderWidth, fontSize, fontWeight, radius, spacing, spacingVertical } from "@/constants/Metrics";
 import React from "react";
 import { StyleSheet } from "react-native";
 
@@ -6,15 +7,15 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   topPurple: {
-    height: 8,
+    height: spacingVertical.sm,
   },
 
   greetingRow: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 18,
-    paddingTop: 50,
-    paddingBottom: 16,
+    paddingHorizontal: spacing.md,
+    paddingTop: spacing.xxli,
+    paddingBottom: spacing.md,
   },
   avatar: {
     width: 44,
@@ -23,31 +24,31 @@ export const styles = StyleSheet.create({
     borderWidth: 2,
   },
   greetingSmall: {
-    fontSize: 13,
+    fontSize: fontSize.xs,
   },
   greetingName: {
-    fontSize: 16,
-    fontWeight: "700",
+    fontSize: fontSize.md,
+    fontWeight: fontWeight.bold,
     marginTop: 2,
   },
 
   emiCard: {
-    marginHorizontal: 18,
-    borderRadius: 12,
-    padding: 16,
-    paddingRight: 26,
+    marginHorizontal: spacing.md,
+    borderRadius: radius.lg,
+    padding: spacing.md,
+    paddingRight: spacing.lg,
     flexDirection: "row",
     alignItems: "center",
     overflow: "hidden",
-    marginBottom: 12,
+    marginBottom: spacing.md,
   },
   emiTitle: {
-    fontSize: 20,
-    fontWeight: "800",
-    marginBottom: 6,
+    fontSize: fontSize.lg,
+    fontWeight: fontWeight.extraBold,
+    marginBottom: spacing.xs,
   },
   emiDesc: {
-    fontSize: 14,
+    fontSize: fontSize.sm,
     lineHeight: 18,
     opacity: 0.95,
   },
@@ -59,17 +60,17 @@ export const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    borderTopLeftRadius: 18,
-    borderTopRightRadius: 18,
-    paddingHorizontal: 18,
-    paddingTop: 18,
+    borderTopLeftRadius: radius.xl,
+    borderTopRightRadius: radius.xl,
+    paddingHorizontal: spacing.md,
+    paddingTop: spacing.md,
   },
 
   inputCard: {
-    borderRadius: 12,
-    padding: 14,
-    marginBottom: 12,
-    borderWidth: 1,
+    borderRadius: radius.lg,
+    padding: spacing.md,
+    marginBottom: spacing.md,
+    borderWidth: borderWidth.thin,
     shadowOpacity: 0.03,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
@@ -78,40 +79,40 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 6,
+    marginBottom: spacing.xs,
   },
 
   resultCard: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    borderRadius: 12,
-    borderWidth: 1,
-    padding: 16,
-    marginBottom: 18,
+    borderRadius: radius.lg,
+    borderWidth: borderWidth.thin,
+    padding: spacing.md,
+    marginBottom: spacing.md,
   },
   resultLabel: {
-    fontSize: 18,
+    fontSize: fontSize.lg,
     marginBottom: 6,
-    fontWeight: "600",
+    fontWeight: fontWeight.semiBold,
   },
   resultAmount: {
-    fontSize: 18,
-    fontWeight: "400",
+    fontSize: fontSize.lg,
+    fontWeight: fontWeight.normal,
   },
   resultUnit: {
-    fontSize: 16,
-    fontWeight: "500",
+    fontSize: fontSize.md,
+    fontWeight: fontWeight.medium,
   },
 
   backButton: {
     paddingVertical: 14,
-    borderRadius: 10,
-    marginBottom: 20,
+    borderRadius: radius.md,
+    marginBottom: spacing.lg,
     alignItems: "center",
   },
   backButtonText: {
-    fontWeight: "800",
-    fontSize: 16,
+    fontWeight: fontWeight.extraBold,
+    fontSize: fontSize.md,
   },
 });
