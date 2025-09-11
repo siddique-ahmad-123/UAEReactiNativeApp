@@ -128,7 +128,6 @@ const EMICalculatorScreen: React.FC = () => {
 
   return (
     <View style={styles.mainContainer}>
-      {/* Greeting row with avatar */}
       <View style={styles.greetingRow}>
         <Image
           source={require("../../../assets/images/avatar.png")} // replace with your avatar
@@ -150,15 +149,11 @@ const EMICalculatorScreen: React.FC = () => {
           </Text>
         </View>
       </View>
-
-      {/* Purple EMI Card */}
-
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingBottom: 100 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* White container (rounded top) */}
         <View style={styles.container}>
           <View
             style={[
@@ -183,7 +178,7 @@ const EMICalculatorScreen: React.FC = () => {
             </View>
 
             <Image
-              source={require("../../../assets/images/emi.png")} // replace with your illustration
+              source={require("../../../assets/images/emi.png")}
               style={styles.emiImage}
               resizeMode="contain"
             />
