@@ -44,7 +44,7 @@ const DynamicSliderCard: React.FC<DynamicSliderCardProps> = ({
       backgroundColor: theme.colors.primaryLightColor,
       borderRadius: radius.lg,
       padding: spacing.md,
-      marginVertical: spacingVertical.md,
+    //   marginVertical: spacingVertical.xs,
       shadowColor: theme.colors.shadowColor,
       shadowOpacity: 0.1,
       shadowOffset: { width: 0, height: 2 },

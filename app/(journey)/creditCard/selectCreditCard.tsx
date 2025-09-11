@@ -1,5 +1,4 @@
 import CustomButton from "@/components/CustomButton";
-import globalStyles from "@/components/CustomButton/utils";
 import React, { useRef, useState } from "react";
 import {
   View,

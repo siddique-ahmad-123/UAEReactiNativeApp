@@ -58,7 +58,6 @@ export default function FormSummaryLayout({
   });
 
   return (
-    <ScreenWrapper>
       <View style={styles.container}>
         <View style={styles.scrollViewContainer}>
           <KeyboardAwareScrollView
@@ -85,6 +84,5 @@ export default function FormSummaryLayout({
           </View>
         </View>
       </View>
-    </ScreenWrapper>
   );
 }

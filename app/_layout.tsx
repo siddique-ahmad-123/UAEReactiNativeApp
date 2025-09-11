@@ -4,6 +4,8 @@ import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
 import { AppProvider } from "@/theme/AppProvider";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import ScreenWrapper from "@/components/ScreenWrapper";
 
 export default function RootLayout() {
   const [loaded] = useFonts({
@@ -16,14 +18,18 @@ export default function RootLayout() {
 
   return (
     <AppProvider>
-      <Stack initialRouteName="(test)">
-        <Stack.Screen name="(test)" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="(main)" options={{ headerShown: false }} />
-        <Stack.Screen name="(journey)" options={{ headerShown: false }}/>
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <ScreenWrapper>
+          <Stack initialRouteName="(main)">
+            <Stack.Screen name="(test)" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            <Stack.Screen name="(main)" options={{ headerShown: false }} />
+            <Stack.Screen name="(journey)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+          <StatusBar style="auto" />
+        </ScreenWrapper>
+      </GestureHandlerRootView>
     </AppProvider>
   );
 }
