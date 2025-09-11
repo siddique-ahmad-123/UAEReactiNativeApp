@@ -27,7 +27,7 @@ export default function RootLayout() {
     <AppProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <ScreenWrapper>
-          <Stack initialRouteName="(journey)">
+          <Stack initialRouteName="(main)">
             <Stack.Screen name="(test)" options={{ headerShown: false }} />
             <Stack.Screen name="(auth)" options={{ headerShown: false }} />
             <Stack.Screen name="(main)" options={{ headerShown: false }} />
