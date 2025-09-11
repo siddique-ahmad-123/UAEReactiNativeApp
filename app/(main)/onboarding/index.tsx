@@ -7,7 +7,6 @@ import {
   ImageBackground,
   Image,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
 import { styles } from "../styles/onboarding.Styles";
@@ -76,29 +75,47 @@ const Carousel = () => {
     const interval = setInterval(() => {
       let nextIndex = currentIndex + 1;
       if (nextIndex >= slides.length) {
-        nextIndex = 0; // loop back to first slide
+        nextIndex = 0; 
       }
       flatListRef.current?.scrollToIndex({
         index: nextIndex,
         animated: true,
       });
       setCurrentIndex(nextIndex);
-    }, 2000); // 2 seconds
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [currentIndex]);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.background }}>
+    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <Image
         source={require("../../../assets/images/newgenLogo.png")}
         style={styles.logo}
         resizeMode="contain"
-        
       />
-      <Pentagon color={theme.colors.primaryLightColor} cornerRadius={100} rotateAngle={45} top={spacingVertical.xxxl} left={-20} />
-      <Pentagon color={theme.colors.primaryLightColor} cornerRadius={100} rotateAngle={45} bottom={200} right={-30} />
-      <Pentagon size={50} color={theme.colors.primaryColor} cornerRadius={100} rotateAngle={90} bottom={140} right={-10} />
+      <Pentagon
+        color={theme.colors.primaryLightColor}
+        cornerRadius={100}
+        rotateAngle={45}
+        top={spacingVertical.xxxl}
+        left={-20}
+      />
+      <Pentagon
+        color={theme.colors.primaryLightColor}
+        cornerRadius={100}
+        rotateAngle={45}
+        bottom={200}
+        right={-30}
+      />
+      <Pentagon
+        size={50}
+        color={theme.colors.primaryColor}
+        cornerRadius={100}
+        rotateAngle={90}
+        bottom={140}
+        right={-10}
+      />
       <FlatList
         data={slides}
         renderItem={renderItem}
@@ -137,22 +154,14 @@ const Carousel = () => {
         <CustomButton
           title="Get Started"
           onPress={() => {
-            // if (currentIndex === slides.length - 1) {
-            //   router.push("/(auth)/login");
-            // } else {
-            //   flatListRef.current?.scrollToIndex({
-            //     index: currentIndex + 1,
-            //     animated: true,
-            //   });
-            // }
-             router.push("/(auth)/login");
+            router.push("/(auth)/login");
           }}
           variant="primary"
           type="filled"
           size="md"
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

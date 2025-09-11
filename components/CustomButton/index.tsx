@@ -16,7 +16,7 @@ type Props = {
   onPress: (event: GestureResponderEvent) => void;
   variant?: "primary" | "secondary";
   type?: "filled" | "outlined";
-  size?: "sm" | "md" | "lg" | "xl" | "full"; // ✅ added full
+  size?: "sm" | "md" | "lg" | "xl" | "full"; 
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
 };
@@ -31,7 +31,6 @@ export default function CustomButton({
   textStyle,
 }: Props) {
   const theme = useTheme();
-  // ✅ Sizing system
   const sizeglobalStyles: Record<string, ViewStyle> = {
     sm: {
       paddingVertical: spacing.xs,
@@ -64,8 +63,6 @@ export default function CustomButton({
   };
 
   const baseStyle = sizeglobalStyles[size] || sizeglobalStyles.md;
-
-  // ✅ Variant + Type
   let buttonStyle: StyleProp<ViewStyle> = [baseStyle];
   let btnTextStyle: StyleProp<TextStyle>;
 

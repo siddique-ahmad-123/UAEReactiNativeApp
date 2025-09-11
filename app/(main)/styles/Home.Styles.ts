@@ -19,7 +19,7 @@ export const localStyles = StyleSheet.create({
     position: "relative",
   },
   navIcon: { width: 22, height: 22, marginBottom: spacing.xs },
-  navText: { fontSize: fontSize.xs, fontWeight: fontWeight.medium },
+  navText: { fontSize: fontSize.xxs, fontWeight: fontWeight.medium },
   activeUnderline: {
     position: "absolute",
     bottom: 0,
@@ -58,6 +58,8 @@ export const localStyles = StyleSheet.create({
     fontWeight: "700",
     marginLeft: 16,
     marginBottom: 10,
+    justifyContent:"flex-start",
+    gap:spacing.sm
   },
   serviceRow: {
     width: 124,
@@ -65,7 +67,7 @@ export const localStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 16,
-    gap: 13, // Add some vertical spacing
+    gap: spacing.md, 
   },
   serviceCard: {
     borderRadius: 12,
