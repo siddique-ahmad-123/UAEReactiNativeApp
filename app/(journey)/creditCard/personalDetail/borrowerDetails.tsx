@@ -28,6 +28,9 @@ const BorrowerPersonalInformation = () => {
     nextStep();
   };
 
+  const borrowerNationalityStatus =
+    watch(fieldNames.borrowerNationalityStatus) ?? "Emirati";
+
   const genderOptions = [
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
@@ -75,15 +78,22 @@ const BorrowerPersonalInformation = () => {
       <SegmentedControl
         label={"Nationality Status"}
         options={["Emirati", "Expat"]}
-        onChange={function (value: string): void {
-          throw new Error("Function not implemented.");
-        }}
+        defaultValue={borrowerNationalityStatus}
+        onChange={(value) =>
+          setValue(fieldNames.borrowerNationalityStatus, value)
+        }
       />
 
       <View style={{ alignItems: "center", gap: spacingVertical.md }}>
         <CustomUpload label={"Emirates ID"} />
         <CustomUpload label={"Passport"} />
-        <CustomUpload label={"Visa"} />
+        {borrowerNationalityStatus === "Expat" ? (
+          <>
+            <CustomUpload label={"Visa"} />
+          </>
+        ) : (
+          <></>
+        )}
       </View>
 
       <CustomButton

@@ -8,6 +8,7 @@ import {
   spacing,
   spacingVertical,
 } from "@/constants/Metrics";
+import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import Checkbox from "expo-checkbox";
 import { router } from "expo-router";
@@ -84,7 +85,7 @@ const DispatchDetails = () => {
 
       <CustomInput
         control={control}
-        name=""
+        name={fieldNames.borrowerName}
         label="Name"
         placeholder="Enter your name"
         type="text"
@@ -123,7 +124,7 @@ const DispatchDetails = () => {
 
       <CustomInput
         control={control}
-        name=""
+        name={fieldNames.supplementaryCardName}
         label="Supplementary Card Name"
         placeholder="Enter supplementary card name"
         type="text"
@@ -151,25 +152,27 @@ const DispatchDetails = () => {
 
           <CustomInput
             control={control}
-            name="addressLine1"
+            name={fieldNames.dispatchAddressLine1}
             label="Address Line 1"
             placeholder="Enter your address"
             type="text"
           />
           <CustomInput
             control={control}
-            name="addressLine2"
+            name={fieldNames.dispatchAddressLine2}
             label="Address Line 2"
             placeholder="Enter your address"
             type="text"
           />
 
           <CustomDropDown
+            name={fieldNames.dispatchEmirates}
             label={"Emirates"}
             data={emiratesOptions}
             control={control}
           />
           <CustomDropDown
+            name={fieldNames.dispatchCountry}
             label={"Country"}
             data={countryOptions}
             control={control}
@@ -189,11 +192,13 @@ const DispatchDetails = () => {
           </View>
 
           <CustomDropDown
+            name={fieldNames.dispatchEmirates}
             label={"Emirates"}
             data={emiratesOptions}
             control={control}
           />
           <CustomDropDown
+            name={fieldNames.dispatchBranchName}
             label={"Branch Name"}
             data={branchOptions}
             control={control}

@@ -32,8 +32,10 @@ export const fieldNames = {
 
   borrowerVerificationStatus: "borrowerVerificationStatus",
 
+  borrowerNationalityStatus: "borrowerNationalityStatus",
+
   // Personal Details - Co-Borrower
-  coBorrower: "coBorrower",
+  isCoBorrower: "isCoBorrower",
   coBorrowerEidaNo: "coBorrowerEidaNo",
   coBorrowerMobileNo: "coBorrowerMobileNo",
   coBorrowerOtp: "coBorrowerOtp",
@@ -77,7 +79,7 @@ export const fieldNames = {
   borrowerCurrentExp: "borrowerCurrentExp",
   borrowerTotalExp: "borrowerTotalExp",
   borrowerIncomeDetailFetchMethod: "borrowerIncomeDetailFetchMethod",
-  borrowerEmirateId: "borrowerEmirateId",
+  borrowerEmiratesId: "borrowerEmiratesId",
   borrowerIbanNo: "borrowerIbanNo",
   borrowerBankingCode: "borrowerBankingCode",
   borrowerStartDateFts: "borrowerStartDateFts",
@@ -136,6 +138,14 @@ export const fieldNames = {
   coBorrowerAccountNo: "coBorrowerAccountNo",
   coBorrowerLast6MonthsADB: "coBorrowerLast6MonthsADB",
   coBorrowerLast6MonthsAvgCredit: "coBorrowerLast6MonthsAvgCredit",
+
+  supplementaryCardName: "supplementaryCardName",
+  dispatchAddress: "dispatchAddress",
+  dispatchAddressLine1: "dispatchAddress1",
+  dispatchAddressLine2: "dispatchAddress2",
+  dispatchEmirates: "dispatchEmirates",
+  dispatchCountry: "dispatchCountry",
+  dispatchBranchName: "dispatchBranchName",
 } as const;
 
 export type fieldNamesKey = keyof typeof fieldNames;

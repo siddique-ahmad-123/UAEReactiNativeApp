@@ -5,6 +5,7 @@ import FormSummaryLayout from "@/components/FormSummary/FormSummaryLayout";
 import SectionHeader from "@/components/SectionHeader";
 import SegmentedControl from "@/components/SegmentControl";
 import { fontSize, fontWeight } from "@/constants/Metrics";
+import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React from "react";
@@ -25,7 +26,7 @@ const IncomeSummary = () => {
     nextStep();
   };
 
-  const borrowerType = watch("borrowerType") ?? "Borrower";
+  const incomeBorrowerType = watch("incomeBorrowerType") ?? "Borrower";
 
   const theme = useTheme();
   const styles = StyleSheet.create({
@@ -64,17 +65,17 @@ const IncomeSummary = () => {
       <SegmentedControl
         label={"Summary - Income Details"}
         options={["Borrower", "Co-Borrower"]}
-        defaultValue={borrowerType}
-        onChange={(value) => setValue("borrowerType", value)}
+        defaultValue={incomeBorrowerType}
+        onChange={(value) => setValue("incomeBorrowerType", value)}
       />
 
-      {borrowerType === "Borrower" ? (
+      {incomeBorrowerType === "Borrower" ? (
         <>
           {/* Borrower (Salaried) */}
           <SectionHeader sectionName={"Income Details - Salaried"} />
 
           <CustomInput
-            name="employerName"
+            name={fieldNames.borrowerEmployerName}
             label="Employer Name"
             type="text"
             placeholder="Newgen Software"
@@ -82,19 +83,19 @@ const IncomeSummary = () => {
           />
 
           <CustomDatePicker
-            name="employedFrom"
+            name={fieldNames.borrowerEmployedFrom}
             label="Employed From"
             control={control}
           />
           <CustomDropDown
-            name="emirate"
+            name={fieldNames.borrowerEmirates}
             label="Emirates"
             data={emiratesOptions}
             control={control}
           />
 
           <CustomInput
-            name=""
+            name={fieldNames.borrowerVerificationStatus}
             label="Verification Status"
             type="text"
             placeholder="Verification Status"
@@ -102,7 +103,7 @@ const IncomeSummary = () => {
           />
 
           <CustomInput
-            name=""
+            name={fieldNames.borrowerMonthlySalaryAECB}
             label="Monthly Salary Income"
             placeholder="2000"
             type="number"
@@ -134,7 +135,7 @@ const IncomeSummary = () => {
           <SectionHeader sectionName={"Income Details - Self Employed"} />
 
           <CustomInput
-            name=""
+            name={fieldNames.borrowerNameOfBusiness}
             label="Business Name"
             placeholder="Business Name"
             type="text"
@@ -142,14 +143,14 @@ const IncomeSummary = () => {
           />
 
           <CustomDropDown
-            name="legalForm"
+            name={fieldNames.borrowerLegalForm}
             label="Legal Form"
             data={legalFormOptions}
             control={control}
           />
 
           <CustomInput
-            name="licenseNo"
+            name={fieldNames.borrowerLicenseNo}
             label="License No"
             type="text"
             placeholder="DLT34554"
@@ -157,7 +158,7 @@ const IncomeSummary = () => {
           />
 
           <CustomDatePicker
-            name="dateOfEstabilishment"
+            name={fieldNames.borrowerDateOfEstabilishment}
             label="Date of Establishment"
             control={control}
           />
@@ -165,7 +166,7 @@ const IncomeSummary = () => {
           <CustomDatePicker name="" label="Date of Expiry" control={control} />
 
           <CustomDropDown
-            name=""
+            name={fieldNames.borrowerVerificationStatus}
             label="Verification Status"
             data={statusOptions}
             control={control}
@@ -201,7 +202,7 @@ const IncomeSummary = () => {
           <SectionHeader sectionName={"Income Details - Salaried"} />
 
           <CustomInput
-            name=""
+            name={fieldNames.coBorrowerEmployerName}
             label="Employer Name"
             type="text"
             placeholder="Newgen Software"
@@ -209,19 +210,19 @@ const IncomeSummary = () => {
           />
 
           <CustomDatePicker
-            name="employedFrom"
+            name={fieldNames.coBorrowerEmployedFrom}
             label="Employed From"
             control={control}
           />
           <CustomDropDown
-            name="emirate"
+            name={fieldNames.coBorrowerEmirates}
             label="Emirates"
             data={emiratesOptions}
             control={control}
           />
 
           <CustomInput
-            name=""
+            name={fieldNames.coBorrowerVerificationStatus}
             label="Verification Status"
             type="text"
             placeholder="Verification Status"
@@ -229,7 +230,7 @@ const IncomeSummary = () => {
           />
 
           <CustomInput
-            name=""
+            name={fieldNames.coBorrowerMonthlySalaryAECB}
             label="Monthly Salary Income"
             placeholder="2000"
             type="number"
@@ -261,7 +262,7 @@ const IncomeSummary = () => {
           <SectionHeader sectionName={"Income Details - Self Employed"} />
 
           <CustomInput
-            name=""
+            name={fieldNames.coBorrowerNameOfBusiness}
             label="Business Name"
             placeholder="Business Name"
             type="text"
@@ -269,14 +270,14 @@ const IncomeSummary = () => {
           />
 
           <CustomDropDown
-            name="legalForm"
+            name={fieldNames.coBorrowerLegalForm}
             label="Legal Form"
             data={legalFormOptions}
             control={control}
           />
 
           <CustomInput
-            name="licenseNo"
+            name={fieldNames.coBorrowerLicenseNo}
             label="License No"
             type="text"
             placeholder="DLT34554"
@@ -284,7 +285,7 @@ const IncomeSummary = () => {
           />
 
           <CustomDatePicker
-            name="dateOfEstabilishment"
+            name={fieldNames.coBorrowerDateOfEstabilishment}
             label="Date of Establishment"
             control={control}
           />
@@ -292,7 +293,7 @@ const IncomeSummary = () => {
           <CustomDatePicker name="" label="Date of Expiry" control={control} />
 
           <CustomDropDown
-            name=""
+            name={fieldNames.coBorrowerVerificationStatus}
             label="Verification Status"
             data={statusOptions}
             control={control}

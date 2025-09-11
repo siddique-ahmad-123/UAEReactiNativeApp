@@ -27,7 +27,7 @@ const CoBorrowerPersonalInformation = () => {
     nextStep();
   };
 
-  const coBorrower = watch("coBorrower") ?? "No";
+  const isCoBorrower = watch(fieldNames.isCoBorrower) ?? "No";
 
   const genderOptions = [
     { label: "Male", value: "Male" },
@@ -76,11 +76,11 @@ const CoBorrowerPersonalInformation = () => {
       <SegmentedControl
         label="Do you want to add Co-Borrower"
         options={["Yes", "No"]}
-        defaultValue={coBorrower}
-        onChange={(v) => setValue("coBorrower", v)}
+        defaultValue={isCoBorrower}
+        onChange={(v) => setValue(fieldNames.isCoBorrower, v)}
       />
 
-      {coBorrower === "Yes" && (
+      {isCoBorrower === "Yes" && (
         <>
           <View style={{ marginHorizontal: spacing.md }}>
             <Text style={{ textAlign: "center" }}>
