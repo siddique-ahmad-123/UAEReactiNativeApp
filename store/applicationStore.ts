@@ -43,11 +43,8 @@ export const useApplicationStore = create<ApplicationState>()(
       nextStep: () => {
         const { stepIndex } = get();
         const next = stepIndex + 1;
-        console.log("Navigating to:", stepIndex, next, stepRoutes.length);
-
         if (next < stepRoutes.length) {
           set({ stepIndex: next });
-
           router.push(stepRoutes[next]); // <-- navigate
         }
       },

@@ -20,11 +20,11 @@ const BorrowerPersonalInformation = () => {
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
-    shouldUnregister: true,
   });
 
   const onSubmit = (values: any) => {
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
+    console.log("Store formData:", formData);
     nextStep();
   };
 
@@ -68,7 +68,7 @@ const BorrowerPersonalInformation = () => {
       stepNumber={1}
       title={t("personalDetails")}
       subTitle={t("borrowerDetails")}
-      noOfBars={2}
+      noOfBars={1}
       activeBarIndex={0}
       onBack={() => prevStep()}
       onClose={() => router.push("/")}

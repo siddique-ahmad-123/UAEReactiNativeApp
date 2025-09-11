@@ -22,7 +22,6 @@ export default function CoBorrowerIncomeScreen() {
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: zodResolver(incomeDetailSchema),
     defaultValues: formData,
-    shouldUnregister: true,
   });
   const incomeType = watch("incomeType") ?? "Salaried";
   const empDetailFetchMethod = watch("empDetailFetchMethod") ?? "AECB";

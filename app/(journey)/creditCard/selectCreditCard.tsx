@@ -1,8 +1,10 @@
 import { styles } from "@/app/(main)/styles/SelectCreditCard.Styles";
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
+import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   Dimensions,
   Image,
@@ -41,7 +43,7 @@ const cards: CardItem[] = [
     description5: "",
     description6: "Joining Fees - Nil",
     description7: "Annual Fees - Nil",
-    image: require("../../../assets/images/card2.png"),
+    image: require("../../../assets/images/card1.png"),
   },
   {
     id: "2",
@@ -53,7 +55,7 @@ const cards: CardItem[] = [
     description5: "Best Rewards: Extensive travel and lifestyle perks; ideal for frequent travelers.",
     description6: "Joining Fees - Nil",
     description7: "Annual Fees - AED650",
-    image: require("../../../assets/images/card1.png"),
+    image: require("../../../assets/images/card2.png"),
   },
   {
     id: "3",
@@ -72,7 +74,16 @@ const cards: CardItem[] = [
 const RequestsScreen = () => {
   const carouselRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const { nextStep } = useApplicationStore();
+  const { nextStep,formData,updateField } = useApplicationStore();
+  const {setValue} = useForm({
+    defaultValues:formData,
+  })
+  const onClickApply=(value:string)=>{
+    setValue(fieldNames.cardType,value);
+    updateField(fieldNames.cardType,value);
+    console.log("Store formData:", formData);
+    nextStep();
+  }
   const renderItem = (item: CardItem) => (
     <View style={[styles.card, { backgroundColor: theme.colors.background }]}>
       <Image
@@ -136,7 +147,7 @@ const RequestsScreen = () => {
             styles.applyBtn,
             { backgroundColor: theme.colors.secondaryColor },
           ]}
-          onPress={() => nextStep()}
+          onPress={() => onClickApply(item.title)}
         >
           <Text
             style={[styles.applyText, { color: theme.colors.primaryColor }]}

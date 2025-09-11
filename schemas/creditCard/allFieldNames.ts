@@ -1,4 +1,9 @@
 export const fieldNames = {
+  //common detail
+  cardType:"cardType",
+  selectedRequiredAmount:"selectedRequiredAmount",
+  isCheckedTermandCond:"isCheckedTermandCond",
+
   // Personal Details - Borrower
   borrowerName: "borrowerName",
   borrowerDOB: "borrowerDOB",

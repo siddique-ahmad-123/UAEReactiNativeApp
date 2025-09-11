@@ -46,7 +46,7 @@ export default function Dashboard() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("1");
   const theme = useTheme();
-  const { resetForm } = useApplicationStore();
+  const { goToStep,stepIndex } = useApplicationStore();
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -100,8 +100,8 @@ export default function Dashboard() {
             title={item.title}
             image={item.imgPath}
             onPress={() => {
-              resetForm(); 
-              router.push("/(journey)/creditCard/selectCreditCard"); 
+              goToStep(stepIndex); 
+              // router.push("/(journey)/creditCard/selectCreditCard"); 
             }}
           />
         ))}

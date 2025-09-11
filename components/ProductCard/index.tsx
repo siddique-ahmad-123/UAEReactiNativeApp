@@ -19,11 +19,13 @@ const ProductCard = ({ title, image, onPress }: ProductCardProps) => {
           source={image}
           style={styles.image}
           imageStyle={styles.imageStyle}
+          
         >
+          <View style={styles.overlay} />
           <Text style={[styles.title, { color: theme.colors.statusBarText }]}>
             {title}
           </Text>
-          <Pentagon size={120} color={"#3f1956f5"} cornerRadius={100} rotateAngle={0} bottom={-25} left={-15} />
+          <Pentagon size={100} color={theme.colors.primaryColor} cornerRadius={100} rotateAngle={45} bottom={-25} right={-10} />
         </ImageBackground>
       </View>
     </TouchableOpacity>

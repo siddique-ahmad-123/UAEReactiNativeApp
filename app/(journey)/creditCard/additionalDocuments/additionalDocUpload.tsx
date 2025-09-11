@@ -13,7 +13,6 @@ const AdditionalDocUpload = () => {
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
-    shouldUnregister: true,
   });
 
   const onSubmit = (values: any) => {
