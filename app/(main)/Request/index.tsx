@@ -1,63 +1,35 @@
 import React from "react";
 import {
   View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
 } from "react-native";
 import { styles } from "../styles/Notification.Styles";
-import RequestCard from "@/components/RequestCard";
-import CustomButton from "@/components/CustomButton";
 import { useTheme } from "styled-components/native";
 import MessageCard from "@/components/MessageCard";
 import { router } from "expo-router";
-// import your card
+import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
+import { useApplicationStore } from "@/store/applicationStore";
 
 const RequestScreen = () => {
   const theme = useTheme();
-  return (
-    <SafeAreaView
-      style={[styles.safeArea, { backgroundColor: theme.colors.primaryColor }]}
-    >
-      {/* Purple Header */}
-      <View style={styles.header}>
-        <View style={styles.headerTop}>
-          <Text
-            style={[styles.headerTitle, { color: theme.colors.textHeader }]}
-          >
-            Request
-          </Text>
-          <TouchableOpacity>
-            <Text
-              style={[styles.closeButton, { color: theme.colors.background }]}
-            >
-              ✕
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={[styles.subHeader, { color: theme.colors.background }]}>
-          Find all the Notifications that you have raised here.
-        </Text>
-      </View>
+const { prevStep } = useApplicationStore();
 
-      {/* White Container with Rounded Top */}
+  return (
+    <CustomMainChild
+      title="Request"
+      subTitle="Find all the requests that you have raised here."
+      noOfButtons={1}
+      singleButtonTitle="Back"
+      onClose={() => router.back()}
+      onPressSingleButton={() => prevStep()}
+    >
+
       <View
         style={[styles.container, { backgroundColor: theme.colors.background }]}
       >
-        {/* Show Request Card */}
         <MessageCard message="You don’t have any new requests as of now" />
-        {/* Footer Button */}
-        <CustomButton
-          title="Back"
-          size="full"
-          variant="primary"
-          type="filled"
-          onPress={() => router.back()}
-          style={{ marginTop: 490 }}
-        />
+      
       </View>
-    </SafeAreaView>
+    </CustomMainChild>
   );
 };
 

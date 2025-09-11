@@ -131,8 +131,6 @@ export default function Dashboard() {
           />
         ))}
       </View>
-
-      {/* Apply Now */}
       <Text style={localStyles.sectionTitle}>Apply Now</Text>
       <View style={localStyles.grid}>
         {applyNow.map((item) => (
