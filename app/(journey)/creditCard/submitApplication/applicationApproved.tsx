@@ -127,7 +127,7 @@ const ApplicationApproved = () => {
             size="full"
             variant="primary"
             type="filled"
-            onPress={() => router.push("/congratulations")}
+            onPress={() => router.push("/(journey)/creditCard/submitApplication/congratulations")}
             style={{ marginTop: 20 }}
           />
         </ScrollView>
