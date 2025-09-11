@@ -3,6 +3,7 @@ import CustomInput from "@/components/CustomInput";
 import FormSummaryLayout from "@/components/FormSummary/FormSummaryLayout";
 import SegmentedControl from "@/components/SegmentControl";
 import { fontSize, fontWeight } from "@/constants/Metrics";
+import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React from "react";
@@ -68,7 +69,7 @@ const PersonalSummary = () => {
         <>
           {/* Borrower Fields */}
           <CustomInput
-            name="name"
+            name={fieldNames.borrowerName}
             label="Name"
             placeholder="Name"
             type="text"
@@ -76,13 +77,14 @@ const PersonalSummary = () => {
           />
 
           <CustomDropDown
+            name={fieldNames.borrowerGender}
             label={"Gender"}
             data={genderOptions}
             control={control}
           />
 
           <CustomInput
-            name="age"
+            name={fieldNames.borrowerAge}
             label="Age"
             placeholder="Age"
             type="number"
@@ -90,21 +92,22 @@ const PersonalSummary = () => {
           />
 
           <CustomDropDown
+            name={fieldNames.borrowerNationality}
             label={"Nationality"}
             data={nationalityOptions}
             control={control}
           />
 
           <CustomInput
-            name="Emirates ID"
-            label="EIDA No"
+            name={fieldNames.borrowerEmiratesId}
+            label="Emirates ID"
             placeholder="Enter your EIDA Number"
             type="number"
             control={control}
           />
 
           <CustomInput
-            name="passportNo"
+            name={fieldNames.borrowerPassportNo}
             label="Passport No"
             placeholder="Enter your passport Number"
             type="number"
@@ -112,7 +115,7 @@ const PersonalSummary = () => {
           />
 
           <CustomInput
-            name="residenceVintage"
+            name={fieldNames.borrowerResidenceVintage}
             label="Residence Vintage(Months)"
             placeholder="Enter your residence vintage"
             type="number"
@@ -120,7 +123,7 @@ const PersonalSummary = () => {
           />
 
           <CustomInput
-            name="noOfDependents"
+            name={fieldNames.borrowerNoOfDependents}
             label="No of Dependents"
             placeholder="Enter the number of dependents"
             type="number"
@@ -128,12 +131,14 @@ const PersonalSummary = () => {
           />
 
           <CustomDropDown
+            name={fieldNames.borrowerVerificationStatus}
             label={"Whether EIDA, Passport are Valid?"}
             data={validityOptions}
             control={control}
           />
 
           <CustomDropDown
+            name={fieldNames.borrowerEmirates}
             label={"Emirates"}
             data={emiratesOptions}
             control={control}
@@ -143,7 +148,7 @@ const PersonalSummary = () => {
         <>
           {/* Co_Borrower Fields */}
           <CustomInput
-            name=""
+            name={fieldNames.coBorrowerName}
             label="Name"
             placeholder="Name"
             type="text"
@@ -151,13 +156,14 @@ const PersonalSummary = () => {
           />
 
           <CustomDropDown
+            name={fieldNames.coBorrowerGender}
             label={"Gender"}
             data={genderOptions}
             control={control}
           />
 
           <CustomInput
-            name="age"
+            name={fieldNames.coBorrowerAge}
             label="Age"
             placeholder="Age"
             type="number"
@@ -165,21 +171,22 @@ const PersonalSummary = () => {
           />
 
           <CustomDropDown
+            name={fieldNames.coBorrowerNationality}
             label={"Nationality"}
             data={nationalityOptions}
             control={control}
           />
 
           <CustomInput
-            name="Emirates ID"
-            label="EIDA No"
+            name={fieldNames.coBorrowerEmirateId}
+            label="Emirates ID"
             placeholder="Enter your EIDA Number"
             type="number"
             control={control}
           />
 
           <CustomInput
-            name="passportNo"
+            name={fieldNames.coBorrowerPassportNo}
             label="Passport No"
             placeholder="Enter your passport Number"
             type="number"
@@ -187,7 +194,7 @@ const PersonalSummary = () => {
           />
 
           <CustomInput
-            name="residenceVintage"
+            name={fieldNames.coBorrowerResidenceVintage}
             label="Residence Vintage(Months)"
             placeholder="Enter your residence vintage"
             type="number"
@@ -195,7 +202,7 @@ const PersonalSummary = () => {
           />
 
           <CustomInput
-            name="noOfDependents"
+            name={fieldNames.coBorrowerNoOfDependents}
             label="No of Dependents"
             placeholder="Enter the number of dependents"
             type="number"
@@ -203,12 +210,14 @@ const PersonalSummary = () => {
           />
 
           <CustomDropDown
+            name={fieldNames.coBorrowerVerificationStatus}
             label={"Whether EIDA, Passport are Valid?"}
             data={validityOptions}
             control={control}
           />
 
           <CustomDropDown
+            name={fieldNames.coBorrowerEmirates}
             label={"Emirates"}
             data={emiratesOptions}
             control={control}

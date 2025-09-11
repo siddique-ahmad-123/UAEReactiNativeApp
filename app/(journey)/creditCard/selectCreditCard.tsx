@@ -1,20 +1,17 @@
-import CustomButton from "@/components/CustomButton";
+import { styles } from "@/app/(main)/styles/SelectCreditCard.Styles";
+import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
+import { useApplicationStore } from "@/store/applicationStore";
+import { router } from "expo-router";
 import React, { useRef, useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-  Image,
   Dimensions,
+  Image,
+  Text,
+  TouchableOpacity,
+  View
 } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { useTheme } from "styled-components/native";
-import { router } from "expo-router";
-import { styles } from "@/app/(main)/styles/SelectCreditCard.Styles";
-import { useApplicationStore } from "@/store/applicationStore";
-import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 
 const { width, height } = Dimensions.get("window");
 

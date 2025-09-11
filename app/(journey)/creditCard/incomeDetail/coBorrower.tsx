@@ -1,35 +1,35 @@
+import CustomButton from "@/components/CustomButton";
+import CustomDatePicker from "@/components/CustomDatePicker";
+import CustomDropDown from "@/components/CustomDropDown";
+import CustomInput from "@/components/CustomInput";
+import CustomUpload from "@/components/CustomUpload";
 import FormLayout from "@/components/Form/FormLayout";
-import { incomeDetailSchema } from "@/schemas/creditCard/incomeDetailSchema";
+import MethodSelector from "@/components/MethodSelector";
+import SectionHeader from "@/components/SectionHeader";
+import SegmentedControl from "@/components/SegmentControl";
+import { spacingVertical } from "@/constants/Metrics";
+import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
-import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
+import { router } from "expo-router";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
-import SegmentedControl from "@/components/SegmentControl";
-import SectionHeader from "@/components/SectionHeader";
-import MethodSelector from "@/components/MethodSelector";
-import CustomButton from "@/components/CustomButton";
-import { spacingVertical } from "@/constants/Metrics";
-import CustomInput from "@/components/CustomInput";
-import CustomDropDown from "@/components/CustomDropDown";
-import CustomDatePicker from "@/components/CustomDatePicker";
-import CustomUpload from "@/components/CustomUpload";
-import { router } from "expo-router";
 
 export default function CoBorrowerIncomeScreen() {
   const { t } = useTranslation();
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
-    // resolver: zodResolver(incomeDetailSchema), 
+    // resolver: zodResolver(incomeDetailSchema),
     defaultValues: formData,
     shouldUnregister: true,
   });
   const incomeType = watch("incomeType") ?? "Salaried";
   const empDetailFetchMethod = watch("empDetailFetchMethod") ?? "AECB";
-  const businessDetailFetchMethod = watch("businessDetailFetchMethod") ?? "Upload Trade License";
-  const incomeDetailFetchMethod = watch("incomeDetailFetchMethod") ?? "Salary Transfer";
-  
+  const businessDetailFetchMethod =
+    watch("businessDetailFetchMethod") ?? "Upload Trade License";
+  const incomeDetailFetchMethod =
+    watch("incomeDetailFetchMethod") ?? "Salary Transfer";
 
   const onSubmit = (values: any) => {
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
@@ -82,13 +82,13 @@ export default function CoBorrowerIncomeScreen() {
       id: "Fetch From Bank",
       title: "Fetch From Bank",
       description: "",
-      iconName: "swap-horizontal", 
+      iconName: "swap-horizontal",
     },
     {
       id: "Upload Bank Statement",
       title: "Upload Bank Statement",
       description: "",
-      iconName: "document-text", 
+      iconName: "document-text",
     },
     {
       id: "UAE-FTS",
@@ -113,7 +113,10 @@ export default function CoBorrowerIncomeScreen() {
   ];
   const legalFormOptions = [
     { label: "Sole Proprietorship", value: "Sole Proprietorship" },
-    { label: "Limited Liability Company (LLC)", value: "Limited Liability Company (LLC)" },
+    {
+      label: "Limited Liability Company (LLC)",
+      value: "Limited Liability Company (LLC)",
+    },
   ];
   const natureOfBusinessOptions = [
     { label: "IT Services", value: "IT Services" },
@@ -160,33 +163,33 @@ export default function CoBorrowerIncomeScreen() {
 
           <CustomInput
             control={control}
-            name="employerName"
+            name={fieldNames.coBorrowerEmployerName}
             label="Employer Name"
             type="text"
             placeholder="Newgen Software"
           />
           <CustomDatePicker
             control={control}
-            name="employedFrom"
+            name={fieldNames.coBorrowerEmployedFrom}
             label="Employed From"
           />
           <CustomInput
             control={control}
-            name="currentExp"
+            name={fieldNames.coBorrowerCurrentExp}
             label="Current Experience (Months)"
             placeholder="20"
             type="number"
           />
           <CustomInput
             control={control}
-            name="totalExp"
+            name={fieldNames.coBorrowerTotalExp}
             label="Total Experience (Months)"
             placeholder="36"
             type="number"
           />
           <CustomDropDown
             control={control}
-            name="emirate"
+            name={fieldNames.coBorrowerEmirates}
             label="Emirates"
             data={emiratesOptions}
           />
@@ -208,14 +211,14 @@ export default function CoBorrowerIncomeScreen() {
               />
               <CustomInput
                 control={control}
-                name="emirateId"
+                name={fieldNames.coBorrowerEmirateId}
                 label="Emirates ID"
                 placeholder="784838291032030"
                 type="text"
               />
               <CustomInput
                 control={control}
-                name="ibanNo"
+                name={fieldNames.coBorrowerIbanNo}
                 label="IBAN No"
                 type="text"
                 placeholder="AE60030000010090435412"
@@ -223,19 +226,19 @@ export default function CoBorrowerIncomeScreen() {
 
               <CustomInput
                 control={control}
-                name="bankingCode"
+                name={fieldNames.coBorrowerBankingCode}
                 label="Banking Code"
                 placeholder="30"
                 type="text"
               />
               <CustomDatePicker
                 control={control}
-                name="startDateFts"
+                name={fieldNames.coBorrowerStartDateFts}
                 label="Start Date"
               />
               <CustomDatePicker
                 control={control}
-                name="endDateFts"
+                name={fieldNames.coBorrowerEndDateFts}
                 label="End Date"
               />
               <CustomButton
@@ -248,7 +251,7 @@ export default function CoBorrowerIncomeScreen() {
               />
               <CustomDropDown
                 control={control}
-                name="ftsStatus"
+                name={fieldNames.coBorrowerFtsStatus}
                 label="FTS Status"
                 data={statusOptions}
               />
@@ -260,14 +263,14 @@ export default function CoBorrowerIncomeScreen() {
           />
           <CustomInput
             control={control}
-            name="monthlySalaryBankTransfer"
+            name={fieldNames.coBorrowerMonthlySalaryBankTransfer}
             label="Monthly Salary (Bank Transfer)"
             placeholder="2000"
             type="number"
           />
           <CustomInput
             control={control}
-            name="monthlySalaryAECB"
+            name={fieldNames.coBorrowerMonthlySalaryAECB}
             label="Monthly Salary (AECB)"
             placeholder="2000"
             type="number"
@@ -295,45 +298,45 @@ export default function CoBorrowerIncomeScreen() {
 
           <CustomInput
             control={control}
-            name="nameOfBusiness"
+            name={fieldNames.coBorrowerNameOfBusiness}
             label="Name of Business"
             type="text"
             placeholder="Newgen"
           />
           <CustomDropDown
             control={control}
-            name="legalForm"
+            name={fieldNames.coBorrowerLegalForm}
             label="Legal Form"
             data={legalFormOptions}
           />
           <CustomDropDown
             control={control}
-            name="emiratesBusiness"
+            name={fieldNames.coBorrowerEmiratesBusiness}
             label="Emirates"
             data={emiratesOptions}
           />
           <CustomDatePicker
             control={control}
-            name="dateOfEstabilishment"
+            name={fieldNames.coBorrowerDateOfEstabilishment}
             label="Date of Establishment"
           />
           <CustomInput
             control={control}
-            name="vintage"
+            name={fieldNames.coBorrowerVintage}
             label="Vintage (Months)"
             placeholder="58"
             type="number"
           />
           <CustomInput
             control={control}
-            name="licenseNo"
+            name={fieldNames.coBorrowerLicenseNo}
             label="License No"
             type="text"
             placeholder="DLT34554"
           />
           <CustomDropDown
             control={control}
-            name="natureOfBusiness"
+            name={fieldNames.coBorrowerNatureOfBusiness}
             label="Nature of Business"
             data={natureOfBusinessOptions}
           />
@@ -358,14 +361,14 @@ export default function CoBorrowerIncomeScreen() {
               />
               <CustomInput
                 control={control}
-                name="emirateId"
+                name={fieldNames.coBorrowerEmirates}
                 label="Emirates ID"
                 placeholder="784838291032030"
                 type="text"
               />
               <CustomInput
                 control={control}
-                name="ibanNo"
+                name={fieldNames.coBorrowerIbanNo}
                 label="IBAN No"
                 type="text"
                 placeholder="AE60030000010090435412"
@@ -373,19 +376,19 @@ export default function CoBorrowerIncomeScreen() {
 
               <CustomInput
                 control={control}
-                name="bankingCode"
+                name={fieldNames.coBorrowerBankingCode}
                 label="Banking Code"
                 placeholder="30"
                 type="text"
               />
               <CustomDatePicker
                 control={control}
-                name="startDateFts"
+                name={fieldNames.coBorrowerStartDateFts}
                 label="Start Date"
               />
               <CustomDatePicker
                 control={control}
-                name="endDateFts"
+                name={fieldNames.coBorrowerEndDateFts}
                 label="End Date"
               />
               <CustomButton
@@ -398,7 +401,7 @@ export default function CoBorrowerIncomeScreen() {
               />
               <CustomDropDown
                 control={control}
-                name="ftsStatus"
+                name={fieldNames.coBorrowerFtsStatus}
                 label="FTS Status"
                 data={statusOptions}
               />
@@ -410,28 +413,28 @@ export default function CoBorrowerIncomeScreen() {
           />
           <CustomInput
             control={control}
-            name="bankName"
+            name={fieldNames.coBorrowerBankName}
             label="Bank Name"
             placeholder="RAK Bank"
             type="text"
           />
           <CustomInput
             control={control}
-            name="accountNo"
+            name={fieldNames.coBorrowerAccountNo}
             label="Account No"
             placeholder="00090435412"
             type="text"
           />
           <CustomInput
             control={control}
-            name="last6MonthsADB"
+            name={fieldNames.coBorrowerLast6MonthsADB}
             label="Last 6 Months ADB"
             placeholder="2000"
             type="number"
           />
           <CustomInput
             control={control}
-            name="last6MonthsAvgCredit"
+            name={fieldNames.coBorrowerLast6MonthsAvgCredit}
             label="Last 6 Months Avg Credit"
             placeholder="2000"
             type="number"
