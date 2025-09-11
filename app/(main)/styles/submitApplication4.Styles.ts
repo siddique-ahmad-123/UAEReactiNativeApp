@@ -30,10 +30,12 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+
         borderTopLeftRadius: radius.pill,
         borderTopRightRadius: radius.pill,
         paddingTop: spacing.xxl,
         paddingHorizontal: spacing.md,
+
   },
 
   centerBox: {

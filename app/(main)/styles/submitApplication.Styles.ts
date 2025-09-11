@@ -1,7 +1,9 @@
 import { useTheme } from "styled-components/native";
 import React from "react";
 import { StyleSheet } from "react-native";
+
 import { fontSize, fontWeight, radius, spacing } from "@/constants/Metrics";
+
 
 export const styles = StyleSheet.create({
   safeArea: {
@@ -18,6 +20,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerTitle: {
+
     fontSize: fontSize.xl,
     fontWeight: fontWeight.bold,
   },
@@ -53,10 +56,12 @@ export const styles = StyleSheet.create({
   textbox: {
     fontSize: fontSize.md,
     fontWeight: fontWeight.medium,
+
     textAlign: "center",
     marginTop: 6,
   },
   textbox2: {
+
     fontSize: fontSize.xl,
     fontWeight: fontWeight.bold,
     marginTop: 15,

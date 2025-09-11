@@ -27,9 +27,8 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
   selectedId,
   onSelect,
 }) => {
-  const [selected, setSelected] = useState(selectedId);
+  
   const handleSelect = (id: string) => {
-    setSelected(id);
     onSelect(id);
   }
   const theme = useTheme();
@@ -82,7 +81,7 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
       {title ? <Text style={styles.title}>{title}</Text> : null}
       <View style={styles.optionContainer}>
         {options.map((option) => {
-          const isSelected = option.id === selected;
+          const isSelected = option.id === selectedId;
           return (
             <TouchableOpacity
               key={option.id}

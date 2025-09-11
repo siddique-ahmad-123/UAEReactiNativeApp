@@ -29,7 +29,10 @@ export const LightThemeColorConstants = {
 
   borderColor:"#DDDD",
 
+  sliderColor:"#8924C6",
+
   errorTextColor: "#FF3333",
+
 
   secondaryText:"#636363",
 
@@ -67,8 +70,12 @@ export const DarkThemeColorConstants = {
 
   borderColor:"#CCCC",
 
+  sliderColor:"#8924C6",
+
   errorTextColor: "#FF3333",
+
     secondaryText:"#636363",
       subtitle:"#666"
+
 } as const;
 export type ThemeColors = typeof LightThemeColorConstants;
