@@ -1,15 +1,16 @@
 import { useTheme } from "styled-components/native";
 import React from "react";
 import { StyleSheet } from "react-native";
+import { fontSize, fontWeight, radius, spacing } from "@/constants/Metrics";
 
 export const styles = StyleSheet.create({
   safeArea: {
     flex: 1, // Purple fills behind header
   },
   header: {
-    paddingHorizontal: 16,
-    paddingTop: 70,
-    paddingBottom: 50,
+    paddingHorizontal: spacing.md,
+    paddingTop: spacing.xxxl,
+    paddingBottom: spacing.xxl,
   },
   headerTop: {
     flexDirection: "row",
@@ -17,8 +18,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerTitle: {
-    fontSize: 24,
-    fontWeight: 700,
+    fontSize: fontSize.xl,
+    fontWeight: fontWeight.bold,
   },
   closeButton: {
     fontSize: 20,
@@ -29,10 +30,10 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    borderTopLeftRadius: 38,
-    borderTopRightRadius: 38,
-    paddingTop: 40,
-    paddingHorizontal: 16,
+    borderTopLeftRadius: radius.pill,
+    borderTopRightRadius: radius.pill,
+    paddingTop: spacing.xxl,
+    paddingHorizontal: spacing.md,
   },
 
   centerBox: {
@@ -40,30 +41,24 @@ export const styles = StyleSheet.create({
     marginTop: 30,
   },
   successImage: {
-    width: 80,
-    height: 80,
+    width: spacing.xxxli,
+    height: spacing.xxxli,
   },
   title: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: fontSize.lg,
+    fontWeight: fontWeight.bold,
     marginTop: 15,
-  },
-  subtitle: {
-    fontSize: 14,
-    color: "#666",
-    textAlign: "center",
-    marginTop: 6,
   },
 
   textbox: {
-    fontSize: 16,
-    fontWeight: "500",
+    fontSize: fontSize.md,
+    fontWeight: fontWeight.medium,
     textAlign: "center",
     marginTop: 6,
   },
   textbox2: {
-    fontSize: 24,
-    fontWeight: "700",
+    fontSize: fontSize.xl,
+    fontWeight: fontWeight.bold,
     marginTop: 15,
   },
   image:{
@@ -71,6 +66,11 @@ export const styles = StyleSheet.create({
      marginTop: 30
   },
   text:{
-    fontSize: 16, fontWeight: 400, color: "#B8B8B8"
+    fontSize: fontSize.sm,
+     fontWeight: fontWeight.normal
+  },
+  imageSpex:{
+    width: spacing.xxxxxxl,
+    height: spacing.xxxxxl
   }
 });

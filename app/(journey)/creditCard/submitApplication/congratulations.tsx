@@ -9,9 +9,9 @@ import {
 import CustomButton from "@/components/CustomButton";
 import { useTheme } from "styled-components/native";
 import { router } from "expo-router";
-import { styles } from "../styles/submitApplication2";
+import { styles } from "@/app/(main)/styles/submitApplication2";
 
-const NotificationScreen = () => {
+const Congratulations = () => {
   const theme = useTheme();
   return (
     <SafeAreaView
@@ -42,7 +42,7 @@ const NotificationScreen = () => {
         {/* Approved Icon & Title */}
         <View style={styles.image}>
           <Image
-            source={require("../../../assets/images/approved-icon.png")}
+            source={require("../../../../assets/images/approved-icon.png")}
             style={{ width: 80, height: 80 }}
             resizeMode="contain"
           />
@@ -78,7 +78,7 @@ const NotificationScreen = () => {
           size="full"
           variant="primary"
           type="filled"
-          onPress={() => {}}
+          onPress={() => {router.push("/NavScreen")}}
           style={{ marginTop: 20 }}
         />
       </View>
@@ -86,4 +86,4 @@ const NotificationScreen = () => {
   );
 };
 
-export default NotificationScreen;
+export default Congratulations;

@@ -13,10 +13,9 @@ import { useTheme } from "styled-components/native";
 import { router } from "expo-router";
 import MethodSelector from "@/components/MethodSelector";
 import DocumentDownload from "@/components/DocumentDownload";
-import { styles } from "../styles/submitApplication4.Styles";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { styles } from "@/app/(main)/styles/submitApplication.Styles";
 
-const NotificationScreen = () => {
+const ApplicationApproved = () => {
   const [selectedMethod, setSelectedMethod] = React.useState<
     string | undefined
   >();
@@ -76,56 +75,59 @@ const NotificationScreen = () => {
           contentContainerStyle={{ paddingBottom: 20 }}
           showsVerticalScrollIndicator={false}
         >
+          {/* Approved Icon & Title */}
           <View style={styles.image}>
             <Image
-              source={require("../../../assets/images/amico.png")}
-              style={{ width: 200, height: 200 }}
+              source={require("../../../../assets/images/approved-icon.png")}
+              style={styles.successImage}
               resizeMode="contain"
             />
             <Text
               style={[styles.textbox2, { color: theme.colors.textPrimary }]}
             >
-              Application Submitted
+              Application Approved
             </Text>
-          </View>
-
-          <Text
-            style={[
-              styles.textbox3,
-              { color: theme.colors.secondaryText, marginBottom: 30 },
-            ]}
-          >
-            We’re sorry but your request did not go through with the amount of 
-            <Text style={{color:theme.colors.primaryColor}}>45,000 AED</Text>
-          </Text>
-
-          <View style={styles.linkTextView}>
-            <TouchableOpacity onPress={() => {}}>
-              <Text
-                style={[styles.linktext, { color: theme.colors.primaryColor }]}
-              >
-                You can choose for counter offer or apply for higher limit with
-                our team
-              </Text>
-            </TouchableOpacity>
+            <Text
+              style={[styles.textbox, { color: theme.colors.secondaryText,marginBottom: 30 },]}
+            >
+              Your application is approved successfully
+            </Text>
           </View>
 
           {/* Method Selector */}
           <MethodSelector
-            title="Application Details"
+            title="Credit Card Details"
             options={methodOptions}
             selectedId={selectedMethod}
             onSelect={(id) => setSelectedMethod(id)}
-            titleCenter
           />
+
+          {/* Card Image */}
+          <View style={{ alignItems: "center", marginTop: 30 }}>
+            <Image
+              source={require("../../../../assets/images/card3.png")}
+              style={styles.imageSpex}
+              resizeMode="contain"
+            />
+          </View>
+
+          {/* Download Text */}
+          <View style={{ alignItems: "center", marginTop: 30 }}>
+            <Text style={[styles.text,{color:theme.colors.borderColor}]}>
+              You can download your offer letter from below
+            </Text>
+          </View>
+
+          {/* Download Button */}
+          <DocumentDownload documentName="Download Offer Letter" />
 
           {/* Back Button */}
           <CustomButton
-            title="Return to Home Page"
+            title="Accept Offer"
             size="full"
             variant="primary"
             type="filled"
-            onPress={() => {}}
+            onPress={() => router.push("/congratulations")}
             style={{ marginTop: 20 }}
           />
         </ScrollView>
@@ -134,4 +136,4 @@ const NotificationScreen = () => {
   );
 };
 
-export default NotificationScreen;
+export default ApplicationApproved;

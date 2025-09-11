@@ -79,7 +79,7 @@ const NotificationScreen = () => {
           <View style={styles.image}>
             <Image
               source={require("../../../assets/images/approved-icon.png")}
-              style={{ width: 80, height: 80 }}
+              style={styles.successImage}
               resizeMode="contain"
             />
             <Text
@@ -106,14 +106,14 @@ const NotificationScreen = () => {
           <View style={{ alignItems: "center", marginTop: 30 }}>
             <Image
               source={require("../../../assets/images/card3.png")}
-              style={{ width: 339, height: 176 }}
+              style={styles.imageSpex}
               resizeMode="contain"
             />
           </View>
 
           {/* Download Text */}
           <View style={{ alignItems: "center", marginTop: 30 }}>
-            <Text style={styles.text}>
+            <Text style={[styles.text,{color:theme.colors.borderColor}]}>
               You can download your offer letter from below
             </Text>
           </View>
@@ -127,7 +127,7 @@ const NotificationScreen = () => {
             size="full"
             variant="primary"
             type="filled"
-            onPress={() => router.push("/NavScreen")}
+            onPress={() => {}}
             style={{ marginTop: 20 }}
           />
         </ScrollView>

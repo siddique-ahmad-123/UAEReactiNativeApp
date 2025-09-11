@@ -8,9 +8,13 @@ export const spacing = {
   lg: scale(24),
   xl: scale(32),
   xxl: scale(40),
+  xxli:scale(50),
   xxxl: scale(60),
+  xxxli:scale(80),
+  xxxlii:scale(70),
   xxxxl: scale(104),
   xxxxxl: scale(160),
+  xxxxxxl: scale(339),
 } as const;
 
 // 🔹 Vertical spacing (use for height,paddingY,marginY) in y direction
@@ -22,6 +26,7 @@ export const spacingVertical = {
   lg: verticalScale(24),
   xl: verticalScale(32),
   xxl: verticalScale(40),
+  xxli: verticalScale(44),
   xxxl: verticalScale(60),
   xxxxl: verticalScale(150),
 } as const;
@@ -34,7 +39,9 @@ export const radius = {
   lg: scale(12),
   xl: scale(16),
   xxl: scale(20),
-  pill: scale(30),
+  xxxl:scale(25),
+  xxli: scale(22),
+  pill: scale(38),
   round: scale(9999),
 } as const;
 
@@ -44,7 +51,7 @@ export const fontSize = {
   sm: scale(14),
   md: scale(16),
   lg: scale(18),
-  xl: scale(22),
+  xl: scale(24),
   xxl: scale(28),
   xxxl: scale(34),
 } as const;
@@ -94,7 +101,7 @@ export const width = {
   none: "0%",
   xs: "10%",
   sm: "20%",
-  md: "45%",
+  md: "44%",
   lg: "60%",
   xl: "80%",
   full: "100%",

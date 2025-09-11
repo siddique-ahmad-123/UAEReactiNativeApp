@@ -1,15 +1,16 @@
 import { useTheme } from "styled-components/native";
 import React from "react";
 import { Dimensions, StyleSheet } from "react-native";
+import { radius, spacing } from "@/constants/Metrics";
 const { width, height } = Dimensions.get("window");
 export const styles = StyleSheet.create({
   safeArea: {
     flex: 1, // Purple fills behind header
   },
   header: {
-    paddingHorizontal: 16,
-    paddingTop: 70,
-    paddingBottom: 50,
+    paddingHorizontal: spacing.md,
+        paddingTop: spacing.xxxl,
+        paddingBottom: spacing.xxl,
   },
   headerTop: {
     flexDirection: "row",
@@ -29,10 +30,10 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    borderTopLeftRadius: 38,
-    borderTopRightRadius: 38,
-    paddingTop: 40,
-    paddingHorizontal: 16,
+        borderTopLeftRadius: radius.pill,
+        borderTopRightRadius: radius.pill,
+        paddingTop: spacing.xxl,
+        paddingHorizontal: spacing.md,
   },
   image: {
     alignItems: "center",

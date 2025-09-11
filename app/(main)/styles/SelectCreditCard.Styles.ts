@@ -1,3 +1,4 @@
+import { radius, spacing } from "@/constants/Metrics";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -5,9 +6,9 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    paddingHorizontal: 16,
-    paddingTop: 100,
-    paddingBottom: 20,
+    paddingHorizontal: spacing.md,
+    paddingTop: spacing.xxxl,
+    paddingBottom: spacing.md,
   },
   headerTop: {
     flexDirection: "row",
@@ -25,10 +26,10 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    borderTopLeftRadius: 38,
-    borderTopRightRadius: 38,
-    paddingTop: 30,
-    paddingHorizontal: 16,
+            borderTopLeftRadius: radius.pill,
+            borderTopRightRadius: radius.pill,
+            paddingTop: spacing.xxl,
+            paddingHorizontal: spacing.md,
   },
 
   /** Card styles */
