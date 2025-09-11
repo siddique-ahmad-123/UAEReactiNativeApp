@@ -68,7 +68,7 @@ const Carousel = () => {
     <View style={{ width, alignItems: "center" }}>
       <ImageBackground
         source={item.imgpath}
-        style={{ width: "100%", height: height * 0.4 }}
+        style={{ width: "100%", height: height * 0.3 }}
         resizeMode="contain"
       />
 
@@ -107,22 +107,22 @@ const Carousel = () => {
         cornerRadius={100}
         rotateAngle={45}
         top={spacingVertical.xxxl}
-        left={-20}
+        left={-25}
       />
       <Pentagon
         color={theme.colors.primaryLightColor}
         cornerRadius={100}
         rotateAngle={45}
-        bottom={200}
+        bottom={230}
         right={-30}
       />
       <Pentagon
         size={50}
-        color={theme.colors.primaryColor}
+        color="#9d87aaff"
         cornerRadius={100}
-        rotateAngle={90}
-        bottom={140}
-        right={-10}
+        rotateAngle={4}
+        bottom={150}
+        right={-5}
       />
       <FlatList
         data={slides}
