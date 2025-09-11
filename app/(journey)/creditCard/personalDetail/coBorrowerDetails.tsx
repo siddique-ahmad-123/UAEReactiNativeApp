@@ -6,9 +6,8 @@ import FormLayout from "@/components/Form/FormLayout";
 import SectionHeader from "@/components/SectionHeader";
 import SegmentedControl from "@/components/SegmentControl";
 import { spacing } from "@/constants/Metrics";
-import { personalDetailsSchema } from "@/schemas/creditCard/personalDetailsSchema";
+import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
 import { t } from "i18next";
 import React from "react";
@@ -28,7 +27,7 @@ const CoBorrowerPersonalInformation = () => {
     nextStep();
   };
 
-  const coBorrower = watch("coBorrower") ?? "No";
+  const isCoBorrower = watch(fieldNames.isCoBorrower) ?? "No";
 
   const genderOptions = [
     { label: "Male", value: "Male" },
@@ -77,11 +76,11 @@ const CoBorrowerPersonalInformation = () => {
       <SegmentedControl
         label="Do you want to add Co-Borrower"
         options={["Yes", "No"]}
-        defaultValue={coBorrower}
-        onChange={(v) => setValue("coBorrower", v)}
+        defaultValue={isCoBorrower}
+        onChange={(v) => setValue(fieldNames.isCoBorrower, v)}
       />
 
-      {coBorrower === "Yes" && (
+      {isCoBorrower === "Yes" && (
         <>
           <View style={{ marginHorizontal: spacing.md }}>
             <Text style={{ textAlign: "center" }}>
@@ -93,7 +92,7 @@ const CoBorrowerPersonalInformation = () => {
 
           <CustomInput
             control={control}
-            name="eidaNo"
+            name={fieldNames.coBorrowerName}
             label="EIDA No"
             placeholder="Enter your EIDA number"
             type="number"
@@ -101,7 +100,7 @@ const CoBorrowerPersonalInformation = () => {
 
           <CustomInput
             control={control}
-            name="mobileNo"
+            name={fieldNames.coBorrowerMobileNo}
             label="Mobile No"
             placeholder="Enter your mobile number"
             type="number"
@@ -116,7 +115,7 @@ const CoBorrowerPersonalInformation = () => {
 
           <CustomInput
             control={control}
-            name=""
+            name={fieldNames.coBorrowerOtp}
             label="Enter OTP"
             placeholder="Enter your OTP"
             type="number"
@@ -132,86 +131,98 @@ const CoBorrowerPersonalInformation = () => {
           <SectionHeader sectionName={t("personalInformation")} />
           <CustomInput
             control={control}
-            name="name"
+            name={fieldNames.coBorrowerName}
             label="Name"
             placeholder="Enter your name"
             type="text"
           />
           <CustomDatePicker
+            name={fieldNames.coBorrowerDOB}
             control={control}
-            name="dob"
             label={"Date of Birth"}
           />
           <CustomInput
             control={control}
-            name="age"
+            name={fieldNames.coBorrowerAge}
             label="Age"
             placeholder="Age"
             type="number"
           />
-          <CustomDropDown label={"Gender"} data={genderOptions} />
-          <CustomDropDown label={"Nationality"} data={nationalityOptions} />
           <CustomDropDown
+            name={fieldNames.coBorrowerGender}
+            label={"Gender"}
+            data={genderOptions}
+            control={control}
+          />
+          <CustomDropDown
+            name={fieldNames.coBorrowerNationality}
+            label={"Nationality"}
+            data={nationalityOptions}
+            control={control}
+          />
+          <CustomDropDown
+            name={fieldNames.coBorrowerResidenceCountry}
             label={"Residence Country"}
             data={residenceCountryOptions}
+            control={control}
           />
           <CustomInput
             control={control}
-            name="eidaNo"
+            name={fieldNames.coBorrowerEidaNo}
             label="EIDA No"
             placeholder="Enter your EIDA Number"
             type="number"
           />
           <CustomDatePicker
+            name={fieldNames.coBorrowerEidaIssueDate}
             control={control}
-            name="eidaIssueDate"
             label={"EIDA Issue Date"}
           />
           <CustomDatePicker
             control={control}
-            name="eidaExpiryDate"
+            name={fieldNames.coBorrowerEidaExpiryDate}
             label={"EIDA Expiry Date"}
           />
 
           <CustomInput
             control={control}
-            name="passportNo"
+            name={fieldNames.coBorrowerPassportNo}
             label="Passport No"
             placeholder="Enter your passport Number"
             type="number"
           />
           <CustomDatePicker
             control={control}
-            name="passportIssueDate"
+            name={fieldNames.coBorrowerPassportIssueDate}
             label={"Passport Issue Date"}
           />
           <CustomDatePicker
             control={control}
-            name="passportExpiryDate"
+            name={fieldNames.coBorrowerPassportExpiryDate}
             label={"Passport Expiry Date"}
           />
 
           <CustomInput
             control={control}
-            name="visaNo"
+            name={fieldNames.coBorrowerVisaNo}
             label="Visa No"
             placeholder="Enter your visa Number"
             type="number"
           />
           <CustomDatePicker
             control={control}
-            name="visaIssueDate"
+            name={fieldNames.coBorrowerVisaIssueDate}
             label={"Visa Issue Date"}
           />
           <CustomDatePicker
             control={control}
-            name="visaExpiryDate"
+            name={fieldNames.coBorrowerVisaExpiryDate}
             label={"VIsa Expiry Date"}
           />
 
           <CustomInput
             control={control}
-            name="emailId"
+            name={fieldNames.coBorrowerEmailId}
             label="Email ID"
             placeholder="Enter your email id"
             type="email"
@@ -219,7 +230,7 @@ const CoBorrowerPersonalInformation = () => {
 
           <CustomInput
             control={control}
-            name="visaNo"
+            name={fieldNames.coBorrowerMobileNo}
             label="Mobile No"
             placeholder="Enter your mobile number"
             type="number"
@@ -227,7 +238,7 @@ const CoBorrowerPersonalInformation = () => {
 
           <CustomInput
             control={control}
-            name="residenceVintage"
+            name={fieldNames.coBorrowerResidenceVintage}
             label="Residence Vintage(Months)"
             placeholder="Enter your residence vintage"
             type="number"
@@ -235,7 +246,7 @@ const CoBorrowerPersonalInformation = () => {
 
           <CustomInput
             control={control}
-            name="noOfDependents"
+            name={fieldNames.coBorrowerNoOfDependents}
             label="No of Dependents"
             placeholder="Enter the number of dependents"
             type="number"
@@ -245,21 +256,31 @@ const CoBorrowerPersonalInformation = () => {
 
           <CustomInput
             control={control}
-            name="addressLine1"
+            name={fieldNames.coBorrowerAddressLine1}
             label="Address Line 1"
             placeholder="Enter your address"
             type="text"
           />
           <CustomInput
             control={control}
-            name="addressLine2"
+            name={fieldNames.coBorrowerAddressLine2}
             label="Address Line 2"
             placeholder="Enter your address"
             type="text"
           />
 
-          <CustomDropDown label={"Emirates"} data={emiratesOptions} />
-          <CustomDropDown label={"Country"} data={countryOptions} />
+          <CustomDropDown
+            name={fieldNames.coBorrowerEmirates}
+            label={"Emirates"}
+            data={emiratesOptions}
+            control={control}
+          />
+          <CustomDropDown
+            name={fieldNames.coBorrowerCountry}
+            label={"Country"}
+            data={countryOptions}
+            control={control}
+          />
 
           <SectionHeader sectionName="EFR Check" />
           <CustomButton
@@ -270,8 +291,10 @@ const CoBorrowerPersonalInformation = () => {
           />
 
           <CustomDropDown
+            name={fieldNames.coBorrowerVerificationStatus}
             label={"Verification Status"}
             data={verificationOptions}
+            control={control}
           />
 
           <CustomButton

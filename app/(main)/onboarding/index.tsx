@@ -7,7 +7,6 @@ import {
   ImageBackground,
   Image,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
 import { styles } from "../styles/onboarding.Styles";
@@ -83,20 +82,20 @@ const Carousel = () => {
     const interval = setInterval(() => {
       let nextIndex = currentIndex + 1;
       if (nextIndex >= slides.length) {
-        nextIndex = 0; // loop back to first slide
+        nextIndex = 0; 
       }
       flatListRef.current?.scrollToIndex({
         index: nextIndex,
         animated: true,
       });
       setCurrentIndex(nextIndex);
-    }, 2000); // 2 seconds
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [currentIndex]);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.background }}>
+    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <Image
         source={require("../../../assets/images/newgenLogo.png")}
         style={styles.logo}
@@ -177,7 +176,7 @@ const Carousel = () => {
           size="md"
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

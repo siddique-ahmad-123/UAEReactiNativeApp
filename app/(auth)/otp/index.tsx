@@ -17,6 +17,7 @@ import {
   spacingVertical,
 } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
+import CustomButton from "@/components/CustomButton"; // 👈 import your custom button
 
 const OTPScreen: React.FC = () => {
   const router = useRouter();
@@ -60,13 +61,15 @@ const OTPScreen: React.FC = () => {
       }
     }
   };
+
   const theme = useTheme();
+  const allFilled = otp.every((digit) => digit !== ""); // 👈 check if OTP is complete
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: theme.colors.background,
     },
-
     headerBackground: {
       width: "110%",
       height: 300,
@@ -74,7 +77,6 @@ const OTPScreen: React.FC = () => {
       padding: spacing.md,
       paddingBottom: spacingVertical.xxxl,
     },
-
     imageStyle: {
       opacity: 1,
       borderBottomLeftRadius: 0,
@@ -89,13 +91,11 @@ const OTPScreen: React.FC = () => {
       fontWeight: fontWeight.bold,
       color: theme.colors.textHeader,
     },
-
     cornerText2: {
       fontSize: fontSize.lg,
       fontWeight: fontWeight.normal,
       color: theme.colors.textHeader,
     },
-
     formContainer: {
       flex: 1,
       backgroundColor: theme.colors.background,
@@ -103,11 +103,8 @@ const OTPScreen: React.FC = () => {
       borderTopRightRadius: radius.pill,
       marginTop: -spacingVertical.xl,
       padding: spacing.md,
-      alignItems:"center"
+      alignItems: "center",
     },
-
-    forgotPassword: { fontSize: 14, color: "text" },
-
     row: {
       flexDirection: "row",
       justifyContent: "space-between",
@@ -143,7 +140,7 @@ const OTPScreen: React.FC = () => {
     backButton: {
       position: "absolute",
       top: 40,
-      left:spacing.md,
+      left: spacing.md,
       zIndex: 10,
     },
     resendLabel: { color: "#B8B8B8", marginTop: 10 },
@@ -159,9 +156,12 @@ const OTPScreen: React.FC = () => {
         imageStyle={styles.imageStyle}
       >
         <View style={styles.overlay} />
-        <TouchableOpacity onPress={() => {
+        <TouchableOpacity
+          onPress={() => {
             router.back();
-          }} style={styles.backButton}>
+          }}
+          style={styles.backButton}
+        >
           <Ionicons
             name="chevron-back"
             size={24}
@@ -175,10 +175,10 @@ const OTPScreen: React.FC = () => {
       <View style={styles.formContainer}>
         <Text style={styles.sectionTitle}>Enter Verification Code</Text>
         <Text style={styles.sectionSubtitle}>
-          We are automatically detecting an SMS sent to your mobile number
-          *****7412
+          {allFilled
+            ? "We are automatically detecting an SMS sent to your mobile number *****7412"
+            : "we have sent a SMS to your mobile number*****7412"}
         </Text>
-
         <View style={styles.otpRow}>
           {otp.map((digit, index) => (
             <TextInput
@@ -194,19 +194,25 @@ const OTPScreen: React.FC = () => {
               maxLength={1}
               textAlign="center"
               autoFocus={index === 0}
-              selectionColor={
-                digit ? theme.colors.background : theme.colors.background
-              }
+              selectionColor={theme.colors.background}
               placeholderTextColor={digit ? theme.colors.background : "#000"}
             />
           ))}
         </View>
 
         <Text style={styles.resendLabel}>Did not receive the code?</Text>
-        <TouchableOpacity onPress={() => router.push("/NavScreen")}>
           <Text style={styles.resendText}>Resend Code</Text>
-        </TouchableOpacity>
         <Text style={styles.timer}>02:00</Text>
+        {allFilled && (
+          <CustomButton
+            title="Continue"
+            size="full"
+            variant="primary"
+            type="filled"
+            onPress={() => router.push("/NavScreen")}
+            style={{marginTop:95}}
+          />
+        )}
       </View>
     </View>
   );

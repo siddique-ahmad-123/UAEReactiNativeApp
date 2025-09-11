@@ -1,7 +1,6 @@
 import { localStyles } from "@/app/(main)/styles/Home.Styles";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "styled-components/native";
 
 const navItems = [
@@ -32,11 +31,13 @@ type Props = {
 const BottomNav: React.FC<Props> = ({ activeTab, setActiveTab }) => {
   const theme = useTheme();
   return (
-    <SafeAreaView
-      edges={["bottom"]}
-      style={{ backgroundColor: theme.colors.background }}
-    >
-      <View style={[localStyles.bottomNav,{borderColor:theme.colors.borderColor}]}>
+    <View style={{ backgroundColor: theme.colors.background, }}>
+      <View
+        style={[
+          localStyles.bottomNav,
+          { borderColor: theme.colors.borderColor },
+        ]}
+      >
         {navItems.map((item) => {
           const isActive = activeTab === item.title;
           return (
@@ -69,12 +70,19 @@ const BottomNav: React.FC<Props> = ({ activeTab, setActiveTab }) => {
               >
                 {item.title}
               </Text>
-              {isActive && <View style={[localStyles.activeUnderline,{backgroundColor:theme.colors.primaryColor}]} />}
+              {isActive && (
+                <View
+                  style={[
+                    localStyles.activeUnderline,
+                    { backgroundColor: theme.colors.primaryColor },
+                  ]}
+                />
+              )}
             </TouchableOpacity>
           );
         })}
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

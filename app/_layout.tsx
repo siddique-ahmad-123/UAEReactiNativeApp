@@ -3,13 +3,13 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
-import { AppProvider } from "@/theme/AppProvider";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import ScreenWrapper from "@/components/ScreenWrapper";
-import { useEffect } from "react";
-import { initSyncListener } from "@/utils/networkListener";
-import Toast from "react-native-toast-message";
 import { toastConfig } from "@/components/Toast/toastConfig";
+import { AppProvider } from "@/theme/AppProvider";
+import { initSyncListener } from "@/utils/networkListener";
+import { useEffect } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Toast from "react-native-toast-message";
 
 export default function RootLayout() {
   useEffect(() => {
