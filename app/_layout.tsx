@@ -3,9 +3,9 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
+import ScreenWrapper from "@/components/ScreenWrapper";
 import { AppProvider } from "@/theme/AppProvider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import ScreenWrapper from "@/components/ScreenWrapper";
 
 export default function RootLayout() {
   const [loaded] = useFonts({

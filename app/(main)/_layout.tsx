@@ -6,7 +6,6 @@ export default function LoginLayout() {
       <Stack.Screen name="onboarding" />
       <Stack.Screen name="Request" />
       <Stack.Screen name="calculator" />
-      <Stack.Screen name="onboarding" />
       <Stack.Screen name="NeedHelp" />
       <Stack.Screen name="notification" />
       <Stack.Screen name="notification2" />

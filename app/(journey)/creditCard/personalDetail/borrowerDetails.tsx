@@ -101,87 +101,93 @@ const BorrowerPersonalInformation = () => {
         placeholder="Name"
         type="text"
       />
-      <CustomDatePicker control={control} name="dob" label={"Date of Birth"} />
+      <CustomDatePicker
+        control={control}
+        name={fieldNames.borrowerDOB}
+        label={"Date of Birth"}
+      />
       <CustomInput
         control={control}
-        name="age"
+        name={fieldNames.borrowerAge}
         label="Age"
         placeholder="Age"
         type="number"
       />
       <CustomDropDown
-        name="gender"
+        name={fieldNames.borrowerGender}
         label={"Gender"}
         data={genderOptions}
         control={control}
       />
       <CustomDropDown
+        name={fieldNames.borrowerNationality}
         label={"Nationality"}
         data={nationalityOptions}
         control={control}
       />
       <CustomDropDown
+        name={fieldNames.borrowerResidenceCountry}
         label={"Residence Country"}
         data={residenceCountryOptions}
         control={control}
       />
       <CustomInput
         control={control}
-        name="eidaNo"
+        name={fieldNames.borrowerEidaNo}
         label="EIDA No"
         placeholder="Enter your EIDA Number"
         type="number"
       />
       <CustomDatePicker
         control={control}
-        name="eidaIssueDate"
+        name={fieldNames.borrowerEidaIssueDate}
         label={"EIDA Issue Date"}
       />
       <CustomDatePicker
         control={control}
-        name="eidaExpiryDate"
+        name={fieldNames.borrowerEidaExpiryDate}
         label={"EIDA Expiry Date"}
       />
 
       <CustomInput
         control={control}
-        name="passportNo"
+        name={fieldNames.borrowerPassportNo}
         label="Passport No"
         placeholder="Enter your passport Number"
         type="number"
       />
       <CustomDatePicker
         control={control}
-        name="passportIssueDate"
+        name={fieldNames.borrowerPassportIssueDate}
         label={"Passport Issue Date"}
       />
       <CustomDatePicker
         control={control}
-        name="passportExpiryDate"
+        name={fieldNames.borrowerPassportExpiryDate}
         label={"Passport Expiry Date"}
       />
 
       <CustomInput
         control={control}
-        name="visaNo"
+        name={fieldNames.borrowerVisaNo}
         label="Visa No"
         placeholder="Enter your visa Number"
         type="number"
       />
       <CustomDatePicker
         control={control}
-        name="visaIssueDate"
+        name={fieldNames.borrowerVisaIssueDate}
         label={"Visa Issue Date"}
       />
       <CustomDatePicker
         control={control}
-        name="visaExpiryDate"
+        name={fieldNames.borrowerVisaExpiryDate}
         label={"VIsa Expiry Date"}
       />
 
       <CustomInput
         control={control}
-        name="emailId"
+        name={fieldNames.borrowerEmailId}
         label="Email ID"
         placeholder="Enter your email id"
         type="email"
@@ -189,7 +195,7 @@ const BorrowerPersonalInformation = () => {
 
       <CustomInput
         control={control}
-        name="visaNo"
+        name={fieldNames.borrowerMobileNo}
         label="Mobile No"
         placeholder="Enter your mobile number"
         type="number"
@@ -197,7 +203,7 @@ const BorrowerPersonalInformation = () => {
 
       <CustomInput
         control={control}
-        name="residenceVintage"
+        name={fieldNames.borrowerVintage}
         label="Residence Vintage(Months)"
         placeholder="Enter your residence vintage"
         type="number"
@@ -205,7 +211,7 @@ const BorrowerPersonalInformation = () => {
 
       <CustomInput
         control={control}
-        name="noOfDependents"
+        name={fieldNames.borrowerNoOfDependents}
         label="No of Dependents"
         placeholder="Enter the number of dependents"
         type="number"
@@ -215,25 +221,27 @@ const BorrowerPersonalInformation = () => {
 
       <CustomInput
         control={control}
-        name="addressLine1"
+        name={fieldNames.borrowerAddressLine1}
         label="Address Line 1"
         placeholder="Enter your address"
         type="text"
       />
       <CustomInput
         control={control}
-        name="addressLine2"
+        name={fieldNames.borrowerAddressLine2}
         label="Address Line 2"
         placeholder="Enter your address"
         type="text"
       />
 
       <CustomDropDown
+        name={fieldNames.borrowerEmirates}
         label={"Emirates"}
         data={emiratesOptions}
         control={control}
       />
       <CustomDropDown
+        name={fieldNames.borrowerCountry}
         label={"Country"}
         data={countryOptions}
         control={control}
@@ -247,6 +255,7 @@ const BorrowerPersonalInformation = () => {
         }}
       />
       <CustomDropDown
+        name={fieldNames.borrowerVerificationStatus}
         label={"Verification Status"}
         data={verificationOptions}
         control={control}
