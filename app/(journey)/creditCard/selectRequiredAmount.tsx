@@ -1,115 +1,69 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { useTheme } from "styled-components/native";
-import InputCard from "@/components/InputCard";
-import CustomButton from "@/components/CustomButton";
 import DocumentDownload from "@/components/DocumentDownload";
-import { router } from "expo-router";
-import Checkbox from 'expo-checkbox';
-import { gstyles } from "@/app/(main)/styles/selectRequiredLoan";
-import { styles } from "@/app/(main)/styles/Notification.Styles";
+import Checkbox from "expo-checkbox";
+import DynamicSliderCard from "@/components/CustomSliderCard/DynamicSliderCard";
+import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import { useApplicationStore } from "@/store/applicationStore";
-
-// Format number with commas
-const formatNumber = (n: number) =>
-  n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 const SelectRequiredAmount = () => {
   const [financeAmount, setFinanceAmount] = useState<number>(50000);
-  const [isChecked, setChecked] = useState(false); // ✅ checkbox state
+  const [isChecked, setChecked] = useState(false);
   const theme = useTheme();
-  const { nextStep,prevStep } = useApplicationStore();
+  const { nextStep, prevStep } = useApplicationStore();
+  const styles = StyleSheet.create({
+    checkboxContainer: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      marginTop: 20,
+      gap: 8,
+    },
+    checkboxLabel: {
+      flex: 1,
+      fontSize: 12,
+      color: theme.colors.primaryColor,
+    },
+    checkbox: {
+      margin: 8,
+    },
+  });
   return (
-    <SafeAreaView
-      style={[styles.safeArea, { backgroundColor: theme.colors.primaryColor }]}
+    <CustomMainChild
+      title="Select Required Amount"
+      noOfButtons={2}
+      doubleButtonTitle1="Cancel"
+      doubleButtonTitle2="Next"
+      onPressDoubleButton1={() => prevStep()}
+      onPressDoubleButton2={() => nextStep()}
     >
-      {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.headerTop}>
-          <Text
-            style={[styles.headerTitle, { color: theme.colors.textHeader }]}
-          >
-            Select Required Amount
-          </Text>
-          <TouchableOpacity onPress={() => router.push("/selectcreditcard")}>
-            <Text
-              style={[styles.closeButton, { color: theme.colors.background }]}
-            >
-              ✕
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      <DynamicSliderCard
+        title="Card Amount"
+        value={financeAmount}
+        setValue={setFinanceAmount}
+        min={10000}
+        max={200000}
+        step={1000}
+        unit="AED"
+      />
+      <View style={{ marginTop: 70 }} />
+      <DocumentDownload documentName="Download Terms & Conditions" />
+      <DocumentDownload documentName="Download Fees & Charges" />
+      <DocumentDownload documentName="Download Key Fact Statement" />
 
-      {/* White Container with Rounded Top */}
-      <View
-        style={[styles.container, { backgroundColor: theme.colors.background }]}
-      >
-        {/* Card Slider */}
-        <InputCard
-          label="Card Amount"
-          value={financeAmount}
-          min={10000}
-          max={2000000}
-          step={1000}
-          unit="AED"
-          onChange={setFinanceAmount}
-          formatValue={formatNumber}
-        />
-        <View style={{ marginTop: 70 }} />
-        <DocumentDownload documentName="Download Terms & Conditions" />
-        <DocumentDownload documentName="Download Fees & Charges" />
-        <DocumentDownload documentName="Download Key Fact Statement" />
-
-        <View style={gstyles.checkboxContainer}>
-          <Checkbox
-           style={gstyles.checkbox}
+      <View style={styles.checkboxContainer}>
+        <Checkbox
+          style={styles.checkbox}
           value={isChecked}
-         onValueChange={setChecked}
-          color={isChecked ? '#4630EB' : undefined}
-         />
-          <Text
-            style={[
-              gstyles.checkboxLabel,
-              { color: theme.colors.primaryColor },
-            ]}
-          >
-            I agree with below provided Terms and Conditions, Fees and Charges
-            Sheet and Key Fact Statement.
-          </Text>
-        </View>
-
-        {/* Footer Buttons */}
-        <View style={[gstyles.row, { marginTop: 30, marginBottom: 20 }]}>
-          <CustomButton
-            title="Cancel"
-            onPress={() => prevStep()}
-            variant="secondary"
-            type="outlined"
-            size="md"
-          />
-          <CustomButton
-            title="Next"
-            onPress={() => 
-              // if (!isChecked) {
-              //   alert("Please accept the terms before proceeding.");
-              //   return;
-              // }
-              nextStep()
-            }
-            variant="primary"
-            type="filled"
-            size="md"
-          />
-        </View>
+          onValueChange={setChecked}
+          color={isChecked ? theme.colors.primaryColor : undefined}
+        />
+        <Text style={styles.checkboxLabel}>
+          I agree with below provided Terms and Conditions, Fees and Charges
+          Sheet and Key Fact Statement.
+        </Text>
       </View>
-    </SafeAreaView>
+    </CustomMainChild>
   );
 };
 

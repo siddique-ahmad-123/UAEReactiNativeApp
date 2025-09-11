@@ -1,26 +1,17 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-  Image,
-  ScrollView, // 👈 added
-} from "react-native";
-
-import CustomButton from "@/components/CustomButton";
+import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { useTheme } from "styled-components/native";
 import { router } from "expo-router";
 import MethodSelector from "@/components/MethodSelector";
-import DocumentDownload from "@/components/DocumentDownload";
 import { styles } from "../styles/submitApplication4.Styles";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
+import { useApplicationStore } from "@/store/applicationStore";
 
 const NotificationScreen = () => {
   const [selectedMethod, setSelectedMethod] = React.useState<
     string | undefined
   >();
-
+  const { nextStep } = useApplicationStore();
   const methodOptions = [
     {
       id: "email",
@@ -47,90 +38,57 @@ const NotificationScreen = () => {
 
   const theme = useTheme();
   return (
-    <SafeAreaView
-      style={[styles.safeArea, { backgroundColor: theme.colors.primaryColor }]}
+    <CustomMainChild
+      title="Submit Application"
+      noOfButtons={1}
+      singleButtonTitle="Return to Home Page"
+      onClose={() => router.back()}
+      onPressSingleButton={() => nextStep()}
     >
-      {/* Purple Header */}
-      <View style={styles.header}>
-        <View style={styles.headerTop}>
-          <Text
-            style={[styles.headerTitle, { color: theme.colors.textHeader }]}
-          >
-            Submit Application
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 20 }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.image}>
+          <Image
+            source={require("../../../assets/images/amico.png")}
+            style={{ width: 200, height: 200 }}
+            resizeMode="contain"
+          />
+          <Text style={[styles.textbox2, { color: theme.colors.textPrimary }]}>
+            Application Submitted
           </Text>
-          <TouchableOpacity>
+        </View>
+
+        <Text
+          style={[
+            styles.textbox3,
+            { color: theme.colors.secondaryText, marginBottom: 30 },
+          ]}
+        >
+          We’re sorry but your request did not go through with the amount of
+          <Text style={{ color: theme.colors.primaryColor }}>45,000 AED</Text>
+        </Text>
+
+        <View style={styles.linkTextView}>
+          <TouchableOpacity onPress={() => {}}>
             <Text
-              style={[styles.closeButton, { color: theme.colors.background }]}
+              style={[styles.linktext, { color: theme.colors.primaryColor }]}
             >
-              ✕
+              You can choose for counter offer or apply for higher limit with
+              our team
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
-
-      {/* White Container with Rounded Top */}
-      <View
-        style={[styles.container, { backgroundColor: theme.colors.background }]}
-      >
-        <ScrollView
-          contentContainerStyle={{ paddingBottom: 20 }}
-          showsVerticalScrollIndicator={false}
-        >
-          <View style={styles.image}>
-            <Image
-              source={require("../../../assets/images/amico.png")}
-              style={{ width: 200, height: 200 }}
-              resizeMode="contain"
-            />
-            <Text
-              style={[styles.textbox2, { color: theme.colors.textPrimary }]}
-            >
-              Application Submitted
-            </Text>
-          </View>
-
-          <Text
-            style={[
-              styles.textbox3,
-              { color: theme.colors.secondaryText, marginBottom: 30 },
-            ]}
-          >
-            We’re sorry but your request did not go through with the amount of 
-            <Text style={{color:theme.colors.primaryColor}}>45,000 AED</Text>
-          </Text>
-
-          <View style={styles.linkTextView}>
-            <TouchableOpacity onPress={() => {}}>
-              <Text
-                style={[styles.linktext, { color: theme.colors.primaryColor }]}
-              >
-                You can choose for counter offer or apply for higher limit with
-                our team
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          {/* Method Selector */}
-          <MethodSelector
-            title="Application Details"
-            options={methodOptions}
-            selectedId={selectedMethod}
-            onSelect={(id) => setSelectedMethod(id)}
-            titleCenter
-          />
-
-          {/* Back Button */}
-          <CustomButton
-            title="Return to Home Page"
-            size="full"
-            variant="primary"
-            type="filled"
-            onPress={() => router.push("/NavScreen")}
-            style={{ marginTop: 20 }}
-          />
-        </ScrollView>
-      </View>
-    </SafeAreaView>
+        <MethodSelector
+          title="Application Details"
+          options={methodOptions}
+          selectedId={selectedMethod}
+          onSelect={(id) => setSelectedMethod(id)}
+          titleCenter
+        />
+      </ScrollView>
+    </CustomMainChild>
   );
 };
 

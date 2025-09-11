@@ -1,0 +1,168 @@
+import React, { useState } from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useTheme } from "styled-components/native";
+import CustomButton from "../CustomButton";
+import {
+  fontSize,
+  fontWeight,
+  radius,
+  spacing,
+  spacingVertical,
+  width,
+} from "@/constants/Metrics";
+import { Ionicons } from "@expo/vector-icons";
+
+interface FormHeaderProps {
+  title: string;
+  subTitle?: string;
+  onClose?: () => void;
+  noOfButtons: number;
+  singleButtonTitle?: string;
+  doubleButtonTitle1?: string;
+  doubleButtonTitle2?: string;
+  onPressSingleButton?: () => void;
+  onPressDoubleButton1?: () => void;
+  onPressDoubleButton2?: () => void;
+  children?: React.ReactNode;
+}
+const CustomMainChild = ({
+  title,
+  subTitle,
+  onClose,
+  noOfButtons,
+  singleButtonTitle,
+  doubleButtonTitle1,
+  doubleButtonTitle2,
+  onPressSingleButton,
+  onPressDoubleButton1,
+  onPressDoubleButton2,
+  children,
+}: FormHeaderProps) => {
+  const theme = useTheme();
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.primaryColor,
+    },
+    header: {
+      padding: spacing.md,
+      gap:spacingVertical.xs,
+    },
+    titleContainer: {
+      flexDirection: theme.flexRow.flexDirection,
+      alignItems: "center",
+      justifyContent:"space-between"
+    },
+    title: {
+      color: theme.colors.statusBarText,
+      fontWeight: fontWeight.medium,
+      fontSize: fontSize.xl,
+      marginRight: spacing.sm,
+    },
+    iconButton: {
+      paddingHorizontal: spacing.xs,
+      alignSelf: "center",
+    },
+    subTitle: {
+      color: theme.colors.statusBarText,
+      fontWeight: fontWeight.medium,
+      fontSize: fontSize.xs,
+      marginRight: spacing.sm,
+    },
+    scrollViewContainer: {
+      flex: 1,
+      backgroundColor: theme.colors.background,
+      borderTopRightRadius: radius.pill,
+      borderTopLeftRadius: radius.pill,
+    },
+    scrollViewContent: {
+      padding: spacing.md,
+      paddingBottom: spacingVertical.xl, // give room at bottom for keyboard
+      gap: spacingVertical.md,
+    },
+    buttonRow: {
+      flexDirection: theme.flexRow.flexDirection,
+      justifyContent: "space-between",
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacingVertical.md,
+      backgroundColor: theme.colors.background,
+    },
+  });
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{title}</Text>
+          {onClose && (
+            <TouchableOpacity onPress={onClose} style={styles.iconButton}>
+              <Ionicons
+                name="close"
+                size={30}
+                color={theme.colors.textHeader}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
+        <Text style={styles.subTitle}>{subTitle}</Text>
+      </View>
+      <View style={styles.scrollViewContainer}>
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+          {children}
+        </ScrollView>
+        {/* Footer stays pinned outside scroll */}
+        {(noOfButtons === 1 || noOfButtons === 2) && (
+          <View style={styles.buttonRow}>
+            {noOfButtons === 1 && (
+              <CustomButton
+                title={singleButtonTitle ? singleButtonTitle : ""}
+                onPress={() => {
+                  if (onPressSingleButton) {
+                    onPressSingleButton();
+                  }
+                }}
+                variant="primary"
+                type="filled"
+                size="full"
+              />
+            )}
+            {noOfButtons === 2 && (
+              <>
+                <CustomButton
+                  title={doubleButtonTitle1 ? doubleButtonTitle1 : ""}
+                  onPress={() => {
+                    if (onPressDoubleButton1) {
+                      onPressDoubleButton1();
+                    }
+                  }}
+                  variant="secondary"
+                  type="outlined"
+                  size="md"
+                />
+                <CustomButton
+                  title={doubleButtonTitle2 ? doubleButtonTitle2 : ""}
+                  onPress={() => {
+                    if (onPressDoubleButton2) {
+                      onPressDoubleButton2();
+                    }
+                  }}
+                  variant="primary"
+                  type="filled"
+                  size="md"
+                />
+              </>
+            )}
+          </View>
+        )}
+      </View>
+    </View>
+  );
+};
+
+export default CustomMainChild;

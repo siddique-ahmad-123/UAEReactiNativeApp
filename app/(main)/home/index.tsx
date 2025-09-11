@@ -85,81 +85,66 @@ export default function Dashboard() {
   const theme = useTheme();
   const { resetForm } = useApplicationStore();
 
-
   return (
-    <SafeAreaView
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
-    >
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Header */}
-        <View style={localStyles.header}>
-          <Image
-            source={{ uri: "https://randomuser.me/api/portraits/men/32.jpg" }}
-            style={localStyles.avatar}
-          />
-          <View>
-            <Text
-              style={[
-                localStyles.welcome,
-                { color: theme.colors.inactiveNavIconColor },
-              ]}
-            >
-              Welcome,
-            </Text>
-            <Text
-              style={[
-                localStyles.username,
-                { color: theme.colors.primaryColor },
-              ]}
-            >
-              Mohammad Sahil Munaf
-            </Text>
-          </View>
-        </View>
-
-        <HeroBanner
-          message="Thank you for being associated with us."
-          backgroundImage={require("../../../assets/images/HeroBanner.png")}
+    <ScrollView showsVerticalScrollIndicator={false}>
+      {/* Header */}
+      <View style={localStyles.header}>
+        <Image
+          source={{ uri: "https://randomuser.me/api/portraits/men/32.jpg" }}
+          style={localStyles.avatar}
         />
-
-        {/* My Services */}
-        <Text
-          style={[
-            localStyles.sectionTitle,
-            { color: theme.colors.primaryColor },
-          ]}
-        >
-          My Services
-        </Text>
-        <View style={localStyles.serviceRow}>
-          {services.map((item) => (
-            <ServiceTile
-              key={item.id}
-              title={item.title}
-              iconName={item.iconName}
-              onPress={() => router.push(item.route)}
-            />
-          ))}
+        <View>
+          <Text
+            style={[
+              localStyles.welcome,
+              { color: theme.colors.inactiveNavIconColor },
+            ]}
+          >
+            Welcome,
+          </Text>
+          <Text
+            style={[localStyles.username, { color: theme.colors.primaryColor }]}
+          >
+            Mohammad Sahil Munaf
+          </Text>
         </View>
+      </View>
 
-        {/* Apply Now */}
-        <Text style={localStyles.sectionTitle}>Apply Now</Text>
-        <View style={localStyles.grid}>
-          {applyNow.map((item) => (
-            <ProductCard
-              key={item.id}
-              title={item.title}
-              image={require("../../../assets/images/ProductImage.png")}
-              onPress={() => {
+      <HeroBanner
+        message="Thank you for being associated with us."
+        backgroundImage={require("../../../assets/images/HeroBanner.png")}
+      />
+
+      {/* My Services */}
+      <Text
+        style={[localStyles.sectionTitle, { color: theme.colors.primaryColor }]}
+      >
+        My Services
+      </Text>
+      <View style={localStyles.serviceRow}>
+        {services.map((item) => (
+          <ServiceTile
+            key={item.id}
+            title={item.title}
+            iconName={item.iconName}
+            onPress={() => router.push(item.route)}
+          />
+        ))}
+      </View>
+      <Text style={localStyles.sectionTitle}>Apply Now</Text>
+      <View style={localStyles.grid}>
+        {applyNow.map((item) => (
+          <ProductCard
+            key={item.id}
+            title={item.title}
+            image={require("../../../assets/images/ProductImage.png")}
+            onPress={() => {
               resetForm(); // resets and navigates home
               router.push("/(journey)/creditCard/selectCreditCard"); // start first step
-        }}
-            />
-          ))}
-        </View>
-      </ScrollView>
-
-      {/* Bottom Navbar */}
-    </SafeAreaView>
+            }}
+          />
+        ))}
+      </View>
+    </ScrollView>
   );
 }

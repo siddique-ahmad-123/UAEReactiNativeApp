@@ -1,40 +1,118 @@
-import React, { useState, useRef } from "react";
-import {
-  View,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  LayoutChangeEvent,
-  Dimensions,
-  ScrollView,
-} from "react-native";
-import Slider from "@react-native-community/slider";
-import { styles } from "../styles/Calculator.Styles";
-import InputCard from "@/components/InputCard";
+import React, { useState } from "react";
+import { View, Text, Image, ScrollView, StyleSheet } from "react-native";
 import { useTheme } from "styled-components/native";
 import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
-
-const { width } = Dimensions.get("window");
-
-const formatNumber = (n: number) =>
-  n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
+import DynamicSliderCard from "@/components/CustomSliderCard/DynamicSliderCard";
+import { spacing, spacingVertical } from "@/constants/Metrics";
 
 const EMICalculatorScreen: React.FC = () => {
+  const theme = useTheme();
+  const styles = StyleSheet.create({
+    mainContainer: {
+      flex: 1,
+      backgroundColor: theme.colors.background,
+      padding: spacing.md,
+      gap: spacingVertical.md,
+    },
+    greetingRow: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    avatar: {
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      borderWidth: 2,
+    },
+    greetingSmall: {
+      fontSize: 13,
+    },
+    greetingName: {
+      fontSize: 16,
+      fontWeight: "700",
+      marginTop: 2,
+    },
+
+    emiCard: {
+      borderRadius: 12,
+      padding: spacing.md,
+      flexDirection: "row",
+      alignItems: "center",
+      overflow: "hidden",
+    },
+    emiTitle: {
+      fontSize: 20,
+      fontWeight: "800",
+      marginBottom: 6,
+    },
+    emiDesc: {
+      fontSize: 14,
+      lineHeight: 18,
+      opacity: 0.95,
+    },
+    emiImage: {
+      width: 100,
+      height: 100,
+      marginLeft: 8,
+    },
+
+    container: {
+      flex: 1,
+      borderTopLeftRadius: 18,
+      borderTopRightRadius: 18,
+      backgroundColor: theme.colors.background,
+      gap: spacingVertical.sm,
+    },
+
+    inputCard: {
+      borderRadius: 12,
+      padding: 14,
+      marginBottom: 12,
+      borderWidth: 1,
+      shadowOpacity: 0.03,
+      shadowOffset: { width: 0, height: 2 },
+      shadowRadius: 4,
+    },
+
+    resultCard: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      borderRadius: 12,
+      borderWidth: 1,
+      padding: 16,
+      marginBottom: 18,
+    },
+    resultLabel: {
+      fontSize: 18,
+      marginBottom: 6,
+      fontWeight: "600",
+    },
+    resultAmount: {
+      fontSize: 18,
+      fontWeight: "400",
+    },
+    resultUnit: {
+      fontSize: 16,
+      fontWeight: "500",
+    },
+
+    backButton: {
+      paddingVertical: 14,
+      borderRadius: 10,
+      marginBottom: 20,
+      alignItems: "center",
+    },
+    backButtonText: {
+      fontWeight: "800",
+      fontSize: 16,
+    },
+  });
   // State
   const [financeAmount, setFinanceAmount] = useState<number>(50000);
   const [tenure, setTenure] = useState<number>(36);
   const [profitRate, setProfitRate] = useState<number>(6);
-
-  // layout widths for custom slider fill
-  const [trackWidthFA, setTrackWidthFA] = useState<number>(0);
-  const [trackWidthTen, setTrackWidthTen] = useState<number>(0);
-  const [trackWidthPR, setTrackWidthPR] = useState<number>(0);
 
   // EMI calculation
   function calculateEMI(principal: number, annualRate: number, months: number) {
@@ -47,19 +125,9 @@ const EMICalculatorScreen: React.FC = () => {
   const monthlyInstallment = Math.round(
     calculateEMI(financeAmount, profitRate, tenure)
   );
-  const theme = useTheme();
-  return (
-    <SafeAreaView
-      style={[styles.safeArea, { backgroundColor: theme.colors.background }]}
-    >
-      {/* top purple strip (statusbar area) */}
-      <View
-        style={[
-          styles.topPurple,
-          { backgroundColor: theme.colors.primaryColor },
-        ]}
-      />
 
+  return (
+    <View style={styles.mainContainer}>
       {/* Greeting row with avatar */}
       <View style={styles.greetingRow}>
         <Image
@@ -84,75 +152,69 @@ const EMICalculatorScreen: React.FC = () => {
       </View>
 
       {/* Purple EMI Card */}
-      <View
-        style={[styles.emiCard, { backgroundColor: theme.colors.primaryColor }]}
-      >
-        <View style={{ flex: 1 }}>
-          <Text style={[styles.emiTitle, { color: theme.colors.background }]}>
-            EMI Calculator
-          </Text>
-          <Text
-            style={[styles.emiDesc, { color: theme.colors.background }]}
-            numberOfLines={4}
-          >
-            This calculator will help you to calculate the expected EMI on your
-            loan amount by taking into consideration the Principal Amount, Loan
-            Tenure and Interest.
-          </Text>
-        </View>
 
-        <Image
-          source={require("../../../assets/images/emi.png")} // replace with your illustration
-          style={styles.emiImage}
-          resizeMode="contain"
-        />
-      </View>
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingBottom: 100 }}
         showsVerticalScrollIndicator={false}
       >
         {/* White container (rounded top) */}
-        <View
-          style={[
-            styles.container,
-            { backgroundColor: theme.colors.background },
-          ]}
-        >
-          {/* Finance Amount card */}
-          <InputCard
-            label="Finance Amount"
+        <View style={styles.container}>
+          <View
+            style={[
+              styles.emiCard,
+              { backgroundColor: theme.colors.primaryColor },
+            ]}
+          >
+            <View style={{ flex: 1 }}>
+              <Text
+                style={[styles.emiTitle, { color: theme.colors.background }]}
+              >
+                EMI Calculator
+              </Text>
+              <Text
+                style={[styles.emiDesc, { color: theme.colors.background }]}
+                numberOfLines={4}
+              >
+                This calculator will help you to calculate the expected EMI on
+                your loan amount by taking into consideration the Principal
+                Amount, Loan Tenure and Interest.
+              </Text>
+            </View>
+
+            <Image
+              source={require("../../../assets/images/emi.png")} // replace with your illustration
+              style={styles.emiImage}
+              resizeMode="contain"
+            />
+          </View>
+          <DynamicSliderCard
+            title="Finance Amount"
             value={financeAmount}
+            setValue={setFinanceAmount}
             min={10000}
-            max={2000000}
+            max={200000}
             step={1000}
             unit="AED"
-            onChange={setFinanceAmount}
-            formatValue={formatNumber}
           />
-
-          {/* Tenure card */}
-          <InputCard
-            label="Tenure (Months)"
+          <DynamicSliderCard
+            title="Tenure (Months)"
             value={tenure}
+            setValue={setTenure}
             min={12}
             max={120}
             step={1}
             unit="Mon"
-            onChange={setTenure}
           />
-
-          {/* Profit Rate card */}
-          <InputCard
-            label="Profit Rate"
+          <DynamicSliderCard
+            title="Profit Rate"
             value={profitRate}
+            setValue={setProfitRate}
             min={1}
-            max={10}
-            step={1}
+            max={20}
+            step={0.1}
             unit="%"
-            onChange={setProfitRate}
           />
-
           <View
             style={[
               styles.inputCard,
@@ -179,7 +241,7 @@ const EMICalculatorScreen: React.FC = () => {
                     { color: theme.colors.shadowColor },
                   ]}
                 >
-                  {formatNumber(monthlyInstallment)}
+                  {monthlyInstallment.toLocaleString()}
                 </Text>
               </View>
               <Text
@@ -189,19 +251,18 @@ const EMICalculatorScreen: React.FC = () => {
               </Text>
             </View>
           </View>
-
-          {/* Back button */}
-          <CustomButton
-            title="Back"
-            size="full"
-            variant="primary"
-            type="filled"
-            onPress={() => router.push("/NavScreen")}
-            style={{ marginTop: 0 }}
-          />
         </View>
       </ScrollView>
-    </SafeAreaView>
+      {/* Back button */}
+      <CustomButton
+        title="Back"
+        size="full"
+        variant="primary"
+        type="filled"
+        onPress={() => router.push("/NavScreen")}
+        style={{ marginTop: 0 }}
+      />
+    </View>
   );
 };
 

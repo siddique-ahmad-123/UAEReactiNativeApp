@@ -4,6 +4,7 @@ import { StyleSheet, View } from "react-native";
 import DynamicSliderCard from "./amountCard2";
 import { GestureHandlerRootView, ScrollView } from "react-native-gesture-handler";
 import { useState } from "react";
+import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 
 const testScreen = () => {
 const [financeAmount, setFinanceAmount] = useState(50000);
@@ -12,7 +13,7 @@ const [financeAmount, setFinanceAmount] = useState(50000);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-    <ScrollView style={{ flex: 1, padding: 16 }}>
+    {/* <ScrollView style={{ flex: 1, padding: 16 }}>
       <DynamicSliderCard
         title="Finance Amount"
         value={financeAmount}
@@ -40,7 +41,8 @@ const [financeAmount, setFinanceAmount] = useState(50000);
         step={0.1}
         unit="%"
       />
-    </ScrollView>
+    </ScrollView> */}
+    <CustomMainChild title="Requeest" subTitle="oooo" noOfButtons={1} singleButtonTitle="Back" onClose={()=>""}/>
     </GestureHandlerRootView>
   );
 };

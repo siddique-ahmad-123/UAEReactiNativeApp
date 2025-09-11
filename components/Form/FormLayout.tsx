@@ -65,7 +65,6 @@ export default function FormLayout({
   });
 
   return (
-    <ScreenWrapper>
       <View style={styles.container}>
         <FormHeader
           stepNumber={stepNumber}
@@ -107,6 +106,5 @@ export default function FormLayout({
           </View>
         </View>
       </View>
-    </ScreenWrapper>
   );
 }
