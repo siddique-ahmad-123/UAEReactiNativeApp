@@ -16,35 +16,58 @@ import { styles } from "@/app/(main)/styles/SelectCreditCard.Styles";
 import { useApplicationStore } from "@/store/applicationStore";
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 type CardItem = {
   id: string;
   title: string;
-  description: string;
+  description1: string;
+  description2: string;
+  description3: string;
+  description4: string;
+  description5: string;
+  description6: string;
+  description7: string;
   image: any;
 };
 
 const cards: CardItem[] = [
   {
     id: "1",
-    title: "Cashback Credit Card",
-    description:
-      "Minimum Income Requirement: AED 5000/month.\nEarn cashback on every spend.\nFree movie tickets monthly.\nComplimentary airport lounge access.\nAnnual Fee: AED 300.Minimum Income Requirement: AED 15,000/month.n every spend.\nFree movie tickets monthly.\nComplimentary airport lounge access.\nAnnual Fee: AED 300.Minimum Income Requirement: AED 15,000/monthn every spend.\nFree movie tickets monthly.\nComplimentary airport lounge access.\nAnnual Fee: AED 300.Minimum Income Requirement: AED 15,000/monthn every spend.\nFree movie tickets monthly.\nComplimentary airport lounge access.\nAnnual Fee: AED 300.Minimum Income Requirement: AED 15,000/month",
-    image: require("../../../assets/images/card1.png"),
+    title: "Elite Credit Card",
+    description1: "Minimum Income Requirement: AED 5,000/month.",
+    description2:
+      "Welcome Bonus: AED 500 for new customers (spend ≥AED 5,000 in first 2 months); AED 100 for existing cardholders.",
+    description3:
+      "Rewards / Cashback:\n• 5% on dining (local & international)\n• 2% on international spends\n• Up to 1% on local spends\n• 0.33% on govt. payments, utilities, education, \ncharity, fuel, rental, telecom spends",
+    description4: "",
+    description5: "",
+    description6: "Joining Fees - Nil",
+    description7: "Annual Fees - Nil",
+    image: require("../../../assets/images/card2.png"),
   },
   {
     id: "2",
-    title: "Elite Credit Card",
-    description:
-      "Minimum Income Requirement: AED 5000/month.\nEarn cashback on every spend.\nFree movie tickets monthly.\nComplimentary airport lounge access.\nAnnual Fee: AED 300.Minimum Income Requirement: AED 15,000/month.n every spend.\nFree movie tickets monthly.\nComplimentary airport lounge access.\nAnnual Fee: AED 300.Minimum Income Requirement: AED 15,000/monthn every spend.\nFree movie tickets monthly.\nComplimentary airport lounge access.\nAnnual Fee: AED 300.Minimum Income Requirement: AED 15,000/monthn every spend.\nFree movie tickets monthly.\nComplimentary airport lounge access.\nAnnual Fee: AED 300.Minimum Income Requirement: AED 15,000/month",
-    image: require("../../../assets/images/card2.png"),
+    title: "Cashback Credit Card",
+    description1: "Minimum Income Requirement: AED 10,000/month.",
+    description2: "Welcome Bonus: AED 1,200 cashback/spending bonuses (3 transactions ≥ AED 100 within 2 months)",
+    description3: "Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local",
+    description4: "Lifestyle Perks: Global lounge access, airport transfers, Fitness First visits, cinema discounts, concierge benefits, etc.",
+    description5: "Best Rewards: Extensive travel and lifestyle perks; ideal for frequent travelers.",
+    description6: "Joining Fees - Nil",
+    description7: "Annual Fees - AED650",
+    image: require("../../../assets/images/card1.png"),
   },
   {
     id: "3",
     title: "World Credit Card",
-    description:
-      "Minimum Income Requirement: AED 5000/month.\nEarn cashback on every spend.\nFree movie tickets monthly.\nComplimentary airport lounge access.\nAnnual Fee: AED 300.Minimum Income Requirement: AED 15,000/month.n every spend.\nFree movie tickets monthly.\nComplimentary airport lounge access.\nAnnual Fee: AED 300.Minimum Income Requirement: AED 15,000/monthn every spend.\nFree movie tickets monthly.\nComplimentary airport lounge access.\nAnnual Fee: AED 300.Minimum Income Requirement: AED 15,000/monthn every spend.\nFree movie tickets monthly.\nComplimentary airport lounge access.\nAnnual Fee: AED 300.Minimum Income Requirement: AED 15,000/month",
+    description1: "Minimum Income Requirement: AED 25,000/month.",
+    description2: "Welcome Bonus: AED 2,000 cashback after 3 transactions ≥ AED 100 in first 2 months",
+    description3: "Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local",
+    description4: "Perks: Airport lounges (900+ worldwide, 12 visits/year), villa/pickup, valet, golf, fitness, concierge, cinema, fine dining, etc.",
+    description5: "Best Rewards: Deep perks, elite status travel benefits.",
+    description6: "Joining Fees - AED250",
+    description7: "Annual Fees - AED650",
     image: require("../../../assets/images/card3.png"),
   },
 ];
@@ -66,7 +89,37 @@ const RequestsScreen = () => {
       <Text
         style={[styles.cardDescription, { color: theme.colors.textPrimary }]}
       >
-        {item.description}
+        {item.description1}
+      </Text>
+      <Text
+        style={[styles.cardDescription, { color: theme.colors.textPrimary }]}
+      >
+        {item.description2}
+      </Text>
+      <Text
+        style={[styles.cardDescription, { color: theme.colors.textPrimary }]}
+      >
+        {item.description3}
+      </Text>
+      <Text
+        style={[styles.cardDescription, { color: theme.colors.textPrimary }]}
+      >
+        {item.description4}
+      </Text>
+      <Text
+        style={[styles.cardDescription, { color: theme.colors.textPrimary }]}
+      >
+        {item.description5}
+      </Text>
+      <Text
+        style={[styles.cardDescription2, { color: theme.colors.textPrimary }]}
+      >
+        {item.description6}
+      </Text>
+      <Text
+        style={[styles.cardDescription2, { color: theme.colors.textPrimary }]}
+      >
+        {item.description7}
       </Text>
       <View style={styles.buttonRow}>
         <TouchableOpacity
@@ -108,9 +161,10 @@ const RequestsScreen = () => {
       onPressSingleButton={() => router.push("/NavScreen")}
     >
       <Carousel
+      style={{marginTop:-32}}
         ref={carouselRef}
-        width={width - 70}
-        height={568}
+        width={width - 32}
+        height={height}
         data={cards}
         renderItem={({ item }) => renderItem(item)}
         mode="parallax"

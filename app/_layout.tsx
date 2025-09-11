@@ -6,8 +6,15 @@ import "react-native-reanimated";
 import { AppProvider } from "@/theme/AppProvider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import ScreenWrapper from "@/components/ScreenWrapper";
+import { useEffect } from "react";
+import { initSyncListener } from "@/utils/networkListener";
+import Toast from "react-native-toast-message";
+import { toastConfig } from "@/components/Toast/toastConfig";
 
 export default function RootLayout() {
+  useEffect(() => {
+    initSyncListener();
+  }, []);
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/karbon-regular-webfont.ttf"),
     LatoRegular: require("../assets/fonts/Lato-Regular.ttf"),
@@ -20,7 +27,7 @@ export default function RootLayout() {
     <AppProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <ScreenWrapper>
-          <Stack initialRouteName="(main)">
+          <Stack initialRouteName="(journey)">
             <Stack.Screen name="(test)" options={{ headerShown: false }} />
             <Stack.Screen name="(auth)" options={{ headerShown: false }} />
             <Stack.Screen name="(main)" options={{ headerShown: false }} />
@@ -28,6 +35,7 @@ export default function RootLayout() {
             <Stack.Screen name="+not-found" />
           </Stack>
           <StatusBar style="auto" />
+          <Toast config={toastConfig}/>
         </ScreenWrapper>
       </GestureHandlerRootView>
     </AppProvider>

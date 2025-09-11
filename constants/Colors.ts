@@ -27,16 +27,15 @@ export const LightThemeColorConstants = {
 
   textHeader: "#FFFF",
 
-  borderColor:"#DDDD",
+  borderColor: "#DDDD",
 
-  sliderColor:"#8924C6",
+  sliderColor: "#8924C6",
 
   errorTextColor: "#FF3333",
 
+  secondaryText: "#636363",
 
-  secondaryText:"#636363",
-
-  subtitle:"#666"
+  subtitle: "#666",
 } as const;
 
 export const DarkThemeColorConstants = {
@@ -52,8 +51,8 @@ export const DarkThemeColorConstants = {
   background: "#ffffffff",
   iconBackground: "#7E5A9B",
 
-  textPrimary:"#333333",
-  inputFieldBorder:"#DEDEDE",
+  textPrimary: "#333333",
+  inputFieldBorder: "#DEDEDE",
 
   verifyCheck: "#2F9400",
   verifyCheckLight: "#EAFFE0",
@@ -68,14 +67,14 @@ export const DarkThemeColorConstants = {
 
   textHeader: "#FFFF",
 
-  borderColor:"#CCCC",
+  borderColor: "#DDDD",
 
-  sliderColor:"#8924C6",
+  sliderColor: "#8924C6",
 
   errorTextColor: "#FF3333",
 
-    secondaryText:"#636363",
-      subtitle:"#666"
+  secondaryText: "#636363",
 
+  subtitle: "#666",
 } as const;
 export type ThemeColors = typeof LightThemeColorConstants;
