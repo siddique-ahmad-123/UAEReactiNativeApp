@@ -5,6 +5,7 @@ import { localStyles } from "../styles/Notification2.Styles";
 import { useApplicationStore } from "@/store/applicationStore";
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import { router } from "expo-router";
+import CustomInput from "@/components/CustomInput";
 
 const NotificationScreen = () => {
   const theme = useTheme();
@@ -16,52 +17,26 @@ const NotificationScreen = () => {
       noOfButtons={1}
       singleButtonTitle="Back"
       onClose={() => router.back()}
-      onPressSingleButton={() => prevStep()}
+      onPressSingleButton={() => router.back()}
     >
       <Text style={localStyles.title2}>Your Request is under processing</Text>
       <Text style={localStyles.subtitle}>
         We will notify you once we receive any update on your request
       </Text>
-      <View
-        style={[
-          localStyles.textBox,
-          { borderColor: theme.colors.borderColor },
-          { backgroundColor: theme.colors.background },
-        ]}
-      >
-        <Text
-          style={[
-            localStyles.label,
-            { color: theme.colors.primaryColor },
-            { backgroundColor: theme.colors.background },
-          ]}
-        >
-          Description
-        </Text>
-        <Text style={[localStyles.value, { color: theme.colors.shadowColor }]}>
-          Need help for Credit Card
-        </Text>
-      </View>
-      <View
-        style={[
-          localStyles.textBox,
-          { borderColor: theme.colors.borderColor },
-          { backgroundColor: theme.colors.background },
-        ]}
-      >
-        <Text
-          style={[
-            localStyles.label,
-            { color: theme.colors.primaryColor },
-            { backgroundColor: theme.colors.background },
-          ]}
-        >
-          Resolution Provided
-        </Text>
-        <Text style={[localStyles.value, { color: theme.colors.shadowColor }]}>
-          Pending...
-        </Text>
-      </View>
+      <CustomInput
+        label="Description"
+        placeholder="Need help for Credit Card"
+        type="textarea"
+        numberOfLines={9}
+      />
+
+      <CustomInput
+        label="Resolution Provided"
+        placeholder="Pending.."
+        type="textarea"
+        numberOfLines={9}
+      />
+     
     </CustomMainChild>
   );
 };

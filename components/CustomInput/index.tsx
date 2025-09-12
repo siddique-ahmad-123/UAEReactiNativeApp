@@ -24,10 +24,11 @@ interface CustomInputProps {
   name?: string; // only required if using control
   label: string;
   placeholder?: string;
-  type?: "text" | "email" | "number" | "currency" | "password";
+  type?: "text" | "email" | "number" | "currency" | "password" | "textarea";
   variant?: "full" | "half";
   mandatory?: boolean;
-  secureTextEntry?:boolean
+  secureTextEntry?: boolean;
+  numberOfLines?: number;
 }
 
 const CustomInput = ({
@@ -38,6 +39,7 @@ const CustomInput = ({
   type = "text",
   variant = "full",
   mandatory = false,
+  numberOfLines = 4,
 }: CustomInputProps) => {
   const [secure, setSecure] = useState(type === "password");
   const [localValue, setLocalValue] = useState(""); // for uncontrolled mode
@@ -49,7 +51,6 @@ const CustomInput = ({
       borderRadius: radius.md,
       paddingHorizontal: spacing.md,
       paddingVertical: spacingVertical.xs,
-      // marginVertical: spacingVertical.sm, 
     },
     full: {
       width: width.full,
@@ -86,6 +87,11 @@ const CustomInput = ({
       fontSize: fontSize.xs,
       marginTop: spacingVertical.xs,
       marginLeft: spacing.sm,
+    },
+    textArea: {
+      textAlignVertical: "top",
+      minHeight: numberOfLines * 22,
+      paddingTop: spacing.sm,
     },
   });
 
@@ -143,14 +149,17 @@ const CustomInput = ({
             style={[
               styles.input,
               { color: theme.colors.textPrimary },
-              { flex: 1 },
+              { flex: type === "textarea" ? 0 : 1 },
+              type === "textarea" && styles.textArea,
             ]}
             placeholder={placeholder}
             placeholderTextColor="#aaa"
             value={value}
             onChangeText={onChange}
             onBlur={onBlur}
-            secureTextEntry={secure}
+            secureTextEntry={type === "password" ? secure : false}
+            multiline={type === "textarea"}
+            numberOfLines={type === "textarea" ? numberOfLines : 1}
             keyboardType={
               type === "email"
                 ? "email-address"

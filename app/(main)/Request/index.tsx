@@ -20,9 +20,8 @@ const { prevStep } = useApplicationStore();
       noOfButtons={1}
       singleButtonTitle="Back"
       onClose={() => router.back()}
-      onPressSingleButton={() => {}}
+      onPressSingleButton={() => router.back()}
     >
-
       <View
         style={[styles.container, { backgroundColor: theme.colors.background }]}
       >
