@@ -30,10 +30,10 @@ export default function RootLayout() {
 
   return (
     <AppProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureHandlerRootView style={{ flex: 1, }}> 
         <ScreenWrapper>
           <Stack initialRouteName="(main)">
-            <Stack.Screen name="(test)" options={{ headerShown: false }} />
+            {/* <Stack.Screen name="(test)" options={{ headerShown: false }} /> */}
             <Stack.Screen name="(auth)" options={{ headerShown: false }} />
             <Stack.Screen name="(main)" options={{ headerShown: false }} />
             <Stack.Screen name="(journey)" options={{ headerShown: false }} />
