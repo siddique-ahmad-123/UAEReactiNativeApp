@@ -14,7 +14,6 @@ import { useTheme } from "styled-components/native";
 const RequestCallBack = () => {
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
-    // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
     shouldUnregister: true,
   });
@@ -43,24 +42,13 @@ const RequestCallBack = () => {
     },
     row: {
       flexDirection: "row",
-      gap: 40,
+      gap: 46,
       alignItems: "center",
-      width: "100%",
     },
     innerRow: {
-      width: width.half,
+      width: width.md,
     },
   });
-
-  const emiratesOptions = [
-    { label: "Dubai", value: "Dubai" },
-    { label: "Saudi Arabia", value: "Saudi Arabia" },
-  ];
-  const countryOptions = [
-    { label: "India", value: "IN" },
-    { label: "United States", value: "US" },
-    { label: "Germany", value: "DE" },
-  ];
   return (
     <FormSummaryLayout onSaveAndBack={() => router.back()}>
       <Text style={styles.text}>Request Callback</Text>
@@ -76,7 +64,7 @@ const RequestCallBack = () => {
         <View style={styles.innerRow}>
           <CustomInput
             label="First Name"
-            placeholder="myankTyagi@gmail.com"
+            placeholder="Myank"
             type="text"
             control={control}
           />
@@ -84,7 +72,7 @@ const RequestCallBack = () => {
         <View style={styles.innerRow}>
           <CustomInput
             label="Last Name"
-            placeholder="myankTyagi@gmail.com"
+            placeholder="Tyagi"
             type="text"
             control={control}
           />
@@ -130,6 +118,13 @@ const RequestCallBack = () => {
         label={"City"}
         data={cityOptions}
         control={control}
+      />
+
+      <CustomInput
+        label="Description"
+        placeholder="Need help for Credit Card"
+        type="textarea"
+        numberOfLines={7}
       />
     </FormSummaryLayout>
   );
