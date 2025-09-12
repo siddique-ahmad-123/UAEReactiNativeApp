@@ -1,9 +1,13 @@
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { Stack } from "expo-router";
 
 export default function LoginLayout() {
   return (
+    <ActionSheetProvider>
     <Stack screenOptions={{ headerShown: false }}>
+      
       <Stack.Screen name="onboarding" />
+      <Stack.Screen name="DocUpload" />
       <Stack.Screen name="Request" />
       <Stack.Screen name="calculator" />
       <Stack.Screen name="NeedHelp" />
@@ -18,5 +22,6 @@ export default function LoginLayout() {
       <Stack.Screen name="submitApplication2" />
       <Stack.Screen name="submitApplication" />
     </Stack>
+    </ActionSheetProvider>
   );
 }

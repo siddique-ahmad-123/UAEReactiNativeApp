@@ -11,12 +11,13 @@ import { spacingVertical } from "@/constants/Metrics";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 
 export default function BorrowerIncomeScreen() {
+  const [visa, setVisa] = useState<string | null>(null);
   const { t } = useTranslation();
   const { updateField, nextStep, prevStep, formData, resetForm } =
     useApplicationStore();
@@ -352,7 +353,7 @@ export default function BorrowerIncomeScreen() {
             onSelect={(id) => setValue("incomeDetailFetchMethod", id)}
           />
           {incomeDetailFetchMethod === "Upload Bank Statement" && (
-            <CustomUpload label="Upload Bank Statement" />
+            <CustomUpload label="Upload Bank Statement" onFilePicked={(uri) => setVisa(uri)} />
           )}
           {incomeDetailFetchMethod === "UAE-FTS" && (
             <>
