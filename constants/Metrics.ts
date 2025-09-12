@@ -102,6 +102,7 @@ export const width = {
   xs: "10%",
   sm: "20%",
   md: "44%",
+  half:"50%",
   lg: "60%",
   xl: "80%",
   full: "100%",
