@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Toast from "react-native-toast-message";
 import SplashScreen from "@/components/SplashScreen/SplashScreen";
+import { Provider } from "react-redux";
+import { store } from "@/redux/reduxStore";
 
 export default function RootLayout() {
   const [loading, setLoading] = useState(true);
@@ -29,20 +31,22 @@ export default function RootLayout() {
   if (!loaded) return null;
 
   return (
-    <AppProvider>
-      <GestureHandlerRootView style={{ flex: 1, }}> 
-        <ScreenWrapper>
-          <Stack initialRouteName="(main)">
-            {/* <Stack.Screen name="(test)" options={{ headerShown: false }} /> */}
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-            <Stack.Screen name="(main)" options={{ headerShown: false }} />
-            <Stack.Screen name="(journey)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-          <StatusBar style="auto" />
-          <Toast config={toastConfig} />
-        </ScreenWrapper>
-      </GestureHandlerRootView>
-    </AppProvider>
+    <Provider store={store}>
+      <AppProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <ScreenWrapper>
+            <Stack initialRouteName="(main)">
+              {/* <Stack.Screen name="(test)" options={{ headerShown: false }} /> */}
+              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+              <Stack.Screen name="(main)" options={{ headerShown: false }} />
+              <Stack.Screen name="(journey)" options={{ headerShown: false }} />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+            <StatusBar style="auto" />
+            <Toast config={toastConfig} />
+          </ScreenWrapper>
+        </GestureHandlerRootView>
+      </AppProvider>
+    </Provider>
   );
 }

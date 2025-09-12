@@ -5,7 +5,6 @@ import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import { useApplicationStore } from "@/store/applicationStore";
 
 const ExistingApplicantstScreen = () => {
-   const {  prevStep } = useApplicationStore();
   return (
     <CustomMainChild
       title="Existing Applications"

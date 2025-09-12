@@ -4,16 +4,28 @@ import { useTheme } from "styled-components/native";
 import { router } from "expo-router";
 import { styles } from "@/app/(main)/styles/submitApplication2";
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
+import { useApplicationStore } from "@/store/applicationStore";
+import { useUserEligibilityCheckMutation } from "@/redux/api/creditCardAPI";
 
 const Congratulations = () => {
   const theme = useTheme();
+  const { formData, resetForm } = useApplicationStore();
+  const [userEligibilityCheck] = useUserEligibilityCheckMutation();
+  const onSubmitApplication = async () => {
+    const response = await userEligibilityCheck(formData).unwrap();
+    console.log("✅ Server Response:", response);
+    if (response.status == 200) {
+      resetForm();
+      router.replace("/(main)/home");
+    }
+  };
   return (
     <CustomMainChild
       title="Submit Application"
       noOfButtons={1}
       singleButtonTitle="Return to Home Page"
       onClose={() => router.back()}
-      onPressSingleButton={() => router.push("/NavScreen")}
+      onPressSingleButton={() => onSubmitApplication()}
     >
       <View style={styles.image}>
         <Image

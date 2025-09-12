@@ -54,6 +54,7 @@ const LoginScreen: React.FC = () => {
       borderTopRightRadius: radius.pill,
       marginTop: -spacingVertical.xl,
       padding:spacing.md,
+      paddingTop:spacingVertical.xl,
       gap: spacingVertical.md,
     },
 
@@ -74,7 +75,7 @@ const LoginScreen: React.FC = () => {
         imageStyle={styles.imageStyle}
       >
         <View style={styles.overlay} />
-        <Text style={styles.cornerText}>Welcome Back!</Text>
+        <Text style={styles.cornerText}>Welcome !!</Text>
         <Text style={styles.cornerText2}>Signing to your account</Text>
       </ImageBackground>
 

@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject, // fill the parent
-    backgroundColor: "#3f195652", // semi-transparent black
+    backgroundColor: "#4b2e5e2f", // semi-transparent black
   },
   title: {
     fontSize: fontSize.xs,

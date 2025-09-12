@@ -67,6 +67,7 @@ export const localStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 16,
+    marginBottom:16,
     gap: spacing.md, 
   },
   serviceCard: {
@@ -83,7 +84,6 @@ export const localStyles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    marginTop: 20,
   },
   applyCard: {
     width: (width - 48) / 2,
@@ -96,7 +96,7 @@ export const localStyles = StyleSheet.create({
   applyImage: { width: "100%", height: "100%" },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0,0,0,0.3)",
+    backgroundColor: "rgba(0, 0, 0, 0.29)",
   },
   applyText: {
     position: "absolute",
