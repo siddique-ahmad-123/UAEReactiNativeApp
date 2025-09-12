@@ -11,7 +11,7 @@ import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import { t } from "i18next";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { GestureResponderEvent, StyleSheet, View } from "react-native";
 
@@ -62,7 +62,7 @@ const BorrowerPersonalInformation = () => {
     { label: "Pending", value: "Pending" },
     { label: "Verified", value: "Verified" },
   ];
-
+const [visa, setVisa] = useState<string | null>(null);
   return (
     <FormLayout
       stepNumber={1}
@@ -85,11 +85,11 @@ const BorrowerPersonalInformation = () => {
       />
 
       <View style={{ alignItems: "center", gap: spacingVertical.md }}>
-        <CustomUpload label={"Emirates ID"} />
-        <CustomUpload label={"Passport"} />
+        <CustomUpload label={"Emirates ID"} onFilePicked={(uri) => setVisa(uri)} />
+        <CustomUpload label={"Passport" } onFilePicked={(uri) => setVisa(uri)} />
         {borrowerNationalityStatus === "Expat" ? (
           <>
-            <CustomUpload label={"Visa"} />
+            <CustomUpload label={"Visa"} onFilePicked={(uri) => setVisa(uri)} />
           </>
         ) : (
           <></>

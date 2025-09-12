@@ -4,11 +4,12 @@ import SegmentedControl from "@/components/SegmentControl";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import { t } from "i18next";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { StyleSheet } from "react-native";
 
 const AdditionalDocUpload = () => {
+  const [visa, setVisa] = useState<string | null>(null);
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
@@ -44,18 +45,18 @@ const AdditionalDocUpload = () => {
       {borrowerType === "Borrower" ? (
         <>
           {/* Borrower Upload  */}
-          <CustomUpload label={"Salary Certificate"} />
-          <CustomUpload label={"Bank Statement"} />
-          <CustomUpload label={"Additional Income Proof"} />
-          <CustomUpload label={"Trade License"} />
+          <CustomUpload label={"Salary Certificate"} onFilePicked={(uri) => setVisa(uri)} />
+          <CustomUpload label={"Bank Statement"} onFilePicked={(uri) => setVisa(uri)} />
+          <CustomUpload label={"Additional Income Proof"} onFilePicked={(uri) => setVisa(uri)} />
+          <CustomUpload label={"Trade License"} onFilePicked={(uri) => setVisa(uri)} />
         </>
       ) : (
         <>
           {/* Co-Borrower Upload */}
-          <CustomUpload label={"Salary Certificate"} />
-          <CustomUpload label={"Bank Statement"} />
-          <CustomUpload label={"Additional Income Proof"} />
-          <CustomUpload label={"Trade License"} />
+          <CustomUpload label={"Salary Certificate"} onFilePicked={(uri) => setVisa(uri)} />
+          <CustomUpload label={"Bank Statement"} onFilePicked={(uri) => setVisa(uri)} />
+          <CustomUpload label={"Additional Income Proof"} onFilePicked={(uri) => setVisa(uri)}/>
+          <CustomUpload label={"Trade License"}onFilePicked={(uri) => setVisa(uri)} />
         </>
       )}
     </FormLayout>
