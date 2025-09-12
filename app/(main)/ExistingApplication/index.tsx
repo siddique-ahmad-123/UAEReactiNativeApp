@@ -13,7 +13,7 @@ const ExistingApplicantstScreen = () => {
       noOfButtons={1}
       singleButtonTitle="Back"
       onClose={() => router.back()}
-      onPressSingleButton={() => prevStep()}
+      onPressSingleButton={() => router.back()}
     >
         <MessageCard message="You don’t have any new requests as of now" />
     </CustomMainChild>

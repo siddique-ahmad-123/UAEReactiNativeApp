@@ -16,7 +16,7 @@ const NotificationScreen = () => {
       noOfButtons={1}
       singleButtonTitle="Back"
       onClose={() => router.back()}
-      onPressSingleButton={() => prevStep()}
+      onPressSingleButton={() => router.back()}
     >
       <Text style={localStyles.title2}>Your Request is under processing</Text>
       <Text style={localStyles.subtitle}>

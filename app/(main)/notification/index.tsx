@@ -13,13 +13,13 @@ const NotificationScreen = () => {
       noOfButtons={1}
       singleButtonTitle="Back"
       onClose={() => router.back()}
-      onPressSingleButton={() => prevStep()}
+      onPressSingleButton={() => router.push("/(main)/NavScreen")}
     >
       <RequestCard
         refNo="89765321"
         date="03/09/2025"
         status="Pending"
-        onPress={() => console.log("Details clicked")}
+        onPress={() => router.push("/(main)/notification2")}
       />
     </CustomMainChild>
   );

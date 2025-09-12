@@ -5,6 +5,8 @@ import EMICalculatorScreen from "../calculator";
 import Dashboard from "../home";
 import RequestsScreen from "../notification";
 import { useTheme } from "styled-components/native";
+import ApplicationSummary from "../NeedHelp";
+import RequestCallBack from "../NeedHelp";
 
 const MainScreen = () => {
   const [activeTab, setActiveTab] = useState("Home");
@@ -16,7 +18,7 @@ const MainScreen = () => {
       case "Calculator":
         return <EMICalculatorScreen />;
       case "Need Help":
-        return <View style={styles.dummy}><></></View>; 
+        return <RequestCallBack />; 
       case "Notifications":
         return <RequestsScreen />; 
       case "Menu":
