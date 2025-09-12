@@ -58,3 +58,19 @@ const styles = StyleSheet.create({
 });
 
 export default DocumentUploadScreen;
+
+// import CustomProfileBanner from "@/components/CustomProfileBanner";
+// import React from "react";
+// import { View } from "react-native";
+
+
+// export default function HomeScreen() {
+//   return (
+//     <View style={{ padding: 20 }}>
+//       <CustomProfileBanner
+//         name="Mohammad Sahil Munaf"
+//         photoUrl="https://your-image-url.com/profile.jpg"
+//       />
+//     </View>
+//   );
+// }
