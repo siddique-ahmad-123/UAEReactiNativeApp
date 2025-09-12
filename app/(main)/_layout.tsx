@@ -5,7 +5,6 @@ export default function LoginLayout() {
   return (
     <ActionSheetProvider>
     <Stack screenOptions={{ headerShown: false }}>
-      
       <Stack.Screen name="onboarding" />
       <Stack.Screen name="DocUpload" />
       <Stack.Screen name="Request" />
