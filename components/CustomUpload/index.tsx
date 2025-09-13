@@ -16,7 +16,7 @@ import { spacing } from "@/constants/Metrics";
 import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
 import Modal from "react-native-modal";
-import Entypo from '@expo/vector-icons/Entypo';
+import Entypo from "@expo/vector-icons/Entypo";
 interface CustomUploadProps {
   label: string;
   onFilePicked?: (uri: string) => void;
@@ -137,7 +137,8 @@ const CustomUpload = ({
         onBackButtonPress={() => setVisible(false)}
         animationIn="slideInUp"
         animationOut="slideOutDown"
-        backdropOpacity={0.3}
+        backdropOpacity={0.4}
+        animationOutTiming={1000} 
         style={localStyles.modal}
       >
         <View style={localStyles.sheet}>

@@ -21,6 +21,8 @@ type Props = {
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   isloading?: boolean;
+  disabled?:boolean
+
 };
 
 export default function CustomButton({
@@ -30,6 +32,7 @@ export default function CustomButton({
   type = "filled",
   size = "full",
   isloading = false,
+  disabled = false,
   style,
   textStyle,
 }: Props) {
@@ -72,7 +75,7 @@ export default function CustomButton({
   if (variant === "primary" && type === "filled") {
     buttonStyle = [
       globalStyles.button1,
-      { backgroundColor: theme.colors.secondaryColor },
+      { backgroundColor: disabled?theme.colors.secondaryLight:theme.colors.secondaryColor },
       baseStyle,
       style,
     ];
@@ -125,7 +128,7 @@ export default function CustomButton({
     <TouchableOpacity
       style={buttonStyle}
       onPress={onPress}
-      disabled={isloading}
+      disabled={isloading?isloading:disabled}
     >
       {isloading ? (
         <ActivityIndicator color={theme.colors.primaryColor} />

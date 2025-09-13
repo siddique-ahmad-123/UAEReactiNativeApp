@@ -15,5 +15,5 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "styled.d.ts"
-, "app/(test)/amountCard2.tsx"  ]
+, "app/(_test)/amountCard2.tsx"  ]
 }

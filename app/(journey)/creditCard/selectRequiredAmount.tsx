@@ -55,6 +55,7 @@ const SelectRequiredAmount = () => {
       doubleButtonTitle2="Next"
       onPressDoubleButton1={() => prevStep()}
       onPressDoubleButton2={()=> onClickNext()}
+      isDisableDoubleButton2={!isChecked}
     >
       <DynamicSliderCard
         title="Card Amount"

@@ -8,6 +8,7 @@ import {
   width,
 } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import React, { useState } from "react";
 import { Controller } from "react-hook-form";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -54,6 +55,7 @@ const CustomDatePicker = ({
   onChange ? onChange(normalizedDate) : setLocalDate(normalizedDate);
   setDatePickerVisibility(false);
 };
+
 
   const styles = StyleSheet.create({
     container: {
@@ -161,6 +163,7 @@ const CustomDatePicker = ({
           onConfirm={(date) => handleConfirm(date, onChange)}
           onCancel={() => setDatePickerVisibility(false)}
         />
+        
       </View>
 
       {/* Error message */}

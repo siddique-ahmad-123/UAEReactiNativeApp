@@ -12,12 +12,14 @@ const Congratulations = () => {
   const { formData, resetForm } = useApplicationStore();
   const [userEligibilityCheck] = useUserEligibilityCheckMutation();
   const onSubmitApplication = async () => {
-    const response = await userEligibilityCheck(formData).unwrap();
-    console.log("✅ Server Response:", response);
-    if (response.status == 200) {
-      resetForm();
-      router.replace("/(main)/home");
-    }
+    // const response = await userEligibilityCheck(formData).unwrap();
+    // console.log("✅ Server Response:", response);
+    // if (response.status == 200) {
+    //   resetForm();
+    //   router.replace("/(main)/home");
+    // }
+     resetForm();
+     router.replace("/");
   };
   return (
     <CustomMainChild
