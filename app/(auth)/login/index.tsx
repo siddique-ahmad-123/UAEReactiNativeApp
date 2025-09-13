@@ -14,6 +14,15 @@ import { fontSize, fontWeight, radius, spacing, spacingVertical } from "@/consta
 const LoginScreen: React.FC = () => {
   const router = useRouter();
   const theme = useTheme();
+
+//   const handleLogin = async () => {
+//   if (emiratesId && mobile) {
+//     await setUser({ emiratesId, mobile });
+//     router.replace("/(main)/home"); // go Home after login
+//   } else {
+//     alert("Please enter Emirates ID and Mobile Number");
+//   }
+// };
   const styles = StyleSheet.create({
     container: { 
       flex: 1, 

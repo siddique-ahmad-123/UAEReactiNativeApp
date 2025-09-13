@@ -186,7 +186,7 @@ const OTPScreen: React.FC = () => {
               ref={inputRefs[index]}
               style={[
                 styles.otpBox,
-                { backgroundColor: digit ? "#3F1956" : "#F3E9F6" },
+                { backgroundColor: digit ? theme.colors.primaryColor : theme.colors.primaryLightColor },
               ]}
               value={digit}
               onChangeText={(text) => handleChange(text, index)}
@@ -210,7 +210,7 @@ const OTPScreen: React.FC = () => {
             variant="primary"
             type="filled"
             onPress={() => router.push("/NavScreen")}
-            style={{marginTop:95}}
+            style={{marginTop:230}}
           />
         )}
       </View>

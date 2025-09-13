@@ -29,6 +29,8 @@ interface CustomInputProps {
   mandatory?: boolean;
   secureTextEntry?: boolean;
   numberOfLines?: number;
+   value?: string;
+  onChangeText?: (v: string) => void;
 }
 
 const CustomInput = ({
@@ -40,6 +42,8 @@ const CustomInput = ({
   variant = "full",
   mandatory = false,
   numberOfLines = 4,
+  value,
+  onChangeText,
 }: CustomInputProps) => {
   const [secure, setSecure] = useState(type === "password");
   const [localValue, setLocalValue] = useState(""); // for uncontrolled mode
@@ -202,7 +206,12 @@ const CustomInput = ({
   }
 
   // 🔹 If no control → fallback to uncontrolled TextInput
-  return renderInput(localValue, setLocalValue, undefined, undefined);
+  return renderInput(
+    value ?? localValue,
+    onChangeText ?? setLocalValue,
+    undefined,
+    undefined
+  );
 };
 
 export default CustomInput;
