@@ -54,3 +54,22 @@ export const incomeDetailSchema = z.object({
     .number()
     .min(1, "Last 6 Months AC is required"),
 });
+const employedSchema = z.object({
+  employmentType: z.literal("employed"),
+  companyName: z.string().min(1, "Company name required"),
+});
+
+const studentSchema = z.object({
+  employmentType: z.literal("student"),
+  university: z.string().min(1, "University required"),
+});
+
+const unemployedSchema = z.object({
+  employmentType: z.literal("unemployed"),
+});
+
+export const step2Schema = z.discriminatedUnion("employmentType", [
+  employedSchema,
+  studentSchema,
+  unemployedSchema,
+]);

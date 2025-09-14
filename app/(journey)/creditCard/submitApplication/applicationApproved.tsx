@@ -1,19 +1,17 @@
+import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
+import DocumentDownload from "@/components/DocumentDownload";
+import MethodSelector from "@/components/MethodSelector";
+import { styles } from "@/components/styles/submitApplication.Styles";
+import { useApplicationStore } from "@/store/applicationStore";
+import { router } from "expo-router";
 import React from "react";
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
   Image,
   ScrollView,
+  Text,
+  View
 } from "react-native";
 import { useTheme } from "styled-components/native";
-import { router } from "expo-router";
-import MethodSelector from "@/components/MethodSelector";
-import DocumentDownload from "@/components/DocumentDownload";
-import { styles } from "@/app/(main)/styles/submitApplication.Styles";
-import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
-import { useApplicationStore } from "@/store/applicationStore";
 
 const ApplicationApproved = () => {
   const { nextStep } = useApplicationStore();

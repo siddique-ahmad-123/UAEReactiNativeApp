@@ -1,5 +1,5 @@
-import { styles } from "@/app/(main)/styles/SelectCreditCard.Styles";
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
+import { styles } from "@/components/styles/SelectCreditCard.Styles";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";

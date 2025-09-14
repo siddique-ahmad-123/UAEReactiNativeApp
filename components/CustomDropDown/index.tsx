@@ -23,6 +23,7 @@ interface CustomDropDownProps {
   mandatory?: boolean;
   control?: any; // react-hook-form control
   name?: string; // required if using control
+  disable?:boolean;
 }
 
 const CustomDropDown = ({
@@ -34,6 +35,7 @@ const CustomDropDown = ({
   mandatory = false,
   control,
   name,
+  disable = false,
 }: CustomDropDownProps) => {
   const [localValue, setLocalValue] = useState<string | string[]>(
     type === "multiSelect" ? [] : ""
@@ -138,6 +140,7 @@ const CustomDropDown = ({
             valueField="value"
             placeholder={placeholder}
             value={value}
+            disable={disable}
             onChange={(item) =>
               onChange ? onChange(item.value) : setLocalValue(item.value)
             }

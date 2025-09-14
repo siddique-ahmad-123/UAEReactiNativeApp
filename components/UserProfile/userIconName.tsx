@@ -1,3 +1,4 @@
+import { fontSize, fontWeight } from "@/constants/Metrics";
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { useTheme } from "styled-components/native";
@@ -10,7 +11,7 @@ const UserIconName = ({ imgPath, name }: Props) => {
   const theme = useTheme();
   const styles = StyleSheet.create({
     greetingRow: {
-      flexDirection: "row",
+      flexDirection: theme.flexRow.flexDirection,
       alignItems: "center",
     },
     avatar: {
@@ -20,12 +21,12 @@ const UserIconName = ({ imgPath, name }: Props) => {
       borderWidth: 2,
     },
     greetingSmall: {
-      fontSize: 13,
+      fontSize: fontSize.sm,
+      fontWeight:fontWeight.normal
     },
     greetingName: {
-      fontSize: 18,
-      fontWeight: "500",
-      marginTop: 2,
+      fontSize: fontSize.lg,
+      fontWeight: fontWeight.normal,
     },
   });
   return (

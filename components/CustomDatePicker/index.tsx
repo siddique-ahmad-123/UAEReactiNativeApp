@@ -24,6 +24,7 @@ interface CustomDatePickerProps {
   maxDate?: Date;
   variant?: "full" | "half";
   mandatory?: boolean;
+  onChangePicker?:(date:Date | null)=>void;
 }
 
 const CustomDatePicker = ({
@@ -35,6 +36,7 @@ const CustomDatePicker = ({
   maxDate,
   variant = "full",
   mandatory = false,
+  onChangePicker
 }: CustomDatePickerProps) => {
   const [localDate, setLocalDate] = useState<Date | null>(null);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -54,6 +56,7 @@ const CustomDatePicker = ({
   const normalizedDate = new Date(date); // always convert
   onChange ? onChange(normalizedDate) : setLocalDate(normalizedDate);
   setDatePickerVisibility(false);
+  onChangePicker?.(normalizedDate);
 };
 
 

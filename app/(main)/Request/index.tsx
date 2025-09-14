@@ -1,13 +1,13 @@
+import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
+import MessageCard from "@/components/MessageCard";
+import { useApplicationStore } from "@/store/applicationStore";
+import { router } from "expo-router";
 import React from "react";
 import {
   View,
 } from "react-native";
-import { styles } from "../styles/Notification.Styles";
 import { useTheme } from "styled-components/native";
-import MessageCard from "@/components/MessageCard";
-import { router } from "expo-router";
-import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
-import { useApplicationStore } from "@/store/applicationStore";
+import { styles } from "../../../components/styles/Notification.Styles";
 
 const RequestScreen = () => {
   const theme = useTheme();

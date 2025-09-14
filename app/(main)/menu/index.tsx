@@ -1,7 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { styles } from "../styles/onboarding.Styles";
+import { styles } from "../../../components/styles/onboarding.Styles";
 
 export default function MenuScreen() {
   return (

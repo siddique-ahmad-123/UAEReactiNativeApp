@@ -1,11 +1,11 @@
-import React from "react";
-import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
-import { useTheme } from "styled-components/native";
-import { router } from "expo-router";
-import MethodSelector from "@/components/MethodSelector";
-import { styles } from "../styles/submitApplication4.Styles";
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
+import MethodSelector from "@/components/MethodSelector";
 import { useApplicationStore } from "@/store/applicationStore";
+import { router } from "expo-router";
+import React from "react";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { useTheme } from "styled-components/native";
+import { styles } from "../../../components/styles/submitApplication4.Styles";
 
 const NotificationScreen = () => {
   const [selectedMethod, setSelectedMethod] = React.useState<

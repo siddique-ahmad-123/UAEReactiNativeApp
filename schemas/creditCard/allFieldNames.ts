@@ -69,8 +69,16 @@ export const fieldNames = {
   borrowerAccountNo: "borrowerAccountNo",
   borrowerLast6MonthsADB: "borrowerLast6MonthsADB",
   borrowerLast6MonthsAvgCredit: "borrowerLast6MonthsAvgCredit",
-
-
+  //expense detail
+  houseRent: "houseRent",
+  houseBills: "houseBills",
+  groceryExpenses: "groceryExpenses",
+  foodDeliveries: "foodDeliveries",
+  schoolCost: "schoolCost",
+  leisure: "leisure",
+  healthcare: "healthcare",
+  otherExpenses: "otherExpenses",
+  
   supplementaryCardName: "supplementaryCardName",
   dispatchAddress: "dispatchAddress",
   dispatchAddressLine1: "dispatchAddress1",
@@ -151,7 +159,6 @@ export const fieldNames = {
   coBorrowerAccountNo: "coBorrowerAccountNo",
   coBorrowerLast6MonthsADB: "coBorrowerLast6MonthsADB",
   coBorrowerLast6MonthsAvgCredit: "coBorrowerLast6MonthsAvgCredit",
-
 } as const;
 
 export type fieldNamesKey = keyof typeof fieldNames;

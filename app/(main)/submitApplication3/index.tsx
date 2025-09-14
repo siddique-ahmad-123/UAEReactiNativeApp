@@ -1,11 +1,11 @@
-import React from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
-import { useTheme } from "styled-components/native";
-import { router } from "expo-router";
-import MethodSelector from "@/components/MethodSelector";
-import { styles } from "../styles/submitApplication3.Styles";
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
+import MethodSelector from "@/components/MethodSelector";
 import { useApplicationStore } from "@/store/applicationStore";
+import { router } from "expo-router";
+import React from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { useTheme } from "styled-components/native";
+import { styles } from "../../../components/styles/submitApplication3.Styles";
 
 const NotificationScreen = () => {
   const theme = useTheme();

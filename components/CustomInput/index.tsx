@@ -26,7 +26,7 @@ interface CustomInputProps {
   placeholder?: string;
   type?: "text" | "email" | "number" | "currency" | "password" | "textarea";
   variant?: "full" | "half";
-  mandatory?: boolean;
+  required?: boolean;
   secureTextEntry?: boolean;
   numberOfLines?: number;
 }
@@ -38,7 +38,7 @@ const CustomInput = ({
   placeholder,
   type = "text",
   variant = "full",
-  mandatory = false,
+  required = false,
   numberOfLines = 4,
 }: CustomInputProps) => {
   const [secure, setSecure] = useState(type === "password");
@@ -133,7 +133,7 @@ const CustomInput = ({
         >
           <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
             {label}
-            {mandatory && <Text style={{ color: "red" }}> *</Text>}
+            {required && <Text style={{ color: "red" }}> *</Text>}
           </Text>
           <View
             style={[
@@ -193,6 +193,9 @@ const CustomInput = ({
       <Controller
         control={control}
         name={name}
+        rules={
+          required ? { required: `${label} is required` } : undefined
+        }
         render={({
           field: { onChange, onBlur, value },
           fieldState: { error },

@@ -75,7 +75,7 @@ export default function CustomButton({
   if (variant === "primary" && type === "filled") {
     buttonStyle = [
       globalStyles.button1,
-      { backgroundColor: disabled?theme.colors.secondaryLight:theme.colors.secondaryColor },
+      { backgroundColor: (disabled || isloading)?theme.colors.secondaryLight:theme.colors.secondaryColor },
       baseStyle,
       style,
     ];
