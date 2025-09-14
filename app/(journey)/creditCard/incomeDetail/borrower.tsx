@@ -156,7 +156,7 @@ export default function BorrowerIncomeScreen() {
             onSelect={(id) => setValue(fieldNames.borrowerEmpDetailFetchMethod, id)}
           />
           {empDetailFetchMethod === "Salary Certificate" && (
-            <CustomUpload label="Upload Salary Certificate" />
+            <CustomUpload label="Upload Salary Certificate" control={control} name="UploadSalaryCertificate"/>
           )}
           <CustomButton
             title="Fetch Employment Details"
@@ -291,7 +291,7 @@ export default function BorrowerIncomeScreen() {
             onSelect={(id) => setValue(fieldNames.borrowerBusinessDetailFetchMethod, id)}
           />
           {businessDetailFetchMethod === "Upload Trade License" && (
-            <CustomUpload label="Upload Trade License" />
+            <CustomUpload label="Upload Trade License" control={control} name="UploadTradeLicense"/>
           )}
           <CustomButton
             title="Fetch Business Details"
@@ -353,7 +353,7 @@ export default function BorrowerIncomeScreen() {
             onSelect={(id) => setValue("incomeDetailFetchMethod", id)}
           />
           {incomeDetailFetchMethod === "Upload Bank Statement" && (
-            <CustomUpload label="Upload Bank Statement" onFilePicked={(uri) => setVisa(uri)} />
+            <CustomUpload label="Upload Bank Statement" control={control} name="UploadBankStatement"/>
           )}
           {incomeDetailFetchMethod === "UAE-FTS" && (
             <>

@@ -17,26 +17,25 @@ import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
 import Modal from "react-native-modal";
 import Entypo from "@expo/vector-icons/Entypo";
+import { Controller } from "react-hook-form";
 interface CustomUploadProps {
   label: string;
-  onFilePicked?: (uri: string) => void;
+  control:any;
+  name:string;
   mode?: "all" | "photo";
 }
 
 const CustomUpload = ({
   label,
   mode = "all",
-  onFilePicked,
+  control,
+  name
 }: CustomUploadProps) => {
   const [visible, setVisible] = useState(false);
   const [previewVisible, setPreviewVisible] = useState(false);
-  const [fileUri, setFileUri] = useState<string | null>(null);
-  const [fileName, setFileName] = useState<string | null>(null);
-  const [fileIsPdf, setFileIsPdf] = useState<boolean>(false);
-
   const theme = useTheme();
 
-  const handlePickFile = async () => {
+  const handlePickFile = async (onChange: any) => {
     setVisible(false);
     const result = await DocumentPicker.getDocumentAsync({
       type: ["image/*", "application/pdf"],
@@ -44,32 +43,27 @@ const CustomUpload = ({
     });
     if (!result.canceled && result.assets[0]?.uri) {
       const uri = result.assets[0].uri;
-      setFileUri(uri);
-      setFileName(result.assets[0].name ?? uri.split("/").pop() ?? "document");
-      setFileIsPdf(uri.toLowerCase().endsWith(".pdf"));
-      onFilePicked?.(uri);
+      const name = result.assets[0].name ?? uri.split("/").pop() ?? "document";
+      const isPdf = uri.toLowerCase().endsWith(".pdf");
+
+      onChange({label, uri, name, isPdf });
     }
   };
 
-  const handleTakePhoto = async () => {
+  const handleTakePhoto = async (onChange: any) => {
     setVisible(false);
-    const permission = await ImagePicker.requestCameraPermissionsAsync();
-    if (!permission.granted) return;
-
     const result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       quality: 0.8,
     });
     if (!result.canceled && result.assets[0]?.uri) {
       const uri = result.assets[0].uri;
-      setFileUri(uri);
-      setFileName("photo.jpg");
-      setFileIsPdf(false);
-      onFilePicked?.(uri);
+      const name = uri.split("/").pop() ?? "photo.jpg";
+      onChange({label, uri, name, isPdf: false });
     }
   };
 
-  const handlePickImage = async () => {
+  const handlePickImage = async (onChange: any) => {
     setVisible(false);
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -77,20 +71,17 @@ const CustomUpload = ({
     });
     if (!result.canceled && result.assets[0]?.uri) {
       const uri = result.assets[0].uri;
-      setFileUri(uri);
-      setFileName(uri.split("/").pop() ?? "image.jpg");
-      setFileIsPdf(false);
-      onFilePicked?.(uri);
+      const name = uri.split("/").pop() ?? "image.jpg";
+      onChange({label, uri, name, isPdf: false });
     }
   };
 
-  const handlePreview = async () => {
-    if (!fileUri) return;
-
-    if (fileIsPdf) {
-      const supported = await Linking.canOpenURL(fileUri);
+  const handlePreview = async (uri: string, isPdf: boolean) => {
+    if (!uri) return;
+    if (isPdf) {
+      const supported = await Linking.canOpenURL(uri);
       if (supported) {
-        await Linking.openURL(fileUri);
+        await Linking.openURL(uri);
       } else {
         Alert.alert("Cannot open this file type");
       }
@@ -100,82 +91,64 @@ const CustomUpload = ({
   };
 
   return (
-    <>
-      <TouchableOpacity
-        style={[
-          styles.container,
-          { borderColor: theme.colors.inputFieldBorder },
-          { backgroundColor: theme.colors.background },
-        ]}
-        onPress={fileUri ? handlePreview : () => setVisible(true)}
-      >
-        <View>
-          <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
-            {label}
-          </Text>
-          {fileName && (
-            <Text
-              style={{
-                fontSize: 12,
-                color: theme.colors.primaryColor ?? theme.colors.subtitle,
-                marginTop: 2,
-              }}
-            >
-              {fileName}
-            </Text>
-          )}
-        </View>
-        <Feather
-          name={fileUri ? "eye" : "upload"}
-          size={spacing.lg}
-          color={theme.colors.primaryColor}
-        />
-      </TouchableOpacity>
-      <Modal
-        isVisible={visible}
-        onBackdropPress={() => setVisible(false)}
-        onBackButtonPress={() => setVisible(false)}
-        animationIn="slideInUp"
-        animationOut="slideOutDown"
-        backdropOpacity={0.4}
-        animationOutTiming={1000} 
-        style={localStyles.modal}
-      >
-        <View style={localStyles.sheet}>
-          <View style={localStyles.row}>
-            <TouchableOpacity
-              style={[
-                localStyles.box,
-                { backgroundColor: theme.colors.primaryLightColor },
-              ]}
-              onPress={handleTakePhoto}
-            >
-              <Feather
-                name="camera"
-                size={22}
-                color={theme.colors.primaryColor}
-              />
+    <Controller
+      control={control}
+      name={name?name:""}
+      render={({ field: { value, onChange } }) => (
+        <>
+          <TouchableOpacity
+            style={[
+              styles.container,
+              { borderColor: theme.colors.inputFieldBorder },
+              { backgroundColor: theme.colors.background },
+            ]}
+            onPress={value?.uri ? ()=>handlePreview(value?.uri,value?.isPdf) : () => setVisible(true)}
+          >
+            <View>
               <Text
-                style={[
-                  localStyles.boxText,
-                  { color: theme.colors.primaryColor },
-                ]}
+                style={[styles.label, { color: theme.colors.primaryColor }]}
               >
-                Camera
+                {label}
               </Text>
-            </TouchableOpacity>
-
-            {mode === "all" && (
-              <>
+              {value?.name && (
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: theme.colors.primaryColor ?? theme.colors.subtitle,
+                    marginTop: 2,
+                  }}
+                >
+                  {value?.name}
+                </Text>
+              )}
+            </View>
+            <Feather
+              name={value?.uri ? "eye" : "upload"}
+              size={spacing.lg}
+              color={theme.colors.primaryColor}
+            />
+          </TouchableOpacity>
+          <Modal
+            isVisible={visible}
+            onBackdropPress={() => setVisible(false)}
+            onBackButtonPress={() => setVisible(false)}
+            animationIn="slideInUp"
+            animationOut="slideOutDown"
+            backdropOpacity={0.4}
+            animationOutTiming={1000}
+            style={localStyles.modal}
+          >
+            <View style={localStyles.sheet}>
+              <View style={localStyles.row}>
                 <TouchableOpacity
                   style={[
                     localStyles.box,
                     { backgroundColor: theme.colors.primaryLightColor },
                   ]}
-                  onPress={handlePickImage}
+                  onPress={()=>handleTakePhoto(onChange)}
                 >
                   <Feather
-                    name="image"
+                    name="camera"
                     size={22}
                     color={theme.colors.primaryColor}
                   />
@@ -185,69 +158,95 @@ const CustomUpload = ({
                       { color: theme.colors.primaryColor },
                     ]}
                   >
-                    Photos
+                    Camera
                   </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity
-                  style={[
-                    localStyles.box,
-                    { backgroundColor: theme.colors.primaryLightColor },
-                  ]}
-                  onPress={handlePickFile}
-                >
-                  <Feather
-                    name="paperclip"
-                    size={22}
-                    color={theme.colors.primaryColor}
-                  />
-                  <Text
-                    style={[
-                      localStyles.boxText,
-                      { color: theme.colors.primaryColor },
-                    ]}
-                  >
-                    Files
-                  </Text>
-                </TouchableOpacity>
-              </>
-            )}
-          </View>
+                {mode === "all" && (
+                  <>
+                    <TouchableOpacity
+                      style={[
+                        localStyles.box,
+                        { backgroundColor: theme.colors.primaryLightColor },
+                      ]}
+                      onPress={()=>handlePickImage(onChange)}
+                    >
+                      <Feather
+                        name="image"
+                        size={22}
+                        color={theme.colors.primaryColor}
+                      />
+                      <Text
+                        style={[
+                          localStyles.boxText,
+                          { color: theme.colors.primaryColor },
+                        ]}
+                      >
+                        Photos
+                      </Text>
+                    </TouchableOpacity>
 
-          <View style={localStyles.divider} />
+                    <TouchableOpacity
+                      style={[
+                        localStyles.box,
+                        { backgroundColor: theme.colors.primaryLightColor },
+                      ]}
+                      onPress={()=>handlePickFile(onChange)}
+                    >
+                      <Feather
+                        name="paperclip"
+                        size={22}
+                        color={theme.colors.primaryColor}
+                      />
+                      <Text
+                        style={[
+                          localStyles.boxText,
+                          { color: theme.colors.primaryColor },
+                        ]}
+                      >
+                        Files
+                      </Text>
+                    </TouchableOpacity>
+                  </>
+                )}
+              </View>
 
-          <TouchableOpacity
-            onPress={() => setVisible(false)}
-            style={localStyles.cancelBtn}
+              <View style={localStyles.divider} />
+
+              <TouchableOpacity
+                onPress={() => setVisible(false)}
+                style={localStyles.cancelBtn}
+              >
+                <Text style={{ color: "red", fontSize: 16, fontWeight: "600" }}>
+                  Cancel
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+
+          <RNModal
+            visible={previewVisible}
+            transparent={true}
+            animationType="fade"
+            onRequestClose={() => setPreviewVisible(false)}
           >
-            <Text style={{ color: "red", fontSize: 16, fontWeight: "600" }}>
-              Cancel
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
-
-      <RNModal
-        visible={previewVisible}
-        transparent={true}
-        animationType="fade"
-        onRequestClose={() => setPreviewVisible(false)}
-      >
-        <View style={localStyles.previewWrapper}>
-          <Image
-            source={{ uri: fileUri || "" }}
-            style={localStyles.previewImage}
-            resizeMode="contain"
-          />
-          <TouchableOpacity
-            onPress={() => setPreviewVisible(false)}
-            style={localStyles.closeBtn}
-          >
-            <Text style={{ color: "#fff", fontSize: 16 }}>Close</Text>
-          </TouchableOpacity>
-        </View>
-      </RNModal>
-    </>
+            <View style={localStyles.previewWrapper}>
+              <Image
+                source={{ uri: value?.uri || "" }}
+                style={localStyles.previewImage}
+                resizeMode="contain"
+              />
+              <TouchableOpacity
+                onPress={() => setPreviewVisible(false)}
+                style={localStyles.closeBtn}
+              >
+                <Text style={{ color: "#fff", fontSize: 16 }}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </RNModal>
+        </>
+      )}
+    />
   );
 };
 

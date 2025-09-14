@@ -75,6 +75,7 @@ const ExpenseList = ({ data, control }: Props) => {
       flex: 1,
       textAlign: "right",
       fontSize: fontSize.sm,
+      color:theme.colors.primaryColor,
       padding: 0,
     },
     currency: {
@@ -117,7 +118,7 @@ const ExpenseList = ({ data, control }: Props) => {
                   <TextInput
                     style={styles.input}
                     keyboardType="numeric"
-                    value={Number(value).toLocaleString()}
+                    value={value?Number(value).toLocaleString():""}
                     onChangeText={(text) =>
                       onChange(text.replace(/[^0-9]/g, "")) // only numbers
                     }
