@@ -5,7 +5,6 @@ export default function LoginLayout() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="login" />
       <Stack.Screen name="otp" />
-      <Stack.Screen name="otpFilled" />
     </Stack>
   );
 }

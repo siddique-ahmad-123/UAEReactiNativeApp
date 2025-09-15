@@ -29,6 +29,10 @@ interface CustomInputProps {
   required?: boolean;
   secureTextEntry?: boolean;
   numberOfLines?: number;
+  value?: string;
+  onChangeText?: (v: string) => void;
+  keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
+  maxLength?: number;
 }
 
 const CustomInput = ({
@@ -40,6 +44,10 @@ const CustomInput = ({
   variant = "full",
   required = false,
   numberOfLines = 4,
+  value,
+  onChangeText,
+  keyboardType,
+  maxLength,
 }: CustomInputProps) => {
   const [secure, setSecure] = useState(type === "password");
   const [localValue, setLocalValue] = useState(""); // for uncontrolled mode
@@ -161,12 +169,14 @@ const CustomInput = ({
             multiline={type === "textarea"}
             numberOfLines={type === "textarea" ? numberOfLines : 1}
             keyboardType={
-              type === "email"
+              keyboardType ??
+              (type === "email"
                 ? "email-address"
                 : type === "number" || type === "currency"
                 ? "numeric"
-                : "default"
+                : "default")
             }
+            maxLength={maxLength}
           />
 
           {type === "password" && (
@@ -193,9 +203,7 @@ const CustomInput = ({
       <Controller
         control={control}
         name={name}
-        rules={
-          required ? { required: `${label} is required` } : undefined
-        }
+        rules={required ? { required: `${label} is required` } : undefined}
         render={({
           field: { onChange, onBlur, value },
           fieldState: { error },
@@ -205,7 +213,12 @@ const CustomInput = ({
   }
 
   // 🔹 If no control → fallback to uncontrolled TextInput
-  return renderInput(localValue, setLocalValue, undefined, undefined);
+  return renderInput(
+    value ?? localValue,
+    onChangeText ?? setLocalValue,
+    undefined,
+    undefined
+  );
 };
 
 export default CustomInput;

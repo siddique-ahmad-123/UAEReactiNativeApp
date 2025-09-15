@@ -4,7 +4,7 @@ export const fieldNames = {
   cardType: "cardType",
   selectedRequiredAmount: "selectedRequiredAmount",
   isCheckedTermandCond: "isCheckedTermandCond",
-
+  
   // Personal Details - Borrower
   borrowerName: "borrowerName",
   borrowerDOB: "borrowerDOB",

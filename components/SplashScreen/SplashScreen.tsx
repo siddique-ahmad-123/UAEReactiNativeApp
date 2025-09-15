@@ -1,10 +1,36 @@
 // SplashScreen.tsx
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import { Ripple } from "./ripple";
-
+import { useRouter } from "expo-router";
+import { getUser } from "@/utils/storage";
 
 export default function SplashScreen() {
+  const router = useRouter();
+
+//   useEffect(() => {
+//   const checkUser = async () => {
+//     try {
+//       const user = await getUser();
+//       console.log("👤 User from storage:", user); 
+
+//       setTimeout(() => {
+//         if (user) {
+//           router.replace("/(main)/home");
+//         } else {
+//           router.replace("/(main)/onboarding");
+//         }
+//       }, 1500);
+//     } catch (err) {
+//       console.error("❌ Error checking user:", err);
+//       router.replace("/(main)/onboarding");
+//     }
+//   };
+
+//   checkUser();
+// }, [router]);
+
+
   return (
     <View style={styles.container}>
       {/* Multiple ripples with delays for wave effect */}

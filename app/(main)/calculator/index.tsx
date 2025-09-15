@@ -248,15 +248,6 @@ const EMICalculatorScreen: React.FC = () => {
           </View>
         </View>
       </ScrollView>
-      {/* Back button */}
-      <CustomButton
-        title="Back"
-        size="full"
-        variant="primary"
-        type="filled"
-        onPress={() => router.push("/NavScreen")}
-        style={{ marginTop: 0 }}
-      />
     </View>
   );
 };
