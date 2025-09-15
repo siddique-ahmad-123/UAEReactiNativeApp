@@ -1,5 +1,6 @@
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import { styles } from "@/components/styles/SelectCreditCard.Styles";
+import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
@@ -74,13 +75,18 @@ const cards: CardItem[] = [
 const RequestsScreen = () => {
   const carouselRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const {value:mobilenumber} = useAsyncStorage("user");
   const { nextStep,formData,updateField } = useApplicationStore();
   const {setValue} = useForm({
     defaultValues:formData,
   })
   const onClickApply=(value:string)=>{
+     
     setValue(fieldNames.cardType,value);
     updateField(fieldNames.cardType,value);
+    setValue(fieldNames.mobileNo,mobilenumber.mobileNumber);
+    updateField(fieldNames.mobileNo,mobilenumber.mobileNumber);
     console.log("Store formData:", formData);
     nextStep();
   }

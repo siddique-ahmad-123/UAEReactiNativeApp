@@ -29,7 +29,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/ProductImage.png",
+          "image": "./assets/Logo-High_front.png",
           "imageWidth": 200,
           "resizeMode": "cover",
           "backgroundColor": "#3C1053"

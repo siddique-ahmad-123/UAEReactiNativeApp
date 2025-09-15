@@ -7,18 +7,25 @@ import FormLayout from "@/components/Form/FormLayout";
 import SectionHeader from "@/components/SectionHeader";
 import SegmentedControl from "@/components/SegmentControl";
 import { spacingVertical } from "@/constants/Metrics";
+import { useEmiratesIdMutation, usePassportMutation, useVisaMutation } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
+import calculateAge from "@/utils/calculateAge";
 import { router } from "expo-router";
 import { t } from "i18next";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { GestureResponderEvent, StyleSheet, View } from "react-native";
+import {StyleSheet, View } from "react-native";
 
 const BorrowerPersonalInformation = () => {
+  const [isloading, setIsLoading] = useState(false);
+  const [isloading1, setIsLoading1] = useState(false);
+  const [emiratesIdOCR] = useEmiratesIdMutation();
+  const [visaOCR] = useVisaMutation();
+  const [passportOCR] = usePassportMutation();
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
-    // resolver: zodResolver(personalDetailsSchema),
+    // resolver: zodResolver(borrowerSchema),
     defaultValues: formData,
   });
 
@@ -31,6 +38,29 @@ const BorrowerPersonalInformation = () => {
   const borrowerNationalityStatus =
     watch(fieldNames.borrowerNationalityStatus) ?? "Emirati";
 
+  const handleFetchDetails = async() => {
+    setIsLoading1(true);
+    const emirateResponse = await emiratesIdOCR(formData[fieldNames.mobileNo]).unwrap();
+    const visaResponse = await visaOCR(formData[fieldNames.mobileNo]).unwrap();
+    const passportResponse = await passportOCR(formData[fieldNames.mobileNo]).unwrap();
+
+    if(emirateResponse.status==200 && visaResponse.status==200 && passportResponse.status==200) {
+      setValue(fieldNames.borrowerName,emirateResponse.data.name);
+    }else{
+
+    }
+    setIsLoading1(false);
+  };
+  const runEFR = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setValue("borrowerVerificationStatus", "Verified");
+      setIsLoading(false);
+    }, 2000);
+  };
+  const calcAge = (date: Date | null) => {
+    setValue("borrowerAge", calculateAge(date));
+  };
   const genderOptions = [
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
@@ -62,7 +92,6 @@ const BorrowerPersonalInformation = () => {
     { label: "Pending", value: "Pending" },
     { label: "Verified", value: "Verified" },
   ];
-const [visa, setVisa] = useState<string | null>(null);
   return (
     <FormLayout
       stepNumber={1}
@@ -71,7 +100,7 @@ const [visa, setVisa] = useState<string | null>(null);
       noOfBars={1}
       activeBarIndex={0}
       onBack={() => prevStep()}
-      onClose={() => router.push("/")}
+      onClose={() => router.push("/(main)/NavScreen")}
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
@@ -85,11 +114,15 @@ const [visa, setVisa] = useState<string | null>(null);
       />
 
       <View style={{ alignItems: "center", gap: spacingVertical.md }}>
-        <CustomUpload label={"Emirates ID"}  control={control} name="emiratesID"/>
-        <CustomUpload label={"Passport" }  control={control} name="passport"/>
+        <CustomUpload
+          label={"Emirates ID"}
+          control={control}
+          name="emiratesID"
+        />
+        <CustomUpload label={"Passport"} control={control} name="passport" />
         {borrowerNationalityStatus === "Expat" ? (
           <>
-            <CustomUpload label={"Visa"}  control={control} name="visa"/>
+            <CustomUpload label={"Visa"} control={control} name="visa" />
           </>
         ) : (
           <></>
@@ -98,9 +131,8 @@ const [visa, setVisa] = useState<string | null>(null);
 
       <CustomButton
         title={"Fetch Details"}
-        onPress={function (event: GestureResponderEvent): void {
-          throw new Error("Function not implemented.");
-        }}
+        onPress={handleFetchDetails}
+        isloading={isloading1}
       />
 
       <SectionHeader sectionName={t("personalInformation")} />
@@ -115,6 +147,7 @@ const [visa, setVisa] = useState<string | null>(null);
         control={control}
         name={fieldNames.borrowerDOB}
         label={"Date of Birth"}
+        onChangePicker={calcAge}
       />
       <CustomInput
         control={control}
@@ -152,11 +185,13 @@ const [visa, setVisa] = useState<string | null>(null);
         control={control}
         name={fieldNames.borrowerEidaIssueDate}
         label={"EIDA Issue Date"}
+        maxDate={new Date()}
       />
       <CustomDatePicker
         control={control}
         name={fieldNames.borrowerEidaExpiryDate}
         label={"EIDA Expiry Date"}
+        minDate={watch(fieldNames.borrowerEidaIssueDate)}
       />
 
       <CustomInput
@@ -170,11 +205,13 @@ const [visa, setVisa] = useState<string | null>(null);
         control={control}
         name={fieldNames.borrowerPassportIssueDate}
         label={"Passport Issue Date"}
+        maxDate={new Date()}
       />
       <CustomDatePicker
         control={control}
         name={fieldNames.borrowerPassportExpiryDate}
         label={"Passport Expiry Date"}
+        minDate={watch(fieldNames.borrowerPassportIssueDate)}
       />
 
       <CustomInput
@@ -188,11 +225,13 @@ const [visa, setVisa] = useState<string | null>(null);
         control={control}
         name={fieldNames.borrowerVisaIssueDate}
         label={"Visa Issue Date"}
+        maxDate={new Date()}
       />
       <CustomDatePicker
         control={control}
         name={fieldNames.borrowerVisaExpiryDate}
         label={"VIsa Expiry Date"}
+        minDate={watch(fieldNames.borrowerVisaIssueDate)}
       />
 
       <CustomInput
@@ -258,17 +297,13 @@ const [visa, setVisa] = useState<string | null>(null);
       />
 
       <SectionHeader sectionName="EFR Check" />
-      <CustomButton
-        title={"RUN EFR"}
-        onPress={function (event: GestureResponderEvent): void {
-          throw new Error("Function not implemented.");
-        }}
-      />
+      <CustomButton title={"RUN EFR"} onPress={runEFR} isloading={isloading} />
       <CustomDropDown
         name={fieldNames.borrowerVerificationStatus}
         label={"Verification Status"}
         data={verificationOptions}
         control={control}
+        disable={true}
       />
     </FormLayout>
   );

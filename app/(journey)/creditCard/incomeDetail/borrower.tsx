@@ -8,6 +8,7 @@ import MethodSelector from "@/components/MethodSelector";
 import SectionHeader from "@/components/SectionHeader";
 import SegmentedControl from "@/components/SegmentControl";
 import { spacingVertical } from "@/constants/Metrics";
+import { useTradeLicenseMutation } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
@@ -17,18 +18,20 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 
 export default function BorrowerIncomeScreen() {
-  const [visa, setVisa] = useState<string | null>(null);
+  const [isloading, setIsLoading] = useState(false);
+  const [tradeLicenseOCR] = useTradeLicenseMutation();
   const { t } = useTranslation();
-  const { updateField, nextStep, prevStep, formData, resetForm } =
-    useApplicationStore();
+  const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: zodResolver(incomeDetailSchema.partial()),
     defaultValues: formData,
   });
   const borrowerIncomeType = watch(fieldNames.borrowerIncomeType) ?? "Salaried";
-  const empDetailFetchMethod = watch(fieldNames.borrowerEmpDetailFetchMethod) ?? "AECB";
+  const empDetailFetchMethod =
+    watch(fieldNames.borrowerEmpDetailFetchMethod) ?? "AECB";
   const businessDetailFetchMethod =
-    watch(fieldNames.borrowerBusinessDetailFetchMethod) ?? "Upload Trade License";
+    watch(fieldNames.borrowerBusinessDetailFetchMethod) ??
+    "Upload Trade License";
   const incomeDetailFetchMethod =
     watch("incomeDetailFetchMethod") ?? "Salary Transfer";
 
@@ -36,6 +39,17 @@ export default function BorrowerIncomeScreen() {
     console.log("Income Details Submitted:", values);
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
     nextStep();
+  };
+  const handleFetchDetailsBusiness = async () => {
+    setIsLoading(true);
+    const tradeLicenseResponse = await tradeLicenseOCR(
+      formData[fieldNames.mobileNo]
+    ).unwrap();
+    if (tradeLicenseResponse.status == 200) {
+      setValue(fieldNames.borrowerName, "Verified");
+    } else {
+    }
+    setIsLoading(false);
   };
   const employmentMethods = [
     {
@@ -153,10 +167,16 @@ export default function BorrowerIncomeScreen() {
             title={"Select Method to Fetch Employment Details"}
             options={employmentMethods}
             selectedId={empDetailFetchMethod}
-            onSelect={(id) => setValue(fieldNames.borrowerEmpDetailFetchMethod, id)}
+            onSelect={(id) =>
+              setValue(fieldNames.borrowerEmpDetailFetchMethod, id)
+            }
           />
           {empDetailFetchMethod === "Salary Certificate" && (
-            <CustomUpload label="Upload Salary Certificate" control={control} name="UploadSalaryCertificate"/>
+            <CustomUpload
+              label="Upload Salary Certificate"
+              control={control}
+              name="UploadSalaryCertificate"
+            />
           )}
           <CustomButton
             title="Fetch Employment Details"
@@ -288,15 +308,23 @@ export default function BorrowerIncomeScreen() {
             title={"Select Method to Fetch Business Details"}
             options={businessMethods}
             selectedId={businessDetailFetchMethod}
-            onSelect={(id) => setValue(fieldNames.borrowerBusinessDetailFetchMethod, id)}
+            onSelect={(id) =>
+              setValue(fieldNames.borrowerBusinessDetailFetchMethod, id)
+            }
           />
           {businessDetailFetchMethod === "Upload Trade License" && (
-            <CustomUpload label="Upload Trade License" control={control} name="UploadTradeLicense"/>
+            <>
+              <CustomUpload
+                label="Upload Trade License"
+                control={control}
+                name="UploadTradeLicense"
+              />
+              <CustomButton
+                title="Fetch Business Details"
+                onPress={handleFetchDetailsBusiness}
+              />
+            </>
           )}
-          <CustomButton
-            title="Fetch Business Details"
-            onPress={() => alert("Fetching Business Details...")}
-          />
 
           <CustomInput
             control={control}
@@ -353,7 +381,11 @@ export default function BorrowerIncomeScreen() {
             onSelect={(id) => setValue("incomeDetailFetchMethod", id)}
           />
           {incomeDetailFetchMethod === "Upload Bank Statement" && (
-            <CustomUpload label="Upload Bank Statement" control={control} name="UploadBankStatement"/>
+            <CustomUpload
+              label="Upload Bank Statement"
+              control={control}
+              name="UploadBankStatement"
+            />
           )}
           {incomeDetailFetchMethod === "UAE-FTS" && (
             <>
