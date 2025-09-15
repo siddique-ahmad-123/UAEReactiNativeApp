@@ -3,10 +3,12 @@ import { View, StyleSheet } from "react-native";
 import BottomNav from "@/components/BottomNav";
 import EMICalculatorScreen from "../calculator";
 import Dashboard from "../home";
-import RequestsScreen from "../notification";
 import { useTheme } from "styled-components/native";
 import ApplicationSummary from "../NeedHelp";
 import RequestCallBack from "../NeedHelp";
+import MenuScreen from "../menu";
+import RequestsScreen from "@/app/(journey)/creditCard/selectCreditCard";
+import NotificationScreen from "../notification";
 
 const MainScreen = () => {
   const [activeTab, setActiveTab] = useState("Home");
@@ -20,9 +22,9 @@ const MainScreen = () => {
       case "Need Help":
         return <RequestCallBack />; 
       case "Notifications":
-        return <RequestsScreen />; 
+        return <NotificationScreen />; 
       case "Menu":
-        return <View style={styles.dummy}><></></View>; 
+        return <MenuScreen/>; 
       default:
         return <Dashboard />;
     }
@@ -33,7 +35,7 @@ const MainScreen = () => {
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={styles.content}>{renderContent()}</View>
-      {activeTab === "Home" && (
+      {(
         <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
       )}
     </View>

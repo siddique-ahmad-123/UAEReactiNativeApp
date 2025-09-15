@@ -77,16 +77,17 @@ const RequestsScreen = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const {value:mobilenumber} = useAsyncStorage("user");
+ 
   const { nextStep,formData,updateField } = useApplicationStore();
   const {setValue} = useForm({
     defaultValues:formData,
   })
   const onClickApply=(value:string)=>{
-     
+      console.log(mobilenumber?.mobile);
     setValue(fieldNames.cardType,value);
     updateField(fieldNames.cardType,value);
-    setValue(fieldNames.mobileNo,mobilenumber.mobileNumber);
-    updateField(fieldNames.mobileNo,mobilenumber.mobileNumber);
+    setValue(fieldNames.mobileNo,mobilenumber?.mobile);
+    updateField(fieldNames.mobileNo,mobilenumber?.mobile);
     console.log("Store formData:", formData);
     nextStep();
   }

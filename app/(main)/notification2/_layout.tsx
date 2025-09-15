@@ -1,6 +1,6 @@
 import { Stack } from "expo-router";
 
-export default function Notification2Layout() {
+export default function homescreenLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />

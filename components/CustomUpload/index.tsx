@@ -20,6 +20,8 @@ import Modal from "react-native-modal";
 import { Controller } from "react-hook-form";
 import { useFileDeleteMutation, useFileUploadMutation } from "@/redux/api/creditCardAPI";
 import Toast from "react-native-toast-message";
+import { useAsyncStorage } from "@/hooks/useAsyncStorage";
+
 interface CustomUploadProps {
   label: string;
   control: any;
@@ -39,12 +41,14 @@ const CustomUpload = ({
   const [isloading, setLoading] = useState(false);
   const [fileUpload] = useFileUploadMutation();
   const [fileDelete] = useFileDeleteMutation();
+  const {value:data} = useAsyncStorage("user");
+  const mobileNumber = data.mobile;
   const theme = useTheme();
   const fileNeme = "Borrower"+" "+label;
   const handleFileDelete = async (onChange: any,type:string)=>{
     setLoading(true);
     const data = {
-      folderName:"12345",
+      folderName:mobileNumber,
       fileName:fileNeme,
       mimeType:type,
     }
@@ -82,7 +86,7 @@ const CustomUpload = ({
         name: name,
         type: type || "application/octet-stream",
       } as any);
-      formData.append("folderName", "12345");
+      formData.append("folderName", mobileNumber);
       formData.append("fileName", fileNeme);
       const response = await fileUpload(formData).unwrap();
       if (response.status == 200) {
@@ -120,7 +124,7 @@ const CustomUpload = ({
         name: name,
         type: type || "application/octet-stream",
       } as any);
-      formData.append("folderName", "12345");
+      formData.append("folderName", mobileNumber);
       formData.append("fileName", fileNeme);
       const response = await fileUpload(formData).unwrap();
       if (response.status == 200) {
@@ -157,7 +161,7 @@ const CustomUpload = ({
         name: name,
         type: type || "application/octet-stream",
       } as any);
-      formData.append("folderName", "12345");
+      formData.append("folderName", mobileNumber);
       formData.append("fileName", fileNeme);
       const response = await fileUpload(formData).unwrap();
       if (response.status == 200) {

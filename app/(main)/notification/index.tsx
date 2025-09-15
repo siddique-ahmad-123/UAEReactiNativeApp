@@ -10,10 +10,7 @@ const NotificationScreen = () => {
     <CustomMainChild
       title="Notification"
       subTitle="Find all your notifications here"
-      noOfButtons={1}
-      singleButtonTitle="Back"
-      onClose={() => router.back()}
-      onPressSingleButton={() => router.push("/(main)/NavScreen")}
+      
     >
       <RequestCard
         refNo="89765321"

@@ -22,7 +22,7 @@ interface FormHeaderProps {
   title: string;
   subTitle?: string;
   onClose?: () => void;
-  noOfButtons: number;
+  noOfButtons?: number;
   singleButtonTitle?: string;
   doubleButtonTitle1?: string;
   doubleButtonTitle2?: string;
