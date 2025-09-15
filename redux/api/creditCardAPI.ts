@@ -24,10 +24,34 @@ export const creditCardAPI = createApi({
         method: "DELETE",
       }),
     }),
+    emiratesId: builder.mutation<any, any>({
+      query: (folderName) => ({
+        url: `ocr/emiratesId?folderName=${folderName}&customerType=Borrower`,
+        method: "POST",
+      }),
+    }),
+    visa: builder.mutation<any, any>({
+      query: (folderName) => ({
+        url: `ocr/visa?folderName=${folderName}&customerType=Borrower`,
+        method: "POST",
+      }),
+    }),
+    passport: builder.mutation<any, any>({
+      query: (folderName) => ({
+        url: `ocr/passport?folderName=${folderName}&customerType=Borrower`,
+        method: "POST",
+      }),
+    }),
+    tradeLicense: builder.mutation<any, any>({
+      query: (folderName) => ({
+        url: `ocr/tradeLicense?folderName=${folderName}&customerType=Borrower`,
+        method: "POST",
+      }),
+    }),
     getUser: builder.query<any, void>({
       query: () => "/user",
     }),
   }),
 });
 
-export const { useUserEligibilityCheckMutation, useGetUserQuery,useFileUploadMutation,useFileDeleteMutation } = creditCardAPI;
+export const { useUserEligibilityCheckMutation, useGetUserQuery,useFileUploadMutation,useFileDeleteMutation,useEmiratesIdMutation,useVisaMutation,usePassportMutation,useTradeLicenseMutation } = creditCardAPI;
