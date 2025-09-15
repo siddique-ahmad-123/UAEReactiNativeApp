@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const creditCardAPI = createApi({
   reducerPath: "creditCardApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://10.232.119.245:8080/api/v1" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://tytlmsdemo.newgensoftware.net:8443/uaeMobileApp/api/v1" }),
   endpoints: (builder) => ({
     userEligibilityCheck: builder.mutation<any, any>({
       query: (formData) => ({
