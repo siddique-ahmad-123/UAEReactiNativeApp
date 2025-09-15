@@ -18,10 +18,16 @@ export const creditCardAPI = createApi({
         body: formData,
       }),
     }),
+    fileDelete: builder.mutation<any, any>({
+      query: ({folderName,fileName,mimeType}) => ({
+        url: `uploadDocInFolder/fileDelete?folderName=${folderName}&fileName=${fileName}&mimeType=${mimeType}`,
+        method: "DELETE",
+      }),
+    }),
     getUser: builder.query<any, void>({
       query: () => "/user",
     }),
   }),
 });
 
-export const { useUserEligibilityCheckMutation, useGetUserQuery,useFileUploadMutation } = creditCardAPI;
+export const { useUserEligibilityCheckMutation, useGetUserQuery,useFileUploadMutation,useFileDeleteMutation } = creditCardAPI;

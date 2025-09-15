@@ -18,7 +18,7 @@ import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
 import Modal from "react-native-modal";
 import { Controller } from "react-hook-form";
-import { useFileUploadMutation } from "@/redux/api/creditCardAPI";
+import { useFileDeleteMutation, useFileUploadMutation } from "@/redux/api/creditCardAPI";
 import Toast from "react-native-toast-message";
 interface CustomUploadProps {
   label: string;
@@ -38,10 +38,35 @@ const CustomUpload = ({
   const [previewVisible, setPreviewVisible] = useState(false);
   const [isloading, setLoading] = useState(false);
   const [fileUpload] = useFileUploadMutation();
+  const [fileDelete] = useFileDeleteMutation();
   const theme = useTheme();
+  const fileNeme = "Borrower"+" "+label;
+  const handleFileDelete = async (onChange: any,type:string)=>{
+    setLoading(true);
+    const data = {
+      folderName:"12345",
+      fileName:fileNeme,
+      mimeType:type,
+    }
+    const response = await fileDelete(data).unwrap();
+    if (response.status == 200) {
+        Toast.show({
+          type: "success",
+          text1: "File deleted successfully",
+          visibilityTime: 2000,
+        });
+        onChange();
+      } else {
+        Toast.show({
+          type: "error",
+          text1: "Failed to delete file!!",
+          visibilityTime: 2000,
+        });
+      }
+      setLoading(false);
+  }
   const handlePickFile = async (onChange: any) => {
     setVisible(false);
-    
     const result = await DocumentPicker.getDocumentAsync({
       type: ["image/*", "application/pdf"],
       copyToCacheDirectory: true,
@@ -58,7 +83,7 @@ const CustomUpload = ({
         type: type || "application/octet-stream",
       } as any);
       formData.append("folderName", "12345");
-      formData.append("fileName", label);
+      formData.append("fileName", fileNeme);
       const response = await fileUpload(formData).unwrap();
       if (response.status == 200) {
         Toast.show({
@@ -96,7 +121,7 @@ const CustomUpload = ({
         type: type || "application/octet-stream",
       } as any);
       formData.append("folderName", "12345");
-      formData.append("fileName", label);
+      formData.append("fileName", fileNeme);
       const response = await fileUpload(formData).unwrap();
       if (response.status == 200) {
         Toast.show({
@@ -133,7 +158,7 @@ const CustomUpload = ({
         type: type || "application/octet-stream",
       } as any);
       formData.append("folderName", "12345");
-      formData.append("fileName", label);
+      formData.append("fileName", fileNeme);
       const response = await fileUpload(formData).unwrap();
       if (response.status == 200) {
         Toast.show({
@@ -219,7 +244,7 @@ const CustomUpload = ({
                       />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => onChange()}>
+                    <TouchableOpacity onPress={() => handleFileDelete(onChange,value?.type)}>
                       <Feather
                         name={"trash-2"}
                         size={spacing.md}
