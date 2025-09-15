@@ -11,10 +11,23 @@ export const creditCardAPI = createApi({
         body: formData,
       }),
     }),
+
+    onSubmitApplication: builder.mutation<any, any>({
+      query: (formData) => ({
+        url: "ruleExecution/uaeCreditCard",
+        method: "POST",
+        body: formData,
+      }),
+    }),
+    getExistingCustomerData: builder.query<any, string>({
+  query: (mobileNo) => `etb/getExistingCustomerData/${mobileNo}`,
+}),
+
+    
     getUser: builder.query<any, void>({
       query: () => "/user",
     }),
   }),
 });
 
-export const { useUserEligibilityCheckMutation, useGetUserQuery } = creditCardAPI;
+export const { useUserEligibilityCheckMutation, useGetUserQuery,useGetExistingCustomerDataQuery} = creditCardAPI;

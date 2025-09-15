@@ -1,11 +1,11 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { useTheme } from "styled-components/native";
-import { localStyles } from "../styles/Notification2.Styles";
-import { useApplicationStore } from "@/store/applicationStore";
-import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
-import { router } from "expo-router";
 import CustomInput from "@/components/CustomInput";
+import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
+import { useApplicationStore } from "@/store/applicationStore";
+import { router } from "expo-router";
+import React from "react";
+import { Text } from "react-native";
+import { useTheme } from "styled-components/native";
+import { localStyles } from "../../../components/styles/Notification2.Styles";
 
 const NotificationScreen = () => {
   const theme = useTheme();

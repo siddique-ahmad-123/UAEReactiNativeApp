@@ -85,11 +85,11 @@ const [visa, setVisa] = useState<string | null>(null);
       />
 
       <View style={{ alignItems: "center", gap: spacingVertical.md }}>
-        <CustomUpload label={"Emirates ID"} onFilePicked={(uri) => setVisa(uri)} />
-        <CustomUpload label={"Passport" } onFilePicked={(uri) => setVisa(uri)} />
+        <CustomUpload label={"Emirates ID"}  control={control} name="emiratesID"/>
+        <CustomUpload label={"Passport" }  control={control} name="passport"/>
         {borrowerNationalityStatus === "Expat" ? (
           <>
-            <CustomUpload label={"Visa"} onFilePicked={(uri) => setVisa(uri)} />
+            <CustomUpload label={"Visa"}  control={control} name="visa"/>
           </>
         ) : (
           <></>

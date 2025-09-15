@@ -1,24 +1,25 @@
-import React, { useRef, useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  Dimensions,
-  ImageBackground,
-  Image,
-  Platform,
-  BackHandler,
-} from "react-native";
 import CustomButton from "@/components/CustomButton";
-import { router } from "expo-router";
-import { styles } from "../styles/onboarding.Styles";
-import { useTheme } from "styled-components/native";
 import Pentagon from "@/components/Pentagon";
 import { spacingVertical } from "@/constants/Metrics";
+import { router } from "expo-router";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  BackHandler,
+  Dimensions,
+  FlatList,
+  Image,
+  ImageBackground,
+  ImageSourcePropType,
+  Platform,
+  Text,
+  View
+} from "react-native";
+import { useTheme } from "styled-components/native";
+import { styles } from "../../../components/styles/onboarding.Styles";
+
+
 
 const { width, height } = Dimensions.get("window");
-
-import { ImageSourcePropType } from "react-native";
 
 type Slide = {
   id: string;

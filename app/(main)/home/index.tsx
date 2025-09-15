@@ -1,7 +1,13 @@
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { View, Text, Image, ScrollView } from "react-native";
-import { localStyles } from "../styles/Home.Styles";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
 import ServiceTile from "@/components/ServiceTile";
 import HeroBanner from "@/components/HeroBanner";
 import ProductCard from "@/components/ProductCard";
@@ -9,7 +15,16 @@ import { useTheme } from "styled-components/native";
 import { useApplicationStore } from "@/store/applicationStore";
 import { Ionicons } from "@expo/vector-icons";
 import UserIconName from "@/components/UserProfile/userIconName";
+import {
+  borderWidth,
+  fontSize,
+  fontWeight,
+  radius,
+  spacing,
+  spacingVertical,
+} from "@/constants/Metrics";
 type RouteNames = "/Request" | "/Agreement" | "/ExistingApplication";
+const { width } = Dimensions.get("window");
 const services: {
   id: string;
   title: string;
@@ -64,10 +79,37 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("1");
   const theme = useTheme();
   const { goToStep, stepIndex } = useApplicationStore();
+  const localStyles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.background,
+      padding: spacing.md,
+      gap:spacingVertical.md,
+    },
+    sectionTitle: {
+      fontSize: 18,
+      fontWeight: "700",
+      color: theme.colors.primaryColor,
+      justifyContent: "flex-start",
+    },
+    serviceRow: {
+      flexDirection: theme.flexRow.flexDirection,
+      justifyContent: "space-between",
+    },
+    grid: {
+      flexDirection: theme.flexRow.flexDirection,
+      flexWrap: "wrap",
+      justifyContent: "space-between",
+      gap:spacingVertical.md
+    }
+  });
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={{paddingLeft:16,paddingTop:16}}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={localStyles.container}
+    >
+      <View>
         <UserIconName name="Ravish Sheikh" />
       </View>
       <HeroBanner
@@ -75,7 +117,7 @@ export default function Dashboard() {
         backgroundImage={require("../../../assets/images/HeroBanner.png")}
       />
       <Text
-        style={[localStyles.sectionTitle, { color: theme.colors.primaryColor }]}
+        style={localStyles.sectionTitle}
       >
         My Services
       </Text>

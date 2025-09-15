@@ -1,9 +1,9 @@
 export const fieldNames = {
   //common detail
-  cardType:"cardType",
-  selectedRequiredAmount:"selectedRequiredAmount",
-  isCheckedTermandCond:"isCheckedTermandCond",
-
+  cardType: "cardType",
+  selectedRequiredAmount: "selectedRequiredAmount",
+  isCheckedTermandCond: "isCheckedTermandCond",
+  
   // Personal Details - Borrower
   borrowerName: "borrowerName",
   borrowerDOB: "borrowerDOB",
@@ -39,6 +39,53 @@ export const fieldNames = {
 
   borrowerNationalityStatus: "borrowerNationalityStatus",
 
+  // Borrower Income – Salaried
+  borrowerIncomeType: "borrowerIncomeType",
+  borrowerEmpDetailFetchMethod: "borrowerEmpDetailFetchMethod",
+  borrowerEmployerName: "borrowerEmployerName",
+  borrowerEmployedFrom: "borrowerEmployedFrom",
+  borrowerCurrentExp: "borrowerCurrentExp",
+  borrowerTotalExp: "borrowerTotalExp",
+  borrowerIncomeDetailFetchMethod: "borrowerIncomeDetailFetchMethod",
+  borrowerEmiratesId: "borrowerEmiratesId",
+  borrowerIbanNo: "borrowerIbanNo",
+  borrowerBankingCode: "borrowerBankingCode",
+  borrowerStartDateFts: "borrowerStartDateFts",
+  borrowerEndDateFts: "borrowerEndDateFts",
+  borrowerFtsStatus: "borrowerFtsStatus",
+  borrowerMonthlySalaryBankTransfer: "borrowerMonthlySalaryBankTransfer",
+  borrowerMonthlySalaryAECB: "borrowerMonthlySalaryAECB",
+
+  // Borrower Income – Self Employed
+  borrowerBusinessDetailFetchMethod: "borrowerBusinessDetailFetchMethod",
+  borrowerNameOfBusiness: "borrowerNameOfBusiness",
+  borrowerLegalForm: "borrowerLegalForm",
+  borrowerEmiratesBusiness: "borrowerEmiratesBusiness",
+  borrowerDateOfEstabilishment: "borrowerDateOfEstabilishment",
+  borrowerVintage: "borrowerVintage",
+  borrowerLicenseNo: "borrowerLicenseNo",
+  borrowerNatureOfBusiness: "borrowerNatureOfBusiness",
+  borrowerBankName: "borrowerBankName",
+  borrowerAccountNo: "borrowerAccountNo",
+  borrowerLast6MonthsADB: "borrowerLast6MonthsADB",
+  borrowerLast6MonthsAvgCredit: "borrowerLast6MonthsAvgCredit",
+  //expense detail
+  houseRent: "houseRent",
+  houseBills: "houseBills",
+  groceryExpenses: "groceryExpenses",
+  foodDeliveries: "foodDeliveries",
+  schoolCost: "schoolCost",
+  leisure: "leisure",
+  healthcare: "healthcare",
+  otherExpenses: "otherExpenses",
+  
+  supplementaryCardName: "supplementaryCardName",
+  dispatchAddress: "dispatchAddress",
+  dispatchAddressLine1: "dispatchAddress1",
+  dispatchAddressLine2: "dispatchAddress2",
+  dispatchEmirates: "dispatchEmirates",
+  dispatchCountry: "dispatchCountry",
+  dispatchBranchName: "dispatchBranchName",
   // Personal Details - Co-Borrower
   isCoBorrower: "isCoBorrower",
   coBorrowerEidaNo: "coBorrowerEidaNo",
@@ -76,37 +123,6 @@ export const fieldNames = {
 
   coBorrowerVerificationStatus: "coBorrowerVerificationStatus",
 
-  // Borrower Income – Salaried
-  borrowerIncomeType: "borrowerIncomeType",
-  borrowerEmpDetailFetchMethod: "borrowerEmpDetailFetchMethod",
-  borrowerEmployerName: "borrowerEmployerName",
-  borrowerEmployedFrom: "borrowerEmployedFrom",
-  borrowerCurrentExp: "borrowerCurrentExp",
-  borrowerTotalExp: "borrowerTotalExp",
-  borrowerIncomeDetailFetchMethod: "borrowerIncomeDetailFetchMethod",
-  borrowerEmiratesId: "borrowerEmiratesId",
-  borrowerIbanNo: "borrowerIbanNo",
-  borrowerBankingCode: "borrowerBankingCode",
-  borrowerStartDateFts: "borrowerStartDateFts",
-  borrowerEndDateFts: "borrowerEndDateFts",
-  borrowerFtsStatus: "borrowerFtsStatus",
-  borrowerMonthlySalaryBankTransfer: "borrowerMonthlySalaryBankTransfer",
-  borrowerMonthlySalaryAECB: "borrowerMonthlySalaryAECB",
-
-  // Borrower Income – Self Employed
-  borrowerBusinessDetailFetchMethod: "borrowerBusinessDetailFetchMethod",
-  borrowerNameOfBusiness: "borrowerNameOfBusiness",
-  borrowerLegalForm: "borrowerLegalForm",
-  borrowerEmiratesBusiness: "borrowerEmiratesBusiness",
-  borrowerDateOfEstabilishment: "borrowerDateOfEstabilishment",
-  borrowerVintage: "borrowerVintage",
-  borrowerLicenseNo: "borrowerLicenseNo",
-  borrowerNatureOfBusiness: "borrowerNatureOfBusiness",
-  borrowerBankName: "borrowerBankName",
-  borrowerAccountNo: "borrowerAccountNo",
-  borrowerLast6MonthsADB: "borrowerLast6MonthsADB",
-  borrowerLast6MonthsAvgCredit: "borrowerLast6MonthsAvgCredit",
-
   // Common Fields (Co-Borrower Income Type)
   coBorrowerIncomeType: "coBorrowerIncomeType",
   coBorrowerEmpDetailFetchMethod: "coBorrowerEmpDetailFetchMethod",
@@ -143,14 +159,6 @@ export const fieldNames = {
   coBorrowerAccountNo: "coBorrowerAccountNo",
   coBorrowerLast6MonthsADB: "coBorrowerLast6MonthsADB",
   coBorrowerLast6MonthsAvgCredit: "coBorrowerLast6MonthsAvgCredit",
-
-  supplementaryCardName: "supplementaryCardName",
-  dispatchAddress: "dispatchAddress",
-  dispatchAddressLine1: "dispatchAddress1",
-  dispatchAddressLine2: "dispatchAddress2",
-  dispatchEmirates: "dispatchEmirates",
-  dispatchCountry: "dispatchCountry",
-  dispatchBranchName: "dispatchBranchName",
 } as const;
 
 export type fieldNamesKey = keyof typeof fieldNames;

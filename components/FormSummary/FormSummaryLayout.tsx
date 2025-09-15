@@ -25,6 +25,7 @@ export default function FormSummaryLayout({
     container: {
       flex: 1,
       backgroundColor: theme.colors.borderColor,
+      
     },
     scrollViewContainer: {
       flex: 1,
@@ -46,6 +47,7 @@ export default function FormSummaryLayout({
       backgroundColor: theme.colors.background,
     },
     handlercontainer: {
+      padding:spacing.md,
       width: width.full,
       alignItems: "center", 
     },
@@ -60,6 +62,9 @@ export default function FormSummaryLayout({
   return (
       <View style={styles.container}>
         <View style={styles.scrollViewContainer}>
+          <View style={styles.handlercontainer}>
+              <View style={styles.handle} />
+            </View>
           <KeyboardAwareScrollView
             contentContainerStyle={styles.scrollViewContent}
             enableOnAndroid
@@ -67,9 +72,7 @@ export default function FormSummaryLayout({
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            <View style={styles.handlercontainer}>
-              <View style={styles.handle} />
-            </View>
+            
             {children}
           </KeyboardAwareScrollView>
 

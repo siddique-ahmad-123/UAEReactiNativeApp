@@ -4,7 +4,7 @@
     "slug": "uaereactnativeapp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/Logo-High_front.png",
     "scheme": "uaereactnativeapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/Logo-High_front.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
@@ -29,10 +29,38 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/ProductImage.png",
           "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "resizeMode": "cover",
+          "backgroundColor": "#3C1053"
+        }
+      ],
+      [
+        "@react-native-community/datetimepicker",
+        {
+          "android": {
+            "datePicker": {
+              "colorAccent": {
+                "light": "#3C1053"
+              },
+              "textColorPrimary": {
+                "light": "#3C1053"
+              },
+              "colorControlActivated": {
+                "light": "#3C1053"
+              },
+              "windowBackground": {
+                "light": "#E6D9F5"
+              }
+            },
+            "timePicker": {
+              "background": { "light": "#FF5722", "dark": "#383838" },
+              "numbersBackgroundColor": {
+                "light": "#FF5722",
+                "dark": "#383838"
+              }
+            }
+          }
         }
       ]
     ],

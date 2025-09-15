@@ -1,23 +1,25 @@
-import React from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
-import { useTheme } from "styled-components/native";
-import { router } from "expo-router";
-import { styles } from "@/app/(main)/styles/submitApplication2";
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
-import { useApplicationStore } from "@/store/applicationStore";
+import { styles } from "@/components/styles/submitApplication2";
 import { useUserEligibilityCheckMutation } from "@/redux/api/creditCardAPI";
+import { useApplicationStore } from "@/store/applicationStore";
+import { router } from "expo-router";
+import React from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { useTheme } from "styled-components/native";
 
 const Congratulations = () => {
   const theme = useTheme();
   const { formData, resetForm } = useApplicationStore();
   const [userEligibilityCheck] = useUserEligibilityCheckMutation();
   const onSubmitApplication = async () => {
-    const response = await userEligibilityCheck(formData).unwrap();
-    console.log("✅ Server Response:", response);
-    if (response.status == 200) {
-      resetForm();
-      router.replace("/(main)/home");
-    }
+    // const response = await userEligibilityCheck(formData).unwrap();
+    // console.log("✅ Server Response:", response);
+    // if (response.status == 200) {
+    //   resetForm();
+    //   router.replace("/(main)/home");
+    // }
+     resetForm();
+     router.replace("/");
   };
   return (
     <CustomMainChild

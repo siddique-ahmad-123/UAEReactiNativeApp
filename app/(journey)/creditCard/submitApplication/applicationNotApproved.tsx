@@ -1,13 +1,13 @@
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import MethodSelector from "@/components/MethodSelector";
+import { styles } from "@/components/styles/submitApplication4.Styles";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "styled-components/native";
-import { styles } from "../../../components/styles/submitApplication4.Styles";
 
-const NotificationScreen = () => {
+const ApplicationNotApproved = () => {
   const [selectedMethod, setSelectedMethod] = React.useState<
     string | undefined
   >();
@@ -56,7 +56,7 @@ const NotificationScreen = () => {
       >
         <View style={styles.image}>
           <Image
-            source={require("../../../assets/images/amico.png")}
+            source={require("../../../../assets/images/amico.png")}
             style={{ width: 200, height: 200 }}
             resizeMode="contain"
           />
@@ -97,4 +97,4 @@ const NotificationScreen = () => {
   );
 };
 
-export default NotificationScreen;
+export default ApplicationNotApproved;

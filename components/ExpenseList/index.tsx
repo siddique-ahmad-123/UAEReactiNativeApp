@@ -6,18 +6,29 @@ import {
   spacing,
   spacingVertical,
 } from "@/constants/Metrics";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
+import { Controller, Control, useWatch } from "react-hook-form";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { useTheme } from "styled-components/native";
 
-const ExpenseList = () => {
+type ExpenseItem = {
+  name: string;
+  label: string;
+};
+
+type Props = {
+  data: ExpenseItem[];
+  control: Control<any>; // 👈 allow any form schema
+};
+
+const ExpenseList = ({ data, control }: Props) => {
   const theme = useTheme();
+
   const styles = StyleSheet.create({
     card: {
       borderRadius: radius.xl,
       backgroundColor: theme.colors.background,
       overflow: "hidden",
-      // elevation: 3,
       borderWidth: borderWidth.normal,
       borderColor: theme.colors.borderColor,
     },
@@ -37,7 +48,7 @@ const ExpenseList = () => {
       fontWeight: fontWeight.medium,
     },
     list: {
-      padding: 16,
+      padding: spacing.md,
     },
     row: {
       flexDirection: theme.flexRow.flexDirection,
@@ -46,7 +57,7 @@ const ExpenseList = () => {
     },
     label: {
       flex: 1,
-      color: "#666",
+      color: theme.colors.primaryColor,
       fontSize: fontSize.md,
     },
     inputContainer: {
@@ -64,41 +75,26 @@ const ExpenseList = () => {
       flex: 1,
       textAlign: "right",
       fontSize: fontSize.sm,
+      color:theme.colors.primaryColor,
       padding: 0,
     },
     currency: {
       marginLeft: spacing.sm,
-      color: "#999",
+      color: theme.colors.primaryColor,
       fontSize: fontSize.xs,
     },
   });
-  const expenses = [
-    "House Rent",
-    "House Bills",
-    "Grocery Expenses",
-    "Food Deliveries",
-    "School Cost",
-    "Leisure",
-    "Healthcare",
-    "Other Expenses",
-  ];
-  const [values, setValues] = useState(
-    expenses.reduce((acc, curr) => ({ ...acc, [curr]: "" }), {})
-  );
 
-  // Calculate total dynamically
+  // ✅ Watch all expense fields
+  const values = useWatch({ control });
+
+  // ✅ Calculate total dynamically
   const total = useMemo(() => {
-    return Object.values(values).reduce(
-      (sum, v) => sum + (parseFloat(v) || 0),
-      0
-    );
-  }, [values]);
-
-  const handleChange = (key: string, text: string) => {
-    // Allow only numbers
-    const cleaned = text.replace(/[^0-9]/g, "");
-    setValues((prev) => ({ ...prev, [key]: cleaned }));
-  };
+    return data.reduce((sum, row) => {
+      const v = parseFloat(values?.[row.name]) || 0;
+      return sum + v;
+    }, 0);
+  }, [values, data]);
 
   return (
     <View style={styles.card}>
@@ -110,16 +106,24 @@ const ExpenseList = () => {
 
       {/* Expense list */}
       <View style={styles.list}>
-        {expenses.map((label, idx) => (
+        {data.map((row, idx) => (
           <View key={idx} style={styles.row}>
-            <Text style={styles.label}>{label}</Text>
+            <Text style={styles.label}>{row.label}</Text>
 
             <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.input}
-                keyboardType="numeric"
-                value={values[label]}
-                onChangeText={(text) => handleChange(label, text)}
+              <Controller
+                control={control}
+                name={row.name}
+                render={({ field: { onChange, value } }) => (
+                  <TextInput
+                    style={styles.input}
+                    keyboardType="numeric"
+                    value={value?Number(value).toLocaleString():""}
+                    onChangeText={(text) =>
+                      onChange(text.replace(/[^0-9]/g, "")) // only numbers
+                    }
+                  />
+                )}
               />
               <Text style={styles.currency}>AED</Text>
             </View>

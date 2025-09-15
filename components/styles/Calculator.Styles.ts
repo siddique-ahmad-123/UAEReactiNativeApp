@@ -2,7 +2,7 @@ import { borderWidth, fontSize, fontWeight, radius, spacing, spacingVertical } f
 import React from "react";
 import { StyleSheet } from "react-native";
 
-export const styles = StyleSheet.create({
+export  const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
   },

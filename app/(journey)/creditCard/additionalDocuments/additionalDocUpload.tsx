@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { StyleSheet } from "react-native";
 
 const AdditionalDocUpload = () => {
-  const [visa, setVisa] = useState<string | null>(null);
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
@@ -20,7 +19,6 @@ const AdditionalDocUpload = () => {
     nextStep();
   };
 
-  const borrowerType = watch("borrowerType") ?? "Borrower";
   return (
     <FormLayout
       stepNumber={4}
@@ -33,30 +31,13 @@ const AdditionalDocUpload = () => {
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
-      {/* <SegmentedControl
-        label={"Select Applicant"}
-        options={["Borrower", "Co-Borrower"]}
-        defaultValue={borrowerType}
-        onChange={(value) => setValue("borrowerType", value)}
-      /> */}
-
-      {borrowerType === "Borrower" ? (
         <>
           {/* Borrower Upload  */}
-          <CustomUpload label={"Salary Certificate"} onFilePicked={(uri) => setVisa(uri)} />
-          <CustomUpload label={"Bank Statement"} onFilePicked={(uri) => setVisa(uri)} />
-          <CustomUpload label={"Additional Income Proof"} onFilePicked={(uri) => setVisa(uri)} />
-          <CustomUpload label={"Trade License"} onFilePicked={(uri) => setVisa(uri)} />
+          <CustomUpload label={"Salary Certificate"} control={control} name="SalaryCertificate"/>
+          <CustomUpload label={"Bank Statement"} control={control} name="BankStatement"/>
+          <CustomUpload label={"Additional Income Proof"}  control={control} name="AdditionalIncomeProof"/>
+          <CustomUpload label={"Trade License"} control={control} name="TradeLicense"/>
         </>
-      ) : (
-        <>
-          {/* Co-Borrower Upload */}
-          <CustomUpload label={"Salary Certificate"} onFilePicked={(uri) => setVisa(uri)} />
-          <CustomUpload label={"Bank Statement"} onFilePicked={(uri) => setVisa(uri)} />
-          <CustomUpload label={"Additional Income Proof"} onFilePicked={(uri) => setVisa(uri)}/>
-          <CustomUpload label={"Trade License"}onFilePicked={(uri) => setVisa(uri)} />
-        </>
-      )}
     </FormLayout>
   );
 };

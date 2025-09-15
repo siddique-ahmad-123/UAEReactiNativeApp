@@ -22,13 +22,14 @@ interface FormHeaderProps {
   title: string;
   subTitle?: string;
   onClose?: () => void;
-  noOfButtons: number;
+  noOfButtons?: number;
   singleButtonTitle?: string;
   doubleButtonTitle1?: string;
   doubleButtonTitle2?: string;
   onPressSingleButton?: () => void;
   onPressDoubleButton1?: () => void;
   onPressDoubleButton2?: () => void;
+  isDisableDoubleButton2?:boolean;
   children?: React.ReactNode;
 }
 const CustomMainChild = ({
@@ -42,6 +43,7 @@ const CustomMainChild = ({
   onPressSingleButton,
   onPressDoubleButton1,
   onPressDoubleButton2,
+  isDisableDoubleButton2 = false,
   children,
 }: FormHeaderProps) => {
   const theme = useTheme();
@@ -147,6 +149,7 @@ const CustomMainChild = ({
                 />
                 <CustomButton
                   title={doubleButtonTitle2 ? doubleButtonTitle2 : ""}
+                  disabled={isDisableDoubleButton2}
                   onPress={() => {
                     if (onPressDoubleButton2) {
                       onPressDoubleButton2();

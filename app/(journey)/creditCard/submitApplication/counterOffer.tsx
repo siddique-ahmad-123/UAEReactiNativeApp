@@ -1,13 +1,14 @@
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import MethodSelector from "@/components/MethodSelector";
+import { styles } from "@/components/styles/submitApplication3.Styles";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "styled-components/native";
-import { styles } from "../../../components/styles/submitApplication3.Styles";
 
-const NotificationScreen = () => {
+
+const CounterOffer = () => {
   const theme = useTheme();
   const { prevStep } = useApplicationStore();
   const [selectedMethod, setSelectedMethod] = React.useState<
@@ -50,7 +51,7 @@ const NotificationScreen = () => {
     >
       <View style={styles.image}>
         <Image
-          source={require("../../../assets/images/animatedImg.png")}
+          source={require("../../../../assets/images/animatedImg.png")}
           style={{ width: 200, height: 200 }}
           resizeMode="contain"
         />
@@ -87,4 +88,4 @@ const NotificationScreen = () => {
   );
 };
 
-export default NotificationScreen;
+export default CounterOffer;

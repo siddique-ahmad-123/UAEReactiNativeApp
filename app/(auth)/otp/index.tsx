@@ -7,7 +7,7 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useTheme } from "styled-components/native";
 import {
   fontSize,
@@ -17,11 +17,15 @@ import {
   spacingVertical,
 } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
-import CustomButton from "@/components/CustomButton"; // 👈 import your custom button
+import CustomButton from "@/components/CustomButton";
+import { setUser } from "@/utils/storage";
 
 const OTPScreen: React.FC = () => {
   const router = useRouter();
-  const [otp, setOtp] = useState(["", "", "", ""]);
+  const { mobile, otp } = useLocalSearchParams<{ mobile?: string; otp?: string }>();
+  const correctOtp = otp || "1234";
+
+  const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
 
   const inputRefs = [
     useRef<TextInput>(null),
@@ -31,15 +35,16 @@ const OTPScreen: React.FC = () => {
   ];
 
   const handleChange = (text: string, index: number) => {
-    const newOtp = [...otp];
+    const newOtp = [...otpDigits];
 
+    // If user pastes multiple digits
     if (text.length > 1) {
       text.split("").forEach((char, i) => {
         if (index + i < newOtp.length) {
           newOtp[index + i] = char;
         }
       });
-      setOtp(newOtp);
+      setOtpDigits(newOtp);
 
       const nextIndex = newOtp.findIndex((d) => d === "");
       if (nextIndex !== -1) {
@@ -48,22 +53,29 @@ const OTPScreen: React.FC = () => {
       return;
     }
 
+    // Normal typing
     newOtp[index] = text;
-    setOtp(newOtp);
+    setOtpDigits(newOtp);
 
-    if (text) {
-      if (index < inputRefs.length - 1) {
-        inputRefs[index + 1].current?.focus();
-      }
+    if (text && index < inputRefs.length - 1) {
+      inputRefs[index + 1].current?.focus();
+    } else if (!text && index > 0) {
+      inputRefs[index - 1].current?.focus();
+    }
+  };
+
+  const handleVerify = async () => {
+    const enteredOtp = otpDigits.join("");
+    if (enteredOtp === correctOtp) {
+      await setUser({ mobile }); // save user session
+      router.replace("/NavScreen"); // go to dashboard
     } else {
-      if (index > 0) {
-        inputRefs[index - 1].current?.focus();
-      }
+      alert("Invalid OTP. Please try again.");
     }
   };
 
   const theme = useTheme();
-  const allFilled = otp.every((digit) => digit !== ""); // 👈 check if OTP is complete
+  const allFilled = otpDigits.every((digit) => digit !== "");
 
   const styles = StyleSheet.create({
     container: {
@@ -104,11 +116,6 @@ const OTPScreen: React.FC = () => {
       marginTop: -spacingVertical.xl,
       padding: spacing.md,
       alignItems: "center",
-    },
-    row: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      gap: 10,
     },
     sectionTitle: {
       fontSize: fontSize.xxl,
@@ -157,9 +164,7 @@ const OTPScreen: React.FC = () => {
       >
         <View style={styles.overlay} />
         <TouchableOpacity
-          onPress={() => {
-            router.back();
-          }}
+          onPress={() => router.back()}
           style={styles.backButton}
         >
           <Ionicons
@@ -177,16 +182,21 @@ const OTPScreen: React.FC = () => {
         <Text style={styles.sectionSubtitle}>
           {allFilled
             ? "We are automatically detecting an SMS sent to your mobile number *****7412"
-            : "we have sent a SMS to your mobile number*****7412"}
+            : "We have sent an SMS to your mobile number *****7412"}
         </Text>
+
         <View style={styles.otpRow}>
-          {otp.map((digit, index) => (
+          {otpDigits.map((digit, index) => (
             <TextInput
               key={index}
               ref={inputRefs[index]}
               style={[
                 styles.otpBox,
-                { backgroundColor: digit ? theme.colors.primaryColor : theme.colors.primaryLightColor },
+                {
+                  backgroundColor: digit
+                    ? theme.colors.primaryColor
+                    : theme.colors.primaryLightColor,
+                },
               ]}
               value={digit}
               onChangeText={(text) => handleChange(text, index)}
@@ -195,22 +205,26 @@ const OTPScreen: React.FC = () => {
               textAlign="center"
               autoFocus={index === 0}
               selectionColor={theme.colors.background}
-              placeholderTextColor={digit ? theme.colors.background : "#000"}
+              placeholderTextColor={
+                digit ? theme.colors.background : "#000"
+              }
             />
           ))}
         </View>
 
         <Text style={styles.resendLabel}>Did not receive the code?</Text>
-          <Text style={styles.resendText}>Resend Code</Text>
+        <Text style={styles.resendText}>Resend Code</Text>
         <Text style={styles.timer}>02:00</Text>
+
         {allFilled && (
           <CustomButton
             title="Continue"
             size="full"
             variant="primary"
             type="filled"
-            onPress={() => router.push("/NavScreen")}
-            style={{marginTop:230}}
+            onPress={handleVerify}
+            style={{ marginTop: 230 }}
+            //disabled={!allFilled}
           />
         )}
       </View>

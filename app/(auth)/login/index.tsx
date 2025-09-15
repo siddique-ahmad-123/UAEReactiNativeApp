@@ -1,41 +1,80 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   ImageBackground,
+  Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { useTheme } from "styled-components/native";
 import CustomButton from "@/components/CustomButton";
 import CustomInput from "@/components/CustomInput";
-import { useTheme } from "styled-components/native";
-import { fontSize, fontWeight, radius, spacing, spacingVertical } from "@/constants/Metrics";
+import {
+  fontSize,
+  fontWeight,
+  radius,
+  spacing,
+  spacingVertical,
+} from "@/constants/Metrics";
+import { useAsyncStorage } from "@/hooks/useAsyncStorage";
+
+const STORAGE_KEY = "user";
 
 const LoginScreen: React.FC = () => {
   const router = useRouter();
   const theme = useTheme();
 
-//   const handleLogin = async () => {
-//   if (emiratesId && mobile) {
-//     await setUser({ emiratesId, mobile });
-//     router.replace("/(main)/home"); // go Home after login
-//   } else {
-//     alert("Please enter Emirates ID and Mobile Number");
-//   }
-// };
-  const styles = StyleSheet.create({
-    container: { 
-      flex: 1, 
-      backgroundColor: theme.colors.background },
+ 
+  const { value: storedUser, storeValue } = useAsyncStorage<{
+    emiratesId: string;
+    mobile: string;
+  }>(STORAGE_KEY);
 
+
+  const [emiratesId, setEmiratesId] = useState("");
+  const [mobile, setMobile] = useState("");
+
+
+  useEffect(() => {
+    if (storedUser) {
+      router.replace({
+        pathname: "/(auth)/otp",
+        params: { mobile: storedUser.mobile, otp: "1234" },
+      });
+    }
+  }, [storedUser]);
+
+  const handleLogin = async () => {
+    if (!emiratesId.trim()) {
+      Alert.alert("Validation Error", "Please enter your Emirates ID");
+      return;
+    }
+    if (!mobile.trim()) {
+      Alert.alert("Validation Error", "Please enter your Mobile Number");
+      return;
+    }
+    if (mobile.length < 10) {
+      Alert.alert("Validation Error", "Mobile number must be at least 10 digits");
+      return;
+    }
+    await storeValue({ emiratesId, mobile });
+
+    router.push({
+      pathname: "/(auth)/otp",
+      params: { mobile, otp: "1234" },
+    });
+  };
+
+  const styles = StyleSheet.create({
+    container: { flex: 1, backgroundColor: theme.colors.background },
     headerBackground: {
       width: "110%",
       height: 300,
       justifyContent: "flex-end",
-      padding:spacing.md,
-      paddingBottom:spacingVertical.xxxl
+      padding: spacing.md,
+      paddingBottom: spacingVertical.xxxl,
     },
-
     imageStyle: {
       opacity: 1,
       borderBottomLeftRadius: 0,
@@ -47,28 +86,24 @@ const LoginScreen: React.FC = () => {
     },
     cornerText: {
       fontSize: fontSize.xxl,
-      fontWeight:fontWeight.bold,
+      fontWeight: fontWeight.bold,
       color: theme.colors.textHeader,
     },
-
     cornerText2: {
       fontSize: fontSize.lg,
-      fontWeight:fontWeight.normal,
-      color: theme.colors.textHeader,    },
-
+      fontWeight: fontWeight.normal,
+      color: theme.colors.textHeader,
+    },
     formContainer: {
       flex: 1,
       backgroundColor: theme.colors.background,
       borderTopLeftRadius: radius.pill,
       borderTopRightRadius: radius.pill,
       marginTop: -spacingVertical.xl,
-      padding:spacing.md,
-      paddingTop:spacingVertical.xl,
+      padding: spacing.md,
+      paddingTop: spacingVertical.xl,
       gap: spacingVertical.md,
     },
-
-    forgotPassword: { fontSize: 14, color: "text" },
-
     row: {
       flexDirection: "row",
       justifyContent: "space-between",
@@ -85,20 +120,25 @@ const LoginScreen: React.FC = () => {
       >
         <View style={styles.overlay} />
         <Text style={styles.cornerText}>Welcome !!</Text>
-        <Text style={styles.cornerText2}>Signing to your account</Text>
+        <Text style={styles.cornerText2}>Sign in to your account</Text>
       </ImageBackground>
 
       <View style={styles.formContainer}>
         <CustomInput
           label="Emirates ID"
           placeholder="0000000000"
-          secureTextEntry
+          value={emiratesId}
+          onChangeText={setEmiratesId}
+          maxLength={10}
         />
-        <CustomInput label="Mobile No" placeholder="********" secureTextEntry />
-
-        {/* <TouchableOpacity style={{ alignSelf: "flex-end", marginBottom: 20 }}>
-          <Text style={styles.forgotPassword}>Forgot password?</Text>
-        </TouchableOpacity> */}
+        <CustomInput
+          label="Mobile No"
+          placeholder="********"
+          value={mobile}
+          onChangeText={setMobile}
+          keyboardType="numeric"
+          maxLength={10}
+        />
 
         <View style={styles.row}>
           <CustomButton
@@ -110,10 +150,11 @@ const LoginScreen: React.FC = () => {
           />
           <CustomButton
             title="Send OTP"
-            onPress={() => router.push("/(auth)/otp")}
+            onPress={handleLogin}
             variant="primary"
             type="filled"
             size="lg"
+            disabled={mobile.trim().length < 10}
           />
         </View>
       </View>

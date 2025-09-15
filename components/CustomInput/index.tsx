@@ -26,11 +26,13 @@ interface CustomInputProps {
   placeholder?: string;
   type?: "text" | "email" | "number" | "currency" | "password" | "textarea";
   variant?: "full" | "half";
-  mandatory?: boolean;
+  required?: boolean;
   secureTextEntry?: boolean;
   numberOfLines?: number;
-   value?: string;
+  value?: string;
   onChangeText?: (v: string) => void;
+  keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
+  maxLength?: number;
 }
 
 const CustomInput = ({
@@ -40,10 +42,12 @@ const CustomInput = ({
   placeholder,
   type = "text",
   variant = "full",
-  mandatory = false,
+  required = false,
   numberOfLines = 4,
   value,
   onChangeText,
+  keyboardType,
+  maxLength,
 }: CustomInputProps) => {
   const [secure, setSecure] = useState(type === "password");
   const [localValue, setLocalValue] = useState(""); // for uncontrolled mode
@@ -137,7 +141,7 @@ const CustomInput = ({
         >
           <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
             {label}
-            {mandatory && <Text style={{ color: "red" }}> *</Text>}
+            {required && <Text style={{ color: "red" }}> *</Text>}
           </Text>
           <View
             style={[
@@ -165,12 +169,14 @@ const CustomInput = ({
             multiline={type === "textarea"}
             numberOfLines={type === "textarea" ? numberOfLines : 1}
             keyboardType={
-              type === "email"
+              keyboardType ??
+              (type === "email"
                 ? "email-address"
                 : type === "number" || type === "currency"
                 ? "numeric"
-                : "default"
+                : "default")
             }
+            maxLength={maxLength}
           />
 
           {type === "password" && (
@@ -197,6 +203,7 @@ const CustomInput = ({
       <Controller
         control={control}
         name={name}
+        rules={required ? { required: `${label} is required` } : undefined}
         render={({
           field: { onChange, onBlur, value },
           fieldState: { error },
