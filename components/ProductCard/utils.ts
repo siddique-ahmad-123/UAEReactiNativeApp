@@ -22,12 +22,16 @@ export const styles = StyleSheet.create({
   imageStyle: {
     borderRadius: radius.lg,
   },
+  overlay: {
+    ...StyleSheet.absoluteFillObject, // fill the parent
+    backgroundColor: "#4b2e5e2f", // semi-transparent black
+  },
   title: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.xs,
     fontWeight: fontWeight.medium,
     position: "absolute",
-    bottom: spacing.lg,
-    left: spacing.sm,
+    bottom: spacing.md,
+    right: spacing.sm,
     zIndex:20
   },
 });

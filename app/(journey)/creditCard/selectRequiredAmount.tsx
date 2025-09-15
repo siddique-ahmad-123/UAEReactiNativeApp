@@ -7,12 +7,25 @@ import DynamicSliderCard from "@/components/CustomSliderCard/DynamicSliderCard";
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import { useApplicationStore } from "@/store/applicationStore";
 import { spacingVertical } from "@/constants/Metrics";
+import { useForm } from "react-hook-form";
+import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 
 const SelectRequiredAmount = () => {
-  const [financeAmount, setFinanceAmount] = useState<number>(50000);
-  const [isChecked, setChecked] = useState(false);
   const theme = useTheme();
-  const { nextStep, prevStep } = useApplicationStore();
+  const { nextStep, formData, prevStep, updateField } = useApplicationStore();
+  const [financeAmount, setFinanceAmount] = useState<number>(formData?.[fieldNames.selectedRequiredAmount] || 10000);
+  const [isChecked, setChecked] = useState(formData?.[fieldNames.isCheckedTermandCond] || false);
+  const { setValue } = useForm({
+    defaultValues: formData,
+  });
+  const onClickNext = () => {
+    setValue(fieldNames.isCheckedTermandCond, isChecked);
+    updateField(fieldNames.isCheckedTermandCond, isChecked);
+    setValue(fieldNames.selectedRequiredAmount, financeAmount);
+    updateField(fieldNames.selectedRequiredAmount, financeAmount);
+    console.log("Store formData:", formData);
+    nextStep();
+  };
   const styles = StyleSheet.create({
     checkboxContainer: {
       flexDirection: "row",
@@ -28,11 +41,11 @@ const SelectRequiredAmount = () => {
     checkbox: {
       margin: 8,
     },
-    bottomContainer:{
-      flex:1,
-      gap:spacingVertical.sm,
-      marginTop:"50%"
-    }
+    bottomContainer: {
+      flex: 1,
+      gap: spacingVertical.sm,
+      marginTop: "50%",
+    },
   });
   return (
     <CustomMainChild
@@ -41,7 +54,7 @@ const SelectRequiredAmount = () => {
       doubleButtonTitle1="Cancel"
       doubleButtonTitle2="Next"
       onPressDoubleButton1={() => prevStep()}
-      onPressDoubleButton2={() => nextStep()}
+      onPressDoubleButton2={()=> onClickNext()}
     >
       <DynamicSliderCard
         title="Card Amount"

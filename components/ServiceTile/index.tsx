@@ -7,7 +7,13 @@ import {
 } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { GestureResponderEvent, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  GestureResponderEvent,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useTheme } from "styled-components/native";
 
 interface ServiceTileProps {
@@ -16,7 +22,7 @@ interface ServiceTileProps {
   onPress?: (event: GestureResponderEvent) => void;
 }
 
-const ServiceTile = ({ title, iconName,onPress}: ServiceTileProps) => {
+const ServiceTile = ({ title, iconName, onPress }: ServiceTileProps) => {
   const theme = useTheme();
   return (
     <TouchableOpacity
@@ -42,10 +48,8 @@ export default ServiceTile;
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "#3F1956",
     borderRadius: radius.lg,
-    paddingVertical: spacingVertical.sm,
-    paddingHorizontal: spacing.sm,
+    padding: spacing.sm,
     alignItems: "flex-start",
     justifyContent: "space-between",
     width: spacing.xxxxl,
@@ -59,8 +63,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    fontSize: fontSize.xs,
-    fontWeight: fontWeight.semiBold,
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.medium,
     // color: "white",
     textAlign: "left",
   },

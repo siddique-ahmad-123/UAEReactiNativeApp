@@ -11,7 +11,12 @@ const NotificationScreen = () => {
   const [selectedMethod, setSelectedMethod] = React.useState<
     string | undefined
   >();
-  const { nextStep } = useApplicationStore();
+  const { resetForm } = useApplicationStore();
+
+  const onSubmitApplication = ()=>{
+      resetForm();
+      router.replace("/(main)/home");
+  }
   const methodOptions = [
     {
       id: "email",
@@ -43,7 +48,7 @@ const NotificationScreen = () => {
       noOfButtons={1}
       singleButtonTitle="Return to Home Page"
       onClose={() => router.back()}
-      onPressSingleButton={() => nextStep()}
+      onPressSingleButton={() => onSubmitApplication()}
     >
       <ScrollView
         contentContainerStyle={{ paddingBottom: 20 }}

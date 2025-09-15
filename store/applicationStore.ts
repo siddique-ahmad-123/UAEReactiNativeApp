@@ -8,9 +8,9 @@ const stepRoutes = [
   "/(journey)/creditCard/selectCreditCard",
   "/(journey)/creditCard/selectRequiredAmount",
   "/(journey)/creditCard/personalDetail/borrowerDetails",
-  "/(journey)/creditCard/personalDetail/coBorrowerDetails",
+  // "/(journey)/creditCard/personalDetail/coBorrowerDetails",
   "/(journey)/creditCard/incomeDetail/borrower",
-  "/(journey)/creditCard/incomeDetail/coBorrower",
+  // "/(journey)/creditCard/incomeDetail/coBorrower",
   "/(journey)/creditCard/expenseDetail/expenseDetails",
   "/(journey)/creditCard/additionalDocuments/additionalDocUpload",
   "/(journey)/creditCard/dispatchDetail/dispatchDetails",
@@ -43,11 +43,8 @@ export const useApplicationStore = create<ApplicationState>()(
       nextStep: () => {
         const { stepIndex } = get();
         const next = stepIndex + 1;
-        console.log("Navigating to:", stepIndex, next, stepRoutes.length);
-
         if (next < stepRoutes.length) {
           set({ stepIndex: next });
-
           router.push(stepRoutes[next]); // <-- navigate
         }
       },

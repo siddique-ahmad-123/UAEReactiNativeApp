@@ -24,7 +24,6 @@ export default function BorrowerIncomeScreen() {
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: zodResolver(incomeDetailSchema.partial()),
     defaultValues: formData,
-    shouldUnregister: true,
   });
   const borrowerIncomeType = watch(fieldNames.borrowerIncomeType) ?? "Salaried";
   const empDetailFetchMethod = watch(fieldNames.borrowerEmpDetailFetchMethod) ?? "AECB";
@@ -131,7 +130,7 @@ export default function BorrowerIncomeScreen() {
       stepNumber={2}
       title={t("incomeDetails")}
       subTitle={t("borrowerDetails")}
-      noOfBars={2}
+      noOfBars={1}
       activeBarIndex={0}
       onBack={() => prevStep()}
       onClose={() => router.replace("/")}

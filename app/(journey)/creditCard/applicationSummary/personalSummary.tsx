@@ -1,14 +1,13 @@
 import CustomDropDown from "@/components/CustomDropDown";
 import CustomInput from "@/components/CustomInput";
 import FormSummaryLayout from "@/components/FormSummary/FormSummaryLayout";
-import SegmentedControl from "@/components/SegmentControl";
 import { fontSize, fontWeight } from "@/constants/Metrics";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { useTheme } from "styled-components/native";
 
 const PersonalSummary = () => {
@@ -16,7 +15,6 @@ const PersonalSummary = () => {
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
-    shouldUnregister: true,
   });
 
   const onSubmit = (values: any) => {
@@ -57,13 +55,13 @@ const PersonalSummary = () => {
   ];
   return (
     <FormSummaryLayout onSaveAndBack={() => router.back()}>
-      {/* <Text style={styles.text}>Summary - Personal Details</Text> */}
-      <SegmentedControl
+      <Text style={styles.text}>Summary - Personal Details</Text>
+      {/* <SegmentedControl
         label={"Summary - Personal Details"}
         options={["Borrower", "Co-Borrower"]}
         defaultValue={borrowerType}
         onChange={(value) => setValue("borrowerType", value)}
-      />
+      /> */}
 
       {borrowerType === "Borrower" ? (
         <>

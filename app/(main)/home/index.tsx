@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
-import React, {  useState } from "react";
-import { View, Text, Image,ScrollView } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Image, ScrollView } from "react-native";
 import { localStyles } from "../styles/Home.Styles";
 import ServiceTile from "@/components/ServiceTile";
 import HeroBanner from "@/components/HeroBanner";
@@ -8,6 +8,7 @@ import ProductCard from "@/components/ProductCard";
 import { useTheme } from "styled-components/native";
 import { useApplicationStore } from "@/store/applicationStore";
 import { Ionicons } from "@expo/vector-icons";
+import UserIconName from "@/components/UserProfile/userIconName";
 type RouteNames = "/Request" | "/Agreement" | "/ExistingApplication";
 const services: {
   id: string;
@@ -36,43 +37,39 @@ const services: {
 ];
 
 const applyNow = [
-  { id: "1", title: "Credit Card",imgPath:require("../../../assets/images/MainScreenCard/Card.png") },
-  { id: "2", title: "Mortgages",imgPath:require("../../../assets/images/MainScreenCard/Mortgage.png") },
-  { id: "3", title: "Auto Loans",imgPath:require("../../../assets/images/MainScreenCard/AutoLoan.png")},
-  { id: "4", title: "Personal \nLoans" ,imgPath:require("../../../assets/images/MainScreenCard/PersonalLoan.png")},
+  {
+    id: "1",
+    title: "Credit Card",
+    imgPath: require("../../../assets/images/MainScreenCard/Card.png"),
+  },
+  {
+    id: "2",
+    title: "Mortgages",
+    imgPath: require("../../../assets/images/MainScreenCard/Mortgage.png"),
+  },
+  {
+    id: "3",
+    title: "Auto Loans",
+    imgPath: require("../../../assets/images/MainScreenCard/AutoLoan.png"),
+  },
+  {
+    id: "4",
+    title: "Personal \nLoans",
+    imgPath: require("../../../assets/images/MainScreenCard/PersonalLoan.png"),
+  },
 ];
 
 export default function Dashboard() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("1");
   const theme = useTheme();
-  const { resetForm } = useApplicationStore();
+  const { goToStep, stepIndex } = useApplicationStore();
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      {/* Header */}
-      <View style={localStyles.header}>
-        <Image
-          source={{ uri: "https://randomuser.me/api/portraits/men/32.jpg" }}
-          style={localStyles.avatar}
-        />
-        <View>
-          <Text
-            style={[
-              localStyles.welcome,
-              { color: theme.colors.inactiveNavIconColor },
-            ]}
-          >
-            Welcome,
-          </Text>
-          <Text
-            style={[localStyles.username, { color: theme.colors.primaryColor }]}
-          >
-            Mohammad Sahil Munaf
-          </Text>
-        </View>
+      <View style={{paddingLeft:16,paddingTop:16}}>
+        <UserIconName name="Ravish Sheikh" />
       </View>
-
       <HeroBanner
         message="Thank you for being associated with us."
         backgroundImage={require("../../../assets/images/HeroBanner.png")}
@@ -100,8 +97,8 @@ export default function Dashboard() {
             title={item.title}
             image={item.imgPath}
             onPress={() => {
-              resetForm(); 
-              router.push("/(journey)/creditCard/selectCreditCard"); 
+              goToStep(stepIndex);
+              // router.push("/(journey)/creditCard/selectCreditCard");
             }}
           />
         ))}

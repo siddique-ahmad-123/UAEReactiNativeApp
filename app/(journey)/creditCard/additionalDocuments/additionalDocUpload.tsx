@@ -1,6 +1,5 @@
 import CustomUpload from "@/components/CustomUpload";
 import FormLayout from "@/components/Form/FormLayout";
-import SegmentedControl from "@/components/SegmentControl";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import { t } from "i18next";
@@ -14,7 +13,6 @@ const AdditionalDocUpload = () => {
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
-    shouldUnregister: true,
   });
 
   const onSubmit = (values: any) => {
@@ -35,12 +33,12 @@ const AdditionalDocUpload = () => {
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
-      <SegmentedControl
+      {/* <SegmentedControl
         label={"Select Applicant"}
         options={["Borrower", "Co-Borrower"]}
         defaultValue={borrowerType}
         onChange={(value) => setValue("borrowerType", value)}
-      />
+      /> */}
 
       {borrowerType === "Borrower" ? (
         <>

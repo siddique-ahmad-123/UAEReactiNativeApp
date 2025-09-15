@@ -1,6 +1,7 @@
 import { radius, spacing } from "@/constants/Metrics";
 import React from "react";
 import {
+  ActivityIndicator,
   GestureResponderEvent,
   StyleProp,
   Text,
@@ -16,9 +17,10 @@ type Props = {
   onPress: (event: GestureResponderEvent) => void;
   variant?: "primary" | "secondary";
   type?: "filled" | "outlined";
-  size?: "sm" | "md" | "lg" | "xl" | "full"; 
+  size?: "sm" | "md" | "lg" | "xl" | "full";
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
+  isloading?: boolean;
 };
 
 export default function CustomButton({
@@ -27,6 +29,7 @@ export default function CustomButton({
   variant = "primary",
   type = "filled",
   size = "full",
+  isloading = false,
   style,
   textStyle,
 }: Props) {
@@ -119,8 +122,16 @@ export default function CustomButton({
   }
 
   return (
-    <TouchableOpacity style={buttonStyle} onPress={onPress}>
-      <Text style={btnTextStyle}>{title}</Text>
+    <TouchableOpacity
+      style={buttonStyle}
+      onPress={onPress}
+      disabled={isloading}
+    >
+      {isloading ? (
+        <ActivityIndicator color={theme.colors.primaryColor} />
+      ) : (
+        <Text style={btnTextStyle}>{title}</Text>
+      )}
     </TouchableOpacity>
   );
 }

@@ -49,10 +49,11 @@ const CustomDatePicker = ({
     }
   };
 
-  const handleConfirm = (date: Date, onChange?: (d: Date) => void) => {
-    onChange ? onChange(date) : setLocalDate(date);
-    setDatePickerVisibility(false);
-  };
+ const handleConfirm = (date: Date, onChange?: (d: Date) => void) => {
+  const normalizedDate = new Date(date); // always convert
+  onChange ? onChange(normalizedDate) : setLocalDate(normalizedDate);
+  setDatePickerVisibility(false);
+};
 
   const styles = StyleSheet.create({
     container: {
@@ -142,7 +143,7 @@ const CustomDatePicker = ({
                   ]
             }
           >
-            {value ? value.toLocaleDateString("en-GB") : placeholder}
+            {value ? new Date(value).toLocaleDateString("en-GB") : placeholder}
           </Text>
           <Ionicons
             name="calendar-outline"
