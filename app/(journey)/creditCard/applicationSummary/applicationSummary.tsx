@@ -1,6 +1,6 @@
 import FormLayout from "@/components/Form/FormLayout";
 import StepCard from "@/components/StepCard";
-import { useUserEligibilityCheckMutation } from "@/redux/api/creditCardAPI";
+import { useUaeCreditCardMutation } from "@/redux/api/creditCardAPI";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import { t } from "i18next";
@@ -11,7 +11,7 @@ import { isReanimated3 } from "react-native-reanimated";
 
 const ApplicationSummary = () => {
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
-   const [userEligibilityCheck] = useUserEligibilityCheckMutation();
+   const [uaeCreditCard] = useUaeCreditCardMutation();
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
@@ -23,7 +23,7 @@ const ApplicationSummary = () => {
   };
 
    const onSubmitApplication = async () => {
-  const response = await userEligibilityCheck(formData).unwrap();
+  const response = await uaeCreditCard(formData).unwrap();
   console.log("✅ Server Response:", response);
 
   if (response.status === 200) {

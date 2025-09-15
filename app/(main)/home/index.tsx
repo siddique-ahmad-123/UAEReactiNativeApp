@@ -15,6 +15,8 @@ import { useTheme } from "styled-components/native";
 import { useApplicationStore } from "@/store/applicationStore";
 import { Ionicons } from "@expo/vector-icons";
 import UserIconName from "@/components/UserProfile/userIconName";
+import { useAsyncStorage } from "@/hooks/useAsyncStorage";
+
 import {
   borderWidth,
   fontSize,
@@ -74,11 +76,23 @@ const applyNow = [
   },
 ];
 
+const STORAGE_KEY = "user";
 export default function Dashboard() {
+
+  
+  
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("1");
   const theme = useTheme();
   const { goToStep, stepIndex } = useApplicationStore();
+
+   const { value: storedUser, loading } = useAsyncStorage<{
+    emiratesId: string;
+    mobile: string;
+    userType: string;
+    name?: string;
+  }>(STORAGE_KEY);
+
   const localStyles = StyleSheet.create({
     container: {
       flex: 1,
@@ -104,13 +118,15 @@ export default function Dashboard() {
     }
   });
 
+
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={localStyles.container}
     >
       <View>
-        <UserIconName name="Ravish Sheikh" />
+        <UserIconName name={loading ? "Loading..." : storedUser?.name ?? "Guest"} />
       </View>
       <HeroBanner
         message="Thank you for being associated with us."

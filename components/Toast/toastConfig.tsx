@@ -4,18 +4,18 @@ import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 export const toastConfig = {
-  success: ({ text1, text2 }: any) => (
+  success: ({ text1, text2, icon }: any) => (
     <View style={[styles.toastContainer, styles.success]}>
-      <Ionicons name="wifi" size={20} color="#2e7d32" style={styles.icon} />
+      <Ionicons name={icon} size={20} color="#2e7d32" style={styles.icon} />
       <View style={styles.textContainer}>
         <Text style={styles.title}>{text1}</Text>
         {text2 ? <Text style={styles.message}>{text2}</Text> : null}
       </View>
     </View>
   ),
-  error: ({ text1, text2 }: any) => (
+  error: ({ text1, text2, icon }: any) => (
     <View style={[styles.toastContainer, styles.error]}>
-      <Ionicons name="close-circle" size={20} color="#c62828" style={styles.icon} />
+      <Ionicons name={icon} size={20} color="#c62828" style={styles.icon} />
       <View style={styles.textContainer}>
         <Text style={styles.title}>{text1}</Text>
         {text2 ? <Text style={styles.message}>{text2}</Text> : null}
