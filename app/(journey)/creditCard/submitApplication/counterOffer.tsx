@@ -46,8 +46,8 @@ const CounterOffer = () => {
       onClose={() => router.back()}
       doubleButtonTitle1={"Need higher amount"}
       doubleButtonTitle2={"Accept Offer"}
-      onPressDoubleButton1={() => {}}
-      onPressDoubleButton2={() => {}}
+      onPressDoubleButton1={() => router.push("/(journey)/creditCard/submitApplication/applicationApproved")}
+      onPressDoubleButton2={() => router.push("/(journey)/creditCard/submitApplication/congratulations")}
     >
       <View style={styles.image}>
         <Image
