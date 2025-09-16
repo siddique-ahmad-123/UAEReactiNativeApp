@@ -1,6 +1,7 @@
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import MethodSelector from "@/components/MethodSelector";
 import { styles } from "@/components/styles/submitApplication4.Styles";
+import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React from "react";
@@ -11,33 +12,35 @@ const ApplicationNotApproved = () => {
   const [selectedMethod, setSelectedMethod] = React.useState<
     string | undefined
   >();
-  const { resetForm } = useApplicationStore();
+  const { resetForm, formData } = useApplicationStore();
+
 
   const onSubmitApplication = ()=>{
       resetForm();
       router.push("/(main)/NavScreen");
   }
+
   const methodOptions = [
     {
       id: "email",
       title: "Credit Limit",
       description: "",
       iconName: "mail-outline",
-      amount: "250 AED",
+      amount: formData[fieldNames.cardLimit],
     },
     {
       id: "sms",
       title: "Joining Fees",
       description: "Will be deducted from 1st credit card installment",
       iconName: "chatbubble-outline",
-      amount: "45000 AED",
+      amount: formData[fieldNames.cardJoiningFees],
     },
     {
       id: "app",
       title: "Annual Fees",
       description: "Stay updated in the app",
       iconName: "notifications-outline",
-      amount: "650 AED",
+      amount: formData[fieldNames.cardAnualFees],
     },
   ];
 
@@ -72,7 +75,9 @@ const ApplicationNotApproved = () => {
           ]}
         >
           We’re sorry but your request did not go through with the amount of
-          <Text style={{ color: theme.colors.primaryColor }}>45,000 AED</Text>
+          <Text style={{ color: theme.colors.primaryColor }}>
+            {formData[fieldNames.selectedRequiredAmount]}
+          </Text>
         </Text>
 
         <View style={styles.linkTextView}>

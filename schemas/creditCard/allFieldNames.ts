@@ -1,10 +1,18 @@
 export const fieldNames = {
   //common detail
-  mobileNo:"mobileNo",
+  mobileNo: "mobileNo",
   cardType: "cardType",
+  cardLimit: "cardLimit",
+  cardJoiningFees: "cardJoiningFees",
+  cardAnualFees: "cardAnualFees",
   selectedRequiredAmount: "selectedRequiredAmount",
   isCheckedTermandCond: "isCheckedTermandCond",
-  
+  workItemNumber: "workItemNumber",
+
+  borrowerSalaryIncomeDetailFetchMethod:
+    "borrowerSalaryIncomeDetailFetchMethod",
+  borrowerSelfIncomeDetailFetchMethod: "borrowerSelfIncomeDetailFetchMethod",
+
   // Personal Details - Borrower
   borrowerName: "borrowerName",
   borrowerDOB: "borrowerDOB",
@@ -79,7 +87,7 @@ export const fieldNames = {
   leisure: "leisure",
   healthcare: "healthcare",
   otherExpenses: "otherExpenses",
-  
+
   supplementaryCardName: "supplementaryCardName",
   dispatchAddress: "dispatchAddress",
   dispatchAddressLine1: "dispatchAddress1",

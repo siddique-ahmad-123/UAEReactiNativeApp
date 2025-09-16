@@ -46,7 +46,7 @@ const NotificationScreen = () => {
       doubleButtonTitle1={"Need higher amount"}
       doubleButtonTitle2={"Accept Offer"}
       onPressDoubleButton1={() => {}}
-      onPressDoubleButton2={() => {}}
+      onPressDoubleButton2={() => router.push("/submitApplication4")}
     >
       <View style={styles.image}>
         <Image

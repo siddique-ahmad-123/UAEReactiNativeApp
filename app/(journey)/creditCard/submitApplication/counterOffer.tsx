@@ -1,16 +1,16 @@
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import MethodSelector from "@/components/MethodSelector";
 import { styles } from "@/components/styles/submitApplication3.Styles";
+import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "styled-components/native";
 
-
 const CounterOffer = () => {
   const theme = useTheme();
-  const { prevStep } = useApplicationStore();
+  const { prevStep, formData } = useApplicationStore();
   const [selectedMethod, setSelectedMethod] = React.useState<
     string | undefined
   >();
@@ -21,21 +21,21 @@ const CounterOffer = () => {
       title: "Credit Limit",
       description: "",
       iconName: "mail-outline",
-      amount: "250 AED",
+      amount: formData[fieldNames.cardLimit],
     },
     {
       id: "sms",
       title: "Joining Fees",
       description: "Will be deducted from 1st credit card installment",
       iconName: "chatbubble-outline",
-      amount: "45000 AED",
+      amount: formData[fieldNames.cardJoiningFees],
     },
     {
       id: "app",
       title: "Annual Fees",
       description: "Stay updated in the app",
       iconName: "notifications-outline",
-      amount: "650 AED",
+      amount: formData[fieldNames.cardAnualFees],
     },
   ];
 
@@ -66,7 +66,7 @@ const CounterOffer = () => {
         ]}
       >
         We’re sorry but your request did not go through with the amount of
-        45,000 AED.
+        {formData[fieldNames.selectedRequiredAmount]} AED.
       </Text>
 
       <View style={styles.linkTextView}>
