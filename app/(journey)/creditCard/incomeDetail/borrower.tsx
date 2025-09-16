@@ -14,9 +14,14 @@ import {
   spacingExtra,
   spacingVertical,
 } from "@/constants/Metrics";
-import { useTradeLicenseMutation } from "@/redux/api/creditCardAPI";
+import {
+  useGetCustomerDataMutation,
+  useSalaryCertificateMutation,
+  useTradeLicenseMutation,
+} from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
+import calculateAge from "@/utils/calculateAge";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useState } from "react";
@@ -36,6 +41,8 @@ export default function BorrowerIncomeScreen() {
   const [ftsRequestSent, setFtsRequestSent] = useState(false);
   const [selfIncomeFetched, setSelfIncomeFetched] = useState(false);
   const [tradeLicenseOCR] = useTradeLicenseMutation();
+  const [salaryCertificateOCR] = useSalaryCertificateMutation();
+  const [getCustomerData] = useGetCustomerDataMutation();
   const { t } = useTranslation();
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch, getValues } = useForm({
@@ -67,33 +74,90 @@ export default function BorrowerIncomeScreen() {
     setIsLoading2(true);
     console.log(empDetailFetchMethod);
     if (empDetailFetchMethod == "AECB") {
-      setValue(fieldNames.borrowerEmployerName, "Newgen Software");
-      setValue(fieldNames.borrowerEmployedFrom, "2025-09-17");
-      setValue(fieldNames.borrowerCurrentExp, "10");
-      setValue(fieldNames.borrowerTotalExp, "20");
-      setValue(fieldNames.borrowerEmirates, "Dubai");
+      console.log("AECB Case data fetching");
+      const customerDataResp = await getCustomerData("501234567").unwrap();
+
+      console.log(customerDataResp);
+      if (customerDataResp.status == 200) {
+        setValue(
+          fieldNames.borrowerEmployerName,
+          customerDataResp.data.employerName
+        );
+        setValue(
+          fieldNames.borrowerEmployedFrom,
+          customerDataResp.data.employedFrom
+        );
+        setValue(
+          fieldNames.borrowerCurrentExp,
+          customerDataResp.data.currentExp
+        );
+        setValue(fieldNames.borrowerTotalExp, customerDataResp.data.totalExp);
+        setValue(fieldNames.borrowerEmirates, customerDataResp.data.emirates);
+      }
     }
+
+    //Case for salary certificate (OCR else db data)
     if (empDetailFetchMethod == "Salary Certificate") {
-      //Salary Certificate Ocr to be implemented here
-      // const salaryCertificateResponse = await salaryCertificateOCR(
-      //   formData[fieldNames.mobileNo]
-      // ).unwrap();
-      // if (salaryCertificateResponse.status == 200) {
-      //   setValue(fieldNames.borrowerName, "Verified");
-      // } else {
-      // }
+      const salaryCertificateResponse = await salaryCertificateOCR(
+        formData[fieldNames.mobileNo]
+      ).unwrap();
+      if (salaryCertificateResponse.status == 200) {
+        setValue(
+          fieldNames.borrowerEmployerName,
+          salaryCertificateResponse.data.companyName
+        );
+        let dateOfJoining =
+          salaryCertificateResponse.data.dateOfJoining.replace(/\//g, "-");
+        let currentExp = Number(calculateAge(dateOfJoining)) * 12;
+        setValue(
+          fieldNames.borrowerEmployedFrom,
+          salaryCertificateResponse.data.dateOf
+        );
+        setValue(fieldNames.borrowerCurrentExp, currentExp);
+        setValue(
+          fieldNames.borrowerEmirates,
+          salaryCertificateResponse.data.nationality
+        );
+      } else {
+        const customerDataResp = await getCustomerData("501234567").unwrap();
+
+        if (customerDataResp.status == 200) {
+          setValue(
+            fieldNames.borrowerEmployerName,
+            customerDataResp.data.employerName
+          );
+          setValue(
+            fieldNames.borrowerEmployedFrom,
+            customerDataResp.data.employedFrom
+          );
+          setValue(
+            fieldNames.borrowerCurrentExp,
+            customerDataResp.data.currentExp
+          );
+          setValue(fieldNames.borrowerTotalExp, customerDataResp.data.totalExp);
+          setValue(fieldNames.borrowerEmirates, customerDataResp.data.emirates);
+        }
+      }
     }
     setIsLoading2(false);
   };
 
   const fetchSalariedIncomeDetails = async () => {
     setIsLoading3(true);
-    setTimeout(() => {
-      setSalaryFetched(true);
-      setValue(fieldNames.borrowerMonthlySalaryBankTransfer, "56000");
-      setValue(fieldNames.borrowerMonthlySalaryAECB, "56000");
-      setIsLoading3(false);
-    }, 2000);
+    const customerDataResp = await getCustomerData("501234567").unwrap();
+
+    if (customerDataResp.status == 200) {
+      setValue(
+        fieldNames.borrowerMonthlySalaryBankTransfer,
+        customerDataResp.data.monthlySalaryBankTrans
+      );
+      setValue(
+        fieldNames.borrowerMonthlySalaryAECB,
+        customerDataResp.data.monthlySalaryAECB
+      );
+    }
+    setSalaryFetched(true);
+    setIsLoading3(false);
   };
 
   const salaryIncomeUaeFtsGetStatus = () => {
@@ -133,27 +197,52 @@ export default function BorrowerIncomeScreen() {
         tradeLicenseResponse.data.licenseNo
       );
     } else {
+      const customerDataResp = await getCustomerData("501234567").unwrap();
+
+      if (customerDataResp.status == 200) {
+        setValue(
+          fieldNames.borrowerNameOfBusiness,
+          customerDataResp.data.nameOfBusiness
+        );
+        setValue(fieldNames.borrowerLegalForm, customerDataResp.data.legalForm);
+        setValue(fieldNames.borrowerEmirates, customerDataResp.data.emirates);
+        setValue(fieldNames.borrowerVintage, customerDataResp.data.vintage);
+        setValue(
+          fieldNames.borrowerDateOfEstabilishment,
+          customerDataResp.data.dateOfEstb
+        );
+        setValue(fieldNames.borrowerLicenseNo, customerDataResp.data.licenseNo);
+      }
     }
     setIsLoading(false);
   };
 
-  const selfEmpIncomeDetails = () => {
+  const selfEmpIncomeDetails = async () => {
     console.log(selfIncomeDetailFetchMethod);
     setIsLoading6(true);
 
-    setTimeout(() => {
-      if (selfIncomeDetailFetchMethod === "Fetch From Bank") {
-        setValue(fieldNames.borrowerBankName, "Newgen Bank");
-        setValue(fieldNames.borrowerAccountNo, "00090435412");
-        setValue(fieldNames.borrowerLast6MonthsADB, "2000");
-        setValue(fieldNames.borrowerLast6MonthsAvgCredit, "2000");
-      } else if (selfIncomeDetailFetchMethod === "Upload Bank Statement") {
-      } else if (selfIncomeDetailFetchMethod === "UAE-FTS") {
-      }
+    const customerDataResp = await getCustomerData("501234567").unwrap();
 
-      setIsLoading6(false);
-    }, 2000);
+    if (customerDataResp.status == 200) {
+      setValue(fieldNames.borrowerBankName, customerDataResp.data.bankName);
+      setValue(fieldNames.borrowerAccountNo, customerDataResp.data.accountNo);
+      setValue(
+        fieldNames.borrowerLast6MonthsADB,
+        customerDataResp.data.last6monthsAdb
+      );
+      setValue(
+        fieldNames.borrowerLast6MonthsAvgCredit,
+        customerDataResp.data.last6monthsAvg
+      );
+    }
+    // setTimeout(() => {
+    //   if (selfIncomeDetailFetchMethod === "Fetch From Bank") {
+    //   } else if (selfIncomeDetailFetchMethod === "Upload Bank Statement") {
+    //   } else if (selfIncomeDetailFetchMethod === "UAE-FTS") {
+    //   }
+    // }, 2000);
 
+    setIsLoading6(false);
     setSelfIncomeFetched(true);
   };
 

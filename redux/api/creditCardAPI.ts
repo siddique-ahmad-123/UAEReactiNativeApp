@@ -2,7 +2,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const creditCardAPI = createApi({
   reducerPath: "creditCardApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://tytlmsdemo.newgensoftware.net:8443/uaeMobileApp/api/v1" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://tytlmsdemo.newgensoftware.net:8443/uaeMobileApp/api/v1",
+  }),
   endpoints: (builder) => ({
     uaeCreditCard: builder.mutation<any, any>({
       query: (formData) => ({
@@ -50,6 +52,12 @@ export const creditCardAPI = createApi({
         method: "POST",
       }),
     }),
+    salaryCertificate: builder.mutation<any, any>({
+      query: (folderName) => ({
+        url: `ocr/salaryCertificate?folderName=${folderName}&customerType=Borrower`,
+        method: "POST",
+      }),
+    }),
 
     onSubmitApplication: builder.mutation<any, any>({
       query: (formData) => ({
@@ -59,19 +67,32 @@ export const creditCardAPI = createApi({
       }),
     }),
 
+    createWorkItem: builder.mutation<any, any>({
+      query: (formData) => ({
+        url: "workItem/createWorkItem",
+        method: "POST",
+        body: formData,
+      }),
+    }),
+
     getExistingCustomerData: builder.mutation<any, string>({
-  query: (mobileNo) => ({
-    url: `etb/getExistingCustomerData/${mobileNo}`,
-    method: "GET",
-  }),
-}),
+      query: (mobileNo) => ({
+        url: `etb/getExistingCustomerData/${mobileNo}`,
+        method: "GET",
+      }),
+    }),
+    getCustomerData: builder.mutation<any, string>({
+      query: (mobileNo) => ({
+        url: `etb/getCustomerData/${mobileNo}`,
+        method: "GET",
+      }),
+    }),
 
     getUser: builder.query<any, void>({
       query: () => "/user",
     }),
   }),
 });
-
 
 export const {
   useUaeCreditCardMutation,
@@ -81,7 +102,10 @@ export const {
   useVisaMutation,
   usePassportMutation,
   useTradeLicenseMutation,
+  useSalaryCertificateMutation,
   useOnSubmitApplicationMutation,
-  useGetExistingCustomerDataMutation, 
+  useGetExistingCustomerDataMutation,
+  useCreateWorkItemMutation,
+  useGetCustomerDataMutation,
   useGetUserQuery,
 } = creditCardAPI;

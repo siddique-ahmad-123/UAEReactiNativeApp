@@ -1,17 +1,17 @@
 import FormLayout from "@/components/Form/FormLayout";
 import StepCard from "@/components/StepCard";
 import { useUaeCreditCardMutation } from "@/redux/api/creditCardAPI";
+import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import { t } from "i18next";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { StyleSheet } from "react-native";
-import { isReanimated3 } from "react-native-reanimated";
 
 const ApplicationSummary = () => {
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
-   const [uaeCreditCard] = useUaeCreditCardMutation();
+  const [uaeCreditCard] = useUaeCreditCardMutation();
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
@@ -22,27 +22,36 @@ const ApplicationSummary = () => {
     onSubmitApplication();
   };
 
-   const onSubmitApplication = async () => {
-  const response = await uaeCreditCard(formData).unwrap();
-  console.log("✅ Server Response:", response);
+  const onSubmitApplication = async () => {
+    const response = await uaeCreditCard(formData).unwrap();
+    console.log("✅ Server Response:", response);
 
-  if (response.status === 200) {
-    const offerType = response.data?.offerType;
+    if (response.status === 200) {
+      const offerType = response.data?.offerType;
 
-    if (offerType === "Approved") {
-      router.push("/(journey)/creditCard/submitApplication/applicationApproved");
-    } else if (offerType === "Not Approved") {
-      router.push("/(journey)/creditCard/submitApplication/applicationNotApproved");
-    } else if (offerType === "Counter Offer") {
-      router.push("/(journey)/creditCard/submitApplication/counterOffer");
+      if (offerType === "Approved") {
+        setValue(fieldNames.cardLimit, response.data.creditLimit);
+        updateField(fieldNames.cardLimit, response.data.creditLimit);
+        router.push(
+          "/(journey)/creditCard/submitApplication/applicationApproved"
+        );
+      } else if (offerType === "Not Approved") {
+        setValue(fieldNames.cardLimit, response.data.creditLimit);
+        updateField(fieldNames.cardLimit, response.data.creditLimit);
+        router.push(
+          "/(journey)/creditCard/submitApplication/applicationNotApproved"
+        );
+      } else if (offerType === "Counter Offer") {
+        setValue(fieldNames.cardLimit, response.data.creditLimit);
+        updateField(fieldNames.cardLimit, response.data.creditLimit);
+        router.push("/(journey)/creditCard/submitApplication/counterOffer");
+      } else {
+        router.replace("/(main)/NavScreen");
+      }
     } else {
-      router.replace("/(main)/NavScreen");
+      console.error(" Unexpected response:", response);
     }
-  } else {
-    console.error(" Unexpected response:", response);
-  }
-};
-
+  };
 
   const styles = StyleSheet.create({});
   return (
