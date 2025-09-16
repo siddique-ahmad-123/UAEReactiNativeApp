@@ -121,13 +121,17 @@ const DispatchDetails = () => {
         </View>
       </View>
 
-      <CustomInput
-        control={control}
-        name={fieldNames.supplementaryCardName}
-        label="Supplementary Card Name"
-        placeholder="Enter supplementary card name"
-        type="text"
-      />
+      {needSupCard ? (
+        <CustomInput
+          control={control}
+          name={fieldNames.supplementaryCardName}
+          label="Supplementary Card Name"
+          placeholder="Enter supplementary card name"
+          type="text"
+        />
+      ) : (
+        <></>
+      )}
 
       <SegmentedControl
         label={"Select Dispatch Address"}
