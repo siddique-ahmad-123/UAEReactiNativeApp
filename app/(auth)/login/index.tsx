@@ -21,10 +21,6 @@ const LoginScreen: React.FC = () => {
   const router = useRouter();
   const theme = useTheme();
 
-  const { setValue } = useForm({
-    defaultValues: fieldNames,
-  });
-
   const { value: storedUser, storeValue } = useAsyncStorage<{
     emiratesId: string;
     mobile: string;

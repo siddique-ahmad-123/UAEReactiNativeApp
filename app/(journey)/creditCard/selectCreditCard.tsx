@@ -86,9 +86,6 @@ const RequestsScreen = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const { value: mobilenumber } = useAsyncStorage("user");
-
-  console.log("From storage:", mobilenumber);
-
   const { nextStep, formData, updateField } = useApplicationStore();
   const { setValue } = useForm({
     defaultValues: formData,

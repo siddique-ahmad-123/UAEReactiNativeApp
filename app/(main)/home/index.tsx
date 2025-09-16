@@ -26,7 +26,6 @@ import {
   spacingVertical,
 } from "@/constants/Metrics";
 type RouteNames = "/Request" | "/Agreement" | "/ExistingApplication";
-const { width } = Dimensions.get("window");
 const services: {
   id: string;
   title: string;
