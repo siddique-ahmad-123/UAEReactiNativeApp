@@ -19,7 +19,7 @@ const { prevStep } = useApplicationStore();
       subTitle="Find all the requests that you have raised here."
       noOfButtons={1}
       singleButtonTitle="Back"
-      onClose={() => router.back()}
+      onClose={() => router.push("/(main)/NavScreen")}
       onPressSingleButton={() => router.back()}
     >
       <View

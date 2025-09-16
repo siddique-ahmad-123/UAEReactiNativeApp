@@ -18,7 +18,7 @@ import {
 } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import CustomButton from "@/components/CustomButton";
-import { useAsyncStorage } from "@/hooks/useAsyncStorage"; // ✅ corrected import
+import { useAsyncStorage } from "@/hooks/useAsyncStorage"; 
 import { useGetExistingCustomerDataMutation } from "@/redux/api/creditCardAPI";
 
 const STORAGE_KEY = "user";
@@ -73,7 +73,10 @@ const OTPScreen: React.FC = () => {
       inputRefs[index - 1].current?.focus();
     }
   };
+
  const [getExistingCustomerData] = useGetExistingCustomerDataMutation();
+
+
  const handleVerify = async () => {
   const enteredOtp = otpDigits.join("");
   if (enteredOtp === correctOtp) {
@@ -82,26 +85,25 @@ const OTPScreen: React.FC = () => {
 
     if (storedUser && (storedUser.userType === "ETB" || storedUser.userType === "NTB")) {
       // user already has type stored, do nothing
-      
     } else {
-      const response: any = await getExistingCustomerData(mobile!).unwrap();
+
+      const response: any = await getExistingCustomerData("509876543").unwrap();
+
+      console.log(response.data.customerData);
 
       if (response.status === 200) {
         let userType = "NTB";
         let userName = "Guest";
-
         if (response.data && Object.keys(response.data.customerData).length > 0) {
           userType = "ETB";
-          userName = response.data.customerData?.name || "Ravish Kumar";
+          userName = response.data.customerData?.Name || "Ravish Kumar";
+          console.log(userType);
         }
-
         setUserType(userType);
       } else {
         alert("user not found");
       }
     }
-
-    setUserType(userTypeValue);
     router.replace("/NavScreen");
   } else {
     alert("Invalid OTP. Please try again.");
@@ -267,3 +269,4 @@ const OTPScreen: React.FC = () => {
 };
 
 export default OTPScreen;
+

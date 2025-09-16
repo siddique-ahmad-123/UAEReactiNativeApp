@@ -15,8 +15,8 @@ const MenuScreen: React.FC = () => {
 
   const handleLogout = async () => {
     try {
-      await clearStorage(); // ✅ clear user data
-      router.replace("/(auth)/login");       // go back to login screen
+      await clearStorage(); 
+      router.replace("/(auth)/login");      
     } catch (e) {
       console.error("Error clearing user data", e);
     }

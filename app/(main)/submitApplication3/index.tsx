@@ -42,7 +42,7 @@ const NotificationScreen = () => {
     <CustomMainChild
       title="Submit Application"
       noOfButtons={2}
-      onClose={() => router.back()}
+      onClose={() => router.push("/(main)/NavScreen")}
       doubleButtonTitle1={"Need higher amount"}
       doubleButtonTitle2={"Accept Offer"}
       onPressDoubleButton1={() => {}}

@@ -50,7 +50,7 @@ const RequestCallBack = () => {
     },
   });
   return (
-    <FormSummaryLayout onSaveAndBack={() => router.back()}>
+    <FormSummaryLayout onSaveAndBack={() => router.push("/(main)/NavScreen")}>
       <Text style={styles.text}>Request Callback</Text>
 
       <CustomInput

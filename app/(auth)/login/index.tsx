@@ -12,8 +12,6 @@ import {
   spacingVertical,
 } from "@/constants/Metrics";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
-import { useGetExistingCustomerDataMutation } from "@/redux/api/creditCardAPI";
-import { customerDataMapper } from "@/schemas/burrowerDataMapper";
 import { useForm } from "react-hook-form";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 
@@ -46,63 +44,7 @@ const LoginScreen: React.FC = () => {
     }
   }, [storedUser]);
 
-  //const [getExistingCustomerData] = useGetExistingCustomerDataMutation();
 
-  // const handleSetDetails = async (mobileNo: string) => {
-  //   try {
-  //     const response = await getExistingCustomerData(mobileNo).unwrap();
-
-  //     if (response.status === 200) {
-
-  //       const customer = response.data.customerData[0];
-
-  //       if(customer.length == 0){
-  //           setUserType("NTB");
-  //       }
-  //       else{
-  //         setUserType("ETB");
-  //       }
-
-  //       setValue(fieldNames.borrowerName, customer.Name);
-  //       setValue(fieldNames.borrowerName, customer.Name);
-  //       setValue(fieldNames.borrowerDOB, customer.DOB);
-  //       setValue(fieldNames.borrowerGender, customer.Gender);
-  //       setValue(fieldNames.borrowerNationality, customer.Nationality);
-  //       setValue(
-  //         fieldNames.borrowerResidenceCountry,
-  //         customer["Residence Country"]
-  //       );
-
-  //       setValue(fieldNames.borrowerEidaNo, customer.EIDA_No);
-  //       setValue(fieldNames.borrowerEidaIssueDate, customer.EIDA_Issue_Date);
-  //       setValue(fieldNames.borrowerEidaExpiryDate, customer.EIDA_Expiry_Date);
-
-  //       setValue(fieldNames.borrowerPassportNo, customer.Passport_No);
-  //       setValue(
-  //         fieldNames.borrowerPassportIssueDate,
-  //         customer.Passport_Issue_Date
-  //       );
-  //       setValue(
-  //         fieldNames.borrowerPassportExpiryDate,
-  //         customer.Passport_Expiry_Date
-  //       );
-
-  //       setValue(fieldNames.borrowerVisaNo, customer.Visa_No);
-  //       setValue(fieldNames.borrowerVisaIssueDate, customer.Visa_Issue_Date);
-  //       setValue(fieldNames.borrowerVisaExpiryDate, customer.Visa_Expiry_Date);
-
-  //       setValue(fieldNames.borrowerEmailId, customer.Email_ID);
-  //       setValue(fieldNames.borrowerMobileNo, customer.Mobile_No);
-
-  //       setValue(fieldNames.borrowerAddressLine1, customer.Address_Line_1);
-  //       setValue(fieldNames.borrowerAddressLine2, customer.Address_Line_2);
-  //       setValue(fieldNames.borrowerEmirates, customer.Emirates);
-  //       setValue(fieldNames.borrowerCountry, customer.Country);
-  //     }
-  //   } catch (error) {
-  //     console.log(" Error fetching customer data", error);
-  //   }
-  // };
 
   const handleLogin = async () => {
     if (!emiratesId.trim()) {
