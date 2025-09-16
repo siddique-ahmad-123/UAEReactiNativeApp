@@ -37,7 +37,7 @@ const ExpenseDetails = () => {
       noOfBars={1}
       activeBarIndex={1}
       onBack={() => prevStep()}
-      onClose={() => router.push("/")}
+      onClose={() => router.push("/(main)/NavScreen")}
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >

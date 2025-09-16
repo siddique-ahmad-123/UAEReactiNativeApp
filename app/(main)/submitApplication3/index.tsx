@@ -42,11 +42,11 @@ const NotificationScreen = () => {
     <CustomMainChild
       title="Submit Application"
       noOfButtons={2}
-      onClose={() => router.back()}
+      onClose={() => router.push("/(main)/NavScreen")}
       doubleButtonTitle1={"Need higher amount"}
       doubleButtonTitle2={"Accept Offer"}
-      onPressDoubleButton1={() => {}}
-      onPressDoubleButton2={() => {}}
+      onPressDoubleButton1={() => router.push("/(journey)/creditCard/submitApplication/applicationApproved")}
+      onPressDoubleButton2={() => router.push("/(journey)/creditCard/submitApplication/congratulations")}
     >
       <View style={styles.image}>
         <Image

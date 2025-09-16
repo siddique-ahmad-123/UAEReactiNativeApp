@@ -14,10 +14,12 @@ const ApplicationNotApproved = () => {
   >();
   const { resetForm, formData } = useApplicationStore();
 
-  const onSubmitApplication = () => {
-    resetForm();
-    router.replace("/(main)/home");
-  };
+
+  const onSubmitApplication = ()=>{
+      resetForm();
+      router.push("/(main)/NavScreen");
+  }
+
   const methodOptions = [
     {
       id: "email",
@@ -48,7 +50,7 @@ const ApplicationNotApproved = () => {
       title="Submit Application"
       noOfButtons={1}
       singleButtonTitle="Return to Home Page"
-      onClose={() => router.back()}
+      onClose={() => router.push("/(main)/NavScreen")}
       onPressSingleButton={() => onSubmitApplication()}
     >
       <ScrollView
