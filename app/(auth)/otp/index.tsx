@@ -18,7 +18,10 @@ import {
 } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import CustomButton from "@/components/CustomButton";
-import { setUser } from "@/utils/storage";
+import { useAsyncStorage } from "@/hooks/useAsyncStorage"; // ✅ corrected import
+import { useGetExistingCustomerDataMutation } from "@/redux/api/creditCardAPI";
+
+const STORAGE_KEY = "user";
 
 const OTPScreen: React.FC = () => {
   const router = useRouter();
@@ -26,6 +29,14 @@ const OTPScreen: React.FC = () => {
   const correctOtp = otp || "1234";
 
   const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
+  const [userType, setUserType] = useState("");
+
+  const { value: storedUser, storeValue } = useAsyncStorage<{
+    emiratesId: string;
+    mobile: string;
+    userType: string;
+    name:string;
+  }>(STORAGE_KEY);
 
   const inputRefs = [
     useRef<TextInput>(null),
@@ -37,7 +48,7 @@ const OTPScreen: React.FC = () => {
   const handleChange = (text: string, index: number) => {
     const newOtp = [...otpDigits];
 
-    // If user pastes multiple digits
+    // Handle paste of multiple digits
     if (text.length > 1) {
       text.split("").forEach((char, i) => {
         if (index + i < newOtp.length) {
@@ -45,7 +56,6 @@ const OTPScreen: React.FC = () => {
         }
       });
       setOtpDigits(newOtp);
-
       const nextIndex = newOtp.findIndex((d) => d === "");
       if (nextIndex !== -1) {
         inputRefs[nextIndex].current?.focus();
@@ -63,16 +73,41 @@ const OTPScreen: React.FC = () => {
       inputRefs[index - 1].current?.focus();
     }
   };
+ const [getExistingCustomerData] = useGetExistingCustomerDataMutation();
+ const handleVerify = async () => {
+  const enteredOtp = otpDigits.join("");
+  if (enteredOtp === correctOtp) {
+    let userTypeValue = "NTB";
+    let userName = "Guest";
 
-  const handleVerify = async () => {
-    const enteredOtp = otpDigits.join("");
-    if (enteredOtp === correctOtp) {
-      await setUser({ mobile }); // save user session
-      router.replace("/NavScreen"); // go to dashboard
+    if (storedUser && (storedUser.userType === "ETB" || storedUser.userType === "NTB")) {
+      // user already has type stored, do nothing
+      
     } else {
-      alert("Invalid OTP. Please try again.");
+      const response: any = await getExistingCustomerData(mobile!).unwrap();
+
+      if (response.status === 200) {
+        let userType = "NTB";
+        let userName = "Guest";
+
+        if (response.data && Object.keys(response.data.customerData).length > 0) {
+          userType = "ETB";
+          userName = response.data.customerData?.name || "Ravish Kumar";
+        }
+
+        setUserType(userType);
+      } else {
+        alert("user not found");
+      }
     }
-  };
+
+    setUserType(userTypeValue);
+    router.replace("/NavScreen");
+  } else {
+    alert("Invalid OTP. Please try again.");
+  }
+};
+
 
   const theme = useTheme();
   const allFilled = otpDigits.every((digit) => digit !== "");
@@ -224,7 +259,6 @@ const OTPScreen: React.FC = () => {
             type="filled"
             onPress={handleVerify}
             style={{ marginTop: 230 }}
-            //disabled={!allFilled}
           />
         )}
       </View>

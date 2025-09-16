@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STORAGE_KEY = "user";
 
@@ -10,17 +11,18 @@ const MenuScreen: React.FC = () => {
   const router = useRouter();
 
   // use hook to manage user session
-  const { removeValue } = useAsyncStorage(STORAGE_KEY);
+  const { clearStorage } = useAsyncStorage(STORAGE_KEY);
 
   const handleLogout = async () => {
     try {
-      await removeValue(); // clears session
-      router.replace("/(auth)/login"); // back to login screen
-    } catch (error) {
-      console.log("❌ Error logging out", error);
+      await clearStorage(); // ✅ clear user data
+      router.replace("/(auth)/login");       // go back to login screen
+    } catch (e) {
+      console.error("Error clearing user data", e);
     }
   };
 
+  // ✅ return should be here, not inside handleLogout
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Menu Screen</Text>
