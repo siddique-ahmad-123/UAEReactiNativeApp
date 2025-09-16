@@ -11,12 +11,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
-  Modal as RNModal,
-  Image,
-  Alert,
-  Linking,
-  ActivityIndicator,
   Dimensions,
 } from "react-native";
 import Modal from "react-native-modal";
@@ -26,13 +20,11 @@ import { styles } from "./utils";
 import { spacing } from "@/constants/Metrics";
 import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
-import Modal from "react-native-modal";
 import { Controller } from "react-hook-form";
 import {
   useFileDeleteMutation,
   useFileUploadMutation,
 } from "@/redux/api/creditCardAPI";
-import Toast from "react-native-toast-message";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 import Pdf from "react-native-pdf";
 import { useApplicationStore } from "@/store/applicationStore";
@@ -243,7 +235,6 @@ const CustomUpload = ({
               <View
                 style={{
                   flexDirection: theme.flexRow.flexDirection,
-                  gap: spacing.lg,
                   gap: spacing.lg,
                 }}
               >
