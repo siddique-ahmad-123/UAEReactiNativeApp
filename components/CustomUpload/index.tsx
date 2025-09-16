@@ -1,35 +1,35 @@
+import { spacing } from "@/constants/Metrics";
+import { useAsyncStorage } from "@/hooks/useAsyncStorage";
+import { useFileDeleteMutation, useFileUploadMutation } from "@/redux/api/creditCardAPI";
 import Feather from "@expo/vector-icons/Feather";
+import * as DocumentPicker from "expo-document-picker";
+import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
+import { Controller } from "react-hook-form";
 import {
+  ActivityIndicator,
+  Alert,
+  Image,
+  Linking,
+  Modal as RNModal,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  StyleSheet,
-  Modal as RNModal,
-  Image,
-  Alert,
-  Linking,
-  ActivityIndicator,
 } from "react-native";
+import Modal from "react-native-modal";
+import Toast from "react-native-toast-message";
 import { useTheme } from "styled-components/native";
 import { styles } from "./utils";
-import { spacing } from "@/constants/Metrics";
-import * as DocumentPicker from "expo-document-picker";
-import * as ImagePicker from "expo-image-picker";
-import Modal from "react-native-modal";
-import { Controller } from "react-hook-form";
-import { useFileDeleteMutation, useFileUploadMutation } from "@/redux/api/creditCardAPI";
-import Toast from "react-native-toast-message";
-import { useAsyncStorage } from "@/hooks/useAsyncStorage";
-
+ 
 interface CustomUploadProps {
   label: string;
   control: any;
   name: string;
   mode?: "all" | "photo";
 }
-
-
+ 
+ 
 const CustomUpload = ({
   label,
   mode = "all",
@@ -41,14 +41,13 @@ const CustomUpload = ({
   const [isloading, setLoading] = useState(false);
   const [fileUpload] = useFileUploadMutation();
   const [fileDelete] = useFileDeleteMutation();
-  const {value:data} = useAsyncStorage("user");
-  const mobileNumber = data.mobile;
+  const {value:userData} = useAsyncStorage("user");
   const theme = useTheme();
   const fileNeme = "Borrower"+" "+label;
   const handleFileDelete = async (onChange: any,type:string)=>{
     setLoading(true);
     const data = {
-      folderName:mobileNumber,
+      folderName:userData?.mobile,
       fileName:fileNeme,
       mimeType:type,
     }
@@ -86,7 +85,7 @@ const CustomUpload = ({
         name: name,
         type: type || "application/octet-stream",
       } as any);
-      formData.append("folderName", mobileNumber);
+      formData.append("folderName", userData?.mobile);
       formData.append("fileName", fileNeme);
       const response = await fileUpload(formData).unwrap();
       if (response.status == 200) {
@@ -106,7 +105,7 @@ const CustomUpload = ({
       setLoading(false);
     }
   };
-
+ 
   const handleTakePhoto = async (onChange: any) => {
     setVisible(false);
     const result = await ImagePicker.launchCameraAsync({
@@ -124,7 +123,7 @@ const CustomUpload = ({
         name: name,
         type: type || "application/octet-stream",
       } as any);
-      formData.append("folderName", mobileNumber);
+      formData.append("folderName", userData?.mobile);
       formData.append("fileName", fileNeme);
       const response = await fileUpload(formData).unwrap();
       if (response.status == 200) {
@@ -161,7 +160,7 @@ const CustomUpload = ({
         name: name,
         type: type || "application/octet-stream",
       } as any);
-      formData.append("folderName", mobileNumber);
+      formData.append("folderName", userData?.mobile);
       formData.append("fileName", fileNeme);
       const response = await fileUpload(formData).unwrap();
       if (response.status == 200) {
@@ -181,7 +180,7 @@ const CustomUpload = ({
       setLoading(false);
     }
   };
-
+ 
   const handlePreview = async (uri: string, type: string) => {
     if (!uri) return;
     if (type === "application/pdf") {
@@ -195,7 +194,7 @@ const CustomUpload = ({
       setPreviewVisible(true);
     }
   };
-
+ 
   return (
     <Controller
       control={control}
@@ -233,7 +232,7 @@ const CustomUpload = ({
               <View
                 style={{
                   flexDirection: theme.flexRow.flexDirection,
-                  gap: spacing.lg, 
+                  gap: spacing.lg,
                 }}
               >
                 {value?.uri ? (
@@ -247,7 +246,7 @@ const CustomUpload = ({
                         color={theme.colors.primaryColor}
                       />
                     </TouchableOpacity>
-
+ 
                     <TouchableOpacity onPress={() => handleFileDelete(onChange,value?.type)}>
                       <Feather
                         name={"trash-2"}
@@ -301,7 +300,7 @@ const CustomUpload = ({
                     Camera
                   </Text>
                 </TouchableOpacity>
-
+ 
                 {mode === "all" && (
                   <>
                     <TouchableOpacity
@@ -325,7 +324,7 @@ const CustomUpload = ({
                         Photos
                       </Text>
                     </TouchableOpacity>
-
+ 
                     <TouchableOpacity
                       style={[
                         localStyles.box,
@@ -350,9 +349,9 @@ const CustomUpload = ({
                   </>
                 )}
               </View>
-
+ 
               <View style={localStyles.divider} />
-
+ 
               <TouchableOpacity
                 onPress={() => setVisible(false)}
                 style={localStyles.cancelBtn}
@@ -363,7 +362,7 @@ const CustomUpload = ({
               </TouchableOpacity>
             </View>
           </Modal>
-
+ 
           <RNModal
             visible={previewVisible}
             transparent={true}
@@ -389,7 +388,7 @@ const CustomUpload = ({
     />
   );
 };
-
+ 
 const localStyles = StyleSheet.create({
   previewWrapper: {
     flex: 1,
@@ -443,5 +442,5 @@ const localStyles = StyleSheet.create({
     paddingVertical: 12,
   },
 });
-
+ 
 export default CustomUpload;
