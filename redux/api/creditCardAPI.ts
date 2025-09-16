@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const creditCardAPI = createApi({
   reducerPath: "creditCardApi",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.EXPO_PUBLIC_API_URL }),
+
   endpoints: (builder) => ({
     uaeCreditCard: builder.mutation<any, any>({
       query: (formData) => ({
@@ -32,6 +33,7 @@ export const creditCardAPI = createApi({
         method: "POST",
       }),
     }),
+
     visa: builder.mutation<any, any>({
       query: (folderName) => ({
         url: `ocr/visa?folderName=${folderName}&customerType=Borrower`,
@@ -64,6 +66,7 @@ export const creditCardAPI = createApi({
         body: formData,
       }),
     }),
+
     offerLetter: builder.mutation<any, any>({
       query: (formData) => ({
         url: "templateGenerate/offerLetter",
@@ -71,9 +74,25 @@ export const creditCardAPI = createApi({
         body: formData,
       }),
     }),
+
+    createWorkItem: builder.mutation<any, any>({
+      query: (formData) => ({
+        url: "workItem/createWorkItem",
+        method: "POST",
+        body: formData,
+      }),
+    }),
+
     getExistingCustomerData: builder.mutation<any, string>({
       query: (mobileNo) => ({
         url: `etb/getExistingCustomerData/${mobileNo}`,
+        method: "GET",
+      }),
+    }),
+
+    getCustomerData: builder.mutation<any, string>({
+      query: (mobileNo) => ({
+        url: `etb/getCustomerData/${mobileNo}`,
         method: "GET",
       }),
     }),
@@ -92,7 +111,11 @@ export const {
   useVisaMutation,
   usePassportMutation,
   useTradeLicenseMutation,
+  useSalaryCertificateMutation,
   useOnSubmitApplicationMutation,
   useGetExistingCustomerDataMutation,
+  useCreateWorkItemMutation,
+  useGetCustomerDataMutation,
   useGetUserQuery,
+  useOfferLetterMutation,
 } = creditCardAPI;

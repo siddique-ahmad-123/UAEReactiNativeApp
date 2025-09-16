@@ -1,5 +1,7 @@
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import { styles } from "@/components/styles/submitApplication2";
+import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+// import { useUserEligibilityCheckMutation } from "@/redux/api/creditCardAPI";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React from "react";
@@ -9,6 +11,7 @@ import { useTheme } from "styled-components/native";
 const Congratulations = () => {
   const theme = useTheme();
   const { formData, resetForm } = useApplicationStore();
+  // const [userEligibilityCheck] = useUserEligibilityCheckMutation();
   const onSubmitApplication = async () => {
     // const response = await userEligibilityCheck(formData).unwrap();
     // console.log("✅ Server Response:", response);
@@ -52,7 +55,7 @@ const Congratulations = () => {
       <View style={styles.linkTextView}>
         <TouchableOpacity onPress={() => {}}>
           <Text style={[styles.linktext, { color: theme.colors.primaryColor }]}>
-            Your Application No is RLOS_CC_1234
+            Your Application No is {formData[fieldNames.workItemNumber]}
           </Text>
         </TouchableOpacity>
       </View>

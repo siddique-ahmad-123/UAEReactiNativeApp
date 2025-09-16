@@ -121,13 +121,17 @@ const DispatchDetails = () => {
         </View>
       </View>
 
-      <CustomInput
-        control={control}
-        name={fieldNames.supplementaryCardName}
-        label="Supplementary Card Name"
-        placeholder="Enter supplementary card name"
-        type="text"
-      />
+      {needSupCard ? (
+        <CustomInput
+          control={control}
+          name={fieldNames.supplementaryCardName}
+          label="Supplementary Card Name"
+          placeholder="Enter supplementary card name"
+          type="text"
+        />
+      ) : (
+        <></>
+      )}
 
       <SegmentedControl
         label={"Select Dispatch Address"}
@@ -144,38 +148,44 @@ const DispatchDetails = () => {
               onValueChange={() => setMailing(!mailing)}
               color={mailing === true ? theme.colors.primaryColor : undefined}
             />
+
             <Text style={styles.checkBoxText}>
               Select Mailing Address to Dispatch Card
             </Text>
           </View>
+          {mailing ? (
+            <>
+              <CustomInput
+                control={control}
+                name={fieldNames.dispatchAddressLine1}
+                label="Address Line 1"
+                placeholder="Enter your address"
+                type="text"
+              />
+              <CustomInput
+                control={control}
+                name={fieldNames.dispatchAddressLine2}
+                label="Address Line 2"
+                placeholder="Enter your address"
+                type="text"
+              />
 
-          <CustomInput
-            control={control}
-            name={fieldNames.dispatchAddressLine1}
-            label="Address Line 1"
-            placeholder="Enter your address"
-            type="text"
-          />
-          <CustomInput
-            control={control}
-            name={fieldNames.dispatchAddressLine2}
-            label="Address Line 2"
-            placeholder="Enter your address"
-            type="text"
-          />
-
-          <CustomDropDown
-            name={fieldNames.dispatchEmirates}
-            label={"Emirates"}
-            data={emiratesOptions}
-            control={control}
-          />
-          <CustomDropDown
-            name={fieldNames.dispatchCountry}
-            label={"Country"}
-            data={countryOptions}
-            control={control}
-          />
+              <CustomDropDown
+                name={fieldNames.dispatchEmirates}
+                label={"Emirates"}
+                data={emiratesOptions}
+                control={control}
+              />
+              <CustomDropDown
+                name={fieldNames.dispatchCountry}
+                label={"Country"}
+                data={countryOptions}
+                control={control}
+              />
+            </>
+          ) : (
+            <></>
+          )}
         </>
       ) : (
         <>
@@ -190,30 +200,36 @@ const DispatchDetails = () => {
             </Text>
           </View>
 
-          <CustomDropDown
-            name={fieldNames.dispatchEmirates}
-            label={"Emirates"}
-            data={emiratesOptions}
-            control={control}
-          />
-          <CustomDropDown
-            name={fieldNames.dispatchBranchName}
-            label={"Branch Name"}
-            data={branchOptions}
-            control={control}
-          />
+          {branch ? (
+            <>
+              <CustomDropDown
+                name={fieldNames.dispatchEmirates}
+                label={"Emirates"}
+                data={emiratesOptions}
+                control={control}
+              />
+              <CustomDropDown
+                name={fieldNames.dispatchBranchName}
+                label={"Branch Name"}
+                data={branchOptions}
+                control={control}
+              />
 
-          <View>
-            <Text style={{ textAlign: "center" }}>
-              Collection Timings - 9 AM to 4 PM (Monday to Friday)
-            </Text>
-          </View>
-          <View>
-            <Text style={{ textAlign: "center" }}>
-              Card will be re-dispatched to Head Office if not collected within
-              30 days
-            </Text>
-          </View>
+              <View>
+                <Text style={{ textAlign: "center" }}>
+                  Collection Timings - 9 AM to 4 PM (Monday to Friday)
+                </Text>
+              </View>
+              <View>
+                <Text style={{ textAlign: "center" }}>
+                  Card will be re-dispatched to Head Office if not collected
+                  within 30 days
+                </Text>
+              </View>
+            </>
+          ) : (
+            <></>
+          )}
         </>
       )}
     </FormLayout>

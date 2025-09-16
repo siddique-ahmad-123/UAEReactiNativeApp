@@ -6,13 +6,7 @@ import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Dimensions,
-  Image,
-  Text,
-  TouchableOpacity,
-  View
-} from "react-native";
+import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { useTheme } from "styled-components/native";
 
@@ -29,12 +23,14 @@ type CardItem = {
   description6: string;
   description7: string;
   image: any;
+  joiningFees: string;
+  anualFees: string;
 };
 
 const cards: CardItem[] = [
   {
     id: "1",
-    title: "Elite Credit Card",
+    title: "Cashback Credit Card",
     description1: "Minimum Income Requirement: AED 5,000/month.",
     description2:
       "Welcome Bonus: AED 500 for new customers (spend ≥AED 5,000 in first 2 months); AED 100 for existing cardholders.",
@@ -44,31 +40,44 @@ const cards: CardItem[] = [
     description5: "",
     description6: "Joining Fees - Nil",
     description7: "Annual Fees - Nil",
-    image: require("../../../assets/images/card1.png"),
+    image: require("../../../assets/images/card2.png"),
+    joiningFees: "Nil",
+    anualFees: "Nil",
   },
   {
     id: "2",
-    title: "Cashback Credit Card",
+    title: "Elite Credit Card",
     description1: "Minimum Income Requirement: AED 10,000/month.",
-    description2: "Welcome Bonus: AED 1,200 cashback/spending bonuses (3 transactions ≥ AED 100 within 2 months)",
-    description3: "Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local",
-    description4: "Lifestyle Perks: Global lounge access, airport transfers, Fitness First visits, cinema discounts, concierge benefits, etc.",
-    description5: "Best Rewards: Extensive travel and lifestyle perks; ideal for frequent travelers.",
+    description2:
+      "Welcome Bonus: AED 1,200 cashback/spending bonuses (3 transactions ≥ AED 100 within 2 months)",
+    description3:
+      "Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local",
+    description4:
+      "Lifestyle Perks: Global lounge access, airport transfers, Fitness First visits, cinema discounts, concierge benefits, etc.",
+    description5:
+      "Best Rewards: Extensive travel and lifestyle perks; ideal for frequent travelers.",
     description6: "Joining Fees - Nil",
     description7: "Annual Fees - AED650",
-    image: require("../../../assets/images/card2.png"),
+    image: require("../../../assets/images/card1.png"),
+    joiningFees: "Nil",
+    anualFees: "AED650",
   },
   {
     id: "3",
     title: "World Credit Card",
     description1: "Minimum Income Requirement: AED 25,000/month.",
-    description2: "Welcome Bonus: AED 2,000 cashback after 3 transactions ≥ AED 100 in first 2 months",
-    description3: "Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local",
-    description4: "Perks: Airport lounges (900+ worldwide, 12 visits/year), villa/pickup, valet, golf, fitness, concierge, cinema, fine dining, etc.",
+    description2:
+      "Welcome Bonus: AED 2,000 cashback after 3 transactions ≥ AED 100 in first 2 months",
+    description3:
+      "Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local",
+    description4:
+      "Perks: Airport lounges (900+ worldwide, 12 visits/year), villa/pickup, valet, golf, fitness, concierge, cinema, fine dining, etc.",
     description5: "Best Rewards: Deep perks, elite status travel benefits.",
     description6: "Joining Fees - AED250",
     description7: "Annual Fees - AED650",
     image: require("../../../assets/images/card3.png"),
+    joiningFees: "AED250",
+    anualFees: "AED650",
   },
 ];
 
@@ -76,21 +85,31 @@ const RequestsScreen = () => {
   const carouselRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const {value:UserData} = useAsyncStorage("user");
- 
-  const { nextStep,formData, updateField } = useApplicationStore();
-  const {setValue} = useForm({
-    defaultValues:formData,
-  })
-  const onClickApply=(value:string)=>{
-    setValue(fieldNames.cardType,value);
-    updateField(fieldNames.cardType,value);
-    setValue(fieldNames.mobileNo,UserData?.mobile);
-    updateField(fieldNames.mobileNo,UserData?.mobile);
-    setValue(fieldNames.userType,UserData?.userType);
-    updateField(fieldNames.userType,UserData?.userType);
+  const { value: mobilenumber } = useAsyncStorage("user");
+
+  console.log("From storage:", mobilenumber);
+
+  const { nextStep, formData, updateField } = useApplicationStore();
+  const { setValue } = useForm({
+    defaultValues: formData,
+  });
+  const onClickApply = (
+    value: string,
+    joiningFees: string,
+    anualFees: string
+  ) => {
+    console.log(mobilenumber?.mobile);
+    setValue(fieldNames.cardType, value);
+    updateField(fieldNames.cardType, value);
+    setValue(fieldNames.cardJoiningFees, joiningFees);
+    updateField(fieldNames.cardJoiningFees, joiningFees);
+    setValue(fieldNames.cardAnualFees, anualFees);
+    updateField(fieldNames.cardAnualFees, anualFees);
+    setValue(fieldNames.mobileNo, mobilenumber?.mobile);
+    updateField(fieldNames.mobileNo, mobilenumber?.mobile);
+    console.log("Store formData:", formData);
     nextStep();
-  }
+  };
   const renderItem = (item: CardItem) => (
     <View style={[styles.card, { backgroundColor: theme.colors.background }]}>
       <Image
@@ -154,7 +173,9 @@ const RequestsScreen = () => {
             styles.applyBtn,
             { backgroundColor: theme.colors.secondaryColor },
           ]}
-          onPress={() => onClickApply(item.title)}
+          onPress={() =>
+            onClickApply(item.title, item.joiningFees, item.anualFees)
+          }
         >
           <Text
             style={[styles.applyText, { color: theme.colors.primaryColor }]}
@@ -176,7 +197,7 @@ const RequestsScreen = () => {
       onPressSingleButton={() => router.push("/NavScreen")}
     >
       <Carousel
-      style={{marginTop:-32}}
+        style={{ marginTop: -32 }}
         ref={carouselRef}
         width={width - 32}
         height={height}
