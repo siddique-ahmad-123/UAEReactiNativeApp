@@ -1,6 +1,6 @@
 import FormLayout from "@/components/Form/FormLayout";
 import StepCard from "@/components/StepCard";
-import { useUaeCreditCardMutation } from "@/redux/api/creditCardAPI";
+import { useOfferLetterMutation, useUaeCreditCardMutation } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
@@ -10,9 +10,10 @@ import { useForm } from "react-hook-form";
 import { StyleSheet } from "react-native";
 
 const ApplicationSummary = () => {
-  const { updateField, nextStep, prevStep, formData } = useApplicationStore();
+  const { updateField, prevStep, formData } = useApplicationStore();
   const [uaeCreditCard] = useUaeCreditCardMutation();
-  const { control, handleSubmit, setValue, watch } = useForm({
+  const [offerLetter] = useOfferLetterMutation();
+  const { handleSubmit, setValue,  } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
   });
@@ -32,6 +33,7 @@ const ApplicationSummary = () => {
       if (offerType === "Approved") {
         setValue(fieldNames.cardLimit, response.data.creditLimit);
         updateField(fieldNames.cardLimit, response.data.creditLimit);
+        await offerLetter(formData);
         router.push(
           "/(journey)/creditCard/submitApplication/applicationApproved"
         );

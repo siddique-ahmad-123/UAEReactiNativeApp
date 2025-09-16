@@ -114,7 +114,7 @@ const ApplicationApproved = () => {
             You can download your offer letter from below
           </Text>
         </View>
-        <DocumentDownload url={""} documentName="Download Offer Letter" />
+        <DocumentDownload url={`${process.env.EXPO_PUBLIC_API_URL}/pdfs/UAE-123123/Template.html`} documentName="Download Offer Letter" />
       </ScrollView>
     </CustomMainChild>
   );
