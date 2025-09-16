@@ -377,7 +377,7 @@ export default function BorrowerIncomeScreen() {
       noOfBars={1}
       activeBarIndex={0}
       onBack={() => prevStep()}
-      onClose={() => router.replace("/")}
+      onClose={() => router.push("/(main)/NavScreen")}
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >

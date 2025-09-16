@@ -14,7 +14,7 @@ const AgreementScreen = () => {
       subTitle="Find all the agreements/documents here."
       noOfButtons={1}
       singleButtonTitle="Back"
-      onClose={() => router.back()}
+      onClose={() => router.push("/(main)/NavScreen")}
       onPressSingleButton={() => router.back()}
     >
         <MessageCard message="You don’t have any new requests as of now" />

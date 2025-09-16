@@ -54,7 +54,7 @@ const PersonalSummary = () => {
     { label: "No", value: "No" },
   ];
   return (
-    <FormSummaryLayout onSaveAndBack={() => router.back()}>
+    <FormSummaryLayout onSaveAndBack={() => router.push("/(main)/NavScreen")}>
       <Text style={styles.text}>Summary - Personal Details</Text>
       {/* <SegmentedControl
         label={"Summary - Personal Details"}

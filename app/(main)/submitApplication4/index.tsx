@@ -47,7 +47,7 @@ const NotificationScreen = () => {
       title="Submit Application"
       noOfButtons={1}
       singleButtonTitle="Return to Home Page"
-      onClose={() => router.back()}
+      onClose={() => router.push("/(main)/NavScreen")}
       onPressSingleButton={() => onSubmitApplication()}
     >
       <ScrollView

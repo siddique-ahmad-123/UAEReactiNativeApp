@@ -59,7 +59,7 @@ const IncomeSummary = () => {
     { label: "Completed", value: "Completed" },
   ];
   return (
-    <FormSummaryLayout onSaveAndBack={() => router.back()}>
+    <FormSummaryLayout onSaveAndBack={() => router.push("/(main)/NavScreen")}>
       <Text style={styles.text}>Summary - Personal Details</Text>
       {/* <SegmentedControl
         label={"Summary - Income Details"}

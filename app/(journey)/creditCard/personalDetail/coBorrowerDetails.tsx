@@ -68,7 +68,7 @@ const CoBorrowerPersonalInformation = () => {
       noOfBars={2}
       activeBarIndex={1}
       onBack={() => prevStep()}
-      onClose={() => router.replace("/")}
+      onClose={() => router.push("/(main)/NavScreen")}
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
