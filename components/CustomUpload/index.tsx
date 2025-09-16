@@ -2,6 +2,12 @@
 import Feather from "@expo/vector-icons/Feather";
 import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
+  Alert,
+  Image,
+  Linking,
+  Modal as RNModal,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -13,6 +19,8 @@ import {
   ActivityIndicator,
   Dimensions,
 } from "react-native";
+import Modal from "react-native-modal";
+import Toast from "react-native-toast-message";
 import { useTheme } from "styled-components/native";
 import { styles } from "./utils";
 import { spacing } from "@/constants/Metrics";
@@ -115,7 +123,7 @@ const CustomUpload = ({
       setLoading(false);
     }
   };
-
+ 
   const handleTakePhoto = async (onChange: any) => {
     setVisible(false);
     const result = await ImagePicker.launchCameraAsync({
@@ -192,12 +200,12 @@ const CustomUpload = ({
       setLoading(false);
     }
   };
-
+ 
   const handlePreview = async (uri: string, type: string) => {
     if (!uri) return;
     setPreviewVisible(true);
   };
-
+ 
   return (
     <Controller
       control={control}
@@ -235,6 +243,7 @@ const CustomUpload = ({
               <View
                 style={{
                   flexDirection: theme.flexRow.flexDirection,
+                  gap: spacing.lg,
                   gap: spacing.lg,
                 }}
               >
@@ -305,7 +314,7 @@ const CustomUpload = ({
                     Camera
                   </Text>
                 </TouchableOpacity>
-
+ 
                 {mode === "all" && (
                   <>
                     <TouchableOpacity
@@ -329,7 +338,7 @@ const CustomUpload = ({
                         Photos
                       </Text>
                     </TouchableOpacity>
-
+ 
                     <TouchableOpacity
                       style={[
                         localStyles.box,
@@ -354,9 +363,9 @@ const CustomUpload = ({
                   </>
                 )}
               </View>
-
+ 
               <View style={localStyles.divider} />
-
+ 
               <TouchableOpacity
                 onPress={() => setVisible(false)}
                 style={localStyles.cancelBtn}
@@ -367,7 +376,7 @@ const CustomUpload = ({
               </TouchableOpacity>
             </View>
           </Modal>
-
+ 
           <RNModal
             visible={previewVisible}
             transparent={true}
@@ -404,7 +413,7 @@ const CustomUpload = ({
     />
   );
 };
-
+ 
 const localStyles = StyleSheet.create({
   previewWrapper: {
     flex: 1,
@@ -465,5 +474,5 @@ const localStyles = StyleSheet.create({
     paddingVertical: 12,
   },
 });
-
+ 
 export default CustomUpload;
