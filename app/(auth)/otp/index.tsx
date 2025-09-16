@@ -7,7 +7,7 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import {useRouter } from "expo-router";
 import { useTheme } from "styled-components/native";
 import {
   fontSize,
@@ -25,17 +25,15 @@ const STORAGE_KEY = "user";
 
 const OTPScreen: React.FC = () => {
   const router = useRouter();
-  const { mobile, otp } = useLocalSearchParams<{ mobile?: string; otp?: string }>();
-  const correctOtp = otp || "1234";
+  const correctOtp = "1234";
 
   const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
-  const [userType, setUserType] = useState("");
-
+  const [getExistingCustomerData] = useGetExistingCustomerDataMutation();
   const { value: storedUser, storeValue } = useAsyncStorage<{
     emiratesId: string;
     mobile: string;
     userType: string;
-    name:string;
+    name: string;
   }>(STORAGE_KEY);
 
   const inputRefs = [
@@ -73,41 +71,47 @@ const OTPScreen: React.FC = () => {
       inputRefs[index - 1].current?.focus();
     }
   };
- const [getExistingCustomerData] = useGetExistingCustomerDataMutation();
- const handleVerify = async () => {
-  const enteredOtp = otpDigits.join("");
-  if (enteredOtp === correctOtp) {
-    let userTypeValue = "NTB";
-    let userName = "Guest";
 
-    if (storedUser && (storedUser.userType === "ETB" || storedUser.userType === "NTB")) {
-      // user already has type stored, do nothing
-      
-    } else {
-      const response: any = await getExistingCustomerData(mobile!).unwrap();
-
-      if (response.status === 200) {
-        let userType = "NTB";
-        let userName = "Guest";
-
-        if (response.data && Object.keys(response.data.customerData).length > 0) {
-          userType = "ETB";
-          userName = response.data.customerData?.name || "Ravish Kumar";
-        }
-
-        setUserType(userType);
+  const handleVerify = async () => {
+    const enteredOtp = otpDigits.join("");
+    if (enteredOtp === correctOtp) {
+      if (
+        storedUser &&
+        (storedUser.userType === "ETB" || storedUser.userType === "NTB")
+      ) {
+        // user already has type stored, do nothing
+        router.replace("/NavScreen");
       } else {
-        alert("user not found");
+        console.log(storedUser?.mobile);
+        const response: any = await getExistingCustomerData(
+          storedUser?.mobile || "509876543"
+        ).unwrap();
+        if (response.status === 200) {
+          let userType = "NTB";
+          let userName = "Guest";
+          if (
+            response.data &&
+            Object.keys(response.data.customerData).length > 0
+          ) {
+            userType = "ETB";
+            userName = response.data.customerData?.name || "Ravish Kumar";
+          }
+
+          storeValue({
+            userType: userType,
+            name: userName,
+            emiratesId: storedUser?.emiratesId || "",
+            mobile: storedUser?.mobile || "509876543",
+          });
+          router.replace("/NavScreen");
+        } else {
+          alert("Something went wrong!!");
+        }
       }
+    } else {
+      alert("Invalid OTP. Please try again.");
     }
-
-    setUserType(userTypeValue);
-    router.replace("/NavScreen");
-  } else {
-    alert("Invalid OTP. Please try again.");
-  }
-};
-
+  };
 
   const theme = useTheme();
   const allFilled = otpDigits.every((digit) => digit !== "");
@@ -240,9 +244,7 @@ const OTPScreen: React.FC = () => {
               textAlign="center"
               autoFocus={index === 0}
               selectionColor={theme.colors.background}
-              placeholderTextColor={
-                digit ? theme.colors.background : "#000"
-              }
+              placeholderTextColor={digit ? theme.colors.background : "#000"}
             />
           ))}
         </View>

@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useApplicationStore } from "@/store/applicationStore";
 
 const STORAGE_KEY = "user";
 
@@ -12,10 +13,11 @@ const MenuScreen: React.FC = () => {
 
   // use hook to manage user session
   const { clearStorage } = useAsyncStorage(STORAGE_KEY);
-
+  const {resetForm} = useApplicationStore();
   const handleLogout = async () => {
     try {
       await clearStorage(); // ✅ clear user data
+      resetForm(); 
       router.replace("/(auth)/login");       // go back to login screen
     } catch (e) {
       console.error("Error clearing user data", e);

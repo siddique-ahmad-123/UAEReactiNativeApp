@@ -78,7 +78,7 @@ const RequestsScreen = () => {
 
   const {value:UserData} = useAsyncStorage("user");
  
-  const { nextStep,formData,updateField } = useApplicationStore();
+  const { nextStep,formData, updateField } = useApplicationStore();
   const {setValue} = useForm({
     defaultValues:formData,
   })
@@ -87,7 +87,8 @@ const RequestsScreen = () => {
     updateField(fieldNames.cardType,value);
     setValue(fieldNames.mobileNo,UserData?.mobile);
     updateField(fieldNames.mobileNo,UserData?.mobile);
-    console.log("Store formData:", formData);
+    setValue(fieldNames.userType,UserData?.userType);
+    updateField(fieldNames.userType,UserData?.userType);
     nextStep();
   }
   const renderItem = (item: CardItem) => (

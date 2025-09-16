@@ -92,7 +92,7 @@ const ApplicationApproved = () => {
             You can download your offer letter from below
           </Text>
         </View>
-        <DocumentDownload documentName="Download Offer Letter" />
+        <DocumentDownload url={""} documentName="Download Offer Letter" />
       </ScrollView>
     </CustomMainChild>
   );

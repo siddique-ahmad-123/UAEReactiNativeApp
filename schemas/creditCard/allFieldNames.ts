@@ -1,6 +1,7 @@
 export const fieldNames = {
   //common detail
   mobileNo:"mobileNo",
+  userType:"userType",
   cardType: "cardType",
   selectedRequiredAmount: "selectedRequiredAmount",
   isCheckedTermandCond: "isCheckedTermandCond",

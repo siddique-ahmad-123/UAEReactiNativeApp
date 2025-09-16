@@ -25,15 +25,16 @@ const UserIconName = ({ imgPath, name }: Props) => {
       fontWeight:fontWeight.normal
     },
     greetingName: {
-      fontSize: fontSize.lg,
+      fontSize: fontSize.md,
       fontWeight: fontWeight.normal,
     },
   });
   return (
     <View style={styles.greetingRow}>
       <Image
-        source={require("../../assets/images/avatar.png")} // replace with your avatar
+        source={imgPath=="ETB"?require("../../assets/images/avatar.png"):require("../../assets/images/user.png")} // replace with your avatar
         style={styles.avatar}
+        resizeMode="cover"
       />
       <View style={{ marginLeft: 12 }}>
         <Text

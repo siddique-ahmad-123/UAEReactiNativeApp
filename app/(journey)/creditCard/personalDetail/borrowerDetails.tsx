@@ -7,19 +7,21 @@ import FormLayout from "@/components/Form/FormLayout";
 import SectionHeader from "@/components/SectionHeader";
 import SegmentedControl from "@/components/SegmentControl";
 import { spacingVertical } from "@/constants/Metrics";
-import { useEmiratesIdMutation, usePassportMutation, useVisaMutation } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import calculateAge from "@/utils/calculateAge";
-import { router, useLocalSearchParams } from "expo-router";
+import { router } from "expo-router";
 import { t } from "i18next";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import {StyleSheet, View } from "react-native";
-import { useGetExistingCustomerDataMutation } from "@/redux/api/creditCardAPI";
-import { useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 import { customerDataMapper } from "@/schemas/burrowerDataMapper";
-
+import {
+  useEmiratesIdMutation,
+  usePassportMutation,
+  useVisaMutation,
+  useGetExistingCustomerDataMutation,
+} from "@/redux/api/creditCardAPI";
 
 const BorrowerPersonalInformation = () => {
   const [isloading, setIsLoading] = useState(false);
@@ -27,50 +29,45 @@ const BorrowerPersonalInformation = () => {
   const [emiratesIdOCR] = useEmiratesIdMutation();
   const [visaOCR] = useVisaMutation();
   const [passportOCR] = usePassportMutation();
+  const [getExistingCustomerData] = useGetExistingCustomerDataMutation();
+
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: zodResolver(borrowerSchema),
     defaultValues: formData,
   });
- const { mobile } = useLocalSearchParams<{ mobile?: string; otp?: string }>();
-  const [getExistingCustomerData] = useGetExistingCustomerDataMutation();
 
   useEffect(() => {
-    console.log(mobile);
-  const fetchAndPopulate = async () => {
-    try {
-
-const response: any = await getExistingCustomerData(formData[fieldNames.mobileNo]).unwrap();
-console.log(response.data.customerData);
-      if (response?.status === 200 && response?.data?.customerData?.length) {
-        
-        const customer = response.data.customerData[0];
-
-        // Map API → form fields
-        Object.entries(customerDataMapper).forEach(([apiKey, formField]) => {
-          const value = customer[apiKey];
-          if (value !== undefined && value !== null) {
-            setValue(formField, value, { shouldValidate: false });
-            updateField(formField, value);
+    const fetchAndPopulate = async () => {
+      try {
+        const response: any = await getExistingCustomerData(
+          formData[fieldNames.mobileNo]
+        ).unwrap();
+        console.log(response.data.customerData);
+        if (response?.status === 200 && response?.data?.customerData?.length) {
+          const customer = response.data.customerData[0];
+          // Map API → form fields
+          Object.entries(customerDataMapper).forEach(([apiKey, formField]) => {
+            const value = customer[apiKey];
+            if (value !== undefined && value !== null) {
+              setValue(formField, value, { shouldValidate: false });
+            }
+          });
+          // Auto-calc age if DOB exists
+          if (customer.DOB) {
+            const dob = new Date(customer.DOB.split("-").reverse().join("-"));
+            const age = calculateAge(dob);
+            setValue(fieldNames.borrowerAge, age);
           }
-        });
-
-        // Auto-calc age if DOB exists
-        if (customer.DOB) {
-          const dob = new Date(customer.DOB.split("-").reverse().join("-"));
-          const age = calculateAge(dob);
-          setValue(fieldNames.borrowerAge, age);
-          updateField(fieldNames.borrowerAge, age);
         }
+      } catch (err) {
+        console.error("❌ Failed to fetch customer data", err);
       }
-    } catch (err) {
-      console.error("❌ Failed to fetch customer data", err);
+    };
+    if (!formData[fieldNames.borrowerName]) {
+      fetchAndPopulate();
     }
-  };
-
-  fetchAndPopulate();
-}, []);
-
+  }, []);
 
   const onSubmit = (values: any) => {
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
@@ -81,18 +78,39 @@ console.log(response.data.customerData);
   const borrowerNationalityStatus =
     watch(fieldNames.borrowerNationalityStatus) ?? "Emirati";
 
-    
-
-  const handleFetchDetails = async() => {
+  const handleFetchDetails = async () => {
     setIsLoading1(true);
-    const emirateResponse = await emiratesIdOCR(formData[fieldNames.mobileNo]).unwrap();
-    const visaResponse = await visaOCR(formData[fieldNames.mobileNo]).unwrap();
-    const passportResponse = await passportOCR(formData[fieldNames.mobileNo]).unwrap();
-
-    if(emirateResponse.status==200 && visaResponse.status==200 && passportResponse.status==200) {
-      setValue(fieldNames.borrowerName,emirateResponse.data.name);
-    }else{
-
+    const emirateResponse = await emiratesIdOCR(
+      formData[fieldNames.mobileNo]
+    ).unwrap();
+    const passportResponse = await passportOCR(
+      formData[fieldNames.mobileNo]
+    ).unwrap();
+ 
+    if (emirateResponse.status == 200 && passportResponse.status == 200) {
+      // Emirates ID v
+      setValue(fieldNames.borrowerName, emirateResponse.data.name);
+      setValue(fieldNames.borrowerDOB, emirateResponse.data.dob);
+      setValue(fieldNames.borrowerGender, emirateResponse.data.gender);
+      setValue(fieldNames.borrowerNationality, emirateResponse.data.nationality);
+      setValue(fieldNames.borrowerEidaIssueDate, emirateResponse.data.eidaIssueDate);
+      setValue(fieldNames.borrowerEidaExpiryDate, emirateResponse.data.eidaExpiryDate);
+ 
+      // Passport 
+      setValue(fieldNames.borrowerPassportNo, passportResponse.data.passportNo);
+      setValue(fieldNames.borrowerPassportIssueDate, passportResponse.data.passportIssueDate);
+      setValue(fieldNames.borrowerPassportExpiryDate, passportResponse.data.passportExpiryDate);
+    }
+    if (borrowerNationalityStatus === "Expat") {
+      const visaResponse = await visaOCR(
+        formData[fieldNames.mobileNo]
+      ).unwrap();
+      if (visaResponse.status === 200) {
+        setValue(fieldNames.borrowerVisaNo, visaResponse.data.visaNo);
+        setValue(fieldNames.borrowerVisaIssueDate, visaResponse.data.visaIssueDate);
+        setValue(fieldNames.borrowerVisaExpiryDate, visaResponse.data.visaExpiryDate);
+        setValue(fieldNames.borrowerName, emirateResponse.data.name);
+      }
     }
     setIsLoading1(false);
   };
@@ -129,7 +147,7 @@ console.log(response.data.customerData);
   ];
   const countryOptions = [
     { label: "India", value: "IN" },
-    { label: "United States", value: "US" },
+    { label: "UAE", value: "UAE" },
     { label: "Germany", value: "DE" },
   ];
   const verificationOptions = [
@@ -149,37 +167,40 @@ console.log(response.data.customerData);
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
-      <SegmentedControl
-        label={"Nationality Status"}
-        options={["Emirati", "Expat"]}
-        defaultValue={borrowerNationalityStatus}
-        onChange={(value) =>
-          setValue(fieldNames.borrowerNationalityStatus, value)
-        }
-      />
+      {formData[fieldNames.userType] === "NTB" && (
+        <>
+          <SegmentedControl
+            label={"Nationality Status"}
+            options={["Emirati", "Expat"]}
+            defaultValue={borrowerNationalityStatus}
+            onChange={(value) =>
+              setValue(fieldNames.borrowerNationalityStatus, value)
+            }
+          />
 
-      <View style={{ alignItems: "center", gap: spacingVertical.md }}>
-        <CustomUpload
-          label={"Emirates ID"}
-          control={control}
-          name="emiratesID"
-        />
-        <CustomUpload label={"Passport"} control={control} name="passport" />
-        {borrowerNationalityStatus === "Expat" ? (
-          <>
-            <CustomUpload label={"Visa"} control={control} name="visa" />
-          </>
-        ) : (
-          <></>
-        )}
-      </View>
+          <View style={{ alignItems: "center", gap: spacingVertical.md }}>
+            <CustomUpload
+              label={"Emirates ID"}
+              control={control}
+              name="emiratesID"
+            />
+            <CustomUpload
+              label={"Passport"}
+              control={control}
+              name="passport"
+            />
+            {borrowerNationalityStatus === "Expat" && (
+              <CustomUpload label={"Visa"} control={control} name="visa" />
+            )}
+          </View>
 
-      <CustomButton
-        title={"Fetch Details"}
-        onPress={handleFetchDetails}
-        isloading={isloading1}
-      />
-
+          <CustomButton
+            title={"Fetch Details"}
+            onPress={handleFetchDetails}
+            isloading={isloading1}
+          />
+        </>
+      )}
       <SectionHeader sectionName={t("personalInformation")} />
       <CustomInput
         control={control}
@@ -258,27 +279,31 @@ console.log(response.data.customerData);
         label={"Passport Expiry Date"}
         minDate={watch(fieldNames.borrowerPassportIssueDate)}
       />
+      {(borrowerNationalityStatus === "Expat" ||
+        formData[fieldNames.userType] === "ETB") && (
+        <>
+          <CustomInput
+            control={control}
+            name={fieldNames.borrowerVisaNo}
+            label="Visa No"
+            placeholder="Enter your visa Number"
+            type="number"
+          />
 
-      <CustomInput
-        control={control}
-        name={fieldNames.borrowerVisaNo}
-        label="Visa No"
-        placeholder="Enter your visa Number"
-        type="number"
-      />
-      <CustomDatePicker
-        control={control}
-        name={fieldNames.borrowerVisaIssueDate}
-        label={"Visa Issue Date"}
-        maxDate={new Date()}
-      />
-      <CustomDatePicker
-        control={control}
-        name={fieldNames.borrowerVisaExpiryDate}
-        label={"VIsa Expiry Date"}
-        minDate={watch(fieldNames.borrowerVisaIssueDate)}
-      />
-
+          <CustomDatePicker
+            control={control}
+            name={fieldNames.borrowerVisaIssueDate}
+            label={"Visa Issue Date"}
+            maxDate={new Date()}
+          />
+          <CustomDatePicker
+            control={control}
+            name={fieldNames.borrowerVisaExpiryDate}
+            label={"VIsa Expiry Date"}
+            minDate={watch(fieldNames.borrowerVisaIssueDate)}
+          />
+        </>
+      )}
       <CustomInput
         control={control}
         name={fieldNames.borrowerEmailId}
