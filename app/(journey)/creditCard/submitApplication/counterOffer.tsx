@@ -53,7 +53,7 @@ const CounterOffer = () => {
         <Image
           source={require("../../../../assets/images/animatedImg.png")}
           style={{ width: 200, height: 200 }}
-          resizeMode="contain"
+        resizeMode="contain"
         />
       </View>
       <Text style={[styles.textbox2, { color: theme.colors.textPrimary }]}>
