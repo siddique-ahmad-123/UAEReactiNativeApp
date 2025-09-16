@@ -67,9 +67,9 @@ const SelectRequiredAmount = () => {
         unit="AED"
       />
       <View style={styles.bottomContainer}>
-        <DocumentDownload documentName="Download Terms & Conditions" />
-        <DocumentDownload documentName="Download Fees & Charges" />
-        <DocumentDownload documentName="Download Key Fact Statement" />
+        <DocumentDownload url={process.env.EXPO_PUBLIC_TERMS_CONDITIONS_URL} documentName="Download Terms & Conditions" />
+        <DocumentDownload url={process.env.EXPO_PUBLIC_FEES_CHARGES_URL} documentName="Download Fees & Charges" />
+        <DocumentDownload url={process.env.EXPO_PUBLIC_KAS_URL} documentName="Download Key Fact Statement" />
 
         <View style={styles.checkboxContainer}>
           <Checkbox

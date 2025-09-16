@@ -1,6 +1,5 @@
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import { styles } from "@/components/styles/submitApplication2";
-import { useUserEligibilityCheckMutation } from "@/redux/api/creditCardAPI";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React from "react";
@@ -10,7 +9,6 @@ import { useTheme } from "styled-components/native";
 const Congratulations = () => {
   const theme = useTheme();
   const { formData, resetForm } = useApplicationStore();
-  const [userEligibilityCheck] = useUserEligibilityCheckMutation();
   const onSubmitApplication = async () => {
     // const response = await userEligibilityCheck(formData).unwrap();
     // console.log("✅ Server Response:", response);

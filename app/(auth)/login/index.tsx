@@ -114,7 +114,7 @@ const LoginScreen: React.FC = () => {
       Alert.alert("Validation Error", "Please enter your Mobile Number");
       return;
     }
-    if (mobile.length < 10) {
+    if (mobile.length < 9) {
       Alert.alert(
         "Validation Error",
         "Mobile number must be at least 10 digits"
@@ -206,7 +206,7 @@ const LoginScreen: React.FC = () => {
           value={mobile}
           onChangeText={setMobile}
           keyboardType="numeric"
-          maxLength={10}
+          maxLength={9}
         />
 
         <View style={styles.row}>
@@ -223,7 +223,7 @@ const LoginScreen: React.FC = () => {
             variant="primary"
             type="filled"
             size="lg"
-            disabled={mobile.trim().length < 10}
+            disabled={mobile.trim().length < 9}
           />
         </View>
       </View>
