@@ -2,9 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const creditCardAPI = createApi({
   reducerPath: "creditCardApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "https://tytlmsdemo.newgensoftware.net:8443/uaeMobileApp/api/v1",
-  }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.EXPO_PUBLIC_API_URL }),
+
   endpoints: (builder) => ({
     uaeCreditCard: builder.mutation<any, any>({
       query: (formData) => ({
@@ -34,6 +33,7 @@ export const creditCardAPI = createApi({
         method: "POST",
       }),
     }),
+
     visa: builder.mutation<any, any>({
       query: (folderName) => ({
         url: `ocr/visa?folderName=${folderName}&customerType=Borrower`,
@@ -67,6 +67,14 @@ export const creditCardAPI = createApi({
       }),
     }),
 
+    offerLetter: builder.mutation<any, any>({
+      query: (formData) => ({
+        url: "templateGenerate/offerLetter",
+        method: "POST",
+        body: formData,
+      }),
+    }),
+
     createWorkItem: builder.mutation<any, any>({
       query: (formData) => ({
         url: "workItem/createWorkItem",
@@ -81,6 +89,7 @@ export const creditCardAPI = createApi({
         method: "GET",
       }),
     }),
+
     getCustomerData: builder.mutation<any, string>({
       query: (mobileNo) => ({
         url: `etb/getCustomerData/${mobileNo}`,
@@ -108,4 +117,5 @@ export const {
   useCreateWorkItemMutation,
   useGetCustomerDataMutation,
   useGetUserQuery,
+  useOfferLetterMutation,
 } = creditCardAPI;

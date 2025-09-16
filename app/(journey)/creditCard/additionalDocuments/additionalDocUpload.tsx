@@ -5,7 +5,6 @@ import { router } from "expo-router";
 import { t } from "i18next";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { StyleSheet } from "react-native";
 
 const AdditionalDocUpload = () => {
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
@@ -43,5 +42,3 @@ const AdditionalDocUpload = () => {
 };
 
 export default AdditionalDocUpload;
-
-const styles = StyleSheet.create({});

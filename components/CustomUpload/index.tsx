@@ -1,11 +1,6 @@
-import { spacing } from "@/constants/Metrics";
-import { useAsyncStorage } from "@/hooks/useAsyncStorage";
-import { useFileDeleteMutation, useFileUploadMutation } from "@/redux/api/creditCardAPI";
+/* eslint-disable no-unused-expressions */
 import Feather from "@expo/vector-icons/Feather";
-import * as DocumentPicker from "expo-document-picker";
-import * as ImagePicker from "expo-image-picker";
-import React, { useState } from "react";
-import { Controller } from "react-hook-form";
+import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -16,20 +11,31 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Dimensions,
 } from "react-native";
 import Modal from "react-native-modal";
 import Toast from "react-native-toast-message";
 import { useTheme } from "styled-components/native";
 import { styles } from "./utils";
- 
+import { spacing } from "@/constants/Metrics";
+import * as DocumentPicker from "expo-document-picker";
+import * as ImagePicker from "expo-image-picker";
+import { Controller } from "react-hook-form";
+import {
+  useFileDeleteMutation,
+  useFileUploadMutation,
+} from "@/redux/api/creditCardAPI";
+import { useAsyncStorage } from "@/hooks/useAsyncStorage";
+import Pdf from "react-native-pdf";
+import { useApplicationStore } from "@/store/applicationStore";
+
 interface CustomUploadProps {
   label: string;
   control: any;
   name: string;
   mode?: "all" | "photo";
 }
- 
- 
+
 const CustomUpload = ({
   label,
   mode = "all",
@@ -41,33 +47,36 @@ const CustomUpload = ({
   const [isloading, setLoading] = useState(false);
   const [fileUpload] = useFileUploadMutation();
   const [fileDelete] = useFileDeleteMutation();
-  const {value:userData} = useAsyncStorage("user");
+  const { value: UserData } = useAsyncStorage("user");
+  const { updateField } = useApplicationStore();
+  const formadataName = name;
   const theme = useTheme();
-  const fileNeme = "Borrower"+" "+label;
-  const handleFileDelete = async (onChange: any,type:string)=>{
+  const fileNeme = "Borrower" + " " + label;
+  const handleFileDelete = async (onChange: any, type: string) => {
     setLoading(true);
     const data = {
-      folderName:userData?.mobile,
-      fileName:fileNeme,
-      mimeType:type,
-    }
+      folderName: UserData.mobile,
+      fileName: fileNeme,
+      mimeType: type,
+    };
     const response = await fileDelete(data).unwrap();
     if (response.status == 200) {
-        Toast.show({
-          type: "success",
-          text1: "File deleted successfully",
-          visibilityTime: 2000,
-        });
-        onChange();
-      } else {
-        Toast.show({
-          type: "error",
-          text1: "Failed to delete file!!",
-          visibilityTime: 2000,
-        });
-      }
-      setLoading(false);
-  }
+      Toast.show({
+        type: "success",
+        text1: "File deleted successfully",
+        visibilityTime: 2000,
+      });
+      onChange();
+      updateField(formadataName,{})
+    } else {
+      Toast.show({
+        type: "error",
+        text1: "Failed to delete file!!",
+        visibilityTime: 2000,
+      });
+    }
+    setLoading(false);
+  };
   const handlePickFile = async (onChange: any) => {
     setVisible(false);
     const result = await DocumentPicker.getDocumentAsync({
@@ -85,7 +94,7 @@ const CustomUpload = ({
         name: name,
         type: type || "application/octet-stream",
       } as any);
-      formData.append("folderName", userData?.mobile);
+      formData.append("folderName", UserData.mobile);
       formData.append("fileName", fileNeme);
       const response = await fileUpload(formData).unwrap();
       if (response.status == 200) {
@@ -95,6 +104,7 @@ const CustomUpload = ({
           visibilityTime: 2000,
         });
         onChange({ uri, name, type });
+        updateField(formadataName,{ uri, name, type })
       } else {
         Toast.show({
           type: "error",
@@ -123,7 +133,7 @@ const CustomUpload = ({
         name: name,
         type: type || "application/octet-stream",
       } as any);
-      formData.append("folderName", userData?.mobile);
+      formData.append("folderName", UserData.mobile);
       formData.append("fileName", fileNeme);
       const response = await fileUpload(formData).unwrap();
       if (response.status == 200) {
@@ -133,6 +143,7 @@ const CustomUpload = ({
           visibilityTime: 2000,
         });
         onChange({ uri, name, type });
+        updateField(formadataName,{ uri, name, type });
       } else {
         Toast.show({
           type: "error",
@@ -160,7 +171,7 @@ const CustomUpload = ({
         name: name,
         type: type || "application/octet-stream",
       } as any);
-      formData.append("folderName", userData?.mobile);
+      formData.append("folderName", UserData.mobile);
       formData.append("fileName", fileNeme);
       const response = await fileUpload(formData).unwrap();
       if (response.status == 200) {
@@ -170,6 +181,7 @@ const CustomUpload = ({
           visibilityTime: 2000,
         });
         onChange({ uri, name, type });
+        updateField(formadataName,{ uri, name, type });
       } else {
         Toast.show({
           type: "error",
@@ -183,16 +195,7 @@ const CustomUpload = ({
  
   const handlePreview = async (uri: string, type: string) => {
     if (!uri) return;
-    if (type === "application/pdf") {
-      const supported = await Linking.canOpenURL(uri);
-      if (supported) {
-        await Linking.openURL(uri);
-      } else {
-        Alert.alert("Cannot open this file type");
-      }
-    } else {
-      setPreviewVisible(true);
-    }
+    setPreviewVisible(true);
   };
  
   return (
@@ -246,8 +249,10 @@ const CustomUpload = ({
                         color={theme.colors.primaryColor}
                       />
                     </TouchableOpacity>
- 
-                    <TouchableOpacity onPress={() => handleFileDelete(onChange,value?.type)}>
+
+                    <TouchableOpacity
+                      onPress={() => handleFileDelete(onChange, value?.type)}
+                    >
                       <Feather
                         name={"trash-2"}
                         size={spacing.md}
@@ -367,14 +372,25 @@ const CustomUpload = ({
             visible={previewVisible}
             transparent={true}
             animationType="fade"
-            onRequestClose={() => setPreviewVisible(false)}
+            onRequestClose={() => setPreviewVisible(false)}            
           >
             <View style={localStyles.previewWrapper}>
+              {value?.type === "application/pdf"?
+                <Pdf
+
+                  trustAllCerts={false}
+                  source={{ uri: value?.uri || "", cache: true }}
+                  style={localStyles.previewPdf}
+                  onError={(error) => {
+                    console.log("❌ PDF view error:", error);
+                  }}
+                />
+              :
               <Image
                 source={{ uri: value?.uri || "" }}
                 style={localStyles.previewImage}
                 resizeMode="contain"
-              />
+              />}
               <TouchableOpacity
                 onPress={() => setPreviewVisible(false)}
                 style={localStyles.closeBtn}
@@ -395,7 +411,14 @@ const localStyles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.9)",
     justifyContent: "center",
     alignItems: "center",
+
   },
+  previewPdf:{
+    flex:1,
+    width: "100%",
+    height: "90%",
+  },
+
   previewImage: {
     width: "90%",
     height: "70%",

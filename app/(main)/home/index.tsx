@@ -76,29 +76,25 @@ const applyNow = [
   },
 ];
 
-const STORAGE_KEY = "user";
 export default function Dashboard() {
-
-  
-  
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("1");
   const theme = useTheme();
   const { goToStep, stepIndex } = useApplicationStore();
 
-   const { value: storedUser, loading } = useAsyncStorage<{
+  const { value: storedUser, loading } = useAsyncStorage<{
     emiratesId: string;
     mobile: string;
     userType: string;
     name?: string;
-  }>(STORAGE_KEY);
+  }>("user");
 
   const localStyles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: theme.colors.background,
       padding: spacing.md,
-      gap:spacingVertical.md,
+      gap: spacingVertical.md,
     },
     sectionTitle: {
       fontSize: 18,
@@ -114,11 +110,9 @@ export default function Dashboard() {
       flexDirection: theme.flexRow.flexDirection,
       flexWrap: "wrap",
       justifyContent: "space-between",
-      gap:spacingVertical.md
-    }
+      gap: spacingVertical.md,
+    },
   });
-
-
 
   return (
     <ScrollView
@@ -126,17 +120,16 @@ export default function Dashboard() {
       contentContainerStyle={localStyles.container}
     >
       <View>
-        <UserIconName name={loading ? "Loading..." : storedUser?.name ?? "Guest"} />
+        <UserIconName
+          name={loading ? "Loading..." : storedUser?.name ?? "Guest"}
+          imgPath={storedUser?.userType}
+        />
       </View>
       <HeroBanner
         message="Thank you for being associated with us."
         backgroundImage={require("../../../assets/images/HeroBanner.png")}
       />
-      <Text
-        style={localStyles.sectionTitle}
-      >
-        My Services
-      </Text>
+      <Text style={localStyles.sectionTitle}>My Services</Text>
       <View style={localStyles.serviceRow}>
         {services.map((item) => (
           <ServiceTile

@@ -4,7 +4,7 @@
     "slug": "uaereactnativeapp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Logo-High_front.png",
+    "icon": "./assets/androidIcon.png",
     "scheme": "uaereactnativeapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/Logo-High_front.png",
+        "foregroundImage": "./assets/androidIcon.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
@@ -26,10 +26,12 @@
     },
     "plugins": [
       "expo-router",
+      "@config-plugins/react-native-blob-util",
+      "@config-plugins/react-native-pdf",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/Logo-High_front.png",
+          "image": "./assets/LogoSplash.png",
           "imageWidth": 200,
           "resizeMode": "cover",
           "backgroundColor": "#3C1053"

@@ -4,6 +4,7 @@ import {
   spacing,
   spacingVertical,
 } from "@/constants/Metrics";
+import downloadPDF from "@/utils/pdfDownload";
 import { Ionicons } from "@expo/vector-icons"; // for the download icon
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
@@ -11,13 +12,18 @@ import { useTheme } from "styled-components/native";
 
 interface DocumentDownloadProps {
   documentName: string;
+  url: any;
 }
 
-const DocumentDownload = ({ documentName }: DocumentDownloadProps) => {
+const DocumentDownload = ({ url, documentName }: DocumentDownloadProps) => {
   const theme = useTheme();
   return (
     <TouchableOpacity
-      style={[styles.container, { backgroundColor: theme.colors.primaryLightColor }]}
+      style={[
+        styles.container,
+        { backgroundColor: theme.colors.primaryLightColor },
+      ]}
+      onPress={() => downloadPDF({ pdfUrl: url, name: documentName })}
     >
       <Text style={[styles.text, { color: theme.colors.primaryColor }]}>
         {documentName}
