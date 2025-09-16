@@ -107,6 +107,8 @@ const RequestsScreen = () => {
     updateField(fieldNames.cardAnualFees, anualFees);
     setValue(fieldNames.mobileNo, mobilenumber?.mobile);
     updateField(fieldNames.mobileNo, mobilenumber?.mobile);
+    setValue(fieldNames.userType, mobilenumber?.userType);
+    updateField(fieldNames.userType, mobilenumber?.userType);
     console.log("Store formData:", formData);
     nextStep();
   };

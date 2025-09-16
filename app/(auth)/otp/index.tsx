@@ -1,14 +1,4 @@
-import React, { useRef, useState } from "react";
-import {
-  View,
-  Text,
-  ImageBackground,
-  TouchableOpacity,
-  TextInput,
-  StyleSheet,
-} from "react-native";
-import {useRouter } from "expo-router";
-import { useTheme } from "styled-components/native";
+import CustomButton from "@/components/CustomButton";
 import {
   fontSize,
   fontWeight,
@@ -16,10 +6,20 @@ import {
   spacing,
   spacingVertical,
 } from "@/constants/Metrics";
-import { Ionicons } from "@expo/vector-icons";
-import CustomButton from "@/components/CustomButton";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage"; // ✅ corrected import
 import { useGetExistingCustomerDataMutation } from "@/redux/api/creditCardAPI";
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import React, { useRef, useState } from "react";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useTheme } from "styled-components/native";
 
 const STORAGE_KEY = "user";
 
@@ -29,6 +29,7 @@ const OTPScreen: React.FC = () => {
 
   const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
   const [getExistingCustomerData] = useGetExistingCustomerDataMutation();
+  const [isloading, setIsLoading] = useState(false);
   const { value: storedUser, storeValue } = useAsyncStorage<{
     emiratesId: string;
     mobile: string;
@@ -73,6 +74,7 @@ const OTPScreen: React.FC = () => {
   };
 
   const handleVerify = async () => {
+    setIsLoading(true);
     const enteredOtp = otpDigits.join("");
     if (enteredOtp === correctOtp) {
       if (
@@ -111,6 +113,7 @@ const OTPScreen: React.FC = () => {
     } else {
       alert("Invalid OTP. Please try again.");
     }
+    setIsLoading(false);
   };
 
   const theme = useTheme();
@@ -261,6 +264,7 @@ const OTPScreen: React.FC = () => {
             type="filled"
             onPress={handleVerify}
             style={{ marginTop: 230 }}
+            isloading={isloading}
           />
         )}
       </View>
