@@ -16,6 +16,7 @@ import {
 } from "react-native";
 import { useTheme } from "styled-components/native";
 import { styles } from "../../../components/styles/onboarding.Styles";
+import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 
 
 
@@ -27,6 +28,8 @@ type Slide = {
   description: string;
   imgpath: ImageSourcePropType;
 };
+
+
 
 const slides: Slide[] = [
   {
@@ -65,6 +68,8 @@ const Carousel = () => {
     const index = Math.round(event.nativeEvent.contentOffset.x / width);
     setCurrentIndex(index);
   };
+
+  const {value:userData}=useAsyncStorage("user");
 
   const renderItem = ({ item }: { item: Slide }) => (
     <View style={{ width, alignItems: "center" }}>
@@ -169,15 +174,13 @@ const Carousel = () => {
         <CustomButton
           title="Get Started"
           onPress={() => {
-            // if (currentIndex === slides.length - 1) {
-            //   router.push("/(auth)/login");
-            // } else {
-            //   flatListRef.current?.scrollToIndex({
-            //     index: currentIndex + 1,
-            //     animated: true,
-            //   });
-            // }
-            router.push("/(auth)/login");
+            console.log(userData);
+            if (userData?.mobile) {
+              router.push("/(auth)/otp");
+            } else {
+               router.push("/(auth)/login");
+            }
+           
           }}
           variant="primary"
           type="filled"

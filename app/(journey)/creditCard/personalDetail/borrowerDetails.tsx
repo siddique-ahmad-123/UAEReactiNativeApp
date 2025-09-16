@@ -11,11 +11,15 @@ import { useEmiratesIdMutation, usePassportMutation, useVisaMutation } from "@/r
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import calculateAge from "@/utils/calculateAge";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { t } from "i18next";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {StyleSheet, View } from "react-native";
+import { useGetExistingCustomerDataMutation } from "@/redux/api/creditCardAPI";
+import { useEffect } from "react";
+import { customerDataMapper } from "@/schemas/burrowerDataMapper";
+
 
 const BorrowerPersonalInformation = () => {
   const [isloading, setIsLoading] = useState(false);
@@ -28,6 +32,45 @@ const BorrowerPersonalInformation = () => {
     // resolver: zodResolver(borrowerSchema),
     defaultValues: formData,
   });
+ const { mobile } = useLocalSearchParams<{ mobile?: string; otp?: string }>();
+  const [getExistingCustomerData] = useGetExistingCustomerDataMutation();
+
+  useEffect(() => {
+    console.log(mobile);
+  const fetchAndPopulate = async () => {
+    try {
+
+const response: any = await getExistingCustomerData(formData[fieldNames.mobileNo]).unwrap();
+console.log(response.data.customerData);
+      if (response?.status === 200 && response?.data?.customerData?.length) {
+        
+        const customer = response.data.customerData[0];
+
+        // Map API → form fields
+        Object.entries(customerDataMapper).forEach(([apiKey, formField]) => {
+          const value = customer[apiKey];
+          if (value !== undefined && value !== null) {
+            setValue(formField, value, { shouldValidate: false });
+            updateField(formField, value);
+          }
+        });
+
+        // Auto-calc age if DOB exists
+        if (customer.DOB) {
+          const dob = new Date(customer.DOB.split("-").reverse().join("-"));
+          const age = calculateAge(dob);
+          setValue(fieldNames.borrowerAge, age);
+          updateField(fieldNames.borrowerAge, age);
+        }
+      }
+    } catch (err) {
+      console.error("❌ Failed to fetch customer data", err);
+    }
+  };
+
+  fetchAndPopulate();
+}, []);
+
 
   const onSubmit = (values: any) => {
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
@@ -37,6 +80,8 @@ const BorrowerPersonalInformation = () => {
 
   const borrowerNationalityStatus =
     watch(fieldNames.borrowerNationalityStatus) ?? "Emirati";
+
+    
 
   const handleFetchDetails = async() => {
     setIsLoading1(true);
