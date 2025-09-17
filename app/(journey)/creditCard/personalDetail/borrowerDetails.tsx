@@ -22,6 +22,7 @@ import {
   useVisaMutation,
   useGetExistingCustomerDataMutation,
 } from "@/redux/api/creditCardAPI";
+import { parseToDate } from "@/utils/dateParser";
 
 const BorrowerPersonalInformation = () => {
   const [isloading, setIsLoading] = useState(false);
@@ -90,16 +91,16 @@ const BorrowerPersonalInformation = () => {
     if (emirateResponse.status == 200 && passportResponse.status == 200) {
       // Emirates ID v
       setValue(fieldNames.borrowerName, emirateResponse.data.name);
-      setValue(fieldNames.borrowerDOB, emirateResponse.data.dob);
+      setValue(fieldNames.borrowerDOB, parseToDate(emirateResponse.data.dob));
       setValue(fieldNames.borrowerGender, emirateResponse.data.gender);
       setValue(fieldNames.borrowerNationality, emirateResponse.data.nationality);
-      setValue(fieldNames.borrowerEidaIssueDate, emirateResponse.data.eidaIssueDate);
-      setValue(fieldNames.borrowerEidaExpiryDate, emirateResponse.data.eidaExpiryDate);
- 
+      setValue(fieldNames.borrowerEidaIssueDate, parseToDate(emirateResponse.data.eidaIssueDate));
+      setValue(fieldNames.borrowerEidaExpiryDate, parseToDate(emirateResponse.data.eidaExpiryDate));
+      setValue(fieldNames.borrowerAge,calculateAge(parseToDate(emirateResponse.data.dob)));
       // Passport 
       setValue(fieldNames.borrowerPassportNo, passportResponse.data.passportNo);
-      setValue(fieldNames.borrowerPassportIssueDate, passportResponse.data.passportIssueDate);
-      setValue(fieldNames.borrowerPassportExpiryDate, passportResponse.data.passportExpiryDate);
+      setValue(fieldNames.borrowerPassportIssueDate, parseToDate(passportResponse.data.passportIssueDate));
+      setValue(fieldNames.borrowerPassportExpiryDate, parseToDate(passportResponse.data.passportExpiryDate));
     }
     if (borrowerNationalityStatus === "Expat") {
       const visaResponse = await visaOCR(
@@ -107,9 +108,8 @@ const BorrowerPersonalInformation = () => {
       ).unwrap();
       if (visaResponse.status === 200) {
         setValue(fieldNames.borrowerVisaNo, visaResponse.data.visaNo);
-        setValue(fieldNames.borrowerVisaIssueDate, visaResponse.data.visaIssueDate);
-        setValue(fieldNames.borrowerVisaExpiryDate, visaResponse.data.visaExpiryDate);
-        setValue(fieldNames.borrowerName, emirateResponse.data.name);
+        setValue(fieldNames.borrowerVisaIssueDate, parseToDate(visaResponse.data.visaIssueDate));
+        setValue(fieldNames.borrowerVisaExpiryDate, parseToDate(visaResponse.data.visaExpiryDate));
       }
     }
     setIsLoading1(false);
@@ -133,12 +133,13 @@ const BorrowerPersonalInformation = () => {
   const residenceCountryOptions = [
     { label: "India", value: "IN" },
     { label: "UAE", value: "UAE" },
-    { label: "Germany", value: "DE" },
+    { label: "Sri Lanka", value: "Sri Lanka" },
   ];
 
   const nationalityOptions = [
     { label: "Indian", value: "Indian" },
-    { label: "Persians", value: "Persians" },
+    { label: "Sri Lanka", value: "Sri Lanka" },
+    { label: "UAE", value: "UAE" },
   ];
 
   const emiratesOptions = [
