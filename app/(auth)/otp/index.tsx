@@ -262,6 +262,8 @@ const OTPScreen: React.FC = () => {
           <Text style={styles.resendText}>Resend Code</Text>
           <Text style={styles.timer}>02:00</Text>
         </View>
+
+        <View  style={{ marginBottom: spacingVertical.lg }}>
         {allFilled && (
           <CustomButton
             title="Continue"
@@ -269,10 +271,10 @@ const OTPScreen: React.FC = () => {
             variant="primary"
             type="filled"
             onPress={handleVerify}
-            style={{ marginTop: 230 }}
             isloading={isloading}
           />
         )}
+        </View>
       </View>
     </View>
   );
