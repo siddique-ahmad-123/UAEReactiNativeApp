@@ -13,15 +13,15 @@ import { StyleSheet, Text } from "react-native";
 import { useTheme } from "styled-components/native";
 
 const IncomeSummary = () => {
-  const { updateField, nextStep, prevStep, formData } = useApplicationStore();
-  const { control, handleSubmit, setValue, watch } = useForm({
+  const { updateField,formData } = useApplicationStore();
+  const { control, handleSubmit, watch } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
   });
 
   const onSubmit = (values: any) => {
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
-    nextStep();
+    router.back();
   };
 
   const incomeBorrowerType = watch("incomeBorrowerType") ?? "Borrower";
@@ -59,7 +59,7 @@ const IncomeSummary = () => {
     { label: "Completed", value: "Completed" },
   ];
   return (
-    <FormSummaryLayout onSaveAndBack={() => router.push("/(main)/NavScreen")}>
+    <FormSummaryLayout onSaveAndBack={handleSubmit(onSubmit)}>
       <Text style={styles.text}>Summary - Personal Details</Text>
       {/* <SegmentedControl
         label={"Summary - Income Details"}

@@ -11,15 +11,15 @@ import { StyleSheet, Text } from "react-native";
 import { useTheme } from "styled-components/native";
 
 const DispatchSummary = () => {
-  const { updateField, nextStep, prevStep, formData } = useApplicationStore();
-  const { control, handleSubmit, setValue, watch } = useForm({
+  const { updateField, formData } = useApplicationStore();
+  const { control, handleSubmit } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
   });
 
   const onSubmit = (values: any) => {
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
-    nextStep();
+    router.back();
   };
   const theme = useTheme();
   const styles = StyleSheet.create({
@@ -40,7 +40,7 @@ const DispatchSummary = () => {
     { label: "Germany", value: "DE" },
   ];
   return (
-    <FormSummaryLayout onSaveAndBack={() => router.push("/(main)/NavScreen")}>
+    <FormSummaryLayout onSaveAndBack={handleSubmit(onSubmit)}>
       <Text style={styles.text}>Summary - Dispatch Details</Text>
 
       <CustomInput

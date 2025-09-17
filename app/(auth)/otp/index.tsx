@@ -96,7 +96,8 @@ const OTPScreen: React.FC = () => {
             Object.keys(response.data.customerData).length > 0
           ) {
             userType = "ETB";
-            userName = response.data.customerData?.name || "Ravish Kumar";
+
+            userName = response.data.customerData[0]?.Name || "Ravish Kumar";
           }
 
           storeValue({

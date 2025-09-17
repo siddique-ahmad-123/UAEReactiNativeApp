@@ -132,12 +132,12 @@ const BorrowerPersonalInformation = () => {
 
   const residenceCountryOptions = [
     { label: "India", value: "IN" },
-    { label: "United States", value: "US" },
+    { label: "UAE", value: "UAE" },
     { label: "Germany", value: "DE" },
   ];
 
   const nationalityOptions = [
-    { label: "Indian", value: "India" },
+    { label: "Indian", value: "Indian" },
     { label: "Persians", value: "Persians" },
   ];
 

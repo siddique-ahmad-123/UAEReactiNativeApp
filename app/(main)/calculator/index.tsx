@@ -5,6 +5,8 @@ import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
 import DynamicSliderCard from "@/components/CustomSliderCard/DynamicSliderCard";
 import { spacing, spacingVertical } from "@/constants/Metrics";
+import { useAsyncStorage } from "@/hooks/useAsyncStorage";
+import UserIconName from "@/components/UserProfile/userIconName";
 
 const EMICalculatorScreen: React.FC = () => {
   const theme = useTheme();
@@ -125,30 +127,13 @@ const EMICalculatorScreen: React.FC = () => {
   const monthlyInstallment = Math.round(
     calculateEMI(financeAmount, profitRate, tenure)
   );
-
+  const { value: storedUser } = useAsyncStorage("user");
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.greetingRow}>
-        <Image
-          source={require("../../../assets/images/avatar.png")} // replace with your avatar
-          style={styles.avatar}
+      <UserIconName
+          name={storedUser?.name ?? "Guest"}
+          imgPath={storedUser?.userType}
         />
-        <View style={{ marginLeft: 12 }}>
-          <Text
-            style={[
-              styles.greetingSmall,
-              { color: theme.colors.inactiveNavIconColor },
-            ]}
-          >
-            Good Morning,
-          </Text>
-          <Text
-            style={[styles.greetingName, { color: theme.colors.shadowColor }]}
-          >
-            Abdul Rahman
-          </Text>
-        </View>
-      </View>
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingBottom: 100 }}

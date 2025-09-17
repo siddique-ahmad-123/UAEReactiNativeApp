@@ -19,7 +19,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     initSyncListener();
-    setTimeout(() => setLoading(false), 4000); // 4s splash
+    // setTimeout(() => setLoading(false), 4000); // 4s splash
   }, []);
 
   const [loaded] = useFonts({
@@ -27,7 +27,7 @@ export default function RootLayout() {
     LatoRegular: require("../assets/fonts/Lato-Regular.ttf"),
     LatoBold: require("../assets/fonts/Lato-Bold.ttf"),
   });
-  if (loading) return <SplashScreen />;
+  // if (loading) return <SplashScreen />;
   if (!loaded) return null;
 
   return (

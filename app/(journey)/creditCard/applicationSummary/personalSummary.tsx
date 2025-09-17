@@ -11,15 +11,15 @@ import { StyleSheet, Text } from "react-native";
 import { useTheme } from "styled-components/native";
 
 const PersonalSummary = () => {
-  const { updateField, nextStep, prevStep, formData } = useApplicationStore();
-  const { control, handleSubmit, setValue, watch } = useForm({
+  const { updateField, formData } = useApplicationStore();
+  const { control, handleSubmit, watch } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
   });
 
   const onSubmit = (values: any) => {
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
-    nextStep();
+    router.back()
   };
 
   const borrowerType = watch("borrowerType") ?? "Borrower";
@@ -40,7 +40,7 @@ const PersonalSummary = () => {
   ];
 
   const nationalityOptions = [
-    { label: "Indian", value: "India" },
+    { label: "Indian", value: "Indian" },
     { label: "Persians", value: "Persians" },
   ];
 
@@ -54,7 +54,7 @@ const PersonalSummary = () => {
     { label: "No", value: "No" },
   ];
   return (
-    <FormSummaryLayout onSaveAndBack={() => router.push("/(main)/NavScreen")}>
+    <FormSummaryLayout onSaveAndBack={handleSubmit(onSubmit)}>
       <Text style={styles.text}>Summary - Personal Details</Text>
       {/* <SegmentedControl
         label={"Summary - Personal Details"}
@@ -97,7 +97,7 @@ const PersonalSummary = () => {
           />
 
           <CustomInput
-            name={fieldNames.borrowerEmiratesId}
+            name={fieldNames.borrowerEidaNo}
             label="Emirates ID"
             placeholder="Enter your EIDA Number"
             type="number"
@@ -113,7 +113,7 @@ const PersonalSummary = () => {
           />
 
           <CustomInput
-            name={fieldNames.borrowerResidenceVintage}
+            name={fieldNames.borrowerVintage}
             label="Residence Vintage(Months)"
             placeholder="Enter your residence vintage"
             type="number"
