@@ -109,7 +109,7 @@ export default function Dashboard() {
       gap: spacingVertical.sm,
     },
     topSection: {
-      gap: spacingVertical.md,
+      gap: spacingVertical.sm,
     },
     card: {
       width: cardWidth,
