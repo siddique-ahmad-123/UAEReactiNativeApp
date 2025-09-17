@@ -15,7 +15,7 @@ const ProductCard = ({ title, image, onPress }: ProductCardProps) => {
   const styles = StyleSheet.create({
     card: {
       width: spacing.xxxxxl,
-      height: spacingVertical.xxxxl,
+      height: 180,
       borderRadius: radius.lg,
       overflow: "hidden",
     },

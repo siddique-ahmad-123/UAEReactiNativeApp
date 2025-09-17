@@ -20,6 +20,7 @@ const HeroBanner = ({ message, backgroundImage }: HeroBannerProps) => {
     bannerContainer: {
       borderRadius: radius.lg,
       overflow: "hidden",
+      height:150,
     },
     bannerImage: {
       borderRadius: radius.lg,
