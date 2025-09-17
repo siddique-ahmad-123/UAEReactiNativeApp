@@ -40,7 +40,7 @@ const DispatchSummary = () => {
     { label: "Germany", value: "DE" },
   ];
   return (
-    <FormSummaryLayout onSaveAndBack={() => router.push("/(main)/NavScreen")}>
+    <FormSummaryLayout onSaveAndBack={() => router.back()}>
       <Text style={styles.text}>Summary - Dispatch Details</Text>
 
       <CustomInput
