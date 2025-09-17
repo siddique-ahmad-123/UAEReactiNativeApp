@@ -24,7 +24,7 @@ const LoginScreen: React.FC = () => {
   const { value: storedUser, storeValue } = useAsyncStorage<{
     emiratesId: string;
     mobile: string;
-    userType:string;
+    userType: string;
   }>(STORAGE_KEY);
 
   const [emiratesId, setEmiratesId] = useState("");
@@ -39,8 +39,6 @@ const LoginScreen: React.FC = () => {
       });
     }
   }, [storedUser]);
-
-
 
   const handleLogin = async () => {
     if (!emiratesId.trim()) {
@@ -58,8 +56,8 @@ const LoginScreen: React.FC = () => {
       );
       return;
     }
-   // handleSetDetails("509876543");
-    await storeValue({ emiratesId, mobile, userType});
+    // handleSetDetails("509876543");
+    await storeValue({ emiratesId, mobile, userType });
 
     router.push({
       pathname: "/(auth)/otp",
@@ -100,15 +98,14 @@ const LoginScreen: React.FC = () => {
       backgroundColor: theme.colors.background,
       borderTopLeftRadius: radius.pill,
       borderTopRightRadius: radius.pill,
-      marginTop: -spacingVertical.xl,
+      marginTop: -spacingVertical.xxl,
       padding: spacing.md,
       paddingTop: spacingVertical.xl,
       gap: spacingVertical.md,
     },
     row: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      gap: 10,
+      flexDirection: theme.flexRow.flexDirection,
+      justifyContent: "space-between"
     },
   });
 

@@ -156,8 +156,12 @@ const OTPScreen: React.FC = () => {
       backgroundColor: theme.colors.background,
       borderTopLeftRadius: radius.pill,
       borderTopRightRadius: radius.pill,
-      marginTop: -spacingVertical.xl,
+      marginTop: -spacingVertical.xxl,
       padding: spacing.md,
+      justifyContent:"space-between"
+    },
+    formContainerChild: {
+      flex: 1,
       alignItems: "center",
     },
     sectionTitle: {
@@ -221,42 +225,43 @@ const OTPScreen: React.FC = () => {
       </ImageBackground>
 
       <View style={styles.formContainer}>
-        <Text style={styles.sectionTitle}>Enter Verification Code</Text>
-        <Text style={styles.sectionSubtitle}>
-          {allFilled
-            ? "We are automatically detecting an SMS sent to your mobile number *****7412"
-            : "We have sent an SMS to your mobile number *****7412"}
-        </Text>
+        <View style={styles.formContainerChild}>
+          <Text style={styles.sectionTitle}>Enter Verification Code</Text>
+          <Text style={styles.sectionSubtitle}>
+            {allFilled
+              ? "We are automatically detecting an SMS sent to your mobile number *****7412"
+              : "We have sent an SMS to your mobile number *****7412"}
+          </Text>
 
-        <View style={styles.otpRow}>
-          {otpDigits.map((digit, index) => (
-            <TextInput
-              key={index}
-              ref={inputRefs[index]}
-              style={[
-                styles.otpBox,
-                {
-                  backgroundColor: digit
-                    ? theme.colors.primaryColor
-                    : theme.colors.primaryLightColor,
-                },
-              ]}
-              value={digit}
-              onChangeText={(text) => handleChange(text, index)}
-              keyboardType="number-pad"
-              maxLength={1}
-              textAlign="center"
-              autoFocus={index === 0}
-              selectionColor={theme.colors.background}
-              placeholderTextColor={digit ? theme.colors.background : "#000"}
-            />
-          ))}
+          <View style={styles.otpRow}>
+            {otpDigits.map((digit, index) => (
+              <TextInput
+                key={index}
+                ref={inputRefs[index]}
+                style={[
+                  styles.otpBox,
+                  {
+                    backgroundColor: digit
+                      ? theme.colors.primaryColor
+                      : theme.colors.primaryLightColor,
+                  },
+                ]}
+                value={digit}
+                onChangeText={(text) => handleChange(text, index)}
+                keyboardType="number-pad"
+                maxLength={1}
+                textAlign="center"
+                autoFocus={index === 0}
+                selectionColor={theme.colors.background}
+                placeholderTextColor={digit ? theme.colors.background : "#000"}
+              />
+            ))}
+          </View>
+
+          <Text style={styles.resendLabel}>Did not receive the code?</Text>
+          <Text style={styles.resendText}>Resend Code</Text>
+          <Text style={styles.timer}>02:00</Text>
         </View>
-
-        <Text style={styles.resendLabel}>Did not receive the code?</Text>
-        <Text style={styles.resendText}>Resend Code</Text>
-        <Text style={styles.timer}>02:00</Text>
-
         {allFilled && (
           <CustomButton
             title="Continue"

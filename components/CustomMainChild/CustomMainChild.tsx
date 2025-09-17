@@ -29,8 +29,9 @@ interface FormHeaderProps {
   onPressSingleButton?: () => void;
   onPressDoubleButton1?: () => void;
   onPressDoubleButton2?: () => void;
-  isDisableDoubleButton2?:boolean;
+  isDisableDoubleButton2?: boolean;
   children?: React.ReactNode;
+  disableOuterScroll?: boolean;
 }
 const CustomMainChild = ({
   title,
@@ -45,6 +46,7 @@ const CustomMainChild = ({
   onPressDoubleButton2,
   isDisableDoubleButton2 = false,
   children,
+  disableOuterScroll = false,
 }: FormHeaderProps) => {
   const theme = useTheme();
   const styles = StyleSheet.create({
@@ -54,12 +56,12 @@ const CustomMainChild = ({
     },
     header: {
       padding: spacing.md,
-      gap:spacingVertical.xs,
+      gap: spacingVertical.xs,
     },
     titleContainer: {
       flexDirection: theme.flexRow.flexDirection,
       alignItems: "center",
-      justifyContent:"space-between"
+      justifyContent: "space-between",
     },
     title: {
       color: theme.colors.statusBarText,
@@ -77,13 +79,19 @@ const CustomMainChild = ({
       fontSize: fontSize.xs,
       marginRight: spacing.sm,
     },
-    scrollViewContainer: {
+    dataViewContainer: {
       flex: 1,
       backgroundColor: theme.colors.background,
       borderTopRightRadius: radius.pill,
       borderTopLeftRadius: radius.pill,
+      justifyContent: "space-between",
+      overflow:"hidden",
+    },
+    scrollViewContainer: {
+      flex: 1,
     },
     scrollViewContent: {
+      flexGrow: 1,
       padding: spacing.md,
       paddingBottom: spacingVertical.xl, // give room at bottom for keyboard
       gap: spacingVertical.md,
@@ -114,10 +122,19 @@ const CustomMainChild = ({
         </View>
         <Text style={styles.subTitle}>{subTitle}</Text>
       </View>
-      <View style={styles.scrollViewContainer}>
-        <ScrollView contentContainerStyle={styles.scrollViewContent}>
-          {children}
-        </ScrollView>
+      <View style={styles.dataViewContainer}>
+        {disableOuterScroll ? (
+          // no outer ScrollView — just a container; carousel will handle inner scrolling
+          <View style={{ flex: 1 }}>{children}</View>
+        ) : (
+          <ScrollView
+            style={styles.scrollViewContainer}
+            contentContainerStyle={styles.scrollViewContent}
+            showsVerticalScrollIndicator={false}
+          >
+            {children}
+          </ScrollView>
+        )}
         {/* Footer stays pinned outside scroll */}
         {(noOfButtons === 1 || noOfButtons === 2) && (
           <View style={styles.buttonRow}>

@@ -9,9 +9,7 @@ import {
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
+
   card: {
     borderRadius: radius.md,
     padding: spacing.md,
@@ -24,7 +22,6 @@ export const styles = StyleSheet.create({
   },
   cardImage: {
     width: width.full,
-    height: 200,
     marginBottom: spacingVertical.md,
   },
   closeButton: {
@@ -76,19 +73,16 @@ export const styles = StyleSheet.create({
 
   /** Pagination Dots */
   pagination: {
-    position:"absolute",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    // marginTop: -300,
-    left:"50%",
-    bottom:"32%"
+    gap:8,
   },
   dot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    marginHorizontal: 4,
+   
   },
   activeDot: {
     width: 10,

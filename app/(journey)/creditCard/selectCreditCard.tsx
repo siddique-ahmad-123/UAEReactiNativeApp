@@ -6,11 +6,18 @@ import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { useTheme } from "styled-components/native";
 
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get("screen");
 
 type CardItem = {
   id: string;
@@ -84,7 +91,9 @@ const cards: CardItem[] = [
 const RequestsScreen = () => {
   const carouselRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-
+  const theme = useTheme();
+  const _imageWidth = width * 0.8;
+  const _spacing = 16; 
   const { value: mobilenumber } = useAsyncStorage("user");
   const { nextStep, formData, updateField } = useApplicationStore();
   const { setValue } = useForm({
@@ -110,7 +119,7 @@ const RequestsScreen = () => {
     nextStep();
   };
   const renderItem = (item: CardItem) => (
-    <View style={[styles.card, { backgroundColor: theme.colors.background }]}>
+    <View style={[styles.card, { backgroundColor: theme.colors.background,width:_imageWidth }]}>
       <Image
         source={item.image}
         style={styles.cardImage}
@@ -185,7 +194,7 @@ const RequestsScreen = () => {
       </View>
     </View>
   );
-  const theme = useTheme();
+  
   return (
     <CustomMainChild
       title="Select your credit card"
@@ -195,22 +204,19 @@ const RequestsScreen = () => {
       onClose={() => router.back()}
       onPressSingleButton={() => router.push("/NavScreen")}
     >
-      <Carousel
-        style={{ marginTop: -32 }}
-        ref={carouselRef}
-        width={width - 32}
-        height={height}
+      <FlatList
         data={cards}
         renderItem={({ item }) => renderItem(item)}
-        mode="parallax"
-        loop={false}
-        onProgressChange={(_, absoluteProgress) => {
-          setActiveIndex(Math.round(absoluteProgress));
+        horizontal
+        style={{ flexGrow: 0 }}
+        pagingEnabled
+        snapToInterval={_imageWidth + _spacing}
+        decelerationRate={"fast"}
+        contentContainerStyle={{
+          gap: _spacing,
+          padding: 16,
         }}
-        modeConfig={{
-          parallaxScrollingScale: 0.9,
-          parallaxScrollingOffset: 40,
-        }}
+        showsHorizontalScrollIndicator={false}
       />
       <View style={styles.pagination}>
         {cards.map((_, index) => (
