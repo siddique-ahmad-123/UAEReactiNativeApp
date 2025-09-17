@@ -13,8 +13,12 @@ import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 const SelectRequiredAmount = () => {
   const theme = useTheme();
   const { nextStep, formData, prevStep, updateField } = useApplicationStore();
-  const [financeAmount, setFinanceAmount] = useState<number>(formData?.[fieldNames.selectedRequiredAmount] || 10000);
-  const [isChecked, setChecked] = useState(formData?.[fieldNames.isCheckedTermandCond] || false);
+  const [financeAmount, setFinanceAmount] = useState<number>(
+    formData?.[fieldNames.selectedRequiredAmount] || 10000
+  );
+  const [isChecked, setChecked] = useState(
+    formData?.[fieldNames.isCheckedTermandCond] || false
+  );
   const { setValue } = useForm({
     defaultValues: formData,
   });
@@ -44,7 +48,6 @@ const SelectRequiredAmount = () => {
     bottomContainer: {
       flex: 1,
       gap: spacingVertical.sm,
-      marginTop: "50%",
     },
   });
   return (
@@ -54,8 +57,9 @@ const SelectRequiredAmount = () => {
       doubleButtonTitle1="Cancel"
       doubleButtonTitle2="Next"
       onPressDoubleButton1={() => prevStep()}
-      onPressDoubleButton2={()=> onClickNext()}
+      onPressDoubleButton2={() => onClickNext()}
       isDisableDoubleButton2={!isChecked}
+      disableOuterScroll={true}
     >
       <DynamicSliderCard
         title="Card Amount"
@@ -67,9 +71,18 @@ const SelectRequiredAmount = () => {
         unit="AED"
       />
       <View style={styles.bottomContainer}>
-        <DocumentDownload url={process.env.EXPO_PUBLIC_TERMS_CONDITIONS_URL} documentName="Download Terms & Conditions" />
-        <DocumentDownload url={process.env.EXPO_PUBLIC_FEES_CHARGES_URL} documentName="Download Fees & Charges" />
-        <DocumentDownload url={process.env.EXPO_PUBLIC_KAS_URL} documentName="Download Key Fact Statement" />
+        <DocumentDownload
+          url={process.env.EXPO_PUBLIC_TERMS_CONDITIONS_URL}
+          documentName="Download Terms & Conditions"
+        />
+        <DocumentDownload
+          url={process.env.EXPO_PUBLIC_FEES_CHARGES_URL}
+          documentName="Download Fees & Charges"
+        />
+        <DocumentDownload
+          url={process.env.EXPO_PUBLIC_KAS_URL}
+          documentName="Download Key Fact Statement"
+        />
 
         <View style={styles.checkboxContainer}>
           <Checkbox

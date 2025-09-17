@@ -87,6 +87,13 @@ const CustomMainChild = ({
       justifyContent: "space-between",
       overflow:"hidden",
     },
+    fixedViewContainer:{
+     flex:1,
+     padding: spacing.md,
+     justifyContent:"space-between",
+     gap: spacingVertical.md,
+
+    },
     scrollViewContainer: {
       flex: 1,
     },
@@ -125,7 +132,7 @@ const CustomMainChild = ({
       <View style={styles.dataViewContainer}>
         {disableOuterScroll ? (
           // no outer ScrollView — just a container; carousel will handle inner scrolling
-          <View style={{ flex: 1 }}>{children}</View>
+          <View style={styles.fixedViewContainer}>{children}</View>
         ) : (
           <ScrollView
             style={styles.scrollViewContainer}

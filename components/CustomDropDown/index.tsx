@@ -49,7 +49,7 @@ const CustomDropDown = ({
     container: {
       borderWidth: borderWidth.normal,
       borderRadius: radius.md,
-      paddingVertical: spacingVertical.semi,
+      paddingVertical: 16,
       paddingHorizontal: spacing.md,
       backgroundColor: theme.colors.background,
     },
