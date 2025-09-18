@@ -33,6 +33,7 @@ interface CustomInputProps {
   onChangeText?: (v: string) => void;
   keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
   maxLength?: number;
+  editable?: boolean;
 }
 
 const CustomInput = ({
@@ -48,6 +49,7 @@ const CustomInput = ({
   onChangeText,
   keyboardType,
   maxLength,
+  editable,
 }: CustomInputProps) => {
   const [secure, setSecure] = useState(type === "password");
   const [localValue, setLocalValue] = useState(""); // for uncontrolled mode
@@ -177,6 +179,7 @@ const CustomInput = ({
                 : "default")
             }
             maxLength={maxLength}
+            editable={editable !== false} 
           />
 
           {type === "password" && (

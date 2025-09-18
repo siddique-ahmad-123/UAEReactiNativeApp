@@ -9,6 +9,8 @@ import SegmentedControl from "@/components/SegmentControl";
 import { spacingVertical } from "@/constants/Metrics";
 import {
   useEmiratesIdMutation,
+  useGetEmiratesBranchDropDownValuesQuery,
+  useGetEmiratesDropDownValuesQuery,
   useGetExistingCustomerDataMutation,
   usePassportMutation,
   useVisaMutation,
@@ -17,7 +19,11 @@ import { customerDataMapper } from "@/schemas/burrowerDataMapper";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import calculateAge from "@/utils/calculateAge";
-import { parseFromDDMMYYYYWithSlash, parseFromYYYYMMDDWithSlash, parseToDate } from "@/utils/dateParser";
+import {
+  parseFromDDMMYYYYWithSlash,
+  parseFromYYYYMMDDWithSlash,
+  parseToDate,
+} from "@/utils/dateParser";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { router } from "expo-router";
 import { t } from "i18next";
@@ -192,9 +198,41 @@ const BorrowerPersonalInformation = () => {
     { label: "UAE", value: "UAE" },
   ];
 
-  const emiratesOptions = [
-    { label: "Dubai", value: "Dubai" },
-    { label: "Saudi Arabia", value: "Saudi Arabia" },
+  const { data: emirates } = useGetEmiratesDropDownValuesQuery();
+
+  const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(
+    formData[fieldNames.borrowerEmirates],
+    { skip: !formData[fieldNames.borrowerEmirates] }
+  );
+
+  const emiratesOptions = emirates?.data ?? [
+    {
+      label: "Abu Dhabi",
+      value: "Abu Dhabi",
+    },
+    {
+      label: "Ajman",
+      value: "Ajman",
+    },
+    {
+      label: "Dubai",
+      value: "Dubai",
+    },
+  ];
+
+  const emiratesBranches = emiratesBranch?.data ?? [
+    {
+      label: "Abu Dhabi",
+      value: "Abu Dhabi",
+    },
+    {
+      label: "Ajman",
+      value: "Ajman",
+    },
+    {
+      label: "Dubai",
+      value: "Dubai",
+    },
   ];
 
   const countryOptions = [
@@ -409,7 +447,7 @@ const BorrowerPersonalInformation = () => {
 
       <CustomDropDown
         name={fieldNames.borrowerEmirates}
-        label={"Emirates"}
+        label="Emirates"
         data={emiratesOptions}
         control={control}
       />

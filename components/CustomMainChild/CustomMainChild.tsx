@@ -32,6 +32,7 @@ interface FormHeaderProps {
   isDisableDoubleButton2?: boolean;
   children?: React.ReactNode;
   disableOuterScroll?: boolean;
+  isLoadingDoubleButton?:boolean;
 }
 const CustomMainChild = ({
   title,
@@ -47,6 +48,7 @@ const CustomMainChild = ({
   isDisableDoubleButton2 = false,
   children,
   disableOuterScroll = false,
+  isLoadingDoubleButton = false,
 }: FormHeaderProps) => {
   const theme = useTheme();
   const styles = StyleSheet.create({
@@ -179,6 +181,7 @@ const CustomMainChild = ({
                       onPressDoubleButton2();
                     }
                   }}
+                  isloading = {isLoadingDoubleButton}
                   variant="primary"
                   type="filled"
                   size="md"

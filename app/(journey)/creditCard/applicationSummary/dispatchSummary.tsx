@@ -50,7 +50,6 @@ const DispatchSummary = () => {
         type="text"
         control={control}
       />
-
       <CustomInput
         name={fieldNames.supplementaryCardName}
         label="Supplementary Card Name"

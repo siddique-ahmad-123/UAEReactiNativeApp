@@ -2,7 +2,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const creditCardAPI = createApi({
   reducerPath: "creditCardApi",
-  baseQuery: fetchBaseQuery({ baseUrl: `${process.env.EXPO_PUBLIC_API_URL}/api/v1`}),
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${process.env.EXPO_PUBLIC_API_URL}/api/v1`,
+  }),
 
   endpoints: (builder) => ({
     uaeCreditCard: builder.mutation<any, any>({
@@ -96,6 +98,14 @@ export const creditCardAPI = createApi({
         method: "GET",
       }),
     }),
+    getEmiratesDropDownValues: builder.query<any, void>({
+      query: () => "getEmiratesDropDownValues"
+
+    }),
+
+     getEmiratesBranchDropDownValues: builder.query<any, void>({
+      query: (emirates) => `getBranchDropdownValues/${emirates}`
+    }),
 
     getUser: builder.query<any, void>({
       query: () => "/user",
@@ -118,4 +128,6 @@ export const {
   useGetCustomerDataMutation,
   useGetUserQuery,
   useOfferLetterMutation,
+  useGetEmiratesDropDownValuesQuery,
+  useGetEmiratesBranchDropDownValuesQuery
 } = creditCardAPI;

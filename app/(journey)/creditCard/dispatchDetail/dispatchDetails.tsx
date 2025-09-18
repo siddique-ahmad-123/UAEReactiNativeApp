@@ -88,8 +88,8 @@ const DispatchDetails = () => {
         label="Name"
         placeholder="Enter your name"
         type="text"
+        editable={modifyName} 
       />
-
       <View style={styles.checkBoxContainer}>
         <Checkbox
           value={modifyName}

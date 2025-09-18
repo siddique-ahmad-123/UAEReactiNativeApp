@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import {
   View,
   Text,
+  Image,
+  ScrollView,
   StyleSheet,
   Dimensions,
 } from "react-native";
@@ -16,10 +18,13 @@ import UserIconName from "@/components/UserProfile/userIconName";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 
 import {
+  borderWidth,
+  fontSize,
+  fontWeight,
+  radius,
   spacing,
   spacingVertical,
 } from "@/constants/Metrics";
-
 type RouteNames = "/Request" | "/Agreement" | "/ExistingApplication";
 const services: {
   id: string;
@@ -72,8 +77,10 @@ const applyNow = [
 
 export default function Dashboard() {
   const router = useRouter();
+  const [activeTab, setActiveTab] = useState("1");
   const theme = useTheme();
   const { goToStep, stepIndex } = useApplicationStore();
+
   const { value: storedUser, loading } = useAsyncStorage<{
     emiratesId: string;
     mobile: string;
@@ -81,85 +88,71 @@ export default function Dashboard() {
     name?: string;
   }>("user");
 
-  const screenWidth = Dimensions.get("window").width;
-  const cardWidth = (screenWidth - spacing.md * 2 - spacing.md) / 2; // 2 per row
-
   const localStyles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: theme.colors.background,
       padding: spacing.md,
-      justifyContent: "space-between",
+      gap: spacingVertical.md,
     },
     sectionTitle: {
       fontSize: 18,
       fontWeight: "700",
       color: theme.colors.primaryColor,
-      marginBottom: spacing.sm,
+      justifyContent: "flex-start",
     },
     serviceRow: {
-      flexDirection: "row",
+      flexDirection: theme.flexRow.flexDirection,
       justifyContent: "space-between",
-      marginBottom: spacingVertical.md,
     },
     grid: {
-      flexDirection: "row",
+      flexDirection: theme.flexRow.flexDirection,
       flexWrap: "wrap",
       justifyContent: "space-between",
-      gap: spacingVertical.sm,
-    },
-    topSection: {
-      gap: spacingVertical.sm,
-    },
-    card: {
-      width: cardWidth,
+      gap: spacingVertical.md,
     },
   });
 
   return (
-    <View style={localStyles.container}>
-      {/* 🔹 Top Section */}
-      <View style={localStyles.topSection}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={localStyles.container}
+    >
+      <View>
         <UserIconName
           name={loading ? "Loading..." : storedUser?.name ?? "Guest"}
           imgPath={storedUser?.userType}
         />
-
-        <HeroBanner
-          message="Thank you for being associated with us."
-          backgroundImage={require("../../../assets/images/HeroBanner.png")}
-        />
-
-        <Text style={localStyles.sectionTitle}>My Services</Text>
-        <View style={localStyles.serviceRow}>
-          {services.map((item) => (
-            <ServiceTile
-              key={item.id}
-              title={item.title}
-              iconName={item.iconName}
-              onPress={() => router.push(item.route)}
-            />
-          ))}
-        </View>
       </View>
-
-      {/* 🔹 Bottom Section */}
-      <View>
-        <Text style={localStyles.sectionTitle}>Apply Now</Text>
-        <View style={localStyles.grid}>
-          {applyNow.map((item) => (
-            <View key={item.id} style={localStyles.card}>
-              <ProductCard
-                title={item.title}
-                image={item.imgPath}
-                onPress={() => {
-                  goToStep(stepIndex);
-                }}
-              />
-            </View>
-          ))}
-        </View>
+      <HeroBanner
+        message="Thank you for being associated with us."
+        backgroundImage={require("../../../assets/images/HeroBanner.png")}
+      />
+      <Text style={localStyles.sectionTitle}>My Services</Text>
+      <View style={localStyles.serviceRow}>
+        {services.map((item) => (
+          <ServiceTile
+            key={item.id}
+            title={item.title}
+            iconName={item.iconName}
+            onPress={() => router.push(item.route)}
+          />
+        ))}
       </View>
-    </View>
+      <Text style={localStyles.sectionTitle}>Apply Now</Text>
+      <View style={localStyles.grid}>
+        {applyNow.map((item) => (
+          <ProductCard
+            key={item.id}
+            title={item.title}
+            image={item.imgPath}
+            onPress={() => {
+              goToStep(stepIndex);
+              // router.push("/(journey)/creditCard/selectCreditCard");
+            }}
+          />
+        ))}
+      </View>
+    </ScrollView>
   );
 }
