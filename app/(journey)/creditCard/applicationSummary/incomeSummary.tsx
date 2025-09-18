@@ -13,8 +13,8 @@ import { StyleSheet, Text } from "react-native";
 import { useTheme } from "styled-components/native";
 
 const IncomeSummary = () => {
-  const { updateField,formData } = useApplicationStore();
-  const { control, handleSubmit, watch } = useForm({
+  const { updateField, formData } = useApplicationStore();
+  const { control, handleSubmit, watch, setValue } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
   });
@@ -24,7 +24,22 @@ const IncomeSummary = () => {
     router.back();
   };
 
-  const incomeBorrowerType = watch("incomeBorrowerType") ?? "Borrower";
+  const borrowerType = watch("borrowerType") ?? "Borrower";
+
+  const borrowerIncomeType = watch(fieldNames.borrowerIncomeType) ?? "Salaried";
+
+  const borrowerSalary = watch(fieldNames.borrowerMonthlySalaryAECB);
+  const borrowerAddIncome = watch("borrowerAddIncome");
+
+  // const calculateTotalIncome = () => {
+  //   console.log("borrowerSalary: " + formData[fieldNames.borrowerMonthlySalaryAECB]);
+  //   console.log("borrowerAddIncome: " + borrowerAddIncome);
+  //   setValue(
+  //     "borrowerSalaryTotalIncome",
+  //     formData[fieldNames.borrowerMonthlySalaryAECB] +
+  //       parseInt(borrowerAddIncome)
+  //   );
+  // };
 
   const theme = useTheme();
   const styles = StyleSheet.create({
@@ -60,140 +75,141 @@ const IncomeSummary = () => {
   ];
   return (
     <FormSummaryLayout onSaveAndBack={handleSubmit(onSubmit)}>
-      <Text style={styles.text}>Summary - Personal Details</Text>
+      <Text style={styles.text}>Summary - Income & Occupation Details</Text>
       {/* <SegmentedControl
         label={"Summary - Income Details"}
         options={["Borrower", "Co-Borrower"]}
-        defaultValue={incomeBorrowerType}
-        onChange={(value) => setValue("incomeBorrowerType", value)}
+        defaultValue={borrowerType}
+        onChange={(value) => setValue("borrowerType", value)}
       /> */}
 
-      {incomeBorrowerType === "Borrower" ? (
+      {borrowerType === "Borrower" ? (
         <>
-          {/* Borrower (Salaried) */}
-          <SectionHeader sectionName={"Income Details - Salaried"} />
+          {borrowerIncomeType === "Salaried" ? (
+            <>
+              {/* Borrower (Salaried) */}
+              <SectionHeader sectionName={"Income Details - Salaried"} />
 
-          <CustomInput
-            name={fieldNames.borrowerEmployerName}
-            label="Employer Name"
-            type="text"
-            placeholder="Newgen Software"
-            control={control}
-          />
+              <CustomInput
+                name={fieldNames.borrowerEmployerName}
+                label="Employer Name"
+                type="text"
+                placeholder="Newgen Software"
+                control={control}
+              />
 
-          <CustomDatePicker
-            name={fieldNames.borrowerEmployedFrom}
-            label="Employed From"
-            control={control}
-          />
-          <CustomDropDown
-            name={fieldNames.borrowerEmirates}
-            label="Emirates"
-            data={emiratesOptions}
-            control={control}
-          />
+              <CustomDatePicker
+                name={fieldNames.borrowerEmployedFrom}
+                label="Employed From"
+                control={control}
+              />
+              <CustomDropDown
+                name={fieldNames.borrowerEmirates}
+                label="Emirates"
+                data={emiratesOptions}
+                control={control}
+              />
 
-          <CustomInput
-            name={fieldNames.borrowerVerificationStatus}
-            label="Verification Status"
-            type="text"
-            placeholder="Verification Status"
-            control={control}
-          />
+              <CustomInput
+                name={fieldNames.borrowerVerificationStatus}
+                label="Verification Status"
+                type="text"
+                placeholder="Verification Status"
+                control={control}
+              />
 
-          <CustomInput
-            name={fieldNames.borrowerMonthlySalaryAECB}
-            label="Monthly Salary Income"
-            placeholder="2000"
-            type="number"
-            control={control}
-          />
-          <CustomInput
-            name=""
-            label="Monthly Additional Income"
-            placeholder="2000"
-            type="number"
-            control={control}
-          />
-          <CustomInput
-            name=""
-            label="Monthly Average Balance"
-            placeholder="2000"
-            type="number"
-            control={control}
-          />
-          <CustomInput
-            name=""
-            label="Total Income"
-            placeholder="2000"
-            type="number"
-            control={control}
-          />
-
-          {/* Borrower (Self-Employed) */}
-          <SectionHeader sectionName={"Income Details - Self Employed"} />
-
-          <CustomInput
-            name={fieldNames.borrowerNameOfBusiness}
-            label="Business Name"
-            placeholder="Business Name"
-            type="text"
-            control={control}
-          />
-
-          <CustomDropDown
-            name={fieldNames.borrowerLegalForm}
-            label="Legal Form"
-            data={legalFormOptions}
-            control={control}
-          />
-
-          <CustomInput
-            name={fieldNames.borrowerLicenseNo}
-            label="License No"
-            type="text"
-            placeholder="DLT34554"
-            control={control}
-          />
-
-          <CustomDatePicker
-            name={fieldNames.borrowerDateOfEstabilishment}
-            label="Date of Establishment"
-            control={control}
-          />
-
-          <CustomDatePicker name="" label="Date of Expiry" control={control} />
-
-          <CustomDropDown
-            name={fieldNames.borrowerVerificationStatus}
-            label="Verification Status"
-            data={statusOptions}
-            control={control}
-          />
-
-          <CustomInput
-            name=""
-            label="Monthly Business Income"
-            placeholder="2000"
-            type="number"
-            control={control}
-          />
-
-          <CustomInput
-            name=""
-            label="Monthly Additional Income"
-            placeholder="2000"
-            type="number"
-            control={control}
-          />
-
-          <CustomInput
-            name=""
-            label="Total Income"
-            placeholder="2000"
-            type="number"
-            control={control}
-          />
+              <CustomInput
+                name={fieldNames.borrowerMonthlySalaryAECB}
+                label="Monthly Salary Income"
+                placeholder="2000"
+                type="number"
+                control={control}
+              />
+              <CustomInput
+                name="borrowerAddIncome"
+                label="Monthly Additional Income"
+                placeholder="2000"
+                type="number"
+                control={control}
+              />
+              <CustomInput
+                name=""
+                label="Monthly Average Balance"
+                placeholder="2000"
+                type="number"
+                control={control}
+              />
+              <CustomInput
+                name="borrowerSalaryTotalIncome"
+                label="Total Income"
+                placeholder="2000"
+                type="number"
+                control={control}
+              />
+            </>
+          ) : (
+            <>
+              {/* Borrower (Self-Employed) */}
+              <SectionHeader sectionName={"Income Details - Self Employed"} />
+              <CustomInput
+                name={fieldNames.borrowerNameOfBusiness}
+                label="Business Name"
+                placeholder="Business Name"
+                type="text"
+                control={control}
+              />
+              <CustomDropDown
+                name={fieldNames.borrowerLegalForm}
+                label="Legal Form"
+                data={legalFormOptions}
+                control={control}
+              />
+              <CustomInput
+                name={fieldNames.borrowerLicenseNo}
+                label="License No"
+                type="text"
+                placeholder="DLT34554"
+                control={control}
+              />
+              <CustomDatePicker
+                name={fieldNames.borrowerDateOfEstabilishment}
+                label="Date of Establishment"
+                control={control}
+              />
+              <CustomDatePicker
+                name=""
+                label="Date of Expiry"
+                control={control}
+              />
+              <CustomDropDown
+                name={fieldNames.borrowerVerificationStatus}
+                label="Verification Status"
+                data={statusOptions}
+                control={control}
+              />
+              <CustomInput
+                name=""
+                label="Monthly Business Income"
+                placeholder="2000"
+                type="number"
+                control={control}
+              />
+              <CustomInput
+                name=""
+                label="Monthly Additional Income"
+                placeholder="2000"
+                type="number"
+                control={control}
+              />
+              <CustomInput
+                name=""
+                label="Total Income"
+                placeholder="2000"
+                type="number"
+                control={control}
+              />
+            </>
+          )}
         </>
       ) : (
         <>
