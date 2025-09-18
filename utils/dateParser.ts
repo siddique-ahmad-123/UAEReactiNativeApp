@@ -25,3 +25,4 @@ export function parseToDate(dateStr: string): Date | null {
 
   return isNaN(date.getTime()) ? null : date;
 }
+

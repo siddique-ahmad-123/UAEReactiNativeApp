@@ -17,6 +17,7 @@ import {
   spacing,
   spacingVertical,
 } from "@/constants/Metrics";
+import { scale } from "@/utils/styling";
 
 interface DynamicSliderCardProps {
   title: string;
@@ -28,16 +29,6 @@ interface DynamicSliderCardProps {
   unit?: string;
 }
 
-// 🔹 New compact constants
-const SLIDER_CONSTANTS = {
-  cardPadding: spacing.sm,
-  headerMargin: spacingVertical.sm,
-  inputFont: fontSize.sm,
-  titleFont: fontSize.md,
-  thumbSize: 18,
-  trackHeight: 8,
-};
-
 const DynamicSliderCard: React.FC<DynamicSliderCardProps> = ({
   title,
   value,
@@ -48,26 +39,26 @@ const DynamicSliderCard: React.FC<DynamicSliderCardProps> = ({
   unit = "",
 }) => {
   const theme = useTheme();
-
   const styles = StyleSheet.create({
     card: {
       backgroundColor: theme.colors.primaryLightColor,
-      borderRadius: radius.md,
-      padding: SLIDER_CONSTANTS.cardPadding,
+      borderRadius: radius.lg,
+      padding: spacing.md,
+    //   marginVertical: spacingVertical.xs,
       shadowColor: theme.colors.shadowColor,
-      shadowOpacity: 0.05,
-      shadowOffset: { width: 0, height: 1 },
-      shadowRadius: 2,
-      elevation: 1,
+      shadowOpacity: 0.1,
+      shadowOffset: { width: 0, height: 2 },
+      shadowRadius: 4,
+      elevation: 2,
     },
     header: {
       flexDirection: theme.flexRow.flexDirection,
       justifyContent: "space-between",
       alignItems: "center",
-      marginBottom: SLIDER_CONSTANTS.headerMargin,
+      marginBottom:spacingVertical.md
     },
     title: {
-      fontSize: SLIDER_CONSTANTS.titleFont,
+      fontSize: fontSize.lg,
       fontWeight: fontWeight.medium,
       color: theme.colors.primaryColor,
     },
@@ -76,35 +67,37 @@ const DynamicSliderCard: React.FC<DynamicSliderCardProps> = ({
       alignItems: "center",
       borderWidth: 0.5,
       borderColor: theme.colors.inactiveNavIconColor,
-      borderRadius: radius.sm,
-      paddingHorizontal: spacing.xs,
+      borderRadius:radius.sm,
+      paddingHorizontal:spacing.sm
     },
     input: {
+      borderBottomWidth: 1,
+      borderColor: "transparent",
       textAlign: "right",
-      fontSize: SLIDER_CONSTANTS.inputFont,
-      fontWeight: fontWeight.medium,
+      fontSize: fontSize.md,
+      fontWeight:fontWeight.medium,
       color: theme.colors.primaryColor,
-      paddingVertical: 2,
-      minWidth: 50,
     },
     inputActive: {
       borderColor: theme.colors.primaryColor,
     },
-    unit: {
-      fontSize: SLIDER_CONSTANTS.inputFont,
-      marginRight: spacing.xs,
-      color: theme.colors.inactiveNavIconColor,
-    },
-    divider: {
+    unit: { 
       fontSize: fontSize.md,
-      fontWeight: fontWeight.light,
+      marginRight: spacing.sm,
+      color: theme.colors.inactiveNavIconColor },
+    divider: { 
+      fontSize: fontSize.xl,
+      fontWeight:fontWeight.light,
       marginHorizontal: spacing.xs,
+      marginBottom:spacingVertical.xs, 
       color: theme.colors.primaryColor,
     },
+    
     tooltip: {
       backgroundColor: theme.colors.secondaryLight,
       paddingHorizontal: spacing.xs,
       borderRadius: radius.pill,
+      right:"50%",
     },
     tooltipText: {
       fontWeight: fontWeight.medium,
@@ -112,9 +105,9 @@ const DynamicSliderCard: React.FC<DynamicSliderCardProps> = ({
       fontSize: fontSize.xs,
     },
     sliderThumb: {
-      width: SLIDER_CONSTANTS.thumbSize,
-      height: SLIDER_CONSTANTS.thumbSize,
-      borderRadius: SLIDER_CONSTANTS.thumbSize / 2,
+      width: 22,
+      height: 22,
+      borderRadius: 11,
       borderWidth: 2,
       backgroundColor: theme.colors.secondaryLight,
       borderColor: theme.colors.secondaryColor,
@@ -124,13 +117,11 @@ const DynamicSliderCard: React.FC<DynamicSliderCardProps> = ({
       justifyContent: "space-between",
       marginTop: spacingVertical.xs,
     },
-    rangeText: {
-      fontSize: SLIDER_CONSTANTS.inputFont,
-      fontWeight: fontWeight.light,
-      color: theme.colors.primaryColor,
-    },
+    rangeText: { 
+      fontSize: fontSize.md,
+      fontWeight:fontWeight.light,
+      color: theme.colors.primaryColor },
   });
-
   const [editing, setEditing] = useState(false);
   const [tempValue, setTempValue] = useState(String(value));
 
@@ -164,8 +155,8 @@ const DynamicSliderCard: React.FC<DynamicSliderCardProps> = ({
           <TouchableOpacity onPress={handleEditToggle}>
             <MaterialIcons
               name={editing ? "check" : "edit"}
-              size={18}
-              color={theme.colors.primaryColor}
+              size={20}
+              color="#5E17EB"
             />
           </TouchableOpacity>
         </View>
@@ -181,7 +172,7 @@ const DynamicSliderCard: React.FC<DynamicSliderCardProps> = ({
         }
         minimumTrackTintColor={theme.colors.sliderColor}
         maximumTrackTintColor="#D8BFD8"
-        trackStyle={{ height: SLIDER_CONSTANTS.trackHeight, borderRadius: 6 }}
+        trackStyle={{ height: 12, borderRadius: 8 }}
         thumbStyle={styles.sliderThumb}
         renderAboveThumbComponent={() => (
           <View style={styles.tooltip}>
