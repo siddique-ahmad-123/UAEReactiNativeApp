@@ -2,11 +2,14 @@ import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import DocumentDownload from "@/components/DocumentDownload";
 import MethodSelector from "@/components/MethodSelector";
 import { styles } from "@/components/styles/submitApplication.Styles";
-import { useCreateWorkItemMutation } from "@/redux/api/creditCardAPI";
+import {
+  useCreateWorkItemMutation,
+  useOfferLetterMutation,
+} from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Image, ScrollView, Text, View } from "react-native";
 import { useTheme } from "styled-components/native";
@@ -21,6 +24,15 @@ const ApplicationApproved = () => {
   >();
 
   const [createWorkItem] = useCreateWorkItemMutation();
+  const [offerLetter] = useOfferLetterMutation();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      await offerLetter(formData);
+    }
+    fetchData();
+  }, []);
 
   const methodOptions = [
     {
@@ -46,16 +58,20 @@ const ApplicationApproved = () => {
     },
   ];
 
-  const onPreesAcceptOffer = async () => {
-    const wiCreationResp = await createWorkItem(
-      formData[fieldNames.mobileNo]
-    ).unwrap();
-
+  const onPressAcceptOffer = async () => {
+    console.log("workitem creation");
+    // console.log(formData);
+    setIsLoading(true);
+    const wiCreationResp = await createWorkItem(formData).unwrap();
+    console.log("After wi creation");
+    console.log("workitem creation resp: " + wiCreationResp.data);
     if (wiCreationResp.status == 200) {
       setValue(fieldNames.workItemNumber, wiCreationResp.data.winame);
       updateField(fieldNames.workItemNumber, wiCreationResp.data.winame);
+      router.push("/(journey)/creditCard/submitApplication/congratulations");
     }
-    nextStep();
+    setIsLoading(false);
+    // nextStep();
   };
 
   const theme = useTheme();
@@ -65,7 +81,8 @@ const ApplicationApproved = () => {
       noOfButtons={1}
       singleButtonTitle="Accept Offer"
       onClose={() => router.back()}
-      onPressSingleButton={onPreesAcceptOffer}
+      onPressSingleButton={onPressAcceptOffer}
+      isLoadingDoubleButton={isLoading}
     >
       <ScrollView
         contentContainerStyle={{ paddingBottom: 20 }}
@@ -114,7 +131,10 @@ const ApplicationApproved = () => {
             You can download your offer letter from below
           </Text>
         </View>
-        <DocumentDownload url={`${process.env.EXPO_PUBLIC_API_URL}/pdfs/UAE-123123/Template.html`} documentName="Download Offer Letter" />
+        <DocumentDownload
+          url={`${process.env.EXPO_PUBLIC_API_URL}/pdfs/UAE-123456/Template.pdf`}
+          documentName="Download Offer Letter"
+        />
       </ScrollView>
     </CustomMainChild>
   );
