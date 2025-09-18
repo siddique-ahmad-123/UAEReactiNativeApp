@@ -98,11 +98,13 @@ export const creditCardAPI = createApi({
         method: "GET",
       }),
     }),
-    getEmiratesDropDownValues: builder.mutation<any, void>({
-      query: () => ({
-        url: `getEmiratesDropDownValues`,
-        method: "GET",
-      }),
+    getEmiratesDropDownValues: builder.query<any, void>({
+      query: () => "getEmiratesDropDownValues"
+
+    }),
+
+     getEmiratesBranchDropDownValues: builder.query<any, void>({
+      query: (emirates) => `getBranchDropdownValues/${emirates}`
     }),
 
     getUser: builder.query<any, void>({
@@ -126,5 +128,6 @@ export const {
   useGetCustomerDataMutation,
   useGetUserQuery,
   useOfferLetterMutation,
-  useGetEmiratesDropDownValuesMutation,
+  useGetEmiratesDropDownValuesQuery,
+  useGetEmiratesBranchDropDownValuesQuery
 } = creditCardAPI;

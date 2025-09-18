@@ -21,10 +21,11 @@ import {
   usePassportMutation,
   useVisaMutation,
   useGetExistingCustomerDataMutation,
+  useGetEmiratesBranchDropDownValuesQuery,
 } from "@/redux/api/creditCardAPI";
 import { parseToDate } from "@/utils/dateParser";
 import { CameraView, useCameraPermissions } from "expo-camera";
-import { useGetEmiratesDropDownValuesMutation } from "@/redux/api/creditCardAPI";
+import { useGetEmiratesDropDownValuesQuery } from "@/redux/api/creditCardAPI";
 
 const BorrowerPersonalInformation = () => {
   const [isloading, setIsLoading] = useState(false);
@@ -190,14 +191,42 @@ const BorrowerPersonalInformation = () => {
     { label: "UAE", value: "UAE" },
   ];
 
-  const [getEmiratesDropDownValues, { data, isLoading, isError }] =
-    useGetEmiratesDropDownValuesMutation();
-  // void arg
-  useEffect(() => {
-    getEmiratesDropDownValues(); // call once on mount
-  }, []);
-  // map server response (keeps same {label,value} shape)
-  const emiratesOptions = data?.data ?? [];
+
+
+   
+  const { data: emirates } = useGetEmiratesDropDownValuesQuery();
+  
+  const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(formData[fieldNames.borrowerEmirates],{skip:!formData[fieldNames.borrowerEmirates]});
+ 
+  const emiratesOptions = emirates?.data ?? [
+    {
+      label: "Abu Dhabi",
+      value: "Abu Dhabi",
+    },
+    {
+      label: "Ajman",
+      value: "Ajman",
+    },
+    {
+      label: "Dubai",
+      value: "Dubai",
+    },
+  ];
+  
+  const emiratesBranches = emiratesBranch?.data ?? [
+    {
+      label: "Abu Dhabi",
+      value: "Abu Dhabi",
+    },
+    {
+      label: "Ajman",
+      value: "Ajman",
+    },
+    {
+      label: "Dubai",
+      value: "Dubai",
+    },
+  ];
 
   const countryOptions = [
     { label: "India", value: "IN" },
@@ -223,6 +252,40 @@ const BorrowerPersonalInformation = () => {
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
+      {formData[fieldNames.userType] === "NTB" && (
+        <>
+          <SegmentedControl
+            label={"Nationality Status"}
+            options={["Emirati", "Expat"]}
+            defaultValue={borrowerNationalityStatus}
+            onChange={(value) =>
+              setValue(fieldNames.borrowerNationalityStatus, value)
+            }
+          />
+
+          <View style={{ alignItems: "center", gap: spacingVertical.md }}>
+            <CustomUpload
+              label={"Emirates ID"}
+              control={control}
+              name="emiratesID"
+            />
+            <CustomUpload
+              label={"Passport"}
+              control={control}
+              name="passport"
+            />
+            {borrowerNationalityStatus === "Expat" && (
+              <CustomUpload label={"Visa"} control={control} name="visa" />
+            )}
+          </View>
+
+          <CustomButton
+            title={"Fetch Details"}
+            onPress={handleFetchDetails}
+            isloading={isloading1}
+          />
+        </>
+      )}
       <SectionHeader sectionName="Personal Information" />
       <CustomInput
         control={control}
@@ -380,7 +443,6 @@ const BorrowerPersonalInformation = () => {
         label="Emirates"
         data={emiratesOptions}
         control={control}
-        disable={isLoading}
       />
       <CustomDropDown
         name={fieldNames.borrowerCountry}

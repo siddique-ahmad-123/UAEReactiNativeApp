@@ -64,7 +64,7 @@ const CustomDatePicker = ({
     container: {
       borderWidth: borderWidth.normal,
       borderRadius: radius.md,
-      paddingVertical: 16,
+      paddingVertical: 12,
       paddingHorizontal: spacing.md,
       backgroundColor: theme.colors.background,
     },
