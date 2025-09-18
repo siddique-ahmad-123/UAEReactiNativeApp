@@ -89,11 +89,15 @@ const cards: CardItem[] = [
 ];
 
 const RequestsScreen = () => {
-  const carouselRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const theme = useTheme();
   const _imageWidth = width * 0.8;
   const _spacing = 16; 
+  const handleMomentumScrollEnd = (event: any) => {
+    const offsetX = event.nativeEvent.contentOffset.x;
+    const index = Math.round(offsetX / (_imageWidth + _spacing));
+    setActiveIndex(index);
+  };
   const { value: mobilenumber } = useAsyncStorage("user");
   const { nextStep, formData, updateField } = useApplicationStore();
   const { setValue } = useForm({
@@ -216,7 +220,9 @@ const RequestsScreen = () => {
           gap: _spacing,
           padding: 16,
         }}
+        
         showsHorizontalScrollIndicator={false}
+        onMomentumScrollEnd={handleMomentumScrollEnd}
       />
       <View style={styles.pagination}>
         {cards.map((_, index) => (

@@ -36,25 +36,25 @@ const slides: Slide[] = [
     id: "1",
     title: "Credit Cards",
     description:
-      "Get Credit Cards Approvals instantly and start accessing our innovative offerings",
+      "Get Credit Cards Approvals instantly and start accessing our innovative offerings.",
     imgpath: require("../../../assets/images/StaringCarosoul/CreditCard.png"),
   },
   {
     id: "2",
     title: "Mortgages",
-    description: "Quick approvals for personal and business loans.",
+    description: "Get Mortgages In Principle Approval instantly and get access to your dream home.",
     imgpath: require("../../../assets/images/StaringCarosoul/Mortgages.png"),
   },
   {
     id: "3",
     title: "Auto Loans",
-    description: "Grow your wealth with our smart investment tools.",
+    description: "Get Auto Loans In Principle Approval instantly and get access to your dream Car.",
     imgpath: require("../../../assets/images/StaringCarosoul/AutoLoans.png"),
   },
   {
     id: "4",
     title: "Personal Loans",
-    description: "Protect your future with tailored insurance plans.",
+    description: "Get Funds instantly in your account allowing you to access things you love.",
     imgpath: require("../../../assets/images/StaringCarosoul/PersonalLoans.png"),
   },
 ];
