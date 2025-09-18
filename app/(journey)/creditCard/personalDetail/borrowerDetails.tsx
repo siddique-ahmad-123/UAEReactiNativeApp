@@ -24,6 +24,7 @@ import {
 } from "@/redux/api/creditCardAPI";
 import { parseToDate } from "@/utils/dateParser";
 import { CameraView, useCameraPermissions } from "expo-camera";
+import { useGetEmiratesDropDownValuesMutation } from "@/redux/api/creditCardAPI";
 
 const BorrowerPersonalInformation = () => {
   const [isloading, setIsLoading] = useState(false);
@@ -91,7 +92,10 @@ const BorrowerPersonalInformation = () => {
       setValue(fieldNames.borrowerName, emirateResponse.data.name);
       setValue(fieldNames.borrowerDOB, parseToDate(emirateResponse.data.dob));
       setValue(fieldNames.borrowerGender, emirateResponse.data.gender);
-      setValue(fieldNames.borrowerNationality, emirateResponse.data.nationality);
+      setValue(
+        fieldNames.borrowerNationality,
+        emirateResponse.data.nationality
+      );
       setValue(
         fieldNames.borrowerEidaIssueDate,
         parseToDate(emirateResponse.data.eidaIssueDate)
@@ -104,10 +108,7 @@ const BorrowerPersonalInformation = () => {
         fieldNames.borrowerAge,
         calculateAge(parseToDate(emirateResponse.data.dob))
       );
-      setValue(
-        fieldNames.borrowerPassportNo,
-        passportResponse.data.passportNo
-      );
+      setValue(fieldNames.borrowerPassportNo, passportResponse.data.passportNo);
       setValue(
         fieldNames.borrowerPassportIssueDate,
         parseToDate(passportResponse.data.passportIssueDate)
@@ -189,10 +190,14 @@ const BorrowerPersonalInformation = () => {
     { label: "UAE", value: "UAE" },
   ];
 
-  const emiratesOptions = [
-    { label: "Dubai", value: "Dubai" },
-    { label: "Saudi Arabia", value: "Saudi Arabia" },
-  ];
+  const [getEmiratesDropDownValues, { data, isLoading, isError }] =
+    useGetEmiratesDropDownValuesMutation();
+  // void arg
+  useEffect(() => {
+    getEmiratesDropDownValues(); // call once on mount
+  }, []);
+  // map server response (keeps same {label,value} shape)
+  const emiratesOptions = data?.data ?? [];
 
   const countryOptions = [
     { label: "India", value: "IN" },
@@ -219,7 +224,7 @@ const BorrowerPersonalInformation = () => {
       onSaveAndNext={handleSubmit(onSubmit)}
     >
       <SectionHeader sectionName="Personal Information" />
-     <CustomInput
+      <CustomInput
         control={control}
         name={fieldNames.borrowerName}
         label="Name"
@@ -276,7 +281,7 @@ const BorrowerPersonalInformation = () => {
         label={"EIDA Expiry Date"}
         minDate={watch(fieldNames.borrowerEidaIssueDate)}
       />
- 
+
       <CustomInput
         control={control}
         name={fieldNames.borrowerPassportNo}
@@ -306,7 +311,7 @@ const BorrowerPersonalInformation = () => {
             placeholder="Enter your visa Number"
             type="number"
           />
- 
+
           <CustomDatePicker
             control={control}
             name={fieldNames.borrowerVisaIssueDate}
@@ -328,7 +333,7 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter your email id"
         type="email"
       />
- 
+
       <CustomInput
         control={control}
         name={fieldNames.borrowerMobileNo}
@@ -336,7 +341,7 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter your mobile number"
         type="number"
       />
- 
+
       <CustomInput
         control={control}
         name={fieldNames.borrowerVintage}
@@ -344,7 +349,7 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter your residence vintage"
         type="number"
       />
- 
+
       <CustomInput
         control={control}
         name={fieldNames.borrowerNoOfDependents}
@@ -352,9 +357,9 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter the number of dependents"
         type="number"
       />
- 
+
       <SectionHeader sectionName={t("addressInformation")} />
- 
+
       <CustomInput
         control={control}
         name={fieldNames.borrowerAddressLine1}
@@ -369,12 +374,13 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter your address"
         type="text"
       />
- 
+
       <CustomDropDown
         name={fieldNames.borrowerEmirates}
-        label={"Emirates"}
+        label="Emirates"
         data={emiratesOptions}
         control={control}
+        disable={isLoading}
       />
       <CustomDropDown
         name={fieldNames.borrowerCountry}

@@ -66,6 +66,7 @@ const SelectRequiredAmount = () => {
       onPressDoubleButton2={() => onClickNext()}
       isDisableDoubleButton2={!(isChecked && isChecked2)}
       disableOuterScroll={true}
+      isLoadingDoubleButton={isloading}
     >
       <DynamicSliderCard
         title="Card Amount"
@@ -109,7 +110,7 @@ const SelectRequiredAmount = () => {
             onValueChange={setChecked2}
             color={isChecked2 ? theme.colors.primaryColor : undefined}
           />
-          <View >
+          <View>
             <Text style={styles.checkboxLabel}>
               I authorize Newgen Bank to access my Bureau and FTS records
             </Text>
