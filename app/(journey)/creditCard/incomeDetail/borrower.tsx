@@ -37,9 +37,9 @@ export default function BorrowerIncomeScreen() {
   const [isloading4, setIsLoading4] = useState(false);
   const [isloading5, setIsLoading5] = useState(false);
   const [isloading6, setIsLoading6] = useState(false);
-  const [salaryFetched, setSalaryFetched] = useState(false);
+  // const [salaryFetched, setSalaryFetched] = useState(false);
   const [ftsRequestSent, setFtsRequestSent] = useState(false);
-  const [selfIncomeFetched, setSelfIncomeFetched] = useState(false);
+  // const [selfIncomeFetched, setSelfIncomeFetched] = useState(false);
   const [tradeLicenseOCR] = useTradeLicenseMutation();
   const [salaryCertificateOCR] = useSalaryCertificateMutation();
   const [getCustomerData] = useGetCustomerDataMutation();
@@ -68,6 +68,46 @@ export default function BorrowerIncomeScreen() {
     console.log("Income Details Submitted:", values);
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
     nextStep();
+  };
+
+  const onChangeBorrowerIncomeType = (value: string) => {
+    setValue(fieldNames.borrowerIncomeType, value);
+    setValue(fieldNames.borrowerFtsStatus, "");
+  };
+
+  const onChangeEmpDetailsFetchMethod = (id: string) => {
+    setValue(fieldNames.borrowerEmpDetailFetchMethod, id);
+    setValue(fieldNames.borrowerEmployerName, "");
+    setValue(fieldNames.borrowerEmployedFrom, "");
+    setValue(fieldNames.borrowerCurrentExp, "");
+    setValue(fieldNames.borrowerTotalExp, "");
+    setValue(fieldNames.borrowerEmirates, "");
+  };
+
+  const onChangeSalaryIncomeDetailFetchMethod = (id: string) => {
+    setValue(fieldNames.borrowerSalaryIncomeDetailFetchMethod, id);
+    setValue(fieldNames.borrowerMonthlySalaryBankTransfer, "");
+    setValue(fieldNames.borrowerMonthlySalaryAECB, "");
+    // setSalaryFetched(false);
+  };
+
+  const onChangeBusinessDetailFetchMethod = (id: string) => {
+    setValue(fieldNames.borrowerBusinessDetailFetchMethod, id);
+    setValue(fieldNames.borrowerNameOfBusiness, "");
+    setValue(fieldNames.borrowerLegalForm, "");
+    setValue(fieldNames.borrowerEmiratesBusiness, "");
+    setValue(fieldNames.borrowerDateOfEstabilishment, "");
+    setValue(fieldNames.borrowerVintage, "");
+    setValue(fieldNames.borrowerLicenseNo, "");
+    setValue(fieldNames.borrowerNatureOfBusiness, "");
+  };
+
+  const onChangeSelfIncomeDetailFetchMethod = (id: string) => {
+    setValue(fieldNames.borrowerSelfIncomeDetailFetchMethod, id);
+    setValue(fieldNames.borrowerBankName, "");
+    setValue(fieldNames.borrowerAccountNo, "");
+    setValue(fieldNames.borrowerLast6MonthsADB, "");
+    setValue(fieldNames.borrowerLast6MonthsAvgCredit, "");
   };
 
   const fetchEmploymentDetails = async () => {
@@ -156,7 +196,7 @@ export default function BorrowerIncomeScreen() {
         customerDataResp.data.monthlySalaryAECB
       );
     }
-    setSalaryFetched(true);
+    // setSalaryFetched(true);
     setIsLoading3(false);
   };
 
@@ -235,15 +275,9 @@ export default function BorrowerIncomeScreen() {
         customerDataResp.data.last6monthsAvg
       );
     }
-    // setTimeout(() => {
-    //   if (selfIncomeDetailFetchMethod === "Fetch From Bank") {
-    //   } else if (selfIncomeDetailFetchMethod === "Upload Bank Statement") {
-    //   } else if (selfIncomeDetailFetchMethod === "UAE-FTS") {
-    //   }
-    // }, 2000);
 
     setIsLoading6(false);
-    setSelfIncomeFetched(true);
+    // setSelfIncomeFetched(true);
   };
 
   const sendRequestUaeFts = () => {
@@ -385,7 +419,10 @@ export default function BorrowerIncomeScreen() {
         label={"Select Income Type"}
         options={["Salaried", "Self Employed"]}
         defaultValue={borrowerIncomeType}
-        onChange={(value) => setValue(fieldNames.borrowerIncomeType, value)}
+        onChange={
+          (value) => onChangeBorrowerIncomeType(value)
+          // setValue(fieldNames.borrowerIncomeType, value)
+        }
       />
       {borrowerIncomeType === "Salaried" ? (
         <>
@@ -397,8 +434,9 @@ export default function BorrowerIncomeScreen() {
             title={"Select Method to Fetch Employment Details"}
             options={employmentMethods}
             selectedId={empDetailFetchMethod}
-            onSelect={(id) =>
-              setValue(fieldNames.borrowerEmpDetailFetchMethod, id)
+            onSelect={
+              (id) => onChangeEmpDetailsFetchMethod(id)
+              // setValue(fieldNames.borrowerEmpDetailFetchMethod, id)
             }
           />
           {empDetailFetchMethod === "Salary Certificate" && (
@@ -454,16 +492,13 @@ export default function BorrowerIncomeScreen() {
             title={"Select Method to Fetch Income Details"}
             options={salaryIncomeMethods}
             selectedId={salaryIncomeDetailFetchMethod}
-            onSelect={(id) =>
-              setValue(fieldNames.borrowerSalaryIncomeDetailFetchMethod, id)
+            onSelect={
+              (id) => onChangeSalaryIncomeDetailFetchMethod(id)
+              // setValue(fieldNames.borrowerSalaryIncomeDetailFetchMethod, id)
             }
           />
           {salaryIncomeDetailFetchMethod === "UAE-FTS" && (
             <>
-              {/* <CustomButton
-                title="Fetch Details"
-                onPress={() => alert("Fetching Details...")}
-              /> */}
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerEmiratesId}
@@ -541,24 +576,15 @@ export default function BorrowerIncomeScreen() {
             </>
           )}
 
-          {salaryIncomeDetailFetchMethod === "Salary Transfer" ? (
-            <CustomButton
-              title="Fetch Salary Details"
-              onPress={fetchSalariedIncomeDetails}
-              isloading={isloading3}
-            />
-          ) : ftsStatus === "Completed" ? (
-            <CustomButton
-              title="Fetch Salary Details"
-              onPress={fetchSalariedIncomeDetails}
-              isloading={isloading3}
-            />
-          ) : (
-            <></>
-          )}
-
-          {salaryFetched ? (
+          {salaryIncomeDetailFetchMethod === "Salary Transfer" ||
+          (salaryIncomeDetailFetchMethod === "UAE-FTS" &&
+            ftsStatus === "Completed") ? (
             <>
+              <CustomButton
+                title="Fetch Salary Details"
+                onPress={fetchSalariedIncomeDetails}
+                isloading={isloading3}
+              />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerMonthlySalaryBankTransfer}
@@ -588,8 +614,9 @@ export default function BorrowerIncomeScreen() {
             title={"Select Method to Fetch Business Details"}
             options={businessMethods}
             selectedId={businessDetailFetchMethod}
-            onSelect={(id) =>
-              setValue(fieldNames.borrowerBusinessDetailFetchMethod, id)
+            onSelect={
+              (id) => onChangeBusinessDetailFetchMethod(id)
+              // setValue(fieldNames.borrowerBusinessDetailFetchMethod, id)
             }
           />
           {businessDetailFetchMethod === "Upload Trade License" && (
@@ -659,8 +686,9 @@ export default function BorrowerIncomeScreen() {
             title={"Select Method to Fetch Income Details"}
             options={businessIncomeMethods}
             selectedId={selfIncomeDetailFetchMethod}
-            onSelect={(id) =>
-              setValue(fieldNames.borrowerSelfIncomeDetailFetchMethod, id)
+            onSelect={
+              (id) => onChangeSelfIncomeDetailFetchMethod(id)
+              // setValue(fieldNames.borrowerSelfIncomeDetailFetchMethod, id)
             }
           />
           {selfIncomeDetailFetchMethod === "Upload Bank Statement" && (
@@ -672,10 +700,6 @@ export default function BorrowerIncomeScreen() {
           )}
           {selfIncomeDetailFetchMethod === "UAE-FTS" && (
             <>
-              {/* <CustomButton
-                title="Fetch Details"
-                onPress={() => alert("Fetching Details...")}
-              /> */}
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerEmiratesId}
@@ -756,17 +780,12 @@ export default function BorrowerIncomeScreen() {
           selfIncomeDetailFetchMethod === "Upload Bank Statement" ||
           (selfIncomeDetailFetchMethod === "UAE-FTS" &&
             ftsStatus === "Completed") ? (
-            <CustomButton
-              title="Fetch Income Details"
-              onPress={selfEmpIncomeDetails}
-              isloading={isloading6}
-            />
-          ) : (
-            <></>
-          )}
-
-          {selfIncomeFetched ? (
             <>
+              <CustomButton
+                title="Fetch Income Details"
+                onPress={selfEmpIncomeDetails}
+                isloading={isloading6}
+              />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerBankName}
