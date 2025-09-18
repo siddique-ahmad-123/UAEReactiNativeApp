@@ -26,3 +26,70 @@ export function parseToDate(dateStr: string): Date | null {
   return isNaN(date.getTime()) ? null : date;
 }
 
+// 1. Convert DD-MM-YYYY → YYYY-MM-DD
+export function parseFromDDMMYYYYWithDash(dateStr: string): string | null {
+  if (!dateStr) return null;
+  const parts = dateStr.split("-");
+  if (parts.length !== 3) return null;
+
+  const [day, month, year] = parts.map(Number);
+  if (!day || !month || !year) return null;
+
+  return `${year.toString().padStart(4, "0")}-${month
+    .toString()
+    .padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+}
+
+// 2. Convert DD/MM/YYYY → YYYY-MM-DD
+export function parseFromDDMMYYYYWithSlash(dateStr: string): string | null {
+  if (!dateStr) return null;
+  const parts = dateStr.split("/");
+  if (parts.length !== 3) return null;
+
+  const [day, month, year] = parts.map(Number);
+  if (!day || !month || !year) return null;
+
+  return `${year.toString().padStart(4, "0")}-${month
+    .toString()
+    .padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+}
+
+// 3. Convert YYYY/MM/DD → YYYY-MM-DD
+export function parseFromYYYYMMDDWithSlash(dateStr: string): string | null {
+  if (!dateStr) return null;
+  const parts = dateStr.split("/");
+  if (parts.length !== 3) return null;
+
+  const [year, month, day] = parts.map(Number);
+  if (!day || !month || !year) return null;
+
+  return `${year.toString().padStart(4, "0")}-${month
+    .toString()
+    .padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+}
+
+export function getDateDifferenceFromToday(dateStr: string): number | null {
+  if (!dateStr) return null;
+
+  const inputDate = new Date(dateStr); // works with YYYY-MM-DD
+  if (isNaN(inputDate.getTime())) return null;
+
+  const today = new Date();
+
+  // Strip time components to compare only dates
+  const inputUTC = Date.UTC(
+    inputDate.getFullYear(),
+    inputDate.getMonth(),
+    inputDate.getDate()
+  );
+  const todayUTC = Date.UTC(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  );
+
+  const diffInMs = inputUTC - todayUTC;
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+  return diffInDays;
+}
