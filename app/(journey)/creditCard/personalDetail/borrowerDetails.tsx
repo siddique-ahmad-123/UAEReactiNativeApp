@@ -22,7 +22,7 @@ import {
   useVisaMutation,
   useGetExistingCustomerDataMutation,
 } from "@/redux/api/creditCardAPI";
-import { parseToDate, toISODate } from "@/utils/dateParser";
+import { parseToDate } from "@/utils/dateParser";
 import { CameraView, useCameraPermissions } from "expo-camera";
 
 const BorrowerPersonalInformation = () => {
@@ -94,7 +94,7 @@ const BorrowerPersonalInformation = () => {
       setValue(fieldNames.borrowerNationality, emirateResponse.data.nationality);
       setValue(
         fieldNames.borrowerEidaIssueDate,
-        toISODate(emirateResponse.data.eidaIssueDate)
+        parseToDate(emirateResponse.data.eidaIssueDate)
       );
       setValue(
         fieldNames.borrowerEidaExpiryDate,
