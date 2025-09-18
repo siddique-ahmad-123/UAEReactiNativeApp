@@ -21,9 +21,11 @@ import {
   usePassportMutation,
   useVisaMutation,
   useGetExistingCustomerDataMutation,
+  useGetEmiratesBranchDropDownValuesQuery,
 } from "@/redux/api/creditCardAPI";
 import { parseToDate } from "@/utils/dateParser";
 import { CameraView, useCameraPermissions } from "expo-camera";
+import { useGetEmiratesDropDownValuesQuery } from "@/redux/api/creditCardAPI";
 
 const BorrowerPersonalInformation = () => {
   const [isloading, setIsLoading] = useState(false);
@@ -91,7 +93,10 @@ const BorrowerPersonalInformation = () => {
       setValue(fieldNames.borrowerName, emirateResponse.data.name);
       setValue(fieldNames.borrowerDOB, parseToDate(emirateResponse.data.dob));
       setValue(fieldNames.borrowerGender, emirateResponse.data.gender);
-      setValue(fieldNames.borrowerNationality, emirateResponse.data.nationality);
+      setValue(
+        fieldNames.borrowerNationality,
+        emirateResponse.data.nationality
+      );
       setValue(
         fieldNames.borrowerEidaIssueDate,
         parseToDate(emirateResponse.data.eidaIssueDate)
@@ -104,10 +109,7 @@ const BorrowerPersonalInformation = () => {
         fieldNames.borrowerAge,
         calculateAge(parseToDate(emirateResponse.data.dob))
       );
-      setValue(
-        fieldNames.borrowerPassportNo,
-        passportResponse.data.passportNo
-      );
+      setValue(fieldNames.borrowerPassportNo, passportResponse.data.passportNo);
       setValue(
         fieldNames.borrowerPassportIssueDate,
         parseToDate(passportResponse.data.passportIssueDate)
@@ -189,9 +191,41 @@ const BorrowerPersonalInformation = () => {
     { label: "UAE", value: "UAE" },
   ];
 
-  const emiratesOptions = [
-    { label: "Dubai", value: "Dubai" },
-    { label: "Saudi Arabia", value: "Saudi Arabia" },
+
+
+   
+  const { data: emirates } = useGetEmiratesDropDownValuesQuery();
+  
+  const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(formData[fieldNames.borrowerEmirates],{skip:!formData[fieldNames.borrowerEmirates]});
+ 
+  const emiratesOptions = emirates?.data ?? [
+    {
+      label: "Abu Dhabi",
+      value: "Abu Dhabi",
+    },
+    {
+      label: "Ajman",
+      value: "Ajman",
+    },
+    {
+      label: "Dubai",
+      value: "Dubai",
+    },
+  ];
+  
+  const emiratesBranches = emiratesBranch?.data ?? [
+    {
+      label: "Abu Dhabi",
+      value: "Abu Dhabi",
+    },
+    {
+      label: "Ajman",
+      value: "Ajman",
+    },
+    {
+      label: "Dubai",
+      value: "Dubai",
+    },
   ];
 
   const countryOptions = [
@@ -218,8 +252,42 @@ const BorrowerPersonalInformation = () => {
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
+      {formData[fieldNames.userType] === "NTB" && (
+        <>
+          <SegmentedControl
+            label={"Nationality Status"}
+            options={["Emirati", "Expat"]}
+            defaultValue={borrowerNationalityStatus}
+            onChange={(value) =>
+              setValue(fieldNames.borrowerNationalityStatus, value)
+            }
+          />
+
+          <View style={{ alignItems: "center", gap: spacingVertical.md }}>
+            <CustomUpload
+              label={"Emirates ID"}
+              control={control}
+              name="emiratesID"
+            />
+            <CustomUpload
+              label={"Passport"}
+              control={control}
+              name="passport"
+            />
+            {borrowerNationalityStatus === "Expat" && (
+              <CustomUpload label={"Visa"} control={control} name="visa" />
+            )}
+          </View>
+
+          <CustomButton
+            title={"Fetch Details"}
+            onPress={handleFetchDetails}
+            isloading={isloading1}
+          />
+        </>
+      )}
       <SectionHeader sectionName="Personal Information" />
-     <CustomInput
+      <CustomInput
         control={control}
         name={fieldNames.borrowerName}
         label="Name"
@@ -276,7 +344,7 @@ const BorrowerPersonalInformation = () => {
         label={"EIDA Expiry Date"}
         minDate={watch(fieldNames.borrowerEidaIssueDate)}
       />
- 
+
       <CustomInput
         control={control}
         name={fieldNames.borrowerPassportNo}
@@ -306,7 +374,7 @@ const BorrowerPersonalInformation = () => {
             placeholder="Enter your visa Number"
             type="number"
           />
- 
+
           <CustomDatePicker
             control={control}
             name={fieldNames.borrowerVisaIssueDate}
@@ -328,7 +396,7 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter your email id"
         type="email"
       />
- 
+
       <CustomInput
         control={control}
         name={fieldNames.borrowerMobileNo}
@@ -336,7 +404,7 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter your mobile number"
         type="number"
       />
- 
+
       <CustomInput
         control={control}
         name={fieldNames.borrowerVintage}
@@ -344,7 +412,7 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter your residence vintage"
         type="number"
       />
- 
+
       <CustomInput
         control={control}
         name={fieldNames.borrowerNoOfDependents}
@@ -352,9 +420,9 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter the number of dependents"
         type="number"
       />
- 
+
       <SectionHeader sectionName={t("addressInformation")} />
- 
+
       <CustomInput
         control={control}
         name={fieldNames.borrowerAddressLine1}
@@ -369,10 +437,10 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter your address"
         type="text"
       />
- 
+
       <CustomDropDown
         name={fieldNames.borrowerEmirates}
-        label={"Emirates"}
+        label="Emirates"
         data={emiratesOptions}
         control={control}
       />

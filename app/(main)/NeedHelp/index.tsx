@@ -4,6 +4,7 @@ import FormSummaryLayout from "@/components/FormSummary/FormSummaryLayout";
 import SegmentedControl from "@/components/SegmentControl";
 import { fontSize, fontWeight, width } from "@/constants/Metrics";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React from "react";
@@ -56,7 +57,7 @@ const RequestCallBack = () => {
       <CustomInput
         name={fieldNames.borrowerName}
         label="Ref no."
-        placeholder="89765321"
+        placeholder="Enter ref number"
         type="text"
         control={control}
       />
@@ -64,7 +65,7 @@ const RequestCallBack = () => {
         <View style={styles.innerRow}>
           <CustomInput
             label="First Name"
-            placeholder="Myank"
+            placeholder={placeHoldersNames.firstName}
             type="text"
             control={control}
           />
@@ -72,7 +73,7 @@ const RequestCallBack = () => {
         <View style={styles.innerRow}>
           <CustomInput
             label="Last Name"
-            placeholder="Tyagi"
+            placeholder={placeHoldersNames.LastName}
             type="text"
             control={control}
           />
@@ -81,7 +82,7 @@ const RequestCallBack = () => {
       <CustomInput
         name={fieldNames.supplementaryCardName}
         label="Email"
-        placeholder="myankTyagi@gmail.com"
+        placeholder="Enter email"
         type="text"
         control={control}
       />
@@ -90,7 +91,7 @@ const RequestCallBack = () => {
         <View style={styles.innerRow}>
           <CustomInput
             label="Mobile Number"
-            placeholder="mobile no"
+            placeholder="Enter number"
             type="text"
             control={control}
           />
@@ -122,7 +123,7 @@ const RequestCallBack = () => {
 
       <CustomInput
         label="Description"
-        placeholder="Need help for Credit Card"
+        placeholder="Write your query"
         type="textarea"
         numberOfLines={7}
       />
