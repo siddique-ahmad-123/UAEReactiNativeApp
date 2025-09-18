@@ -26,7 +26,7 @@ const SectionHeader = ({ sectionName, style }: SectionHeaderProps) => {
       marginVertical: spacingVertical.sm,
     },
     text: {
-      fontSize: fontSize.lg,
+      fontSize: fontSize.md,
       fontWeight: fontWeight.medium,
     },
   });

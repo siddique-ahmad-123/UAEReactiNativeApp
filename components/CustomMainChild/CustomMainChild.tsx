@@ -66,7 +66,7 @@ const CustomMainChild = ({
     title: {
       color: theme.colors.statusBarText,
       fontWeight: fontWeight.medium,
-      fontSize: fontSize.xl,
+      fontSize: fontSize.lg,
       marginRight: spacing.sm,
     },
     iconButton: {

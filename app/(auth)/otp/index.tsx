@@ -88,6 +88,7 @@ const OTPScreen: React.FC = () => {
         const response: any = await getExistingCustomerData(
           storedUser?.mobile || "509876543"
         ).unwrap();
+        console.log("api hit" + response);
         if (response.status === 200) {
           let userType = "NTB";
           let userName = "Guest";

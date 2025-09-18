@@ -14,7 +14,7 @@ import { router } from "expo-router";
 import { t } from "i18next";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Modal, Text, TouchableOpacity } from "react-native";
 import { customerDataMapper } from "@/schemas/burrowerDataMapper";
 import {
   useEmiratesIdMutation,
@@ -22,11 +22,16 @@ import {
   useVisaMutation,
   useGetExistingCustomerDataMutation,
 } from "@/redux/api/creditCardAPI";
-import { parseToDate } from "@/utils/dateParser";
+import { parseToDate, toISODate } from "@/utils/dateParser";
+import { CameraView, useCameraPermissions } from "expo-camera";
 
 const BorrowerPersonalInformation = () => {
   const [isloading, setIsLoading] = useState(false);
   const [isloading1, setIsLoading1] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
+  const [cameraRef, setCameraRef] = useState<any>(null);
+  const [permission, requestPermission] = useCameraPermissions();
+
   const [emiratesIdOCR] = useEmiratesIdMutation();
   const [visaOCR] = useVisaMutation();
   const [passportOCR] = usePassportMutation();
@@ -34,7 +39,6 @@ const BorrowerPersonalInformation = () => {
 
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
-    // resolver: zodResolver(borrowerSchema),
     defaultValues: formData,
   });
 
@@ -44,17 +48,14 @@ const BorrowerPersonalInformation = () => {
         const response: any = await getExistingCustomerData(
           formData[fieldNames.mobileNo]
         ).unwrap();
-        console.log(response.data.customerData);
         if (response?.status === 200 && response?.data?.customerData?.length) {
           const customer = response.data.customerData[0];
-          // Map API → form fields
           Object.entries(customerDataMapper).forEach(([apiKey, formField]) => {
             const value = customer[apiKey];
             if (value !== undefined && value !== null) {
               setValue(formField, value, { shouldValidate: false });
             }
           });
-          // Auto-calc age if DOB exists
           if (customer.DOB) {
             const dob = new Date(customer.DOB.split("-").reverse().join("-"));
             const age = calculateAge(dob);
@@ -72,7 +73,6 @@ const BorrowerPersonalInformation = () => {
 
   const onSubmit = (values: any) => {
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
-    console.log("Store formData:", formData);
     nextStep();
   };
 
@@ -87,20 +87,35 @@ const BorrowerPersonalInformation = () => {
     const passportResponse = await passportOCR(
       formData[fieldNames.mobileNo]
     ).unwrap();
- 
     if (emirateResponse.status == 200 && passportResponse.status == 200) {
-      // Emirates ID v
       setValue(fieldNames.borrowerName, emirateResponse.data.name);
       setValue(fieldNames.borrowerDOB, parseToDate(emirateResponse.data.dob));
       setValue(fieldNames.borrowerGender, emirateResponse.data.gender);
       setValue(fieldNames.borrowerNationality, emirateResponse.data.nationality);
-      setValue(fieldNames.borrowerEidaIssueDate, parseToDate(emirateResponse.data.eidaIssueDate));
-      setValue(fieldNames.borrowerEidaExpiryDate, parseToDate(emirateResponse.data.eidaExpiryDate));
-      setValue(fieldNames.borrowerAge,calculateAge(parseToDate(emirateResponse.data.dob)));
-      // Passport 
-      setValue(fieldNames.borrowerPassportNo, passportResponse.data.passportNo);
-      setValue(fieldNames.borrowerPassportIssueDate, parseToDate(passportResponse.data.passportIssueDate));
-      setValue(fieldNames.borrowerPassportExpiryDate, parseToDate(passportResponse.data.passportExpiryDate));
+      setValue(
+        fieldNames.borrowerEidaIssueDate,
+        toISODate(emirateResponse.data.eidaIssueDate)
+      );
+      setValue(
+        fieldNames.borrowerEidaExpiryDate,
+        parseToDate(emirateResponse.data.eidaExpiryDate)
+      );
+      setValue(
+        fieldNames.borrowerAge,
+        calculateAge(parseToDate(emirateResponse.data.dob))
+      );
+      setValue(
+        fieldNames.borrowerPassportNo,
+        passportResponse.data.passportNo
+      );
+      setValue(
+        fieldNames.borrowerPassportIssueDate,
+        parseToDate(passportResponse.data.passportIssueDate)
+      );
+      setValue(
+        fieldNames.borrowerPassportExpiryDate,
+        parseToDate(passportResponse.data.passportExpiryDate)
+      );
     }
     if (borrowerNationalityStatus === "Expat") {
       const visaResponse = await visaOCR(
@@ -108,22 +123,54 @@ const BorrowerPersonalInformation = () => {
       ).unwrap();
       if (visaResponse.status === 200) {
         setValue(fieldNames.borrowerVisaNo, visaResponse.data.visaNo);
-        setValue(fieldNames.borrowerVisaIssueDate, parseToDate(visaResponse.data.visaIssueDate));
-        setValue(fieldNames.borrowerVisaExpiryDate, parseToDate(visaResponse.data.visaExpiryDate));
+        setValue(
+          fieldNames.borrowerVisaIssueDate,
+          parseToDate(visaResponse.data.visaIssueDate)
+        );
+        setValue(
+          fieldNames.borrowerVisaExpiryDate,
+          parseToDate(visaResponse.data.visaExpiryDate)
+        );
       }
     }
     setIsLoading1(false);
   };
-  const runEFR = () => {
+
+  // 🔹 Updated EFR function with Camera
+  const runEFR = async () => {
     setIsLoading(true);
-    setTimeout(() => {
-      setValue("borrowerVerificationStatus", "Verified");
-      setIsLoading(false);
-    }, 2000);
+    if (!permission?.granted) {
+      const perm = await requestPermission();
+      if (!perm.granted) {
+        alert("Camera permission denied");
+        setIsLoading(false);
+        return;
+      }
+    }
+    setShowCamera(true);
   };
+
+  const capturePhoto = async () => {
+    if (cameraRef) {
+      try {
+        await cameraRef.takePictureAsync();
+        setShowCamera(false);
+        setValue("borrowerVerificationStatus", "Pending");
+        setTimeout(() => {
+          setValue("borrowerVerificationStatus", "Verified");
+          setIsLoading(false);
+        }, 2000);
+      } catch (err) {
+        console.error("❌ Failed to capture photo", err);
+        setIsLoading(false);
+      }
+    }
+  };
+
   const calcAge = (date: Date | null) => {
     setValue("borrowerAge", calculateAge(date));
   };
+
   const genderOptions = [
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
@@ -146,16 +193,19 @@ const BorrowerPersonalInformation = () => {
     { label: "Dubai", value: "Dubai" },
     { label: "Saudi Arabia", value: "Saudi Arabia" },
   ];
+
   const countryOptions = [
     { label: "India", value: "IN" },
     { label: "UAE", value: "UAE" },
     { label: "Germany", value: "DE" },
   ];
+
   const verificationOptions = [
     { label: "Initiated", value: "Initiated" },
     { label: "Pending", value: "Pending" },
     { label: "Verified", value: "Verified" },
   ];
+
   return (
     <FormLayout
       stepNumber={1}
@@ -168,42 +218,8 @@ const BorrowerPersonalInformation = () => {
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
-      {formData[fieldNames.userType] === "NTB" && (
-        <>
-          <SegmentedControl
-            label={"Nationality Status"}
-            options={["Emirati", "Expat"]}
-            defaultValue={borrowerNationalityStatus}
-            onChange={(value) =>
-              setValue(fieldNames.borrowerNationalityStatus, value)
-            }
-          />
-
-          <View style={{ alignItems: "center", gap: spacingVertical.md }}>
-            <CustomUpload
-              label={"Emirates ID"}
-              control={control}
-              name="emiratesID"
-            />
-            <CustomUpload
-              label={"Passport"}
-              control={control}
-              name="passport"
-            />
-            {borrowerNationalityStatus === "Expat" && (
-              <CustomUpload label={"Visa"} control={control} name="visa" />
-            )}
-          </View>
-
-          <CustomButton
-            title={"Fetch Details"}
-            onPress={handleFetchDetails}
-            isloading={isloading1}
-          />
-        </>
-      )}
-      <SectionHeader sectionName={t("personalInformation")} />
-      <CustomInput
+      <SectionHeader sectionName="Personal Information" />
+     <CustomInput
         control={control}
         name={fieldNames.borrowerName}
         label="Name"
@@ -260,7 +276,7 @@ const BorrowerPersonalInformation = () => {
         label={"EIDA Expiry Date"}
         minDate={watch(fieldNames.borrowerEidaIssueDate)}
       />
-
+ 
       <CustomInput
         control={control}
         name={fieldNames.borrowerPassportNo}
@@ -290,7 +306,7 @@ const BorrowerPersonalInformation = () => {
             placeholder="Enter your visa Number"
             type="number"
           />
-
+ 
           <CustomDatePicker
             control={control}
             name={fieldNames.borrowerVisaIssueDate}
@@ -312,7 +328,7 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter your email id"
         type="email"
       />
-
+ 
       <CustomInput
         control={control}
         name={fieldNames.borrowerMobileNo}
@@ -320,7 +336,7 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter your mobile number"
         type="number"
       />
-
+ 
       <CustomInput
         control={control}
         name={fieldNames.borrowerVintage}
@@ -328,7 +344,7 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter your residence vintage"
         type="number"
       />
-
+ 
       <CustomInput
         control={control}
         name={fieldNames.borrowerNoOfDependents}
@@ -336,9 +352,9 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter the number of dependents"
         type="number"
       />
-
+ 
       <SectionHeader sectionName={t("addressInformation")} />
-
+ 
       <CustomInput
         control={control}
         name={fieldNames.borrowerAddressLine1}
@@ -353,7 +369,7 @@ const BorrowerPersonalInformation = () => {
         placeholder="Enter your address"
         type="text"
       />
-
+ 
       <CustomDropDown
         name={fieldNames.borrowerEmirates}
         label={"Emirates"}
@@ -376,6 +392,28 @@ const BorrowerPersonalInformation = () => {
         control={control}
         disable={true}
       />
+
+      {/* 🔹 Camera Modal */}
+      <Modal visible={showCamera} animationType="slide">
+        <CameraView
+          style={{ flex: 1 }}
+          facing="front"
+          ref={(ref) => setCameraRef(ref)}
+        />
+        <TouchableOpacity
+          style={{
+            position: "absolute",
+            bottom: 40,
+            alignSelf: "center",
+            backgroundColor: "white",
+            padding: 16,
+            borderRadius: 50,
+          }}
+          onPress={capturePhoto}
+        >
+          <Text style={{ fontWeight: "bold" }}>📸 Capture</Text>
+        </TouchableOpacity>
+      </Modal>
     </FormLayout>
   );
 };
