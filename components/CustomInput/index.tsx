@@ -30,7 +30,7 @@ interface CustomInputProps {
   secureTextEntry?: boolean;
   numberOfLines?: number;
   value?: string;
-  onChangeField?: (v: string | null) => void;
+  onChangeText?: (v: string) => void;
   keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
   maxLength?: number;
   editable?: boolean;
@@ -47,7 +47,7 @@ const CustomInput = ({
   required = false,
   numberOfLines = 4,
   value,
-  onChangeField,
+  onChangeText,
   keyboardType,
   maxLength,
   editable,
@@ -56,10 +56,7 @@ const CustomInput = ({
   const [secure, setSecure] = useState(type === "password");
   const [localValue, setLocalValue] = useState(""); // for uncontrolled mode
   const theme = useTheme();
- const handleConfirm = (value: string, onChange?: (v: string) => void) => {
-  onChange ? onChange(value) : value;
-  onChangeField?.(value);
-};
+
   const styles = StyleSheet.create({
     container: {
       borderWidth: borderWidth.normal,
@@ -144,7 +141,7 @@ const CustomInput = ({
   // 🔹 Shared render block
   const renderInput = (
     value: string,
-    onChange?: (v: string) => void,
+    onChange: (v: string) => void,
     onBlur?: () => void,
     error?: any
   ) => {
@@ -185,34 +182,34 @@ const CustomInput = ({
             />
           </View>
 
-        {/* Input Row */}
-        <View style={styles.inputRow}>
-          <TextInput
-            style={[
-              styles.input,
-              { color: theme.colors.textPrimary },
-              { flex: type === "textarea" ? 0 : 1 },
-              type === "textarea" && styles.textArea,
-            ]}
-            placeholder={placeholder}
-            placeholderTextColor="#aaa"
-            value={value}
-            onChangeText={(v)=>handleConfirm(v,onChange)}
-            onBlur={onBlur}
-            secureTextEntry={type === "password" ? secure : false}
-            multiline={type === "textarea"}
-            numberOfLines={type === "textarea" ? numberOfLines : 1}
-            keyboardType={
-              keyboardType ??
-              (type === "email"
-                ? "email-address"
-                : type === "number" || type === "currency"
-                ? "numeric"
-                : "default")
-            }
-            maxLength={maxLength}
-            editable={editable !== false} 
-          />
+          {/* Input Row */}
+          <View style={styles.inputRow}>
+            <TextInput
+              style={[
+                styles.input,
+                { color: theme.colors.textPrimary },
+                { flex: type === "textarea" ? 0 : 1 },
+                type === "textarea" && styles.textArea,
+              ]}
+              placeholder={placeholder}
+              placeholderTextColor="#aaa"
+              value={displayValue}
+              onChangeText={(text) => handleTextChange(text, onChange)}
+              onBlur={onBlur}
+              secureTextEntry={type === "password" ? secure : false}
+              multiline={type === "textarea"}
+              numberOfLines={type === "textarea" ? numberOfLines : 1}
+              keyboardType={
+                keyboardType ??
+                (type === "email"
+                  ? "email-address"
+                  : type === "number" || type === "currency"
+                  ? "numeric"
+                  : "default")
+              }
+              maxLength={maxLength}
+              editable={editable !== false}
+            />
 
             {type === "password" && (
               <TouchableOpacity onPress={() => setSecure(!secure)}>
@@ -250,8 +247,8 @@ const CustomInput = ({
 
   // 🔹 If no control → fallback to uncontrolled TextInput
   return renderInput(
-    localValue,
-    undefined, 
+    value ?? localValue,
+    onChangeText ?? setLocalValue,
     undefined,
     undefined
   );
