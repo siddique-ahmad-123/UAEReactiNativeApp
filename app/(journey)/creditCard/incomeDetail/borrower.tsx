@@ -17,6 +17,7 @@ import {
 import {
   useGetCustomerDataMutation,
   useGetEmiratesDropDownValuesQuery,
+  useOnSendingEmailMutation,
   useSalaryCertificateMutation,
   useTradeLicenseMutation,
 } from "@/redux/api/creditCardAPI";
@@ -24,6 +25,7 @@ import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import calculateAge from "@/utils/calculateAge";
+import { getUaeFtsCompletedMail, getUaeFtsInitiatedMail } from "@/utils/sendEmailUae";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useState } from "react";
@@ -45,6 +47,7 @@ export default function BorrowerIncomeScreen() {
   const [tradeLicenseOCR] = useTradeLicenseMutation();
   const [salaryCertificateOCR] = useSalaryCertificateMutation();
   const [getCustomerData] = useGetCustomerDataMutation();
+  const [sendEmail] = useOnSendingEmailMutation();
   const { t } = useTranslation();
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch, getValues } = useForm({
@@ -202,15 +205,32 @@ export default function BorrowerIncomeScreen() {
     setIsLoading3(false);
   };
 
-  const salaryIncomeUaeFtsGetStatus = () => {
+  const salaryIncomeUaeFtsGetStatus = async () => {
     setIsLoading5(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       if (salaryIncomeUaeFtsGetStatusValue === "") {
         setValue(fieldNames.borrowerFtsStatus, "Initiated");
+        const body = {
+          subject: getUaeFtsInitiatedMail(formData[fieldNames.borrowerName])
+            .subject,
+          mailBody: getUaeFtsInitiatedMail(formData[fieldNames.borrowerName])
+            .body,
+          mailTo: formData[fieldNames.borrowerEmailId],
+        };
+        const response = await sendEmail(body).unwrap();
       } else if (salaryIncomeUaeFtsGetStatusValue === "Initiated") {
         setValue(fieldNames.borrowerFtsStatus, "Pending");
       } else if (salaryIncomeUaeFtsGetStatusValue === "Pending") {
+
         setValue(fieldNames.borrowerFtsStatus, "Completed");
+        const body = {
+          subject: getUaeFtsCompletedMail(formData[fieldNames.borrowerName])
+            .subject,
+          mailBody: getUaeFtsCompletedMail(formData[fieldNames.borrowerName])
+            .body,
+          mailTo: formData[fieldNames.borrowerEmailId],
+        };
+        const response = await sendEmail(body).unwrap();
       }
       setIsLoading5(false);
     }, 2000);

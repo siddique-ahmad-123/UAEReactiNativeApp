@@ -69,6 +69,14 @@ export const creditCardAPI = createApi({
       }),
     }),
 
+     onSendingEmail: builder.mutation<any, any>({
+      query: (data) => ({
+        url: "sendMail",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
     offerLetter: builder.mutation<any, any>({
       query: (formData) => ({
         url: "templateGenerate/offerLetter",
@@ -129,5 +137,6 @@ export const {
   useGetUserQuery,
   useOfferLetterMutation,
   useGetEmiratesDropDownValuesQuery,
-  useGetEmiratesBranchDropDownValuesQuery
+  useGetEmiratesBranchDropDownValuesQuery,
+  useOnSendingEmailMutation
 } = creditCardAPI;
