@@ -8,7 +8,7 @@ export const placeHoldersNames = {
   SupplementaryCard:"Enter Supplementary Card",
   Address:"Enter Your Address",
   Verification:"Varification Status",
-  Number:"2000",
+  Number:"Enter Monthly Business",
   BusinessName:"Business Name",
   Age:"Enter Your Age",
   EIDA:"Enter Your EIDA No.",
@@ -20,6 +20,12 @@ export const placeHoldersNames = {
   BankingCode:"Enter Banking Code",
   TotalExperience:"Enter Total Experience(months)",
   BankName:"Enter Bank Name",
-  AccountNumber:"Enter Account Number"
-
+  AccountNumber:"Enter Account Number",
+  CurrentExp:"Enter Current Exp..",
+  IBANNO:"Enter IBAN NO..",
+  MonthylySalary:"Monthly Salary ..",
+  EmiratesID:"Enter Emirates ID",
+  VintageMonth:"Enter Vintage Months",
+  MonthlyAddIncom:"Enter Monthly Additional Income",
+  TotalIncome:"Enter Total Income"
 }

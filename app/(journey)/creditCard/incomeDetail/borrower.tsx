@@ -497,7 +497,7 @@ export default function BorrowerIncomeScreen() {
             control={control}
             name={fieldNames.borrowerCurrentExp}
             label="Current Experience (Months)"
-            placeholder="20"
+            placeholder={placeHoldersNames.CurrentExp}
             type="number"
           />
           <CustomInput
@@ -540,7 +540,7 @@ export default function BorrowerIncomeScreen() {
                 name={fieldNames.borrowerIbanNo}
                 label="IBAN No"
                 type="text"
-                placeholder="AE60030000010090435412"
+                placeholder={placeHoldersNames.IBANNO}
               />
 
               <CustomInput
@@ -618,7 +618,7 @@ export default function BorrowerIncomeScreen() {
                 control={control}
                 name={fieldNames.borrowerMonthlySalaryBankTransfer}
                 label="Monthly Salary (Bank Transfer)"
-                placeholder="2000"
+                placeholder={placeHoldersNames.MonthylySalary}
                 type="number"
                 formatWithCommas={true}
               />
@@ -735,7 +735,7 @@ export default function BorrowerIncomeScreen() {
                 control={control}
                 name={fieldNames.borrowerEmiratesId}
                 label="Emirates ID"
-                placeholder="784838291032030"
+                placeholder={placeHoldersNames.EmiratesID}
                 type="text"
               />
               <CustomInput
@@ -743,7 +743,7 @@ export default function BorrowerIncomeScreen() {
                 name={fieldNames.borrowerIbanNo}
                 label="IBAN No"
                 type="text"
-                placeholder="AE60030000010090435412"
+                placeholder={placeHoldersNames.IBANNO}
               />
 
               <CustomInput

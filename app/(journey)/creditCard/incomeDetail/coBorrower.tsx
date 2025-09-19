@@ -10,6 +10,7 @@ import SegmentedControl from "@/components/SegmentControl";
 import { spacingVertical } from "@/constants/Metrics";
 import { useGetEmiratesDropDownValuesQuery } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React from "react";
@@ -173,7 +174,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             name={fieldNames.coBorrowerEmployerName}
             label="Employer Name"
             type="text"
-            placeholder="Newgen Software"
+            placeholder={placeHoldersNames.EmployerName}
           />
           <CustomDatePicker
             control={control}
@@ -184,14 +185,14 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             control={control}
             name={fieldNames.coBorrowerCurrentExp}
             label="Current Experience (Months)"
-            placeholder="20"
+            placeholder={placeHoldersNames.CurrentExp}
             type="number"
           />
           <CustomInput
             control={control}
             name={fieldNames.coBorrowerTotalExp}
             label="Total Experience (Months)"
-            placeholder="36"
+            placeholder={placeHoldersNames.TotalExperience}
             type="number"
           />
           <CustomDropDown
@@ -220,7 +221,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
                 control={control}
                 name={fieldNames.coBorrowerEmirateId}
                 label="Emirates ID"
-                placeholder="784838291032030"
+                placeholder={placeHoldersNames.EmiratesID}
                 type="text"
               />
               <CustomInput
@@ -228,14 +229,14 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
                 name={fieldNames.coBorrowerIbanNo}
                 label="IBAN No"
                 type="text"
-                placeholder="AE60030000010090435412"
+                placeholder={placeHoldersNames.IBANNO}
               />
 
               <CustomInput
                 control={control}
                 name={fieldNames.coBorrowerBankingCode}
                 label="Banking Code"
-                placeholder="30"
+                placeholder={placeHoldersNames.BankingCode}
                 type="text"
               />
               <CustomDatePicker
@@ -272,7 +273,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             control={control}
             name={fieldNames.coBorrowerMonthlySalaryBankTransfer}
             label="Monthly Salary (Bank Transfer)"
-            placeholder="2000"
+            placeholder={placeHoldersNames.MonthylySalary}
             type="number"
             formatWithCommas={true}
           />
@@ -280,7 +281,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             control={control}
             name={fieldNames.coBorrowerMonthlySalaryAECB}
             label="Monthly Salary (AECB)"
-            placeholder="2000"
+            placeholder={placeHoldersNames.MonthylySalary}
             type="number"
             formatWithCommas={true}
           />
@@ -310,7 +311,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             name={fieldNames.coBorrowerNameOfBusiness}
             label="Name of Business"
             type="text"
-            placeholder="Newgen"
+            placeholder={placeHoldersNames.BusinessName}
           />
           <CustomDropDown
             control={control}
@@ -333,7 +334,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             control={control}
             name={fieldNames.coBorrowerVintage}
             label="Vintage (Months)"
-            placeholder="58"
+            placeholder={placeHoldersNames.VintageMonth}
             type="number"
           />
           <CustomInput
@@ -372,7 +373,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
                 control={control}
                 name={fieldNames.coBorrowerEmirates}
                 label="Emirates ID"
-                placeholder="784838291032030"
+                placeholder={placeHoldersNames.EmiratesID}
                 type="text"
               />
               <CustomInput
@@ -380,14 +381,14 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
                 name={fieldNames.coBorrowerIbanNo}
                 label="IBAN No"
                 type="text"
-                placeholder="AE60030000010090435412"
+                placeholder={placeHoldersNames.IBANNO}
               />
 
               <CustomInput
                 control={control}
                 name={fieldNames.coBorrowerBankingCode}
                 label="Banking Code"
-                placeholder="30"
+                placeholder={placeHoldersNames.BankingCode}
                 type="text"
               />
               <CustomDatePicker
@@ -424,21 +425,21 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             control={control}
             name={fieldNames.coBorrowerBankName}
             label="Bank Name"
-            placeholder="RAK Bank"
+            placeholder={placeHoldersNames.BankName}
             type="text"
           />
           <CustomInput
             control={control}
             name={fieldNames.coBorrowerAccountNo}
             label="Account No"
-            placeholder="00090435412"
+            placeholder={placeHoldersNames.AccountNumber}
             type="text"
           />
           <CustomInput
             control={control}
             name={fieldNames.coBorrowerLast6MonthsADB}
             label="Last 6 Months ADB"
-            placeholder="2000"
+            placeholder={placeHoldersNames.MonthylySalary}
             type="number"
             formatWithCommas={true}
           />
@@ -446,7 +447,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             control={control}
             name={fieldNames.coBorrowerLast6MonthsAvgCredit}
             label="Last 6 Months Avg Credit"
-            placeholder="2000"
+            placeholder={placeHoldersNames.MonthylySalary}
             type="number"
             formatWithCommas={true}
           />
