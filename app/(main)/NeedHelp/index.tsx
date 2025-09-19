@@ -7,33 +7,41 @@ import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "styled-components/native";
-
+ 
 const RequestCallBack = () => {
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch } = useForm({
     defaultValues: formData,
     shouldUnregister: true,
   });
-
+ 
   const cityOptions = [
     { label: "Dubai", value: "Dubai" },
     { label: "Sharja", value: "Sharjha" },
   ];
-
+ 
   const genderOptions = [
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
     { label: "Others", value: "Others" },
   ];
-
+ 
   const onSubmit = (values: any) => {
     Object.entries(values).forEach(([k, v]) => updateField(k, v));
     nextStep();
   };
+ 
+  useEffect(() => {
+    const min = 10000000;
+    const max = 99999999;
+    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    setValue("refNo", randomNumber.toString());
+  });
+ 
   const theme = useTheme();
   const styles = StyleSheet.create({
     text: {
@@ -53,13 +61,15 @@ const RequestCallBack = () => {
   return (
     <FormSummaryLayout onSaveAndBack={() => router.push("/(main)/NavScreen")}>
       <Text style={styles.text}>Request Callback</Text>
-
+ 
       <CustomInput
-        name={fieldNames.borrowerName}
+        name="refNo"
         label="Ref no."
         placeholder="Enter ref number"
         type="text"
         control={control}
+        editable={false}
+        
       />
       <View style={styles.row}>
         <View style={styles.innerRow}>
@@ -86,7 +96,7 @@ const RequestCallBack = () => {
         type="text"
         control={control}
       />
-
+ 
       <View style={styles.row}>
         <View style={styles.innerRow}>
           <CustomInput
@@ -104,7 +114,7 @@ const RequestCallBack = () => {
           />
         </View>
       </View>
-
+ 
       <SegmentedControl
         label={"Marital Status"}
         options={["Single", "Married"]}
@@ -113,14 +123,14 @@ const RequestCallBack = () => {
           console.log("martial status changed");
         }}
       />
-
+ 
       <CustomDropDown
         name={fieldNames.borrowerGender}
         label={"City"}
         data={cityOptions}
         control={control}
       />
-
+ 
       <CustomInput
         label="Description"
         placeholder="Write your query"
@@ -130,5 +140,7 @@ const RequestCallBack = () => {
     </FormSummaryLayout>
   );
 };
-
+ 
 export default RequestCallBack;
+ 
+ 

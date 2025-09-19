@@ -8,6 +8,7 @@ import MethodSelector from "@/components/MethodSelector";
 import SectionHeader from "@/components/SectionHeader";
 import SegmentedControl from "@/components/SegmentControl";
 import { spacingVertical } from "@/constants/Metrics";
+import { useGetEmiratesDropDownValuesQuery } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
@@ -96,15 +97,22 @@ export default function CoBorrowerIncomeScreen() {
       iconName: "swap-vertical",
     },
   ];
-  const emiratesOptions = [
-    { label: "Dubai", value: "Dubai" },
-    { label: "Abu Dhabi", value: "Abu Dhabi" },
-    { label: "Sharjah", value: "Sharjah" },
-    { label: "Ajman", value: "Ajman" },
-    { label: "Umm Al-Quwain", value: "Umm Al-Quwain" },
-    { label: "Fujairah", value: "Fujairah" },
-    { label: "Ras Al Khaimah", value: "Ras Al Khaimah" },
-  ];
+const { data: emirates } = useGetEmiratesDropDownValuesQuery();
+    
+    const emiratesOptions = emirates?.data ?? [
+      {
+        label: "Abu Dhabi",
+        value: "Abu Dhabi",
+      },
+      {
+        label: "Ajman",
+        value: "Ajman",
+      },
+      {
+        label: "Dubai",
+        value: "Dubai",
+      },
+    ];
   const statusOptions = [
     { label: "Initiated", value: "Initiated" },
     { label: "Pending", value: "Pending" },
@@ -266,6 +274,7 @@ export default function CoBorrowerIncomeScreen() {
             label="Monthly Salary (Bank Transfer)"
             placeholder="2000"
             type="number"
+            formatWithCommas={true}
           />
           <CustomInput
             control={control}
@@ -273,6 +282,7 @@ export default function CoBorrowerIncomeScreen() {
             label="Monthly Salary (AECB)"
             placeholder="2000"
             type="number"
+            formatWithCommas={true}
           />
         </>
       ) : (
@@ -430,6 +440,7 @@ export default function CoBorrowerIncomeScreen() {
             label="Last 6 Months ADB"
             placeholder="2000"
             type="number"
+            formatWithCommas={true}
           />
           <CustomInput
             control={control}
@@ -437,6 +448,7 @@ export default function CoBorrowerIncomeScreen() {
             label="Last 6 Months Avg Credit"
             placeholder="2000"
             type="number"
+            formatWithCommas={true}
           />
         </>
       )}

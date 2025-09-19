@@ -16,12 +16,16 @@ import {
 } from "@/constants/Metrics";
 import {
   useGetCustomerDataMutation,
+  useGetEmiratesDropDownValuesQuery,
+  useOnSendingEmailMutation,
   useSalaryCertificateMutation,
   useTradeLicenseMutation,
 } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import calculateAge from "@/utils/calculateAge";
+import { getUaeFtsCompletedMail, getUaeFtsInitiatedMail } from "@/utils/sendEmailUae";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useState } from "react";
@@ -43,6 +47,7 @@ export default function BorrowerIncomeScreen() {
   const [tradeLicenseOCR] = useTradeLicenseMutation();
   const [salaryCertificateOCR] = useSalaryCertificateMutation();
   const [getCustomerData] = useGetCustomerDataMutation();
+  const [sendEmail] = useOnSendingEmailMutation();
   const { t } = useTranslation();
   const { updateField, nextStep, prevStep, formData } = useApplicationStore();
   const { control, handleSubmit, setValue, watch, getValues } = useForm({
@@ -200,15 +205,32 @@ export default function BorrowerIncomeScreen() {
     setIsLoading3(false);
   };
 
-  const salaryIncomeUaeFtsGetStatus = () => {
+  const salaryIncomeUaeFtsGetStatus = async () => {
     setIsLoading5(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       if (salaryIncomeUaeFtsGetStatusValue === "") {
         setValue(fieldNames.borrowerFtsStatus, "Initiated");
+        const body = {
+          subject: getUaeFtsInitiatedMail(formData[fieldNames.borrowerName])
+            .subject,
+          mailBody: getUaeFtsInitiatedMail(formData[fieldNames.borrowerName])
+            .body,
+          mailTo: formData[fieldNames.borrowerEmailId],
+        };
+        const response = await sendEmail(body).unwrap();
       } else if (salaryIncomeUaeFtsGetStatusValue === "Initiated") {
         setValue(fieldNames.borrowerFtsStatus, "Pending");
       } else if (salaryIncomeUaeFtsGetStatusValue === "Pending") {
+
         setValue(fieldNames.borrowerFtsStatus, "Completed");
+        const body = {
+          subject: getUaeFtsCompletedMail(formData[fieldNames.borrowerName])
+            .subject,
+          mailBody: getUaeFtsCompletedMail(formData[fieldNames.borrowerName])
+            .body,
+          mailTo: formData[fieldNames.borrowerEmailId],
+        };
+        const response = await sendEmail(body).unwrap();
       }
       setIsLoading5(false);
     }, 2000);
@@ -349,14 +371,21 @@ export default function BorrowerIncomeScreen() {
       iconName: "swap-vertical",
     },
   ];
-  const emiratesOptions = [
-    { label: "Dubai", value: "Dubai" },
-    { label: "Abu Dhabi", value: "Abu Dhabi" },
-    { label: "Sharjah", value: "Sharjah" },
-    { label: "Ajman", value: "Ajman" },
-    { label: "Umm Al-Quwain", value: "Umm Al-Quwain" },
-    { label: "Fujairah", value: "Fujairah" },
-    { label: "Ras Al Khaimah", value: "Ras Al Khaimah" },
+  const { data: emirates } = useGetEmiratesDropDownValuesQuery();
+
+  const emiratesOptions = emirates?.data ?? [
+    {
+      label: "Abu Dhabi",
+      value: "Abu Dhabi",
+    },
+    {
+      label: "Ajman",
+      value: "Ajman",
+    },
+    {
+      label: "Dubai",
+      value: "Dubai",
+    },
   ];
   const statusOptions = [
     { label: "Initiated", value: "Initiated" },
@@ -457,7 +486,7 @@ export default function BorrowerIncomeScreen() {
             name={fieldNames.borrowerEmployerName}
             label="Employer Name"
             type="text"
-            placeholder="Newgen Software"
+            placeholder={placeHoldersNames.EmployerName}
           />
           <CustomDatePicker
             control={control}
@@ -475,7 +504,7 @@ export default function BorrowerIncomeScreen() {
             control={control}
             name={fieldNames.borrowerTotalExp}
             label="Total Experience (Months)"
-            placeholder="36"
+            placeholder={placeHoldersNames.TotalExperience}
             type="number"
           />
           <CustomDropDown
@@ -518,7 +547,7 @@ export default function BorrowerIncomeScreen() {
                 control={control}
                 name={fieldNames.borrowerBankingCode}
                 label="Banking Code"
-                placeholder="30"
+                placeholder={placeHoldersNames.BankingCode}
                 type="text"
               />
               <CustomDatePicker
@@ -591,6 +620,7 @@ export default function BorrowerIncomeScreen() {
                 label="Monthly Salary (Bank Transfer)"
                 placeholder="2000"
                 type="number"
+                formatWithCommas={true}
               />
               <CustomInput
                 control={control}
@@ -598,6 +628,7 @@ export default function BorrowerIncomeScreen() {
                 label="Monthly Salary (AECB)"
                 placeholder="2000"
                 type="number"
+                formatWithCommas={true}
               />
             </>
           ) : (
@@ -719,7 +750,7 @@ export default function BorrowerIncomeScreen() {
                 control={control}
                 name={fieldNames.borrowerBankingCode}
                 label="Banking Code"
-                placeholder="30"
+                placeholder={placeHoldersNames.BankingCode}
                 type="text"
               />
               <CustomDatePicker
@@ -790,29 +821,31 @@ export default function BorrowerIncomeScreen() {
                 control={control}
                 name={fieldNames.borrowerBankName}
                 label="Bank Name"
-                placeholder="Bank Bank"
+                placeholder={placeHoldersNames.BankName}
                 type="text"
               />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerAccountNo}
                 label="Account No"
-                placeholder="00090435412"
+                placeholder={placeHoldersNames.AccountNumber}
                 type="number"
               />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerLast6MonthsADB}
                 label="Last 6 Months ADB"
-                placeholder="2000"
+                placeholder={placeHoldersNames.Number}
                 type="number"
+                formatWithCommas={true}
               />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerLast6MonthsAvgCredit}
                 label="Last 6 Months Avg Credit"
-                placeholder="2000"
+                placeholder={placeHoldersNames.Number}
                 type="number"
+                formatWithCommas={true}
               />
             </>
           ) : (

@@ -3,6 +3,7 @@ import CustomInput from "@/components/CustomInput";
 import FormSummaryLayout from "@/components/FormSummary/FormSummaryLayout";
 import { fontSize, fontWeight } from "@/constants/Metrics";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React from "react";
@@ -46,14 +47,14 @@ const DispatchSummary = () => {
       <CustomInput
         name={fieldNames.borrowerName}
         label="Name on Card"
-        placeholder="Enter your name"
+        placeholder={placeHoldersNames.Name}
         type="text"
         control={control}
       />
       <CustomInput
         name={fieldNames.supplementaryCardName}
         label="Supplementary Card Name"
-        placeholder=""
+        placeholder={placeHoldersNames.SupplementaryCard}
         type="text"
         control={control}
       />
@@ -63,14 +64,14 @@ const DispatchSummary = () => {
       <CustomInput
         name={fieldNames.dispatchAddressLine1}
         label="Address Line 1"
-        placeholder="Enter your address"
+        placeholder={placeHoldersNames.Address}
         type="text"
         control={control}
       />
       <CustomInput
         name={fieldNames.dispatchAddressLine2}
         label="Address Line 2"
-        placeholder="Enter your address"
+        placeholder={placeHoldersNames.Address}
         type="text"
         control={control}
       />

@@ -8,7 +8,9 @@ import {
   spacing,
   spacingVertical,
 } from "@/constants/Metrics";
+import { useGetEmiratesBranchDropDownValuesQuery, useGetEmiratesDropDownValuesQuery } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import Checkbox from "expo-checkbox";
 import { router } from "expo-router";
@@ -33,17 +35,41 @@ const DispatchDetails = () => {
 
   const dispatchType = watch("dispatchType") ?? "Mailing Address";
 
-  const emiratesOptions = [
-    { label: "Dubai", value: "Dubai" },
-    { label: "Saudi Arabia", value: "Saudi Arabia" },
+  const { data: emirates } = useGetEmiratesDropDownValuesQuery();
+
+ const emiratesOptions = emirates?.data ?? [
+    {
+      label: "Abu Dhabi",
+      value: "Abu Dhabi",
+    },
+    {
+      label: "Ajman",
+      value: "Ajman",
+    },
+    {
+      label: "Dubai",
+      value: "Dubai",
+    },
   ];
   const countryOptions = [
     { label: "India", value: "IN" },
     { label: "United States", value: "US" },
     { label: "Germany", value: "DE" },
   ];
-  const branchOptions = [{ label: "Bur Dubai", value: "Bur Dubai" }];
 
+   const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(formData[fieldNames.dispatchBranchName],{skip:!formData[fieldNames.dispatchBranchName]});
+
+     const emiratesBranches = emiratesBranch?.data ?? [
+       {
+            "label": "Ajman Corniche",
+            "value": "Ajman Corniche"
+        },
+        {
+            "label": "Ajman Free Zone",
+            "value": "Ajman Free Zone"
+        }
+  ];
+  
   const [modifyName, setModifyName] = useState(false);
   const [needSupCard, setNeedSupCard] = useState(false);
   const [mailing, setMailing] = useState(false);
@@ -86,7 +112,7 @@ const DispatchDetails = () => {
         control={control}
         name={fieldNames.borrowerName}
         label="Name"
-        placeholder="Enter your name"
+        placeholder={placeHoldersNames.Name}
         type="text"
         editable={modifyName} 
       />
@@ -126,7 +152,7 @@ const DispatchDetails = () => {
           control={control}
           name={fieldNames.supplementaryCardName}
           label="Supplementary Card Name"
-          placeholder="Enter supplementary card name"
+          placeholder={placeHoldersNames.SupplementaryCard}
           type="text"
         />
       ) : (
@@ -159,14 +185,14 @@ const DispatchDetails = () => {
                 control={control}
                 name={fieldNames.dispatchAddressLine1}
                 label="Address Line 1"
-                placeholder="Enter your address"
+                placeholder={placeHoldersNames.Address}
                 type="text"
               />
               <CustomInput
                 control={control}
                 name={fieldNames.dispatchAddressLine2}
                 label="Address Line 2"
-                placeholder="Enter your address"
+                placeholder={placeHoldersNames.Address}
                 type="text"
               />
 
@@ -211,7 +237,7 @@ const DispatchDetails = () => {
               <CustomDropDown
                 name={fieldNames.dispatchBranchName}
                 label={"Branch Name"}
-                data={branchOptions}
+                data={emiratesBranches}
                 control={control}
               />
 

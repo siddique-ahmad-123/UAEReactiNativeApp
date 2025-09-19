@@ -9,7 +9,6 @@ import SegmentedControl from "@/components/SegmentControl";
 import { spacingVertical } from "@/constants/Metrics";
 import {
   useEmiratesIdMutation,
-  useGetEmiratesBranchDropDownValuesQuery,
   useGetEmiratesDropDownValuesQuery,
   useGetExistingCustomerDataMutation,
   usePassportMutation,
@@ -17,6 +16,7 @@ import {
 } from "@/redux/api/creditCardAPI";
 import { customerDataMapper } from "@/schemas/burrowerDataMapper";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import calculateAge from "@/utils/calculateAge";
 import {
@@ -29,8 +29,7 @@ import { router } from "expo-router";
 import { t } from "i18next";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
+import { StyleSheet, View, Modal, Text, TouchableOpacity } from "react-native";
 const BorrowerPersonalInformation = () => {
   const [isloading, setIsLoading] = useState(false);
   const [isloading1, setIsLoading1] = useState(false);
@@ -199,12 +198,8 @@ const BorrowerPersonalInformation = () => {
   ];
 
   const { data: emirates } = useGetEmiratesDropDownValuesQuery();
-
-  const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(
-    formData[fieldNames.borrowerEmirates],
-    { skip: !formData[fieldNames.borrowerEmirates] }
-  );
-
+  
+ 
   const emiratesOptions = emirates?.data ?? [
     {
       label: "Abu Dhabi",
@@ -219,21 +214,7 @@ const BorrowerPersonalInformation = () => {
       value: "Dubai",
     },
   ];
-
-  const emiratesBranches = emiratesBranch?.data ?? [
-    {
-      label: "Abu Dhabi",
-      value: "Abu Dhabi",
-    },
-    {
-      label: "Ajman",
-      value: "Ajman",
-    },
-    {
-      label: "Dubai",
-      value: "Dubai",
-    },
-  ];
+  
 
   const countryOptions = [
     { label: "India", value: "IN" },
@@ -298,7 +279,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerName}
         label="Name"
-        placeholder="Name"
+        placeholder={placeHoldersNames.Name}
         type="text"
       />
       <CustomDatePicker
@@ -311,7 +292,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerAge}
         label="Age"
-        placeholder="Age"
+        placeholder={placeHoldersNames.Age}
         type="number"
       />
       <CustomDropDown
@@ -336,7 +317,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerEidaNo}
         label="EIDA No"
-        placeholder="Enter your EIDA Number"
+        placeholder={placeHoldersNames.EIDA}
         type="number"
       />
       <CustomDatePicker
@@ -356,7 +337,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerPassportNo}
         label="Passport No"
-        placeholder="Enter your passport Number"
+        placeholder={placeHoldersNames.PassportNumber}
         type="number"
       />
       <CustomDatePicker
@@ -378,7 +359,7 @@ const BorrowerPersonalInformation = () => {
             control={control}
             name={fieldNames.borrowerVisaNo}
             label="Visa No"
-            placeholder="Enter your visa Number"
+            placeholder={placeHoldersNames.VisaNumber}
             type="number"
           />
 
@@ -400,7 +381,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerEmailId}
         label="Email ID"
-        placeholder="Enter your email id"
+        placeholder={placeHoldersNames.Email}
         type="email"
       />
 
@@ -408,7 +389,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerMobileNo}
         label="Mobile No"
-        placeholder="Enter your mobile number"
+        placeholder={placeHoldersNames.MobileNumber}
         type="number"
       />
 
@@ -416,7 +397,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerVintage}
         label="Residence Vintage(Months)"
-        placeholder="Enter your residence vintage"
+        placeholder={placeHoldersNames.ResidenceVintage}
         type="number"
       />
 
@@ -424,7 +405,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerNoOfDependents}
         label="No of Dependents"
-        placeholder="Enter the number of dependents"
+        placeholder={placeHoldersNames.DependentsNumber}
         type="number"
       />
 
@@ -434,14 +415,14 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerAddressLine1}
         label="Address Line 1"
-        placeholder="Enter your address"
+        placeholder={placeHoldersNames.Address}
         type="text"
       />
       <CustomInput
         control={control}
         name={fieldNames.borrowerAddressLine2}
         label="Address Line 2"
-        placeholder="Enter your address"
+        placeholder={placeHoldersNames.Address}
         type="text"
       />
 

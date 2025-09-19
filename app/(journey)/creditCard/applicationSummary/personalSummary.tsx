@@ -2,7 +2,9 @@ import CustomDropDown from "@/components/CustomDropDown";
 import CustomInput from "@/components/CustomInput";
 import FormSummaryLayout from "@/components/FormSummary/FormSummaryLayout";
 import { fontSize, fontWeight } from "@/constants/Metrics";
+import { useGetEmiratesDropDownValuesQuery } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import { getDateDifferenceFromToday } from "@/utils/dateParser";
 import { router } from "expo-router";
@@ -61,10 +63,22 @@ const PersonalSummary = () => {
     { label: "Persians", value: "Persians" },
   ];
 
-  const emiratesOptions = [
-    { label: "Dubai", value: "Dubai" },
-    { label: "Saudi Arabia", value: "Saudi Arabia" },
-  ];
+  const { data: emirates } = useGetEmiratesDropDownValuesQuery();
+      
+      const emiratesOptions = emirates?.data ?? [
+        {
+          label: "Abu Dhabi",
+          value: "Abu Dhabi",
+        },
+        {
+          label: "Ajman",
+          value: "Ajman",
+        },
+        {
+          label: "Dubai",
+          value: "Dubai",
+        },
+      ];
 
   const validityOptions = [
     { label: "Yes", value: "Yes" },
@@ -86,7 +100,7 @@ const PersonalSummary = () => {
           <CustomInput
             name={fieldNames.borrowerName}
             label="Name"
-            placeholder="Name"
+            placeholder={placeHoldersNames.Name}
             type="text"
             control={control}
           />
@@ -101,7 +115,7 @@ const PersonalSummary = () => {
           <CustomInput
             name={fieldNames.borrowerAge}
             label="Age"
-            placeholder="Age"
+            placeholder={placeHoldersNames.Age}
             type="number"
             control={control}
           />
@@ -116,7 +130,7 @@ const PersonalSummary = () => {
           <CustomInput
             name={fieldNames.borrowerEidaNo}
             label="Emirates ID"
-            placeholder="Enter your EIDA Number"
+            placeholder={placeHoldersNames.EIDA}
             type="number"
             control={control}
           />
@@ -124,7 +138,7 @@ const PersonalSummary = () => {
           <CustomInput
             name={fieldNames.borrowerPassportNo}
             label="Passport No"
-            placeholder="Enter your passport Number"
+            placeholder={placeHoldersNames.PassportNumber}
             type="number"
             control={control}
           />
@@ -132,7 +146,7 @@ const PersonalSummary = () => {
           <CustomInput
             name={fieldNames.borrowerVintage}
             label="Residence Vintage(Months)"
-            placeholder="Enter your residence vintage"
+            placeholder={placeHoldersNames.ResidenceVintage}
             type="number"
             control={control}
           />
@@ -140,7 +154,7 @@ const PersonalSummary = () => {
           <CustomInput
             name={fieldNames.borrowerNoOfDependents}
             label="No of Dependents"
-            placeholder="Enter the number of dependents"
+            placeholder={placeHoldersNames.DependentsNumber}
             type="number"
             control={control}
           />

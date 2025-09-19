@@ -58,7 +58,7 @@ const ApplicationNotApproved = () => {
       >
         <View style={styles.image}>
           <Image
-            source={require("../../../../assets/images/amico.png")}
+            source={require("../../../../assets/images/animatedImg.png")}
             style={{ width: 200, height: 200 }}
             resizeMode="contain"
           />
