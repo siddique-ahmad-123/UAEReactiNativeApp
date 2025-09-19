@@ -334,7 +334,7 @@ const IncomeSummary = () => {
           <CustomInput
             name=""
             label="Monthly Additional Income"
-            placeholder={placeHoldersNames.Number}
+            placeholder={placeHoldersNames.MonthlyAddIncom}
             type="number"
             control={control}
             formatWithCommas={true}
@@ -343,7 +343,7 @@ const IncomeSummary = () => {
           <CustomInput
             name=""
             label="Total Income"
-            placeholder={placeHoldersNames.Number}
+            placeholder={placeHoldersNames.TotalIncome}
             type="number"
             control={control}
             formatWithCommas={true}
