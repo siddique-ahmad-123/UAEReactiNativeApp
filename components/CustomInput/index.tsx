@@ -30,7 +30,11 @@ interface CustomInputProps {
   secureTextEntry?: boolean;
   numberOfLines?: number;
   value?: string;
-  onChangeText?: (v: string) => void;
+  /**
+   * external onChange callback you can pass from parent.
+   * Receives (rawValue, formattedValue?) where formattedValue is provided when formatWithCommas = true
+   */
+  onChangeText?: (v: string, formatted?: string) => void;
   keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
   maxLength?: number;
   editable?: boolean;
@@ -116,34 +120,47 @@ const CustomInput = ({
     }
   };
 
-  // 🔹 Formatter helpers
-  const formatNumber = (text: string) => {
-    const rawValue = text.replace(/,/g, "");
+  // —— Replace existing formatNumber with this ——
+  const formatNumber = (text: string | number | null | undefined) => {
+    // coerce everything to string so .replace won't crash
+    const str = text == null ? "" : String(text);
+    const rawValue = str.replace(/,/g, "");
     if (rawValue === "") return "";
+    // allow numeric strings only
     if (!isNaN(Number(rawValue))) {
       return Number(rawValue).toLocaleString("en-US");
     }
-    return text;
+    return str;
   };
 
-  const handleTextChange = (text: string, onChange: (v: string) => void) => {
+  // —— Replace existing handleTextChange with this ——
+  const handleTextChange = (
+    text: string,
+    onChange: (v: string) => void,
+    externalOnChange?: (v: string, formatted?: string) => void
+  ) => {
     if ((type === "number" || type === "currency") && formatWithCommas) {
-      const rawValue = text.replace(/,/g, "");
-      const formatted = formatNumber(text);
+      const rawValue = String(text).replace(/,/g, "");
+      const formatted = formatNumber(text); // safe now
       setLocalValue(formatted);
-      onChange(rawValue); // store raw numeric string
+      // keep form state numeric-friendly: pass raw string (you can change to Number(rawValue) if you prefer)
+      onChange(rawValue);
+      if (externalOnChange) externalOnChange(rawValue, formatted);
     } else {
-      setLocalValue(text);
-      onChange(text);
+      const str = String(text);
+      setLocalValue(str);
+      onChange(str);
+      if (externalOnChange) externalOnChange(str);
     }
   };
 
-  // 🔹 Shared render block
+  // 🔹 Shared render block (added externalOnChange param)
   const renderInput = (
     value: string,
     onChange: (v: string) => void,
     onBlur?: () => void,
-    error?: any
+    error?: any,
+    externalOnChange?: (v: string, formatted?: string) => void
   ) => {
     const displayValue =
       (type === "number" || type === "currency") && formatWithCommas
@@ -194,7 +211,9 @@ const CustomInput = ({
               placeholder={placeholder}
               placeholderTextColor="#aaa"
               value={displayValue}
-              onChangeText={(text) => handleTextChange(text, onChange)}
+              onChangeText={(text) =>
+                handleTextChange(text, onChange, externalOnChange)
+              }
               onBlur={onBlur}
               secureTextEntry={type === "password" ? secure : false}
               multiline={type === "textarea"}
@@ -240,17 +259,22 @@ const CustomInput = ({
         render={({
           field: { onChange, onBlur, value },
           fieldState: { error },
-        }) => renderInput(value ?? "", onChange, onBlur, error)}
+        }) =>
+          // pass external onChangeText so it is fired as well
+          renderInput(value ?? "", onChange, onBlur, error, onChangeText)
+        }
       />
     );
   }
 
   // 🔹 If no control → fallback to uncontrolled TextInput
+  // here: onChange is local setLocalValue, externalOnChange is the prop onChangeText
   return renderInput(
     value ?? localValue,
-    onChangeText ?? setLocalValue,
+    setLocalValue,
     undefined,
-    undefined
+    undefined,
+    onChangeText
   );
 };
 

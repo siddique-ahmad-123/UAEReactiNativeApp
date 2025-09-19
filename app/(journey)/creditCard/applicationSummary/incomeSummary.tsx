@@ -26,21 +26,16 @@ const IncomeSummary = () => {
   };
 
   const borrowerType = watch("borrowerType") ?? "Borrower";
-
   const borrowerIncomeType = watch(fieldNames.borrowerIncomeType) ?? "Salaried";
-
   const borrowerSalary = watch(fieldNames.borrowerMonthlySalaryAECB);
-  const borrowerAddIncome = watch("borrowerAddIncome");
 
-  // const calculateTotalIncome = () => {
-  //   console.log("borrowerSalary: " + formData[fieldNames.borrowerMonthlySalaryAECB]);
-  //   console.log("borrowerAddIncome: " + borrowerAddIncome);
-  //   setValue(
-  //     "borrowerSalaryTotalIncome",
-  //     formData[fieldNames.borrowerMonthlySalaryAECB] +
-  //       parseInt(borrowerAddIncome)
-  //   );
-  // };
+  const calculateTotalIncome = (v:string) => {
+    setValue(
+      "borrowerSalaryTotalIncome",
+     parseInt(borrowerSalary) +
+        parseInt(v)
+    );
+  };
 
   const theme = useTheme();
   const styles = StyleSheet.create({
@@ -134,6 +129,7 @@ const IncomeSummary = () => {
                 type="number"
                 control={control}
                 formatWithCommas={true}
+                onChangeText={calculateTotalIncome}
               />
               <CustomInput
                 name=""

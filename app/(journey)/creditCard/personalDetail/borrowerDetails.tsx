@@ -281,6 +281,7 @@ const BorrowerPersonalInformation = () => {
         label="Name"
         placeholder={placeHoldersNames.Name}
         type="text"
+        
       />
       <CustomDatePicker
         control={control}
