@@ -10,10 +10,11 @@ export const placeHoldersNames = {
   Verification:"Varification Status",
   Number:"2000",
   BusinessName:"Business Name",
-  Age:"Age",
+  Age:"Enter Your Age",
   EIDA:"Enter Your EIDA No.",
   PassportNumber:"Enter Your Passport Number",
   ResidenceVintage:"Enter Your Residence Vintage",
-  DependentsNumber:"Enter The Number of Dependents"
+  DependentsNumber:"Enter The Number of Dependents",
+  VisaNumber:"Enter Visa Number",
 
 }
