@@ -21,6 +21,7 @@ import {
   useTradeLicenseMutation,
 } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import calculateAge from "@/utils/calculateAge";
 import { Ionicons } from "@expo/vector-icons";
@@ -350,22 +351,22 @@ export default function BorrowerIncomeScreen() {
       iconName: "swap-vertical",
     },
   ];
-const { data: emirates } = useGetEmiratesDropDownValuesQuery();
-    
-    const emiratesOptions = emirates?.data ?? [
-      {
-        label: "Abu Dhabi",
-        value: "Abu Dhabi",
-      },
-      {
-        label: "Ajman",
-        value: "Ajman",
-      },
-      {
-        label: "Dubai",
-        value: "Dubai",
-      },
-    ];
+  const { data: emirates } = useGetEmiratesDropDownValuesQuery();
+
+  const emiratesOptions = emirates?.data ?? [
+    {
+      label: "Abu Dhabi",
+      value: "Abu Dhabi",
+    },
+    {
+      label: "Ajman",
+      value: "Ajman",
+    },
+    {
+      label: "Dubai",
+      value: "Dubai",
+    },
+  ];
   const statusOptions = [
     { label: "Initiated", value: "Initiated" },
     { label: "Pending", value: "Pending" },
@@ -465,7 +466,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             name={fieldNames.borrowerEmployerName}
             label="Employer Name"
             type="text"
-            placeholder="Newgen Software"
+            placeholder={placeHoldersNames.EmployerName}
           />
           <CustomDatePicker
             control={control}
@@ -483,7 +484,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             control={control}
             name={fieldNames.borrowerTotalExp}
             label="Total Experience (Months)"
-            placeholder="36"
+            placeholder={placeHoldersNames.TotalExperience}
             type="number"
           />
           <CustomDropDown
@@ -526,7 +527,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
                 control={control}
                 name={fieldNames.borrowerBankingCode}
                 label="Banking Code"
-                placeholder="30"
+                placeholder={placeHoldersNames.BankingCode}
                 type="text"
               />
               <CustomDatePicker
@@ -599,6 +600,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
                 label="Monthly Salary (Bank Transfer)"
                 placeholder="2000"
                 type="number"
+                formatWithCommas={true}
               />
               <CustomInput
                 control={control}
@@ -606,6 +608,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
                 label="Monthly Salary (AECB)"
                 placeholder="2000"
                 type="number"
+                formatWithCommas={true}
               />
             </>
           ) : (
@@ -727,7 +730,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
                 control={control}
                 name={fieldNames.borrowerBankingCode}
                 label="Banking Code"
-                placeholder="30"
+                placeholder={placeHoldersNames.BankingCode}
                 type="text"
               />
               <CustomDatePicker
@@ -798,29 +801,31 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
                 control={control}
                 name={fieldNames.borrowerBankName}
                 label="Bank Name"
-                placeholder="Bank Bank"
+                placeholder={placeHoldersNames.BankName}
                 type="text"
               />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerAccountNo}
                 label="Account No"
-                placeholder="00090435412"
+                placeholder={placeHoldersNames.AccountNumber}
                 type="number"
               />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerLast6MonthsADB}
                 label="Last 6 Months ADB"
-                placeholder="2000"
+                placeholder={placeHoldersNames.Number}
                 type="number"
+                formatWithCommas={true}
               />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerLast6MonthsAvgCredit}
                 label="Last 6 Months Avg Credit"
-                placeholder="2000"
+                placeholder={placeHoldersNames.Number}
                 type="number"
+                formatWithCommas={true}
               />
             </>
           ) : (

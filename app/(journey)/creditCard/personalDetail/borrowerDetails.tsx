@@ -16,6 +16,7 @@ import {
 } from "@/redux/api/creditCardAPI";
 import { customerDataMapper } from "@/schemas/burrowerDataMapper";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import calculateAge from "@/utils/calculateAge";
 import {
@@ -278,7 +279,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerName}
         label="Name"
-        placeholder="Name"
+        placeholder={placeHoldersNames.Name}
         type="text"
       />
       <CustomDatePicker
@@ -291,7 +292,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerAge}
         label="Age"
-        placeholder="Age"
+        placeholder={placeHoldersNames.Age}
         type="number"
       />
       <CustomDropDown
@@ -316,7 +317,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerEidaNo}
         label="EIDA No"
-        placeholder="Enter your EIDA Number"
+        placeholder={placeHoldersNames.EIDA}
         type="number"
       />
       <CustomDatePicker
@@ -336,7 +337,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerPassportNo}
         label="Passport No"
-        placeholder="Enter your passport Number"
+        placeholder={placeHoldersNames.PassportNumber}
         type="number"
       />
       <CustomDatePicker
@@ -358,7 +359,7 @@ const BorrowerPersonalInformation = () => {
             control={control}
             name={fieldNames.borrowerVisaNo}
             label="Visa No"
-            placeholder="Enter your visa Number"
+            placeholder={placeHoldersNames.VisaNumber}
             type="number"
           />
 
@@ -380,7 +381,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerEmailId}
         label="Email ID"
-        placeholder="Enter your email id"
+        placeholder={placeHoldersNames.Email}
         type="email"
       />
 
@@ -388,7 +389,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerMobileNo}
         label="Mobile No"
-        placeholder="Enter your mobile number"
+        placeholder={placeHoldersNames.MobileNumber}
         type="number"
       />
 
@@ -396,7 +397,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerVintage}
         label="Residence Vintage(Months)"
-        placeholder="Enter your residence vintage"
+        placeholder={placeHoldersNames.ResidenceVintage}
         type="number"
       />
 
@@ -404,7 +405,7 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerNoOfDependents}
         label="No of Dependents"
-        placeholder="Enter the number of dependents"
+        placeholder={placeHoldersNames.DependentsNumber}
         type="number"
       />
 
@@ -414,14 +415,14 @@ const BorrowerPersonalInformation = () => {
         control={control}
         name={fieldNames.borrowerAddressLine1}
         label="Address Line 1"
-        placeholder="Enter your address"
+        placeholder={placeHoldersNames.Address}
         type="text"
       />
       <CustomInput
         control={control}
         name={fieldNames.borrowerAddressLine2}
         label="Address Line 2"
-        placeholder="Enter your address"
+        placeholder={placeHoldersNames.Address}
         type="text"
       />
 

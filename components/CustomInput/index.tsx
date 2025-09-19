@@ -34,6 +34,7 @@ interface CustomInputProps {
   keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
   maxLength?: number;
   editable?: boolean;
+  formatWithCommas?: boolean; // 🔹 new prop
 }
 
 const CustomInput = ({
@@ -50,6 +51,7 @@ const CustomInput = ({
   keyboardType,
   maxLength,
   editable,
+  formatWithCommas = false, // 🔹 default false
 }: CustomInputProps) => {
   const [secure, setSecure] = useState(type === "password");
   const [localValue, setLocalValue] = useState(""); // for uncontrolled mode
@@ -81,7 +83,6 @@ const CustomInput = ({
       fontWeight: fontWeight.medium,
     },
     labelLine: {
-      // height: 1.5,
       marginLeft: spacing.md,
     },
     input: {
@@ -115,90 +116,119 @@ const CustomInput = ({
     }
   };
 
-  // 🔹 Shared render block (used for both controlled & uncontrolled)
+  // 🔹 Formatter helpers
+  const formatNumber = (text: string) => {
+    const rawValue = text.replace(/,/g, "");
+    if (rawValue === "") return "";
+    if (!isNaN(Number(rawValue))) {
+      return Number(rawValue).toLocaleString("en-US");
+    }
+    return text;
+  };
+
+  const handleTextChange = (text: string, onChange: (v: string) => void) => {
+    if ((type === "number" || type === "currency") && formatWithCommas) {
+      const rawValue = text.replace(/,/g, "");
+      const formatted = formatNumber(text);
+      setLocalValue(formatted);
+      onChange(rawValue); // store raw numeric string
+    } else {
+      setLocalValue(text);
+      onChange(text);
+    }
+  };
+
+  // 🔹 Shared render block
   const renderInput = (
     value: string,
     onChange: (v: string) => void,
     onBlur?: () => void,
     error?: any
-  ) => (
-    <View>
-      <View
-        style={[
-          styles.container,
-          getVariantStyle(),
-          {
-            borderColor: error ? "red" : theme.colors.inputFieldBorder,
-            backgroundColor: theme.colors.background,
-          },
-        ]}
-      >
-        {/* Label */}
+  ) => {
+    const displayValue =
+      (type === "number" || type === "currency") && formatWithCommas
+        ? formatNumber(value ?? localValue)
+        : value ?? localValue;
+
+    return (
+      <View>
         <View
-          pointerEvents="none"
           style={[
-            styles.labelContainer,
-            { backgroundColor: theme.colors.background },
+            styles.container,
+            getVariantStyle(),
+            {
+              borderColor: error ? "red" : theme.colors.inputFieldBorder,
+              backgroundColor: theme.colors.background,
+            },
           ]}
         >
-          <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
-            {label}
-            {required && <Text style={{ color: "red" }}> *</Text>}
-          </Text>
+          {/* Label */}
           <View
+            pointerEvents="none"
             style={[
-              styles.labelLine,
+              styles.labelContainer,
               { backgroundColor: theme.colors.background },
             ]}
-          />
+          >
+            <Text style={[styles.label, { color: theme.colors.primaryColor }]}>
+              {label}
+              {required && <Text style={{ color: "red" }}> *</Text>}
+            </Text>
+            <View
+              style={[
+                styles.labelLine,
+                { backgroundColor: theme.colors.background },
+              ]}
+            />
+          </View>
+
+          {/* Input Row */}
+          <View style={styles.inputRow}>
+            <TextInput
+              style={[
+                styles.input,
+                { color: theme.colors.textPrimary },
+                { flex: type === "textarea" ? 0 : 1 },
+                type === "textarea" && styles.textArea,
+              ]}
+              placeholder={placeholder}
+              placeholderTextColor="#aaa"
+              value={displayValue}
+              onChangeText={(text) => handleTextChange(text, onChange)}
+              onBlur={onBlur}
+              secureTextEntry={type === "password" ? secure : false}
+              multiline={type === "textarea"}
+              numberOfLines={type === "textarea" ? numberOfLines : 1}
+              keyboardType={
+                keyboardType ??
+                (type === "email"
+                  ? "email-address"
+                  : type === "number" || type === "currency"
+                  ? "numeric"
+                  : "default")
+              }
+              maxLength={maxLength}
+              editable={editable !== false}
+            />
+
+            {type === "password" && (
+              <TouchableOpacity onPress={() => setSecure(!secure)}>
+                <Ionicons
+                  name={secure ? "eye-off" : "eye"}
+                  size={fontSize.lg}
+                  color="#555"
+                  style={{ marginLeft: spacing.md }}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
 
-        {/* Input Row */}
-        <View style={styles.inputRow}>
-          <TextInput
-            style={[
-              styles.input,
-              { color: theme.colors.textPrimary },
-              { flex: type === "textarea" ? 0 : 1 },
-              type === "textarea" && styles.textArea,
-            ]}
-            placeholder={placeholder}
-            placeholderTextColor="#aaa"
-            value={value}
-            onChangeText={onChange}
-            onBlur={onBlur}
-            secureTextEntry={type === "password" ? secure : false}
-            multiline={type === "textarea"}
-            numberOfLines={type === "textarea" ? numberOfLines : 1}
-            keyboardType={
-              keyboardType ??
-              (type === "email"
-                ? "email-address"
-                : type === "number" || type === "currency"
-                ? "numeric"
-                : "default")
-            }
-            maxLength={maxLength}
-            editable={editable !== false} 
-          />
-
-          {type === "password" && (
-            <TouchableOpacity onPress={() => setSecure(!secure)}>
-              <Ionicons
-                name={secure ? "eye-off" : "eye"}
-                size={fontSize.lg}
-                color="#555"
-                style={{ marginLeft: spacing.md }}
-              />
-            </TouchableOpacity>
-          )}
-        </View>
+        {/* Error Message */}
+        {error && <Text style={styles.errorText}>{error.message}</Text>}
       </View>
-
-      {/* Error Message */}
-      {error && <Text style={styles.errorText}>{error.message}</Text>}
-    </View>
-  );
+    );
+  };
 
   // 🔹 If control is passed → use Controller (react-hook-form)
   if (control && name) {
