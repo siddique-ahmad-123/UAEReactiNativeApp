@@ -532,7 +532,7 @@ export default function BorrowerIncomeScreen() {
                 control={control}
                 name={fieldNames.borrowerEmiratesId}
                 label="Emirates ID"
-                placeholder="784838291032030"
+                placeholder="Enter Emirates ID"
                 type="text"
               />
               <CustomInput
@@ -626,7 +626,7 @@ export default function BorrowerIncomeScreen() {
                 control={control}
                 name={fieldNames.borrowerMonthlySalaryAECB}
                 label="Monthly Salary (AECB)"
-                placeholder="2000"
+                placeholder="Monthly Salary AECB"
                 type="number"
                 formatWithCommas={true}
               />
@@ -670,7 +670,7 @@ export default function BorrowerIncomeScreen() {
             name={fieldNames.borrowerNameOfBusiness}
             label="Name of Business"
             type="text"
-            placeholder="Newgen"
+            placeholder="Enter name of business"
           />
           <CustomDropDown
             control={control}
@@ -693,7 +693,7 @@ export default function BorrowerIncomeScreen() {
             control={control}
             name={fieldNames.borrowerVintage}
             label="Vintage (Months)"
-            placeholder="58"
+            placeholder="Enter vintage"
             type="number"
           />
           <CustomInput
@@ -701,7 +701,7 @@ export default function BorrowerIncomeScreen() {
             name={fieldNames.borrowerLicenseNo}
             label="License No"
             type="text"
-            placeholder="DLT34554"
+            placeholder="Enter your business license no"
           />
           <CustomDropDown
             control={control}
@@ -835,7 +835,7 @@ export default function BorrowerIncomeScreen() {
                 control={control}
                 name={fieldNames.borrowerLast6MonthsADB}
                 label="Last 6 Months ADB"
-                placeholder={placeHoldersNames.Number}
+                placeholder="Enter last 6 months ADB"
                 type="number"
                 formatWithCommas={true}
               />
@@ -843,7 +843,7 @@ export default function BorrowerIncomeScreen() {
                 control={control}
                 name={fieldNames.borrowerLast6MonthsAvgCredit}
                 label="Last 6 Months Avg Credit"
-                placeholder={placeHoldersNames.Number}
+                placeholder="Enter last 6 months avg credit"
                 type="number"
                 formatWithCommas={true}
               />

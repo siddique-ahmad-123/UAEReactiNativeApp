@@ -14,7 +14,6 @@ import {
   usePassportMutation,
   useVisaMutation,
 } from "@/redux/api/creditCardAPI";
-import { customerDataMapper } from "@/schemas/burrowerDataMapper";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
@@ -29,7 +28,7 @@ import { router } from "expo-router";
 import { t } from "i18next";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { StyleSheet, View, Modal, Text, TouchableOpacity } from "react-native";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 const BorrowerPersonalInformation = () => {
   const [isloading, setIsLoading] = useState(false);
   const [isloading1, setIsLoading1] = useState(false);
@@ -55,14 +54,59 @@ const BorrowerPersonalInformation = () => {
         ).unwrap();
         if (response?.status === 200 && response?.data?.customerData?.length) {
           const customer = response.data.customerData[0];
-          Object.entries(customerDataMapper).forEach(([apiKey, formField]) => {
-            const value = customer[apiKey];
-            if (value !== undefined && value !== null) {
-              setValue(formField, value, { shouldValidate: false });
-            }
-          });
+          // Object.entries(customerDataMapper).forEach(([apiKey, formField]) => {
+          //   const value = customer[apiKey];
+          //   if (value !== undefined && value !== null) {
+          //     setValue(formField, value, { shouldValidate: false });
+          //   }
+          // });
+          setValue(fieldNames.borrowerName, customer.Name);
+          setValue(
+            fieldNames.borrowerDOB,
+            parseFromDDMMYYYYWithSlash(customer.DOB)
+          );
+          setValue(fieldNames.borrowerGender, customer.Gender);
+          setValue(fieldNames.borrowerNationality, customer.Nationality);
+          setValue(
+            fieldNames.borrowerResidenceCountry,
+            customer["Residence Country"]
+          );
+          setValue(fieldNames.borrowerEidaNo, customer.EIDA_No);
+          setValue(
+            fieldNames.borrowerEidaIssueDate,
+            parseFromDDMMYYYYWithSlash(customer.EIDA_Issue_Date)
+          );
+          setValue(
+            fieldNames.borrowerEidaExpiryDate,
+            parseFromDDMMYYYYWithSlash(customer.EIDA_Expiry_Date)
+          );
+          setValue(fieldNames.borrowerPassportNo, customer.Passport_No);
+          setValue(
+            fieldNames.borrowerPassportIssueDate,
+            parseFromDDMMYYYYWithSlash(customer.Passport_Issue_Date)
+          );
+          setValue(
+            fieldNames.borrowerPassportExpiryDate,
+            parseFromDDMMYYYYWithSlash(customer.Passport_Expiry_Date)
+          );
+          setValue(fieldNames.borrowerVisaNo, customer.Visa_No);
+          setValue(
+            fieldNames.borrowerVisaIssueDate,
+            parseFromDDMMYYYYWithSlash(customer.Visa_Issue_Date)
+          );
+          setValue(
+            fieldNames.borrowerVisaExpiryDate,
+            parseFromDDMMYYYYWithSlash(customer.Visa_Expiry_Date)
+          );
+          setValue(fieldNames.borrowerEmailId, customer.Email_ID);
+          setValue(fieldNames.borrowerMobileNo, customer.Mobile_No);
+          setValue(fieldNames.borrowerAddressLine1, customer.Address_Line_1);
+          setValue(fieldNames.borrowerAddressLine2, customer.Address_Line_2);
+          setValue(fieldNames.borrowerEmirates, customer.Emirates);
+          setValue(fieldNames.borrowerCountry, customer.Country);
           if (customer.DOB) {
-            const dob = new Date(customer.DOB.split("-").reverse().join("-"));
+            const tempDob = parseFromDDMMYYYYWithSlash(customer.DOB) || "";
+            const dob = new Date(tempDob.split("/").reverse().join("/"));
             const age = calculateAge(dob);
             setValue(fieldNames.borrowerAge, age);
           }
@@ -198,8 +242,7 @@ const BorrowerPersonalInformation = () => {
   ];
 
   const { data: emirates } = useGetEmiratesDropDownValuesQuery();
-  
- 
+
   const emiratesOptions = emirates?.data ?? [
     {
       label: "Abu Dhabi",
@@ -214,7 +257,6 @@ const BorrowerPersonalInformation = () => {
       value: "Dubai",
     },
   ];
-  
 
   const countryOptions = [
     { label: "India", value: "IN" },
@@ -281,7 +323,6 @@ const BorrowerPersonalInformation = () => {
         label="Name"
         placeholder={placeHoldersNames.Name}
         type="text"
-        
       />
       <CustomDatePicker
         control={control}
