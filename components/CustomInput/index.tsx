@@ -30,7 +30,7 @@ interface CustomInputProps {
   secureTextEntry?: boolean;
   numberOfLines?: number;
   value?: string;
-  onChangeText?: (v: string) => void;
+  onChangeField?: (v: string | null) => void;
   keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
   maxLength?: number;
   editable?: boolean;
@@ -46,7 +46,7 @@ const CustomInput = ({
   required = false,
   numberOfLines = 4,
   value,
-  onChangeText,
+  onChangeField,
   keyboardType,
   maxLength,
   editable,
@@ -54,7 +54,10 @@ const CustomInput = ({
   const [secure, setSecure] = useState(type === "password");
   const [localValue, setLocalValue] = useState(""); // for uncontrolled mode
   const theme = useTheme();
-
+ const handleConfirm = (value: string, onChange?: (v: string) => void) => {
+  onChange ? onChange(value) : value;
+  onChangeField?.(value);
+};
   const styles = StyleSheet.create({
     container: {
       borderWidth: borderWidth.normal,
@@ -118,7 +121,7 @@ const CustomInput = ({
   // 🔹 Shared render block (used for both controlled & uncontrolled)
   const renderInput = (
     value: string,
-    onChange: (v: string) => void,
+    onChange?: (v: string) => void,
     onBlur?: () => void,
     error?: any
   ) => (
@@ -165,7 +168,7 @@ const CustomInput = ({
             placeholder={placeholder}
             placeholderTextColor="#aaa"
             value={value}
-            onChangeText={onChange}
+            onChangeText={(v)=>handleConfirm(v,onChange)}
             onBlur={onBlur}
             secureTextEntry={type === "password" ? secure : false}
             multiline={type === "textarea"}
@@ -217,8 +220,8 @@ const CustomInput = ({
 
   // 🔹 If no control → fallback to uncontrolled TextInput
   return renderInput(
-    value ?? localValue,
-    onChangeText ?? setLocalValue,
+    localValue,
+    undefined, 
     undefined,
     undefined
   );
