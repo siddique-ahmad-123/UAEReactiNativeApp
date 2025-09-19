@@ -274,6 +274,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             label="Monthly Salary (Bank Transfer)"
             placeholder="2000"
             type="number"
+            formatWithCommas={true}
           />
           <CustomInput
             control={control}
@@ -281,6 +282,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             label="Monthly Salary (AECB)"
             placeholder="2000"
             type="number"
+            formatWithCommas={true}
           />
         </>
       ) : (
@@ -438,6 +440,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             label="Last 6 Months ADB"
             placeholder="2000"
             type="number"
+            formatWithCommas={true}
           />
           <CustomInput
             control={control}
@@ -445,6 +448,7 @@ const { data: emirates } = useGetEmiratesDropDownValuesQuery();
             label="Last 6 Months Avg Credit"
             placeholder="2000"
             type="number"
+            formatWithCommas={true}
           />
         </>
       )}
