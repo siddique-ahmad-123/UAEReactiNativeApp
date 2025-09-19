@@ -16,6 +16,7 @@ import {
 } from "@/constants/Metrics";
 import {
   useGetCustomerDataMutation,
+  useGetEmiratesDropDownValuesQuery,
   useSalaryCertificateMutation,
   useTradeLicenseMutation,
 } from "@/redux/api/creditCardAPI";
@@ -349,15 +350,22 @@ export default function BorrowerIncomeScreen() {
       iconName: "swap-vertical",
     },
   ];
-  const emiratesOptions = [
-    { label: "Dubai", value: "Dubai" },
-    { label: "Abu Dhabi", value: "Abu Dhabi" },
-    { label: "Sharjah", value: "Sharjah" },
-    { label: "Ajman", value: "Ajman" },
-    { label: "Umm Al-Quwain", value: "Umm Al-Quwain" },
-    { label: "Fujairah", value: "Fujairah" },
-    { label: "Ras Al Khaimah", value: "Ras Al Khaimah" },
-  ];
+const { data: emirates } = useGetEmiratesDropDownValuesQuery();
+    
+    const emiratesOptions = emirates?.data ?? [
+      {
+        label: "Abu Dhabi",
+        value: "Abu Dhabi",
+      },
+      {
+        label: "Ajman",
+        value: "Ajman",
+      },
+      {
+        label: "Dubai",
+        value: "Dubai",
+      },
+    ];
   const statusOptions = [
     { label: "Initiated", value: "Initiated" },
     { label: "Pending", value: "Pending" },

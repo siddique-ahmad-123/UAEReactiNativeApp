@@ -9,7 +9,6 @@ import SegmentedControl from "@/components/SegmentControl";
 import { spacingVertical } from "@/constants/Metrics";
 import {
   useEmiratesIdMutation,
-  useGetEmiratesBranchDropDownValuesQuery,
   useGetEmiratesDropDownValuesQuery,
   useGetExistingCustomerDataMutation,
   usePassportMutation,
@@ -29,8 +28,7 @@ import { router } from "expo-router";
 import { t } from "i18next";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
+import { StyleSheet, View, Modal, Text, TouchableOpacity } from "react-native";
 const BorrowerPersonalInformation = () => {
   const [isloading, setIsLoading] = useState(false);
   const [isloading1, setIsLoading1] = useState(false);
@@ -199,12 +197,8 @@ const BorrowerPersonalInformation = () => {
   ];
 
   const { data: emirates } = useGetEmiratesDropDownValuesQuery();
-
-  const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(
-    formData[fieldNames.borrowerEmirates],
-    { skip: !formData[fieldNames.borrowerEmirates] }
-  );
-
+  
+ 
   const emiratesOptions = emirates?.data ?? [
     {
       label: "Abu Dhabi",
@@ -219,21 +213,7 @@ const BorrowerPersonalInformation = () => {
       value: "Dubai",
     },
   ];
-
-  const emiratesBranches = emiratesBranch?.data ?? [
-    {
-      label: "Abu Dhabi",
-      value: "Abu Dhabi",
-    },
-    {
-      label: "Ajman",
-      value: "Ajman",
-    },
-    {
-      label: "Dubai",
-      value: "Dubai",
-    },
-  ];
+  
 
   const countryOptions = [
     { label: "India", value: "IN" },

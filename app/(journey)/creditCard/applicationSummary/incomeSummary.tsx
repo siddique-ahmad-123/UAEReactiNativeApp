@@ -5,6 +5,7 @@ import FormSummaryLayout from "@/components/FormSummary/FormSummaryLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { fontSize, fontWeight } from "@/constants/Metrics";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import React from "react";
@@ -114,35 +115,35 @@ const IncomeSummary = () => {
                 name={fieldNames.borrowerVerificationStatus}
                 label="Verification Status"
                 type="text"
-                placeholder="Verification Status"
+                placeholder={placeHoldersNames.Verification}
                 control={control}
               />
 
               <CustomInput
                 name={fieldNames.borrowerMonthlySalaryAECB}
                 label="Monthly Salary Income"
-                placeholder="2000"
+                placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
               />
               <CustomInput
                 name="borrowerAddIncome"
                 label="Monthly Additional Income"
-                placeholder="2000"
+                placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
               />
               <CustomInput
                 name=""
                 label="Monthly Average Balance"
-                placeholder="2000"
+                placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
               />
               <CustomInput
                 name="borrowerSalaryTotalIncome"
                 label="Total Income"
-                placeholder="2000"
+                placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
               />
@@ -190,21 +191,21 @@ const IncomeSummary = () => {
               <CustomInput
                 name=""
                 label="Monthly Business Income"
-                placeholder="2000"
+                placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
               />
               <CustomInput
                 name=""
                 label="Monthly Additional Income"
-                placeholder="2000"
+                placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
               />
               <CustomInput
                 name=""
                 label="Total Income"
-                placeholder="2000"
+                placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
               />
@@ -240,35 +241,35 @@ const IncomeSummary = () => {
             name={fieldNames.coBorrowerVerificationStatus}
             label="Verification Status"
             type="text"
-            placeholder="Verification Status"
+            placeholder={placeHoldersNames.Verification}
             control={control}
           />
 
           <CustomInput
             name={fieldNames.coBorrowerMonthlySalaryAECB}
             label="Monthly Salary Income"
-            placeholder="2000"
+            placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
           />
           <CustomInput
             name=""
             label="Monthly Additional Income"
-            placeholder="2000"
+            placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
           />
           <CustomInput
             name=""
             label="Monthly Average Balance"
-            placeholder="2000"
+            placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
           />
           <CustomInput
             name=""
             label="Total Income"
-            placeholder="2000"
+            placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
           />
@@ -279,7 +280,7 @@ const IncomeSummary = () => {
           <CustomInput
             name={fieldNames.coBorrowerNameOfBusiness}
             label="Business Name"
-            placeholder="Business Name"
+            placeholder={placeHoldersNames.BusinessName}
             type="text"
             control={control}
           />
@@ -317,7 +318,7 @@ const IncomeSummary = () => {
           <CustomInput
             name=""
             label="Monthly Business Income"
-            placeholder="2000"
+            placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
           />
@@ -325,7 +326,7 @@ const IncomeSummary = () => {
           <CustomInput
             name=""
             label="Monthly Additional Income"
-            placeholder="2000"
+            placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
           />
@@ -333,7 +334,7 @@ const IncomeSummary = () => {
           <CustomInput
             name=""
             label="Total Income"
-            placeholder="2000"
+            placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
           />
