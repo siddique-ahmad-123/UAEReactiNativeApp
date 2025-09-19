@@ -107,7 +107,7 @@ export const creditCardAPI = createApi({
       }),
     }),
     getEmiratesDropDownValues: builder.query<any, void>({
-      query: () => "getEmiratesDropDownValues"
+      query: () => "getEmiratesDropdownValues"
 
     }),
 
