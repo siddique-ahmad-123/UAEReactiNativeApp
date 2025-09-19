@@ -7,7 +7,7 @@ export const placeHoldersNames = {
   Name:"Enter Your Name",
   SupplementaryCard:"Enter Supplementary Card",
   Address:"Enter Your Address",
-  Verification:"Varification Status",
+  Verification:"Verification Status",
   Number:"Enter Monthly Business",
   BusinessName:"Business Name",
   Age:"Enter Your Age",

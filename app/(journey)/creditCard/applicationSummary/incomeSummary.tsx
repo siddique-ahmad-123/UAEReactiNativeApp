@@ -8,7 +8,7 @@ import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { StyleSheet, Text } from "react-native";
 import { useTheme } from "styled-components/native";
@@ -28,12 +28,47 @@ const IncomeSummary = () => {
   const borrowerType = watch("borrowerType") ?? "Borrower";
   const borrowerIncomeType = watch(fieldNames.borrowerIncomeType) ?? "Salaried";
   const borrowerSalary = watch(fieldNames.borrowerMonthlySalaryAECB);
+  const borrowerSelfIncome = watch(fieldNames.borrowerLast6MonthsADB);
+  const borrowerEmpDetailFetchMethod = watch(
+    fieldNames.borrowerEmpDetailFetchMethod
+  );
+  const borrowerBusinessDetailFetchMethod = watch(
+    fieldNames.borrowerBusinessDetailFetchMethod
+  );
 
-  const calculateTotalIncome = (v:string) => {
+  useEffect(() => {
+    if (borrowerIncomeType === "Salaried") {
+      console.log("Triggered");
+      if (borrowerEmpDetailFetchMethod === "Salary Certificate") {
+        setValue("isSalariedBorrowerVerified", "Verified");
+      } else {
+        setValue("isSalariedBorrowerVerified", "Unverified");
+      }
+    } else {
+      console.log(borrowerBusinessDetailFetchMethod);
+      if (borrowerBusinessDetailFetchMethod === "Upload Trade License") {
+        setValue("isSelfBorrowerVerified", "Verified");
+      } else {
+        setValue("isSelfBorrowerVerified", "Unverified");
+      }
+    }
+  });
+
+  const calculateTotalIncome = (v: string) => {
     setValue(
       "borrowerSalaryTotalIncome",
-     parseInt(borrowerSalary) +
-        parseInt(v)
+      parseInt(borrowerSalary) + parseInt(v)
+    );
+    setValue(
+      "borrowerSalaryAvgIncome",
+      (parseInt(borrowerSalary) + parseInt(v)) / 2
+    );
+  };
+
+  const calculateSelfTotalIncome = (v: string) => {
+    setValue(
+      "selfTotalIncome",
+      parseInt(borrowerSelfIncome) + parseInt(v)
     );
   };
 
@@ -107,7 +142,7 @@ const IncomeSummary = () => {
               />
 
               <CustomInput
-                name={fieldNames.borrowerVerificationStatus}
+                name="isSalariedBorrowerVerified"
                 label="Verification Status"
                 type="text"
                 placeholder={placeHoldersNames.Verification}
@@ -132,7 +167,7 @@ const IncomeSummary = () => {
                 onChangeText={calculateTotalIncome}
               />
               <CustomInput
-                name=""
+                name="borrowerSalaryAvgIncome"
                 label="Monthly Average Balance"
                 placeholder={placeHoldersNames.Number}
                 type="number"
@@ -178,18 +213,20 @@ const IncomeSummary = () => {
                 control={control}
               />
               <CustomDatePicker
-                name=""
+                name={fieldNames.borrowerDateOfEstabilishment}
                 label="Date of Expiry"
                 control={control}
               />
-              <CustomDropDown
-                name={fieldNames.borrowerVerificationStatus}
+
+              <CustomInput
+                name="isSelfBorrowerVerified"
                 label="Verification Status"
-                data={statusOptions}
+                type="text"
+                placeholder={placeHoldersNames.Verification}
                 control={control}
               />
               <CustomInput
-                name=""
+                name={fieldNames.borrowerLast6MonthsADB}
                 label="Monthly Business Income"
                 placeholder={placeHoldersNames.Number}
                 type="number"
@@ -197,15 +234,16 @@ const IncomeSummary = () => {
                 formatWithCommas={true}
               />
               <CustomInput
-                name=""
+                name="monthlySelfAdditionalIncome"
                 label="Monthly Additional Income"
                 placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
                 formatWithCommas={true}
+                onChangeText={calculateSelfTotalIncome}
               />
               <CustomInput
-                name=""
+                name="selfTotalIncome"
                 label="Total Income"
                 placeholder={placeHoldersNames.Number}
                 type="number"
