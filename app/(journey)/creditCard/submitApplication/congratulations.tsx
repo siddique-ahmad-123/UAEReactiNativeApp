@@ -21,7 +21,7 @@ const Congratulations = () => {
     //   router.replace("/(main)/home");
     // }
      resetForm();
-     router.replace("/");
+     router.replace("/(main)/NavScreen");
   };
   return (
     <CustomMainChild
