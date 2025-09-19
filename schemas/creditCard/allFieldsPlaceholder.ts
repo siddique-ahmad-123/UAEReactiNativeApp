@@ -16,5 +16,10 @@ export const placeHoldersNames = {
   ResidenceVintage:"Enter Your Residence Vintage",
   DependentsNumber:"Enter The Number of Dependents",
   VisaNumber:"Enter Visa Number",
+  EmployerName:"Enter Employer Name",
+  BankingCode:"Enter Banking Code",
+  TotalExperience:"Enter Total Experience(months)",
+  BankName:"Enter Bank Name",
+  AccountNumber:"Enter Account Number"
 
 }

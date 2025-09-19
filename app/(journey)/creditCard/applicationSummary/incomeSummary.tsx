@@ -125,6 +125,7 @@ const IncomeSummary = () => {
                 placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
+                formatWithCommas={true}
               />
               <CustomInput
                 name="borrowerAddIncome"
@@ -132,6 +133,7 @@ const IncomeSummary = () => {
                 placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
+                formatWithCommas={true}
               />
               <CustomInput
                 name=""
@@ -139,6 +141,7 @@ const IncomeSummary = () => {
                 placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
+                formatWithCommas={true}
               />
               <CustomInput
                 name="borrowerSalaryTotalIncome"
@@ -146,6 +149,7 @@ const IncomeSummary = () => {
                 placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
+                formatWithCommas={true}
               />
             </>
           ) : (
@@ -194,6 +198,7 @@ const IncomeSummary = () => {
                 placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
+                formatWithCommas={true}
               />
               <CustomInput
                 name=""
@@ -201,6 +206,7 @@ const IncomeSummary = () => {
                 placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
+                formatWithCommas={true}
               />
               <CustomInput
                 name=""
@@ -208,6 +214,7 @@ const IncomeSummary = () => {
                 placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
+                formatWithCommas={true}
               />
             </>
           )}
@@ -251,6 +258,7 @@ const IncomeSummary = () => {
             placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
+            formatWithCommas={true}
           />
           <CustomInput
             name=""
@@ -258,6 +266,7 @@ const IncomeSummary = () => {
             placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
+            formatWithCommas={true}
           />
           <CustomInput
             name=""
@@ -265,6 +274,7 @@ const IncomeSummary = () => {
             placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
+            formatWithCommas={true}
           />
           <CustomInput
             name=""
@@ -272,6 +282,7 @@ const IncomeSummary = () => {
             placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
+            formatWithCommas={true}
           />
 
           {/* Co-Borrower (Self-Employed) */}
@@ -321,6 +332,7 @@ const IncomeSummary = () => {
             placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
+            formatWithCommas={true}
           />
 
           <CustomInput
@@ -329,6 +341,7 @@ const IncomeSummary = () => {
             placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
+            formatWithCommas={true}
           />
 
           <CustomInput
@@ -337,6 +350,7 @@ const IncomeSummary = () => {
             placeholder={placeHoldersNames.Number}
             type="number"
             control={control}
+            formatWithCommas={true}
           />
         </>
       )}
