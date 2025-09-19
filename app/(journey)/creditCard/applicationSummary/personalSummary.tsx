@@ -194,7 +194,7 @@ const PersonalSummary = () => {
           <CustomInput
             name={fieldNames.coBorrowerAge}
             label="Age"
-            placeholder="Age"
+            placeholder={placeHoldersNames.Age}
             type="number"
             control={control}
           />
@@ -209,7 +209,7 @@ const PersonalSummary = () => {
           <CustomInput
             name={fieldNames.coBorrowerEmirateId}
             label="Emirates ID"
-            placeholder="Enter your EIDA Number"
+            placeholder={placeHoldersNames.EIDA}
             type="number"
             control={control}
           />
@@ -217,7 +217,7 @@ const PersonalSummary = () => {
           <CustomInput
             name={fieldNames.coBorrowerPassportNo}
             label="Passport No"
-            placeholder="Enter your passport Number"
+            placeholder={placeHoldersNames.PassportNumber}
             type="number"
             control={control}
           />
@@ -225,7 +225,7 @@ const PersonalSummary = () => {
           <CustomInput
             name={fieldNames.coBorrowerResidenceVintage}
             label="Residence Vintage(Months)"
-            placeholder="Enter your residence vintage"
+            placeholder={placeHoldersNames.ResidenceVintage}
             type="number"
             control={control}
           />
@@ -233,7 +233,7 @@ const PersonalSummary = () => {
           <CustomInput
             name={fieldNames.coBorrowerNoOfDependents}
             label="No of Dependents"
-            placeholder="Enter the number of dependents"
+            placeholder={placeHoldersNames.DependentsNumber}
             type="number"
             control={control}
           />

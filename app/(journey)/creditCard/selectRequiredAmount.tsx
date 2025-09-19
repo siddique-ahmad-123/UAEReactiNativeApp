@@ -65,7 +65,7 @@ const SelectRequiredAmount = () => {
       onPressDoubleButton1={() => prevStep()}
       onPressDoubleButton2={() => onClickNext()}
       isDisableDoubleButton2={!(isChecked && isChecked2)}
-      disableOuterScroll={true}
+      disableOuterScroll={false}
       isLoadingDoubleButton={isloading}
     >
       <DynamicSliderCard

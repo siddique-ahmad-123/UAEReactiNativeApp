@@ -1,16 +1,14 @@
-import { useTheme } from "styled-components/native";
-import React from "react";
+import { fontSize, fontWeight, radius, spacing } from "@/constants/Metrics";
 import { StyleSheet } from "react-native";
-import { radius, spacing } from "@/constants/Metrics";
 
 export const styles = StyleSheet.create({
   safeArea: {
     flex: 1, // Purple fills behind header
   },
   header: {
-   paddingHorizontal: spacing.md,
-       paddingTop: spacing.xxxl,
-       paddingBottom: spacing.xxl,
+    paddingHorizontal: spacing.md,
+    paddingTop: spacing.xxxl,
+    paddingBottom: spacing.xxl,
   },
   headerTop: {
     flexDirection: "row",
@@ -29,11 +27,11 @@ export const styles = StyleSheet.create({
     marginTop: 4,
   },
   container: {
-   flex: 1,
-       borderTopLeftRadius: radius.pill,
-       borderTopRightRadius: radius.pill,
-       paddingTop: spacing.xxl,
-       paddingHorizontal: spacing.md,
+    flex: 1,
+    borderTopLeftRadius: radius.pill,
+    borderTopRightRadius: radius.pill,
+    paddingTop: spacing.xxl,
+    paddingHorizontal: spacing.md,
   },
   image: {
     alignItems: "center",
@@ -55,5 +53,9 @@ export const styles = StyleSheet.create({
     marginTop: 60,
     marginBottom: 120,
   },
-  linktext: { alignItems: "center", fontSize: 18, fontWeight: "700" },
+  linktext: {
+    alignItems: "center",
+    fontSize: fontSize.md,
+    fontWeight: fontWeight.bold,
+  },
 });

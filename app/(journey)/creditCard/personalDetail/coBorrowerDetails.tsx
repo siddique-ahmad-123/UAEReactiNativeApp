@@ -8,6 +8,7 @@ import SegmentedControl from "@/components/SegmentControl";
 import { spacing } from "@/constants/Metrics";
 import { useGetEmiratesDropDownValuesQuery } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import { t } from "i18next";
@@ -218,7 +219,7 @@ const CoBorrowerPersonalInformation = () => {
             control={control}
             name={fieldNames.coBorrowerVisaNo}
             label="Visa No"
-            placeholder="Enter your visa Number"
+            placeholder={placeHoldersNames.VisaNumber}
             type="number"
           />
           <CustomDatePicker
@@ -236,7 +237,7 @@ const CoBorrowerPersonalInformation = () => {
             control={control}
             name={fieldNames.coBorrowerEmailId}
             label="Email ID"
-            placeholder="Enter your email id"
+            placeholder={placeHoldersNames.Email}
             type="email"
           />
 
@@ -244,7 +245,7 @@ const CoBorrowerPersonalInformation = () => {
             control={control}
             name={fieldNames.coBorrowerMobileNo}
             label="Mobile No"
-            placeholder="Enter your mobile number"
+            placeholder={placeHoldersNames.MobileNumber}
             type="number"
           />
 
@@ -252,7 +253,7 @@ const CoBorrowerPersonalInformation = () => {
             control={control}
             name={fieldNames.coBorrowerResidenceVintage}
             label="Residence Vintage(Months)"
-            placeholder="Enter your residence vintage"
+            placeholder={placeHoldersNames.ResidenceVintage}
             type="number"
           />
 
@@ -260,7 +261,7 @@ const CoBorrowerPersonalInformation = () => {
             control={control}
             name={fieldNames.coBorrowerNoOfDependents}
             label="No of Dependents"
-            placeholder="Enter the number of dependents"
+            placeholder={placeHoldersNames.DependentsNumber}
             type="number"
           />
 
@@ -270,14 +271,14 @@ const CoBorrowerPersonalInformation = () => {
             control={control}
             name={fieldNames.coBorrowerAddressLine1}
             label="Address Line 1"
-            placeholder="Enter your address"
+            placeholder={placeHoldersNames.Address}
             type="text"
           />
           <CustomInput
             control={control}
             name={fieldNames.coBorrowerAddressLine2}
             label="Address Line 2"
-            placeholder="Enter your address"
+            placeholder={placeHoldersNames.Address}
             type="text"
           />
 

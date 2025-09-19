@@ -90,7 +90,6 @@ export default function Dashboard() {
 
   const localStyles = StyleSheet.create({
     container: {
-      flex: 1,
       backgroundColor: theme.colors.background,
       padding: spacing.md,
       gap: spacingVertical.md,
