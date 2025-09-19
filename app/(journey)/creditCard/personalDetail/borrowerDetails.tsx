@@ -21,7 +21,6 @@ import {
   usePassportMutation,
   useVisaMutation,
   useGetExistingCustomerDataMutation,
-  useGetEmiratesBranchDropDownValuesQuery,
 } from "@/redux/api/creditCardAPI";
 import { parseToDate } from "@/utils/dateParser";
 import { CameraView, useCameraPermissions } from "expo-camera";
@@ -196,7 +195,7 @@ const BorrowerPersonalInformation = () => {
    
   const { data: emirates } = useGetEmiratesDropDownValuesQuery();
   
-  const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(formData[fieldNames.borrowerEmirates],{skip:!formData[fieldNames.borrowerEmirates]});
+ 
  
   const emiratesOptions = emirates?.data ?? [
     {
@@ -213,20 +212,7 @@ const BorrowerPersonalInformation = () => {
     },
   ];
   
-  const emiratesBranches = emiratesBranch?.data ?? [
-    {
-      label: "Abu Dhabi",
-      value: "Abu Dhabi",
-    },
-    {
-      label: "Ajman",
-      value: "Ajman",
-    },
-    {
-      label: "Dubai",
-      value: "Dubai",
-    },
-  ];
+
 
   const countryOptions = [
     { label: "India", value: "IN" },

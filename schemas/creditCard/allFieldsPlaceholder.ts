@@ -1,4 +1,4 @@
 export const placeHoldersNames = {
- firstName:"First Name",
+  firstName:"First Name",
   LastName:"Enter Last Name"
 }

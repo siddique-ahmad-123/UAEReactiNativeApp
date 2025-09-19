@@ -2,6 +2,7 @@ import CustomDropDown from "@/components/CustomDropDown";
 import CustomInput from "@/components/CustomInput";
 import FormSummaryLayout from "@/components/FormSummary/FormSummaryLayout";
 import { fontSize, fontWeight } from "@/constants/Metrics";
+import { useGetEmiratesDropDownValuesQuery } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
@@ -44,10 +45,22 @@ const PersonalSummary = () => {
     { label: "Persians", value: "Persians" },
   ];
 
-  const emiratesOptions = [
-    { label: "Dubai", value: "Dubai" },
-    { label: "Saudi Arabia", value: "Saudi Arabia" },
-  ];
+  const { data: emirates } = useGetEmiratesDropDownValuesQuery();
+      
+      const emiratesOptions = emirates?.data ?? [
+        {
+          label: "Abu Dhabi",
+          value: "Abu Dhabi",
+        },
+        {
+          label: "Ajman",
+          value: "Ajman",
+        },
+        {
+          label: "Dubai",
+          value: "Dubai",
+        },
+      ];
 
   const validityOptions = [
     { label: "Yes", value: "Yes" },

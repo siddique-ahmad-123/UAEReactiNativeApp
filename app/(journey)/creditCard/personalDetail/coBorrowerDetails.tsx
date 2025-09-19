@@ -6,6 +6,7 @@ import FormLayout from "@/components/Form/FormLayout";
 import SectionHeader from "@/components/SectionHeader";
 import SegmentedControl from "@/components/SegmentControl";
 import { spacing } from "@/constants/Metrics";
+import { useGetEmiratesDropDownValuesQuery } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
@@ -45,10 +46,22 @@ const CoBorrowerPersonalInformation = () => {
     { label: "Persians", value: "Persians" },
   ];
 
-  const emiratesOptions = [
-    { label: "Dubai", value: "Dubai" },
-    { label: "Saudi Arabia", value: "Saudi Arabia" },
-  ];
+   const { data: emirates } = useGetEmiratesDropDownValuesQuery();
+    
+    const emiratesOptions = emirates?.data ?? [
+      {
+        label: "Abu Dhabi",
+        value: "Abu Dhabi",
+      },
+      {
+        label: "Ajman",
+        value: "Ajman",
+      },
+      {
+        label: "Dubai",
+        value: "Dubai",
+      },
+    ];
   const countryOptions = [
     { label: "India", value: "IN" },
     { label: "United States", value: "US" },
