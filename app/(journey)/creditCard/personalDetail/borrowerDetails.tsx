@@ -7,25 +7,28 @@ import FormLayout from "@/components/Form/FormLayout";
 import SectionHeader from "@/components/SectionHeader";
 import SegmentedControl from "@/components/SegmentControl";
 import { spacingVertical } from "@/constants/Metrics";
+import {
+  useEmiratesIdMutation,
+  useGetEmiratesDropDownValuesQuery,
+  useGetExistingCustomerDataMutation,
+  usePassportMutation,
+  useVisaMutation,
+} from "@/redux/api/creditCardAPI";
+import { customerDataMapper } from "@/schemas/burrowerDataMapper";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import calculateAge from "@/utils/calculateAge";
+import {
+  parseFromDDMMYYYYWithSlash,
+  parseFromYYYYMMDDWithSlash,
+  parseToDate,
+} from "@/utils/dateParser";
+import { CameraView, useCameraPermissions } from "expo-camera";
 import { router } from "expo-router";
 import { t } from "i18next";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { StyleSheet, View, Modal, Text, TouchableOpacity } from "react-native";
-import { customerDataMapper } from "@/schemas/burrowerDataMapper";
-import {
-  useEmiratesIdMutation,
-  usePassportMutation,
-  useVisaMutation,
-  useGetExistingCustomerDataMutation,
-} from "@/redux/api/creditCardAPI";
-import { parseToDate } from "@/utils/dateParser";
-import { CameraView, useCameraPermissions } from "expo-camera";
-import { useGetEmiratesDropDownValuesQuery } from "@/redux/api/creditCardAPI";
-
 const BorrowerPersonalInformation = () => {
   const [isloading, setIsLoading] = useState(false);
   const [isloading1, setIsLoading1] = useState(false);
@@ -90,7 +93,10 @@ const BorrowerPersonalInformation = () => {
     ).unwrap();
     if (emirateResponse.status == 200 && passportResponse.status == 200) {
       setValue(fieldNames.borrowerName, emirateResponse.data.name);
-      setValue(fieldNames.borrowerDOB, parseToDate(emirateResponse.data.dob));
+      setValue(
+        fieldNames.borrowerDOB,
+        parseFromDDMMYYYYWithSlash(emirateResponse.data.dob)
+      );
       setValue(fieldNames.borrowerGender, emirateResponse.data.gender);
       setValue(
         fieldNames.borrowerNationality,
@@ -98,11 +104,11 @@ const BorrowerPersonalInformation = () => {
       );
       setValue(
         fieldNames.borrowerEidaIssueDate,
-        parseToDate(emirateResponse.data.eidaIssueDate)
+        parseFromDDMMYYYYWithSlash(emirateResponse.data.eidaIssueDate)
       );
       setValue(
         fieldNames.borrowerEidaExpiryDate,
-        parseToDate(emirateResponse.data.eidaExpiryDate)
+        parseFromDDMMYYYYWithSlash(emirateResponse.data.eidaExpiryDate)
       );
       setValue(
         fieldNames.borrowerAge,
@@ -126,11 +132,11 @@ const BorrowerPersonalInformation = () => {
         setValue(fieldNames.borrowerVisaNo, visaResponse.data.visaNo);
         setValue(
           fieldNames.borrowerVisaIssueDate,
-          parseToDate(visaResponse.data.visaIssueDate)
+          parseFromYYYYMMDDWithSlash(visaResponse.data.visaIssueDate)
         );
         setValue(
           fieldNames.borrowerVisaExpiryDate,
-          parseToDate(visaResponse.data.visaExpiryDate)
+          parseFromYYYYMMDDWithSlash(visaResponse.data.visaExpiryDate)
         );
       }
     }
@@ -190,12 +196,8 @@ const BorrowerPersonalInformation = () => {
     { label: "UAE", value: "UAE" },
   ];
 
-
-
-   
   const { data: emirates } = useGetEmiratesDropDownValuesQuery();
   
- 
  
   const emiratesOptions = emirates?.data ?? [
     {
@@ -212,7 +214,6 @@ const BorrowerPersonalInformation = () => {
     },
   ];
   
-
 
   const countryOptions = [
     { label: "India", value: "IN" },

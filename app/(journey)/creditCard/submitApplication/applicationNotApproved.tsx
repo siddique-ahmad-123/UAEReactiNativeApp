@@ -14,16 +14,15 @@ const ApplicationNotApproved = () => {
   >();
   const { resetForm, formData } = useApplicationStore();
 
-
-  const onSubmitApplication = ()=>{
-      resetForm();
-      router.push("/(main)/NavScreen");
-  }
+  const onSubmitApplication = () => {
+    resetForm();
+    router.push("/(main)/NavScreen");
+  };
 
   const methodOptions = [
     {
       id: "email",
-      title: "Credit Limit",
+      title: "Limit Required",
       description: "",
       iconName: "mail-outline",
       amount: formData[fieldNames.cardLimit],
@@ -74,7 +73,7 @@ const ApplicationNotApproved = () => {
             { color: theme.colors.secondaryText, marginBottom: 30 },
           ]}
         >
-          We’re sorry but your request did not go through with the amount of
+          Your application has been successfully accepted for AED.
           <Text style={{ color: theme.colors.primaryColor }}>
             {formData[fieldNames.selectedRequiredAmount]}
           </Text>
@@ -85,10 +84,13 @@ const ApplicationNotApproved = () => {
             <Text
               style={[styles.linktext, { color: theme.colors.primaryColor }]}
             >
-              You can choose for counter offer or apply for higher limit with
-              our team
+              You’ll hear from our team within 1 day about Credit Card
+              application status.
             </Text>
           </TouchableOpacity>
+          <Text style={[styles.linktext, { color: theme.colors.primaryColor }]}>
+            Your Application No is {formData[fieldNames.workItemNumber]}
+          </Text>
         </View>
         <MethodSelector
           title="Application Details"

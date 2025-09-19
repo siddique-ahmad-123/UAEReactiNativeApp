@@ -1,4 +1,19 @@
 export const placeHoldersNames = {
   firstName:"First Name",
-  LastName:"Enter Last Name"
+  LastName:"Enter Last Name",
+  Email:"Enter Email",
+  MobileNumber:"Mobile Number",
+  WriteYourQuery:"Write Your Query",
+  Name:"Enter Your Name",
+  SupplementaryCard:"Enter Supplementary Card",
+  Address:"Enter Your Address",
+  Verification:"Varification Status",
+  Number:"2000",
+  BusinessName:"Business Name",
+  Age:"Age",
+  EIDA:"Enter Your EIDA No.",
+  PassportNumber:"Enter Your Passport Number",
+  ResidenceVintage:"Enter Your Residence Vintage",
+  DependentsNumber:"Enter The Number of Dependents"
+
 }

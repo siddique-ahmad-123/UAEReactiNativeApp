@@ -82,7 +82,7 @@ const RequestCallBack = () => {
       <CustomInput
         name={fieldNames.supplementaryCardName}
         label="Email"
-        placeholder="Enter email"
+        placeholder={placeHoldersNames.Email}
         type="text"
         control={control}
       />
@@ -91,7 +91,7 @@ const RequestCallBack = () => {
         <View style={styles.innerRow}>
           <CustomInput
             label="Mobile Number"
-            placeholder="Enter number"
+            placeholder={placeHoldersNames.MobileNumber}
             type="text"
             control={control}
           />
@@ -123,7 +123,7 @@ const RequestCallBack = () => {
 
       <CustomInput
         label="Description"
-        placeholder="Write your query"
+        placeholder={placeHoldersNames.WriteYourQuery}
         type="textarea"
         numberOfLines={7}
       />

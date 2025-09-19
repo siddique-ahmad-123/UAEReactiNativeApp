@@ -10,6 +10,7 @@ import {
 } from "@/constants/Metrics";
 import { useGetEmiratesBranchDropDownValuesQuery, useGetEmiratesDropDownValuesQuery } from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import Checkbox from "expo-checkbox";
 import { router } from "expo-router";
@@ -111,7 +112,7 @@ const DispatchDetails = () => {
         control={control}
         name={fieldNames.borrowerName}
         label="Name"
-        placeholder="Enter your name"
+        placeholder={placeHoldersNames.Name}
         type="text"
         editable={modifyName} 
       />
@@ -151,7 +152,7 @@ const DispatchDetails = () => {
           control={control}
           name={fieldNames.supplementaryCardName}
           label="Supplementary Card Name"
-          placeholder="Enter supplementary card name"
+          placeholder={placeHoldersNames.SupplementaryCard}
           type="text"
         />
       ) : (
@@ -184,14 +185,14 @@ const DispatchDetails = () => {
                 control={control}
                 name={fieldNames.dispatchAddressLine1}
                 label="Address Line 1"
-                placeholder="Enter your address"
+                placeholder={placeHoldersNames.Address}
                 type="text"
               />
               <CustomInput
                 control={control}
                 name={fieldNames.dispatchAddressLine2}
                 label="Address Line 2"
-                placeholder="Enter your address"
+                placeholder={placeHoldersNames.Address}
                 type="text"
               />
 
