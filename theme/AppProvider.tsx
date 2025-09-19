@@ -1,12 +1,12 @@
 // context/AppProvider.tsx
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { DefaultTheme, ThemeProvider as StyledThemeProvider } from "styled-components/native";
-import { darkTheme, lightTheme} from "./themes";
+import i18n, { RTL_LANGS } from "../i18n";
 import { getItem, setItem } from "../utils/storage";
-import i18n from "../i18n";
-import { RTL_LANGS } from "../i18n";
-import {I18nManager, Alert } from "react-native";
-import * as Updates from 'expo-updates';
+import { darkTheme, lightTheme } from "./themes";
+
+import { I18nManager } from "react-native";
+// import * as Updates from 'expo-updates';
 
 const AppContext = createContext<any>(null);
 
@@ -50,9 +50,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         if (shouldBeRTL !== I18nManager.isRTL) {
           I18nManager.allowRTL(shouldBeRTL);
           I18nManager.forceRTL(shouldBeRTL);
-          Alert.alert("Restart Required", "App will restart to apply layout", [
-            { text: "OK", onPress: () => Updates.reloadAsync()}
-          ]);
+          // Alert.alert("Restart Required", "App will restart to apply layout", [
+          //   { text: "OK", onPress: () => Updates.reloadAsync()}
+          // ]);
       }
   };
   const currentTheme:DefaultTheme = isDark ? darkTheme : lightTheme;
