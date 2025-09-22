@@ -17,7 +17,6 @@ import {
   spacing,
   spacingVertical,
 } from "@/constants/Metrics";
-import { scale } from "@/utils/styling";
 
 interface DynamicSliderCardProps {
   title: string;

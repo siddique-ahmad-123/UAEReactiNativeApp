@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Image, ScrollView, StyleSheet } from "react-native";
 import { useTheme } from "styled-components/native";
-import CustomButton from "@/components/CustomButton";
-import { router } from "expo-router";
 import DynamicSliderCard from "@/components/CustomSliderCard/DynamicSliderCard";
 import { spacing, spacingVertical } from "@/constants/Metrics";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";

@@ -1,5 +1,6 @@
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import { styles } from "@/components/styles/SelectCreditCard.Styles";
+import { ImagesPath } from "@/constants/Image";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
@@ -47,7 +48,7 @@ const cards: CardItem[] = [
     description5: "",
     description6: "Joining Fees - Nil",
     description7: "Annual Fees - Nil",
-    image: require("../../../assets/images/card2.png"),
+    image: ImagesPath.card1Image,
     joiningFees: "Nil",
     anualFees: "Nil",
   },
@@ -65,7 +66,7 @@ const cards: CardItem[] = [
       "Best Rewards: Extensive travel and lifestyle perks; ideal for frequent travelers.",
     description6: "Joining Fees - Nil",
     description7: "Annual Fees - AED650",
-    image: require("../../../assets/images/card1.png"),
+    image: ImagesPath.card2Image,
     joiningFees: "Nil",
     anualFees: "AED650",
   },
@@ -82,7 +83,7 @@ const cards: CardItem[] = [
     description5: "Best Rewards: Deep perks, elite status travel benefits.",
     description6: "Joining Fees - AED250",
     description7: "Annual Fees - AED650",
-    image: require("../../../assets/images/card3.png"),
+    image: ImagesPath.card3Image,
     joiningFees: "AED250",
     anualFees: "AED650",
   },
