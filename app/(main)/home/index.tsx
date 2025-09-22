@@ -18,13 +18,10 @@ import UserIconName from "@/components/UserProfile/userIconName";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 
 import {
-  borderWidth,
-  fontSize,
-  fontWeight,
-  radius,
   spacing,
   spacingVertical,
 } from "@/constants/Metrics";
+import { ImagesPath } from "@/constants/Image";
 type RouteNames = "/Request" | "/Agreement" | "/ExistingApplication";
 const services: {
   id: string;
@@ -56,22 +53,22 @@ const applyNow = [
   {
     id: "1",
     title: "Credit Card",
-    imgPath: require("../../../assets/images/MainScreenCard/Card.png"),
+    imgPath: ImagesPath.mainScreencardImages
   },
   {
     id: "2",
     title: "Mortgages",
-    imgPath: require("../../../assets/images/MainScreenCard/Mortgage.png"),
+    imgPath: ImagesPath.mainScreenMortgageImages
   },
   {
     id: "3",
     title: "Auto Loans",
-    imgPath: require("../../../assets/images/MainScreenCard/AutoLoan.png"),
+    imgPath: ImagesPath.mainScreenAutoLoan
   },
   {
     id: "4",
     title: "Personal \nLoans",
-    imgPath: require("../../../assets/images/MainScreenCard/PersonalLoan.png"),
+    imgPath: ImagesPath.mainScreenPersonalLoan
   },
 ];
 
@@ -125,7 +122,7 @@ export default function Dashboard() {
       </View>
       <HeroBanner
         message="Thank you for being associated with us."
-        backgroundImage={require("../../../assets/images/HeroBanner.png")}
+        backgroundImage={ImagesPath.heroBannerImages}
       />
       <Text style={localStyles.sectionTitle}>My Services</Text>
       <View style={localStyles.serviceRow}>
@@ -147,7 +144,6 @@ export default function Dashboard() {
             image={item.imgPath}
             onPress={() => {
               goToStep(stepIndex);
-              // router.push("/(journey)/creditCard/selectCreditCard");
             }}
           />
         ))}
