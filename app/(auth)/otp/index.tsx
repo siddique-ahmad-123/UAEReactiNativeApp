@@ -1,4 +1,5 @@
 import CustomButton from "@/components/CustomButton";
+import { ImagesPath } from "@/constants/Image";
 import {
   fontSize,
   fontWeight,
@@ -206,7 +207,7 @@ const OTPScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../../../assets/images/background.png")}
+        source={ImagesPath.backgroundImage}
         style={styles.headerBackground}
         imageStyle={styles.imageStyle}
       >

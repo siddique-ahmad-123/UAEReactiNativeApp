@@ -1,5 +1,6 @@
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import { styles } from "@/components/styles/submitApplication2";
+import { ImagesPath } from "@/constants/Image";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 //import { useUserEligibilityCheckMutation } from "@/redux/api/creditCardAPI";
 import { useApplicationStore } from "@/store/applicationStore";
@@ -33,7 +34,7 @@ const Congratulations = () => {
     >
       <View style={styles.image}>
         <Image
-          source={require("../../../../assets/images/approved-icon.png")}
+          source={ImagesPath.approvedIconImage}
           style={{ width: 80, height: 80 }}
           resizeMode="contain"
         />

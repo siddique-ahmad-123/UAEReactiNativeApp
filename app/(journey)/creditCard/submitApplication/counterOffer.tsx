@@ -1,6 +1,7 @@
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import MethodSelector from "@/components/MethodSelector";
 import { styles } from "@/components/styles/submitApplication3.Styles";
+import { ImagesPath } from "@/constants/Image";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
@@ -51,7 +52,7 @@ const CounterOffer = () => {
     >
       <View style={styles.image}>
         <Image
-          source={require("../../../../assets/images/animatedImg.png")}
+          source={ImagesPath.animatedImage}
           style={{ width: 200, height: 200 }}
         resizeMode="contain"
         />
