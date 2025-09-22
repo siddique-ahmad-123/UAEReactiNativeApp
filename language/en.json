@@ -1,4 +1,113 @@
 {
+
+ "CreditCards": "Credit Cards",
+ "GetCreditCardsApprovalsinstantlyandstartaccessingourinnovativeofferings": "Get Credit Cards Approvals instantly and start accessing our innovative offerings",
+ "Cancel": "Cancel",
+ "GetStarted": "Get Started",
+ "GetMortgagesInPrincipleApprovalinstantlyandgetaccesstoyourdreamhome": "Get Mortgages In Principle Approval instantly and get access to your dream home",
+ "GetAutoLoansInPrincipleApprovalinstantlyandgetaccesstoyourdreamCar": "Get Auto Loans In Principle Approval instantly and get access to your dream Car",
+ "PersonalLoans": "Personal Loans", 
+ "GetFundsinstantlyinyouraccountallowingyoutoaccessthingsyoulove": "Get Funds instantly in your account allowing you to access things you love",
+
+
+ "Welcome!": "Welcome !",
+ "Signintoyouraccount": "Sign in to your account",
+ "EmiratesID": "Emirates ID",
+ "MobileNo": "Mobile No",
+ "LoginwithUAE-PASS": "Login with UAE-PASS",
+ "SendOTP": "Send OTP",
+ "VerifyOTP": "Verify OTP",
+ "Enteryourotp ": "Enter your otp ",
+ "EnterVerificationCode": "Enter Verification Code",
+ "wehavesentaSMStoyourmobilenumber*****7412": "we have sent a SMSto your mobile number*****7412",
+ "Didnotreceivethecode?": "Did not receive the code?",
+ "ResendCode": "Resend Code",
+ 
+"Welcome":"Welcome",
+"MohammadSahilMunaf": "Mohammad Sahil Munaf",
+"Thankyouforbeingassociatedwithus.": "Thank you for being associated with us.",
+  "MyServices": "My Services",
+  "Applications": "Applications",
+  "ApplyNow": "Apply Now",
+  "CreditCard": "Credit Card",
+  "AutoLoans": "Auto Loans",
+  "Home": "Home",
+  "Calculator": "Calculator",
+  "NeedHelp": "Need Help",
+  "Notifications": "Notifications",
+  "Menu ": "Menu ",
+  "Requests": "Requests",
+  "Findalltherequeststhatyouhaveraisedhere.": "Find all the requests that you have raised here.",
+  "Youdonthaveanynewrequestasofnow": "You don’t have any new request as of now",
+  "Back": "Back",
+  "Agreements": "Agreements",
+  "Youdonthaveanynewagreementavailableasofnow": "You don’t have any new agreement available as of now",
+  "ExistingApplications": "Existing Applications",
+  "Findalltheexistingapplicationshere.": "Find all the existing applications here.",
+  "Youdonthaveanynewexistingapplicationsavailableasofnow": "You don’t have any new existing applications available as of now",
+  "RequestCallback": "Request Callback",
+  "RefNo": "Ref No",
+  "Findalltheagreements/documentshere.":"Find all the agreements/documents here.",
+  "Youdon’thaveanynewagreementavailableasofnow":"You don’t have any new agreement available as of now",
+
+  "FirstName":"First Name",
+  "LastName":"Last Name",
+  "Email":"Email",
+  "MobileNumber":"Mobile Number",
+  "Gender":"Gender",
+  "MaritalStatus":"Marital Status",
+  "Married":"Married",
+  "Single":"Single",
+  "City":"City",
+  "Description":"Description",
+  "NeedhelpforCreditCard":"Need help for Credit Card",
+  "Submit":"Submit",
+  "Nonewnotifications":"No new notifications.",
+
+
+  "AbdulRahman":"Abdul Rahman",
+  "GoodMorning":"Good Morning,",
+  "EMICalculator":"EMI Calculator",
+  "ThiscalculatorwillhelpyoutocalculatetheexpectedEMIonyourloanamountbytakingintoconsiderationthePrincipalAmountLoanTenureandInterest":"This calculator will help you to calculate the expected EMI on your loan amount by taking into consideration the Principal Amount, Loan Tenure and Interest.",
+  "FinanceAmount":"Finance Amount",
+  "Tenure(Months)":"Tenure (Months)",
+  "ProfitRate":"Profit Rate",
+  "MonthlyInstallment":"Monthly Installment",
+  "Findallofyournotificationshere":"Find all of your notifications here.",
+"CallBackRequest":"Call Back Request -",
+"RefNo89765321":"Ref No - 89765321",
+"Date03/09/2025":"Date - 03/09/2025",
+"StatusPending":"Status - Pending",
+"CheckDetails":"Check Details",
+
+"YourRequestisunderprocessing":"Your Request is under processing",
+"Wewillnotifyyouoncewereceiveanyupdateonyourrequest":"We will notify you once we receive any update on your request",
+"ResolutionProvided":"Resolution Provided",
+"Pending":"Pending...",
+
+"SelectyourCard":"Select your Card",
+"Wehavecardsforeveryneedexplorehere":"We have cards for every need, explore here",
+"CashbackCreditCard":"Cashback Credit Card",
+"JOHNCARTER":"JOHN CARTER",
+"MinimumIncomeRequirement":"Minimum Income Requirement: AED 5,000/month.",
+"WelcomeBonus":"Welcome Bonus: AED 500 for new customers (spend ≥AED 5,000 in first 2 months); AED 100 for existing cardholders.",
+"RewardsCashback":"Rewards / Cashback: 5% on dining (local & international) 2% on international spends Up to 1% on local spends 0.33% on govt. payments, utilities, education, charity, fuel, rental, telecom spends",
+"JoiningFees":"Joining Fees - Nil Annual Fees - Nil",
+"KnowMore":"Know More",
+
+"EliteCreditCard":"Elite Credit Card",
+"RewardPoints":"Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local Lifestyle Perks: Global lounge access, airport transfers, Fitness First visits, cinema discounts, concierge benefits, etc. Best Rewards: Extensive travel and lifestyle perks; ideal for frequent travelers.",
+"RewardPoints2":"Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local Perks: Airport lounges (900+ worldwide, 12 visits/year), villa/pickup, valet, golf, fitness, concierge, cinema, fine dining, etc. Best Rewards: Deep perks, elite status travel benefits.",
+
+"SelectRequiredAmount":"Select Required Amount",
+"CardAmount":"Card Amount",
+"Download Terms & Conditions":"Download Terms & Conditions",
+"DownloadFeesCharges":"Download Fees & Charges",
+"DownloadKeyFactStatement":"Download Key Fact Statement",
+"IagreewithbelowprovidedTermsandConditionsFeesandChargesSheetandKeyFactStatement":"I agree with below provided Terms and Conditions, Fees and Charges Sheet and Key Fact Statement.",
+
+
+
   "fetchDetails": "FetchDetails",
   "back": "Back",
   "saveAndNext": "Save & Next",
@@ -88,4 +197,9 @@
   "dispatchEmirates": "Dispatch Emirate",
   "dispatchCountry": "Dispatch Country",
   "dispatchBranchName": "Dispatch Branch Name"
+
+
+
+
+  
 }
