@@ -13,7 +13,7 @@ const resources = {
 
 export const RTL_LANGS = ["ar"];
 
-const fallback = { languageTag: "en", isRTL: false };
+const fallback = { languageTag: "hi", isRTL: false };
 const { languageTag } = fallback;
 
 if (RTL_LANGS.includes(languageTag) && !I18nManager.isRTL) {
