@@ -1,6 +1,9 @@
 import FormLayout from "@/components/Form/FormLayout";
 import StepCard from "@/components/StepCard";
-import { useOfferLetterMutation, useUaeCreditCardMutation } from "@/redux/api/creditCardAPI";
+import {
+  useOfferLetterMutation,
+  useUaeCreditCardMutation,
+} from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
@@ -13,7 +16,7 @@ const ApplicationSummary = () => {
   const { updateField, prevStep, formData } = useApplicationStore();
   const [uaeCreditCard] = useUaeCreditCardMutation();
   const [offerLetter] = useOfferLetterMutation();
-  const { handleSubmit, setValue,  } = useForm({
+  const { handleSubmit, setValue } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
   });
@@ -70,25 +73,25 @@ const ApplicationSummary = () => {
     >
       <StepCard
         stepNumber={1}
-        label={"Personal Details"}
+        label={t("personalDetails")}
         path={"/(journey)/creditCard/applicationSummary/personalSummary"}
         completed={true}
       />
       <StepCard
         stepNumber={2}
-        label={"Income & Occupation Details"}
+        label={t("incomeOccupationDetails")}
         path={"/(journey)/creditCard/applicationSummary/incomeSummary"}
         completed={true}
       />
       <StepCard
         stepNumber={3}
-        label={"Expense Details"}
+        label={t("expenseDetails")}
         path={"/(journey)/creditCard/applicationSummary/expenseSummary"}
         completed={true}
       />
       <StepCard
         stepNumber={4}
-        label={"Dispatch Details"}
+        label={t("dispatchDetails")}
         path={"/(journey)/creditCard/applicationSummary/dispatchSummary"}
         completed={true}
       />

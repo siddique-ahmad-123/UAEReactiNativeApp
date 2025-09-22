@@ -285,8 +285,8 @@ const BorrowerPersonalInformation = () => {
       {formData[fieldNames.userType] === "NTB" && (
         <>
           <SegmentedControl
-            label={"Nationality Status"}
-            options={["Emirati", "Expat"]}
+            label={t("nationalityStatus")}
+            options={[t("emirati"), t("expat")]}
             defaultValue={borrowerNationalityStatus}
             onChange={(value) =>
               setValue(fieldNames.borrowerNationalityStatus, value)
@@ -295,103 +295,103 @@ const BorrowerPersonalInformation = () => {
 
           <View style={{ alignItems: "center", gap: spacingVertical.md }}>
             <CustomUpload
-              label={"Emirates ID"}
+              label={t("emiratesID")}
               control={control}
               name="emiratesID"
             />
             <CustomUpload
-              label={"Passport"}
+              label={t("passport")}
               control={control}
               name="passport"
             />
             {borrowerNationalityStatus === "Expat" && (
-              <CustomUpload label={"Visa"} control={control} name="visa" />
+              <CustomUpload label={t("visa")} control={control} name="visa" />
             )}
           </View>
 
           <CustomButton
-            title={"Fetch Details"}
+            title={t("fetchDetails")}
             onPress={handleFetchDetails}
             isloading={isloading1}
           />
         </>
       )}
-      <SectionHeader sectionName="Personal Information" />
+      <SectionHeader sectionName={t("personalInformation")} />
       <CustomInput
         control={control}
         name={fieldNames.borrowerName}
-        label="Name"
+        label={t("name")}
         placeholder={placeHoldersNames.Name}
         type="text"
       />
       <CustomDatePicker
         control={control}
         name={fieldNames.borrowerDOB}
-        label={"Date of Birth"}
+        label={t("dateOfBirth")}
         onChangePicker={calcAge}
       />
       <CustomInput
         control={control}
         name={fieldNames.borrowerAge}
-        label="Age"
+        label={t("age")}
         placeholder={placeHoldersNames.Age}
         type="number"
       />
       <CustomDropDown
         name={fieldNames.borrowerGender}
-        label={"Gender"}
+        label={t("gender")}
         data={genderOptions}
         control={control}
       />
       <CustomDropDown
         name={fieldNames.borrowerNationality}
-        label={"Nationality"}
+        label={t("nationality")}
         data={nationalityOptions}
         control={control}
       />
       <CustomDropDown
         name={fieldNames.borrowerResidenceCountry}
-        label={"Residence Country"}
+        label={t("residenceCountry")}
         data={residenceCountryOptions}
         control={control}
       />
       <CustomInput
         control={control}
         name={fieldNames.borrowerEidaNo}
-        label="EIDA No"
+        label={t("eidaNo")}
         placeholder={placeHoldersNames.EIDA}
         type="number"
       />
       <CustomDatePicker
         control={control}
         name={fieldNames.borrowerEidaIssueDate}
-        label={"EIDA Issue Date"}
+        label={t("eidaIssueDate")}
         maxDate={new Date()}
       />
       <CustomDatePicker
         control={control}
         name={fieldNames.borrowerEidaExpiryDate}
-        label={"EIDA Expiry Date"}
+        label={t("eidaExpiryDate")}
         minDate={watch(fieldNames.borrowerEidaIssueDate)}
       />
 
       <CustomInput
         control={control}
         name={fieldNames.borrowerPassportNo}
-        label="Passport No"
+        label={t("passportNo")}
         placeholder={placeHoldersNames.PassportNumber}
         type="number"
       />
       <CustomDatePicker
         control={control}
         name={fieldNames.borrowerPassportIssueDate}
-        label={"Passport Issue Date"}
+        label={t("passportIssueDate")}
         maxDate={new Date()}
       />
       <CustomDatePicker
         control={control}
         name={fieldNames.borrowerPassportExpiryDate}
-        label={"Passport Expiry Date"}
+        label={t("passportExpiryDate")}
         minDate={watch(fieldNames.borrowerPassportIssueDate)}
       />
       {(borrowerNationalityStatus === "Expat" ||
@@ -400,7 +400,7 @@ const BorrowerPersonalInformation = () => {
           <CustomInput
             control={control}
             name={fieldNames.borrowerVisaNo}
-            label="Visa No"
+            label={t("visaNo")}
             placeholder={placeHoldersNames.VisaNumber}
             type="number"
           />
@@ -408,13 +408,13 @@ const BorrowerPersonalInformation = () => {
           <CustomDatePicker
             control={control}
             name={fieldNames.borrowerVisaIssueDate}
-            label={"Visa Issue Date"}
+            label={t("visaIssueDate")}
             maxDate={new Date()}
           />
           <CustomDatePicker
             control={control}
             name={fieldNames.borrowerVisaExpiryDate}
-            label={"VIsa Expiry Date"}
+            label={t("visaExpiryDate")}
             minDate={watch(fieldNames.borrowerVisaIssueDate)}
           />
         </>
@@ -422,7 +422,7 @@ const BorrowerPersonalInformation = () => {
       <CustomInput
         control={control}
         name={fieldNames.borrowerEmailId}
-        label="Email ID"
+        label={t("emailID")}
         placeholder={placeHoldersNames.Email}
         type="email"
       />
@@ -430,7 +430,7 @@ const BorrowerPersonalInformation = () => {
       <CustomInput
         control={control}
         name={fieldNames.borrowerMobileNo}
-        label="Mobile No"
+        label={t("mobileNo")}
         placeholder={placeHoldersNames.MobileNumber}
         type="number"
       />
@@ -438,7 +438,7 @@ const BorrowerPersonalInformation = () => {
       <CustomInput
         control={control}
         name={fieldNames.borrowerVintage}
-        label="Residence Vintage(Months)"
+        label={t("residenceVintage")}
         placeholder={placeHoldersNames.ResidenceVintage}
         type="number"
       />
@@ -446,7 +446,7 @@ const BorrowerPersonalInformation = () => {
       <CustomInput
         control={control}
         name={fieldNames.borrowerNoOfDependents}
-        label="No of Dependents"
+        label={t("noOfDependents")}
         placeholder={placeHoldersNames.DependentsNumber}
         type="number"
       />
@@ -456,36 +456,40 @@ const BorrowerPersonalInformation = () => {
       <CustomInput
         control={control}
         name={fieldNames.borrowerAddressLine1}
-        label="Address Line 1"
+        label={t("addressLine1")}
         placeholder={placeHoldersNames.Address}
         type="text"
       />
       <CustomInput
         control={control}
         name={fieldNames.borrowerAddressLine2}
-        label="Address Line 2"
+        label={t("addressLine2")}
         placeholder={placeHoldersNames.Address}
         type="text"
       />
 
       <CustomDropDown
         name={fieldNames.borrowerEmirates}
-        label="Emirates"
+        label={t("emirates")}
         data={emiratesOptions}
         control={control}
       />
       <CustomDropDown
         name={fieldNames.borrowerCountry}
-        label={"Country"}
+        label={t("country")}
         data={countryOptions}
         control={control}
       />
 
       <SectionHeader sectionName="EFR Check" />
-      <CustomButton title={"RUN EFR"} onPress={runEFR} isloading={isloading} />
+      <CustomButton
+        title={t("runEFR")}
+        onPress={runEFR}
+        isloading={isloading}
+      />
       <CustomDropDown
         name={fieldNames.borrowerVerificationStatus}
-        label={"Verification Status"}
+        label={t("verificationStatus")}
         data={verificationOptions}
         control={control}
         disable={true}

@@ -25,7 +25,10 @@ import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import calculateAge from "@/utils/calculateAge";
-import { getUaeFtsCompletedMail, getUaeFtsInitiatedMail } from "@/utils/sendEmailUae";
+import {
+  getUaeFtsCompletedMail,
+  getUaeFtsInitiatedMail,
+} from "@/utils/sendEmailUae";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useState } from "react";
@@ -221,7 +224,6 @@ export default function BorrowerIncomeScreen() {
       } else if (salaryIncomeUaeFtsGetStatusValue === "Initiated") {
         setValue(fieldNames.borrowerFtsStatus, "Pending");
       } else if (salaryIncomeUaeFtsGetStatusValue === "Pending") {
-
         setValue(fieldNames.borrowerFtsStatus, "Completed");
         const body = {
           subject: getUaeFtsCompletedMail(formData[fieldNames.borrowerName])
@@ -445,8 +447,8 @@ export default function BorrowerIncomeScreen() {
       onSaveAndNext={handleSubmit(onSubmit)}
     >
       <SegmentedControl
-        label={"Select Income Type"}
-        options={["Salaried", "Self Employed"]}
+        label={t("selectIncomeType")}
+        options={[t("salaried"), t("selfEmployed")]}
         defaultValue={borrowerIncomeType}
         onChange={
           (value) => onChangeBorrowerIncomeType(value)
@@ -456,11 +458,11 @@ export default function BorrowerIncomeScreen() {
       {borrowerIncomeType === "Salaried" ? (
         <>
           <SectionHeader
-            sectionName="Employment  Information"
+            sectionName={t("employmentInformation")}
             style={{ marginTop: spacingVertical.md }}
           />
           <MethodSelector
-            title={"Select Method to Fetch Employment Details"}
+            title={t("selectMethodFetchEmp")}
             options={employmentMethods}
             selectedId={empDetailFetchMethod}
             onSelect={
@@ -476,7 +478,7 @@ export default function BorrowerIncomeScreen() {
             />
           )}
           <CustomButton
-            title="Fetch Employment Details"
+            title={t("Fetch Employment Details")}
             onPress={fetchEmploymentDetails}
             isloading={isloading2}
           />
@@ -484,41 +486,41 @@ export default function BorrowerIncomeScreen() {
           <CustomInput
             control={control}
             name={fieldNames.borrowerEmployerName}
-            label="Employer Name"
+            label={t("employerName")}
             type="text"
             placeholder={placeHoldersNames.EmployerName}
           />
           <CustomDatePicker
             control={control}
             name={fieldNames.borrowerEmployedFrom}
-            label="Employed From"
+            label={t("employedFrom")}
           />
           <CustomInput
             control={control}
             name={fieldNames.borrowerCurrentExp}
-            label="Current Experience (Months)"
+            label={t("currentExpMonths")}
             placeholder={placeHoldersNames.CurrentExp}
             type="number"
           />
           <CustomInput
             control={control}
             name={fieldNames.borrowerTotalExp}
-            label="Total Experience (Months)"
+            label={t("totalExpMonths")}
             placeholder={placeHoldersNames.TotalExperience}
             type="number"
           />
           <CustomDropDown
             control={control}
             name={fieldNames.borrowerEmirates}
-            label="Emirates"
+            label={t("emirates")}
             data={emiratesOptions}
           />
           <SectionHeader
-            sectionName="Income  Details"
+            sectionName={t("incomeDetails")}
             style={{ marginTop: spacingVertical.md }}
           />
           <MethodSelector
-            title={"Select Method to Fetch Income Details"}
+            title={t("selectMethodFetchIncome")}
             options={salaryIncomeMethods}
             selectedId={salaryIncomeDetailFetchMethod}
             onSelect={
@@ -531,14 +533,14 @@ export default function BorrowerIncomeScreen() {
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerEmiratesId}
-                label="Emirates ID"
+                label={t("emiratesID")}
                 placeholder="Enter Emirates ID"
                 type="text"
               />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerIbanNo}
-                label="IBAN No"
+                label={t("ibanNo")}
                 type="text"
                 placeholder={placeHoldersNames.IBANNO}
               />
@@ -546,22 +548,22 @@ export default function BorrowerIncomeScreen() {
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerBankingCode}
-                label="Banking Code"
+                label={t("bankingCode")}
                 placeholder={placeHoldersNames.BankingCode}
                 type="text"
               />
               <CustomDatePicker
                 control={control}
                 name={fieldNames.borrowerStartDateFts}
-                label="Start Date"
+                label={t("startDate")}
               />
               <CustomDatePicker
                 control={control}
                 name={fieldNames.borrowerEndDateFts}
-                label="End Date"
+                label={t("endDate")}
               />
               <CustomButton
-                title="Send Request"
+                title={t("sendRequest")}
                 onPress={sendRequestUaeFts}
                 isloading={isloading4}
               />
@@ -581,7 +583,7 @@ export default function BorrowerIncomeScreen() {
                     </Text>
                   </View>
                   <CustomButton
-                    title="Get Status"
+                    title={t("getStatus")}
                     onPress={salaryIncomeUaeFtsGetStatus}
                     isloading={isloading5}
                   />
@@ -596,7 +598,7 @@ export default function BorrowerIncomeScreen() {
                 <CustomDropDown
                   control={control}
                   name={fieldNames.borrowerFtsStatus}
-                  label="FTS Status"
+                  label={t("ftsStatus")}
                   data={statusOptions}
                 />
               ) : (
@@ -610,14 +612,14 @@ export default function BorrowerIncomeScreen() {
             ftsStatus === "Completed") ? (
             <>
               <CustomButton
-                title="Fetch Salary Details"
+                title={t("fetchSalaryDetails")}
                 onPress={fetchSalariedIncomeDetails}
                 isloading={isloading3}
               />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerMonthlySalaryBankTransfer}
-                label="Monthly Salary (Bank Transfer)"
+                label={t("monthlySalaryBankTransfer")}
                 placeholder={placeHoldersNames.MonthylySalary}
                 type="number"
                 formatWithCommas={true}
@@ -625,7 +627,7 @@ export default function BorrowerIncomeScreen() {
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerMonthlySalaryAECB}
-                label="Monthly Salary (AECB)"
+                label={t("monthlySalaryAECB")}
                 placeholder="Monthly Salary AECB"
                 type="number"
                 formatWithCommas={true}
@@ -638,11 +640,11 @@ export default function BorrowerIncomeScreen() {
       ) : (
         <>
           <SectionHeader
-            sectionName="Business  Information"
+            sectionName={t("businessInformation")}
             style={{ marginTop: spacingVertical.md }}
           />
           <MethodSelector
-            title={"Select Method to Fetch Business Details"}
+            title={t("selectMethodFetchBusiness")}
             options={businessMethods}
             selectedId={businessDetailFetchMethod}
             onSelect={
@@ -653,12 +655,12 @@ export default function BorrowerIncomeScreen() {
           {businessDetailFetchMethod === "Upload Trade License" && (
             <>
               <CustomUpload
-                label="Upload Trade License"
+                label={t("uploadTradeLicense")}
                 control={control}
                 name="UploadTradeLicense"
               />
               <CustomButton
-                title="Fetch Business Details"
+                title={t("fetchBusinessDetails")}
                 onPress={handleFetchDetailsBusiness}
                 isloading={isloading}
               />
@@ -668,53 +670,53 @@ export default function BorrowerIncomeScreen() {
           <CustomInput
             control={control}
             name={fieldNames.borrowerNameOfBusiness}
-            label="Name of Business"
+            label={t("nameOfBusiness")}
             type="text"
             placeholder="Enter name of business"
           />
           <CustomDropDown
             control={control}
             name={fieldNames.borrowerLegalForm}
-            label="Legal Form"
+            label={t("legalForm")}
             data={legalFormOptions}
           />
           <CustomDropDown
             control={control}
             name={fieldNames.borrowerEmiratesBusiness}
-            label="Emirates"
+            label={t("emirates")}
             data={emiratesOptions}
           />
           <CustomDatePicker
             control={control}
             name={fieldNames.borrowerDateOfEstabilishment}
-            label="Date of Establishment"
+            label={t("dateOfEstabilishment")}
           />
           <CustomInput
             control={control}
             name={fieldNames.borrowerVintage}
-            label="Vintage (Months)"
+            label={t("vintageMonths")}
             placeholder="Enter vintage"
             type="number"
           />
           <CustomInput
             control={control}
             name={fieldNames.borrowerLicenseNo}
-            label="License No"
+            label={t("licenseNumber")}
             type="text"
             placeholder="Enter your business license no"
           />
           <CustomDropDown
             control={control}
             name={fieldNames.borrowerNatureOfBusiness}
-            label="Nature of Business"
+            label={t("natureOfBusiness")}
             data={natureOfBusinessOptions}
           />
           <SectionHeader
-            sectionName="Income  Details"
+            sectionName={t("incomeDetails")}
             style={{ marginTop: spacingVertical.md }}
           />
           <MethodSelector
-            title={"Select Method to Fetch Income Details"}
+            title={t("selectMethodFetchIncome")}
             options={businessIncomeMethods}
             selectedId={selfIncomeDetailFetchMethod}
             onSelect={
@@ -724,7 +726,7 @@ export default function BorrowerIncomeScreen() {
           />
           {selfIncomeDetailFetchMethod === "Upload Bank Statement" && (
             <CustomUpload
-              label="Upload Bank Statement"
+              label={t("uploadBankStatement")}
               control={control}
               name="UploadBankStatement"
             />
@@ -734,14 +736,14 @@ export default function BorrowerIncomeScreen() {
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerEmiratesId}
-                label="Emirates ID"
+                label={t("emiratesID")}
                 placeholder={placeHoldersNames.EmiratesID}
                 type="text"
               />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerIbanNo}
-                label="IBAN No"
+                label={t("ibanNo")}
                 type="text"
                 placeholder={placeHoldersNames.IBANNO}
               />
@@ -749,22 +751,22 @@ export default function BorrowerIncomeScreen() {
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerBankingCode}
-                label="Banking Code"
+                label={t("bankingCode")}
                 placeholder={placeHoldersNames.BankingCode}
                 type="text"
               />
               <CustomDatePicker
                 control={control}
                 name={fieldNames.borrowerStartDateFts}
-                label="Start Date"
+                label={t("startDate")}
               />
               <CustomDatePicker
                 control={control}
                 name={fieldNames.borrowerEndDateFts}
-                label="End Date"
+                label={t("endDate")}
               />
               <CustomButton
-                title="Send Request"
+                title={t("sendRequest")}
                 onPress={sendRequestUaeFts}
                 isloading={isloading4}
               />
@@ -784,7 +786,7 @@ export default function BorrowerIncomeScreen() {
                     </Text>
                   </View>
                   <CustomButton
-                    title="Get Status"
+                    title={t("getStatus")}
                     onPress={salaryIncomeUaeFtsGetStatus}
                     isloading={isloading5}
                   />
@@ -799,7 +801,7 @@ export default function BorrowerIncomeScreen() {
                 <CustomDropDown
                   control={control}
                   name={fieldNames.borrowerFtsStatus}
-                  label="FTS Status"
+                  label={t("ftsStatus")}
                   data={statusOptions}
                 />
               ) : (
@@ -813,28 +815,28 @@ export default function BorrowerIncomeScreen() {
             ftsStatus === "Completed") ? (
             <>
               <CustomButton
-                title="Fetch Income Details"
+                title={t("fetchIncomeDetails")}
                 onPress={selfEmpIncomeDetails}
                 isloading={isloading6}
               />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerBankName}
-                label="Bank Name"
+                label={t("bankName")}
                 placeholder={placeHoldersNames.BankName}
                 type="text"
               />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerAccountNo}
-                label="Account No"
+                label={t("accountNo")}
                 placeholder={placeHoldersNames.AccountNumber}
                 type="number"
               />
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerLast6MonthsADB}
-                label="Last 6 Months ADB"
+                label={t("last6MonthsADB")}
                 placeholder="Enter last 6 months ADB"
                 type="number"
                 formatWithCommas={true}
@@ -842,7 +844,7 @@ export default function BorrowerIncomeScreen() {
               <CustomInput
                 control={control}
                 name={fieldNames.borrowerLast6MonthsAvgCredit}
-                label="Last 6 Months Avg Credit"
+                label={t("last6MonthsAvgCredit")}
                 placeholder="Enter last 6 months avg credit"
                 type="number"
                 formatWithCommas={true}
