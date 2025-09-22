@@ -6,8 +6,9 @@ import {
   spacing,
   spacingVertical,
 } from "@/constants/Metrics";
+import { t } from "i18next";
 import React, { useMemo } from "react";
-import { Controller, Control, useWatch } from "react-hook-form";
+import { Control, Controller, useWatch } from "react-hook-form";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { useTheme } from "styled-components/native";
 
@@ -75,7 +76,7 @@ const ExpenseList = ({ data, control }: Props) => {
       flex: 1,
       textAlign: "right",
       fontSize: fontSize.sm,
-      color:theme.colors.primaryColor,
+      color: theme.colors.primaryColor,
       padding: 0,
     },
     currency: {
@@ -100,7 +101,7 @@ const ExpenseList = ({ data, control }: Props) => {
     <View style={styles.card}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Total Expenses</Text>
+        <Text style={styles.headerTitle}>{t("totalExpenses")}</Text>
         <Text style={styles.headerAmount}>{total.toLocaleString()} AED</Text>
       </View>
 
@@ -118,9 +119,9 @@ const ExpenseList = ({ data, control }: Props) => {
                   <TextInput
                     style={styles.input}
                     keyboardType="numeric"
-                    value={value?Number(value).toLocaleString():""}
-                    onChangeText={(text) =>
-                      onChange(text.replace(/[^0-9]/g, "")) // only numbers
+                    value={value ? Number(value).toLocaleString() : ""}
+                    onChangeText={
+                      (text) => onChange(text.replace(/[^0-9]/g, "")) // only numbers
                     }
                   />
                 )}

@@ -3,7 +3,7 @@ import FormLayout from "@/components/Form/FormLayout";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
 import { t } from "i18next";
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 
 const AdditionalDocUpload = () => {
@@ -30,13 +30,29 @@ const AdditionalDocUpload = () => {
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
-        <>
-          {/* Borrower Upload  */}
-          <CustomUpload label={"Salary Certificate"} control={control} name="SalaryCertificate"/>
-          <CustomUpload label={"Bank Statement"} control={control} name="BankStatement"/>
-          <CustomUpload label={"Additional Income Proof"}  control={control} name="AdditionalIncomeProof"/>
-          <CustomUpload label={"Trade License"} control={control} name="TradeLicense"/>
-        </>
+      <>
+        {/* Borrower Upload  */}
+        <CustomUpload
+          label={t("salaryCertificate")}
+          control={control}
+          name="SalaryCertificate"
+        />
+        <CustomUpload
+          label={t("bankStatement")}
+          control={control}
+          name="BankStatement"
+        />
+        <CustomUpload
+          label={t("additionalIncomeProof")}
+          control={control}
+          name="AdditionalIncomeProof"
+        />
+        <CustomUpload
+          label={t("tradeLicense")}
+          control={control}
+          name="TradeLicense"
+        />
+      </>
     </FormLayout>
   );
 };

@@ -8,7 +8,10 @@ import {
   spacing,
   spacingVertical,
 } from "@/constants/Metrics";
-import { useGetEmiratesBranchDropDownValuesQuery, useGetEmiratesDropDownValuesQuery } from "@/redux/api/creditCardAPI";
+import {
+  useGetEmiratesBranchDropDownValuesQuery,
+  useGetEmiratesDropDownValuesQuery,
+} from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
@@ -37,7 +40,7 @@ const DispatchDetails = () => {
 
   const { data: emirates } = useGetEmiratesDropDownValuesQuery();
 
- const emiratesOptions = emirates?.data ?? [
+  const emiratesOptions = emirates?.data ?? [
     {
       label: "Abu Dhabi",
       value: "Abu Dhabi",
@@ -57,19 +60,22 @@ const DispatchDetails = () => {
     { label: "Germany", value: "DE" },
   ];
 
-   const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(formData[fieldNames.dispatchBranchName],{skip:!formData[fieldNames.dispatchBranchName]});
+  const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(
+    formData[fieldNames.dispatchBranchName],
+    { skip: !formData[fieldNames.dispatchBranchName] }
+  );
 
-     const emiratesBranches = emiratesBranch?.data ?? [
-       {
-            "label": "Ajman Corniche",
-            "value": "Ajman Corniche"
-        },
-        {
-            "label": "Ajman Free Zone",
-            "value": "Ajman Free Zone"
-        }
+  const emiratesBranches = emiratesBranch?.data ?? [
+    {
+      label: "Ajman Corniche",
+      value: "Ajman Corniche",
+    },
+    {
+      label: "Ajman Free Zone",
+      value: "Ajman Free Zone",
+    },
   ];
-  
+
   const [modifyName, setModifyName] = useState(false);
   const [needSupCard, setNeedSupCard] = useState(false);
   const [mailing, setMailing] = useState(false);
@@ -105,16 +111,16 @@ const DispatchDetails = () => {
       onSaveAndNext={handleSubmit(onSubmit)}
     >
       <View>
-        <Text style={styles.text}>Select Name on Card</Text>
+        <Text style={styles.text}>{t("selectNameOnCard")}</Text>
       </View>
 
       <CustomInput
         control={control}
         name={fieldNames.borrowerName}
-        label="Name"
+        label={t("name")}
         placeholder={placeHoldersNames.Name}
         type="text"
-        editable={modifyName} 
+        editable={modifyName}
       />
       <View style={styles.checkBoxContainer}>
         <Checkbox
@@ -122,11 +128,11 @@ const DispatchDetails = () => {
           onValueChange={() => setModifyName(!modifyName)}
           color={modifyName === true ? theme.colors.primaryColor : undefined}
         />
-        <Text style={styles.checkBoxText}>Modify Name</Text>
+        <Text style={styles.checkBoxText}>{t("selectNameOnCard")}</Text>
       </View>
 
       <View style={{ gap: spacing.sm, marginVertical: spacingVertical.semi }}>
-        <Text style={styles.text}>Do you need any supplementary card?</Text>
+        <Text style={styles.text}>{t("needSupplementaryCard")}</Text>
         <View style={styles.checkBoxContainer}>
           <Checkbox
             value={needSupCard === true}
@@ -151,7 +157,7 @@ const DispatchDetails = () => {
         <CustomInput
           control={control}
           name={fieldNames.supplementaryCardName}
-          label="Supplementary Card Name"
+          label={t("supplementaryCardName")}
           placeholder={placeHoldersNames.SupplementaryCard}
           type="text"
         />
@@ -160,8 +166,8 @@ const DispatchDetails = () => {
       )}
 
       <SegmentedControl
-        label={"Select Dispatch Address"}
-        options={["Mailing Address", "Branch Collect"]}
+        label={t("selectDispatchAddress")}
+        options={[t("mailingAddress"), t("branchCollect")]}
         defaultValue={dispatchType}
         onChange={(value) => setValue("dispatchType", value)}
       />
@@ -176,7 +182,7 @@ const DispatchDetails = () => {
             />
 
             <Text style={styles.checkBoxText}>
-              Select Mailing Address to Dispatch Card
+              {t("selectMailingAddresDispatch")}
             </Text>
           </View>
           {mailing ? (
@@ -184,27 +190,27 @@ const DispatchDetails = () => {
               <CustomInput
                 control={control}
                 name={fieldNames.dispatchAddressLine1}
-                label="Address Line 1"
+                label={t("addressLine1")}
                 placeholder={placeHoldersNames.Address}
                 type="text"
               />
               <CustomInput
                 control={control}
                 name={fieldNames.dispatchAddressLine2}
-                label="Address Line 2"
+                label={t("addressLine2")}
                 placeholder={placeHoldersNames.Address}
                 type="text"
               />
 
               <CustomDropDown
                 name={fieldNames.dispatchEmirates}
-                label={"Emirates"}
+                label={t("emirates")}
                 data={emiratesOptions}
                 control={control}
               />
               <CustomDropDown
                 name={fieldNames.dispatchCountry}
-                label={"Country"}
+                label={t("country")}
                 data={countryOptions}
                 control={control}
               />
@@ -222,7 +228,7 @@ const DispatchDetails = () => {
               color={branch === true ? theme.colors.primaryColor : undefined}
             />
             <Text style={styles.checkBoxText}>
-              Select below Branch to Dispatch Card
+              {t("selectBelowBranchDispatch")}
             </Text>
           </View>
 
@@ -230,26 +236,25 @@ const DispatchDetails = () => {
             <>
               <CustomDropDown
                 name={fieldNames.dispatchEmirates}
-                label={"Emirates"}
+                label={t("emirates")}
                 data={emiratesOptions}
                 control={control}
               />
               <CustomDropDown
                 name={fieldNames.dispatchBranchName}
-                label={"Branch Name"}
+                label={t("branchName")}
                 data={emiratesBranches}
                 control={control}
               />
 
               <View>
                 <Text style={{ textAlign: "center" }}>
-                  Collection Timings - 9 AM to 4 PM (Monday to Friday)
+                  {t("collectionTimings")}
                 </Text>
               </View>
               <View>
                 <Text style={{ textAlign: "center" }}>
-                  Card will be re-dispatched to Head Office if not collected
-                  within 30 days
+                  {t("cardWillBeReDispatched")}
                 </Text>
               </View>
             </>

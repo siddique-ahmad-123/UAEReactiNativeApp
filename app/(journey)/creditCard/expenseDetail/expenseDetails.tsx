@@ -20,14 +20,14 @@ const ExpenseDetails = () => {
     nextStep();
   };
   const expenses = [
-    { name: fieldNames.houseRent, label: "House Rent" },
-    { name: fieldNames.groceryExpenses, label: "Grocery Expenses" },
-    { name: fieldNames.houseBills, label: "House Bills" },
-    { name: fieldNames.foodDeliveries, label: "Food Deliveries" },
-    { name: fieldNames.schoolCost, label: "School Cost" },
-    { name: fieldNames.leisure, label: "Leisure" },
-    { name: fieldNames.healthcare, label: "Healthcare" },
-    { name: fieldNames.otherExpenses, label: "Other Expenses" },
+    { name: fieldNames.houseRent, label: t("houseRent") },
+    { name: fieldNames.groceryExpenses, label: t("groceryExpenses") },
+    { name: fieldNames.houseBills, label: t("houseBills") },
+    { name: fieldNames.foodDeliveries, label: t("foodDeliveries") },
+    { name: fieldNames.schoolCost, label: t("schoolCost") },
+    { name: fieldNames.leisure, label: t("leisure") },
+    { name: fieldNames.healthcare, label: t("healthcare") },
+    { name: fieldNames.otherExpenses, label: t("otherExpenses") },
   ];
   return (
     <FormLayout
@@ -41,7 +41,7 @@ const ExpenseDetails = () => {
       onInfoPress={() => alert("Info about this step")}
       onSaveAndNext={handleSubmit(onSubmit)}
     >
-      <ExpenseList data={expenses} control={control}/>
+      <ExpenseList data={expenses} control={control} />
     </FormLayout>
   );
 };
