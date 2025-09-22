@@ -11,7 +11,12 @@ export const ImagesPath = {
     card3Image:require("../assets/images/card3.png"),
     approvedIconImage:require("../assets/images/approved-icon.png"),
     animatedImage:require("../assets/images/animatedImg.png"),
-    logoHighFront:require("../assets/Logo-High_front.png")
+    logoHighFront:require("../assets/Logo-High_front.png"),
+    mainScreencardImages:require("../assets/images/MainScreenCard/Card.png"),
+    mainScreenMortgageImages:require("../assets/images/MainScreenCard/Mortgage.png"),
+    mainScreenAutoLoan:require("../assets/images/MainScreenCard/AutoLoan.png"),
+    mainScreenPersonalLoan:require("../assets/images/MainScreenCard/PersonalLoan.png"),
+    heroBannerImages:require("../assets/images/HeroBanner.png")
   
 } as const;
 

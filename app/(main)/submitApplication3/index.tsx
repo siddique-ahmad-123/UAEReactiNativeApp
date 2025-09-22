@@ -6,6 +6,7 @@ import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "styled-components/native";
 import { styles } from "../../../components/styles/submitApplication3.Styles";
+import { ImagesPath } from "@/constants/Image";
 
 const NotificationScreen = () => {
   const theme = useTheme();
@@ -50,7 +51,7 @@ const NotificationScreen = () => {
     >
       <View style={styles.image}>
         <Image
-          source={require("../../../assets/images/animatedImg.png")}
+          source={ImagesPath.animatedImage}
           style={{ width: 200, height: 200 }}
           resizeMode="contain"
         />
