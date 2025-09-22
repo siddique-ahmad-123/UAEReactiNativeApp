@@ -12,8 +12,7 @@ import {
   spacingVertical,
 } from "@/constants/Metrics";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
-import { useForm } from "react-hook-form";
-import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { ImagesPath } from "@/constants/Image";
 
 const STORAGE_KEY = "user";
 
@@ -112,7 +111,7 @@ const LoginScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../../../assets/images/background.png")}
+        source={ImagesPath.backgroundImage}
         style={styles.headerBackground}
         imageStyle={styles.imageStyle}
       >

@@ -2,6 +2,7 @@ import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import DocumentDownload from "@/components/DocumentDownload";
 import MethodSelector from "@/components/MethodSelector";
 import { styles } from "@/components/styles/submitApplication.Styles";
+import { ImagesPath } from "@/constants/Image";
 import {
   useCreateWorkItemMutation,
   useOfferLetterMutation,
@@ -90,7 +91,7 @@ const ApplicationApproved = () => {
       >
         <View style={styles.image}>
           <Image
-            source={require("../../../../assets/images/approved-icon.png")}
+            source={ImagesPath.approvedIconImage}
             style={styles.successImage}
             resizeMode="contain"
           />
@@ -114,13 +115,13 @@ const ApplicationApproved = () => {
         />
         <View style={{ alignItems: "center", marginTop: 30 }}>
           <Image
-            // source={require(`../../../../assets/images/${cardNumber}.png`)}
+           
             source={
               formData[fieldNames.cardType] === "Cashback Credit Card"
-                ? require("../../../../assets/images/card2.png")
+                ? ImagesPath.card2Image
                 : formData[fieldNames.cardType] === "Elite Credit Card"
-                ? require("../../../../assets/images/card1.png")
-                : require("../../../../assets/images/card3.png")
+                ? ImagesPath.card1Image
+                : ImagesPath.card3Image
             }
             style={styles.imageSpex}
             resizeMode="contain"

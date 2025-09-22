@@ -4,6 +4,7 @@ import { Image, StyleSheet, View } from "react-native";
 import { Ripple } from "./ripple";
 import { useRouter } from "expo-router";
 import { getUser } from "@/utils/storage";
+import { ImagesPath } from "@/constants/Image";
 
 export default function SplashScreen() {
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function SplashScreen() {
 
       {/* Your logo in center */}
       <Image
-        source={require("../../assets/Logo-High_front.png")}
+        source={ImagesPath.logoHighFront}
         style={styles.logo}
         resizeMode="contain"
       />

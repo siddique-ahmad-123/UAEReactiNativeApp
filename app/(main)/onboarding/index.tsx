@@ -45,19 +45,19 @@ const slides: Slide[] = [
     id: "2",
     title: "Mortgages",
     description: "Get Mortgages In Principle Approval instantly and get access to your dream home.",
-    imgpath: require("../../../assets/images/StaringCarosoul/Mortgages.png"),
+    imgpath: ImagesPath.landingPageImage2,
   },
   {
     id: "3",
     title: "Auto Loans",
     description: "Get Auto Loans In Principle Approval instantly and get access to your dream Car.",
-    imgpath: require("../../../assets/images/StaringCarosoul/AutoLoans.png"),
+    imgpath: ImagesPath.landingPageImage3
   },
   {
     id: "4",
     title: "Personal Loans",
     description: "Get Funds instantly in your account allowing you to access things you love.",
-    imgpath: require("../../../assets/images/StaringCarosoul/PersonalLoans.png"),
+    imgpath: ImagesPath.landingPageImage4
   },
 ];
 
@@ -112,7 +112,7 @@ const Carousel = () => {
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <Image
-        source={require("../../../assets/images/newgenLogo1.png")}
+        source={ImagesPath.newgenLogo}
         style={styles.logo}
         resizeMode="contain"
       />
