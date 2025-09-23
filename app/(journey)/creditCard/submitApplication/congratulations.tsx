@@ -27,7 +27,7 @@ const Congratulations = () => {
   };
   return (
     <CustomMainChild
-      title={t("Submit Application")}
+      title={t("submitApplication")}
       noOfButtons={1}
       singleButtonTitle={t("Return to Home Page")}
       onClose={() => router.push("/(main)/NavScreen")}
@@ -40,7 +40,7 @@ const Congratulations = () => {
           resizeMode="contain"
         />
         <Text style={[styles.textbox2, { color: theme.colors.textPrimary }]}>
-          t(Congratulations !!)
+          {t("congratulations")}
         </Text>
         <Text
           style={[
@@ -48,17 +48,13 @@ const Congratulations = () => {
             { color: theme.colors.secondaryText, marginBottom: 30 },
           ]}
         >
-          t(Your Credit Card will be dispatched in 1 day {"\n"} {"\n"} {"\n"}
-          You’ll soon receive a confirmation from our side over SMS and Email
-          regarding dispatch details.{"\n"} {"\n"} {"\n"}
-          {"\n"} Your ‘PIN’ will be available in Mobile App, once the card is
-          delivered)
+          {t("yourCreditCardWillBeDispatched")}
         </Text>
       </View>
       <View style={styles.linkTextView}>
         <TouchableOpacity onPress={() => {}}>
           <Text style={[styles.linktext, { color: theme.colors.primaryColor }]}>
-            t(Your Application No is) {formData[fieldNames.workItemNumber]}
+            {t("yourApplicationNumberIs")} {formData[fieldNames.workItemNumber]}
           </Text>
         </TouchableOpacity>
       </View>

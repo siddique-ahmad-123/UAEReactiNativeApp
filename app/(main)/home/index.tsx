@@ -32,19 +32,19 @@ const services: {
 }[] = [
   {
     id: "1",
-    title: t("Requests"),
+    title: t("requests"),
     iconName: "document-text-outline",
     route: "/Request",
   },
   {
     id: "2",
-    title: t("Agreements"),
+    title: t("agreements"),
     iconName: "file-tray-outline",
     route: "/Agreement",
   },
   {
     id: "3",
-    title: t("Applications"),
+    title: t("applications"),
     iconName: "clipboard-outline",
     route: "/ExistingApplication",
   },
@@ -53,17 +53,17 @@ const services: {
 const applyNow = [
   {
     id: "1",
-    title: t("Credit Card"),
+    title: t("creditCards"),
     imgPath: ImagesPath.mainScreencardImages
   },
   {
     id: "2",
-    title: t("Mortgages"),
+    title: t("mortgages"),
     imgPath: ImagesPath.mainScreenMortgageImages
   },
   {
     id: "3",
-    title: t("Auto Loans"),
+    title: t("autoLoans"),
     imgPath: ImagesPath.mainScreenAutoLoan
   },
   {
@@ -122,7 +122,7 @@ export default function Dashboard() {
         />
       </View>
       <HeroBanner
-        message={t("Thank you for being associated with us.")}
+        message={t("thankYouForBeing")}
         backgroundImage={ImagesPath.heroBannerImages}
       />
       <Text style={localStyles.sectionTitle}>My Services</Text>

@@ -11,14 +11,14 @@ const AgreementScreen = () => {
   const theme = useTheme();
   return (
     <CustomMainChild
-      title={t("Agreement")}
-      subTitle={t("Find all the agreements/documents here.")}
+      title={t("agreements")}
+      subTitle={t("findAllTheAgreements")}
       noOfButtons={1}
-      singleButtonTitle={t("Back")}
+      singleButtonTitle={t("back")}
       onClose={() => router.push("/(main)/NavScreen")}
       onPressSingleButton={() => router.back()}
     >
-        <MessageCard message={t("You don’t have any new requests as of now")}/>
+        <MessageCard message={t("youDontHaveAnyNewExisting")}/>
 
     </CustomMainChild>
   );

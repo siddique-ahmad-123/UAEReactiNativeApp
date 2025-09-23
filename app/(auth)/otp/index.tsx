@@ -119,7 +119,7 @@ const OTPScreen: React.FC = () => {
           ) {
             userType = "ETB";
 
-            userName = response.data.customerData[0]?.Name || t("Ravish Kumar");
+            userName = response.data.customerData[0]?.Name || t("personName");
           }
 
           storeValue({
@@ -130,11 +130,11 @@ const OTPScreen: React.FC = () => {
           });
           router.replace("/NavScreen");
         } else {
-          alert(t("Something went wrong!!"));
+          alert(t("Somethingwentwrong"));
         }
       }
     } else {
-      alert(t("Invalid OTP. Please try again."));
+      alert(t("inValidOtpTryAgain"));
     }
     setIsLoading(false);
   };
@@ -242,17 +242,17 @@ const OTPScreen: React.FC = () => {
             style={{ color: theme.colors.statusBarText }}
           />
         </TouchableOpacity>
-        <Text style={styles.cornerText}>t(Verify OTP)</Text>
-        <Text style={styles.cornerText2}>t(Enter your OTP)</Text>
+        <Text style={styles.cornerText}>{t("verifyOtp")}</Text>
+        <Text style={styles.cornerText2}>{t("enterYourOtp")}</Text>
       </ImageBackground>
 
       <View style={styles.formContainer}>
         <View style={styles.formContainerChild}>
-          <Text style={styles.sectionTitle}>t(Enter Verification Code)</Text>
+          <Text style={styles.sectionTitle}>{t("enterVerificationCode")}</Text>
           <Text style={styles.sectionSubtitle}>
             {allFilled
-              ? t("We are automatically detecting an SMS sent to your mobile number *****7412")
-              : t("We have sent an SMS to your mobile number *****7412")}
+              ? t("weAreAutomaticallyDetecting")
+              : t("WeHaveSentSms")}
           </Text>
 
           <View style={styles.otpRow}>
@@ -281,15 +281,15 @@ const OTPScreen: React.FC = () => {
             ))}
           </View>
 
-          <Text style={styles.resendLabel}>t(Did not receive the code?)</Text>
-          <Text style={styles.resendText}>t(Resend Code)</Text>
+          <Text style={styles.resendLabel}>{t("didNotReceiveTheCode")}</Text>
+          <Text style={styles.resendText}>{t("resendCode")}</Text>
           <Text style={styles.timer}>{formatTime(secondsLeft)}</Text>
         </View>
 
         <View  style={{ marginBottom: spacingVertical.lg }}>
         {allFilled && (
           <CustomButton
-            title={t("Continue")}
+            title={t("continue")}
             size="full"
             variant="primary"
             type="filled"

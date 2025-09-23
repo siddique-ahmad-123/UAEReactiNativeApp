@@ -13,26 +13,26 @@ const NotificationScreen = () => {
   const { prevStep } = useApplicationStore();
   return (
     <CustomMainChild
-      title={t("Notification")}
-      subTitle={t("Find all the Notifications that you have raised here.")}
+      title={t("notification")}
+      subTitle={t("findAllNotification")}
       noOfButtons={1}
-      singleButtonTitle={t("Back")}
+      singleButtonTitle={t("back")}
       onClose={() => router.back()}
       onPressSingleButton={() => router.back()}
     >
       <Text style={localStyles.title2}>Your Request is under processing</Text>
       <Text style={localStyles.subtitle}>
-        We will notify you once we receive any update on your request
+        {t("weWillNotifyYouOnce")}
       </Text>
       <CustomInput
-        label={t("Description")}
-        placeholder={t("Need help for Credit Card")}
+        label={t("description")}
+        placeholder={t("needHelpForCreditCard")}
         type="textarea"
         numberOfLines={9}
       />
 
       <CustomInput
-        label={t("Resolution Provided")}
+        label={t("resolutionProvided")}
         placeholder={t("Pending..")}
         type="textarea"
         numberOfLines={9}

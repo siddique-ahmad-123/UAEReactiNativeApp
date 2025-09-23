@@ -8,14 +8,14 @@ import { t } from "i18next";
 const ExistingApplicantstScreen = () => {
   return (
     <CustomMainChild
-      title={t("Existing Applications")}
-      subTitle={t("Find all the existing applications here.")}
+      title={t("existingApplications")}
+      subTitle={t("findAllTheRequests")}
       noOfButtons={1}
       singleButtonTitle={t("Back")}
       onClose={() => router.push("/(main)/NavScreen")}
       onPressSingleButton={() => router.back()}
     >
-        <MessageCard message={t("You don’t have any new requests as of now")} />
+        <MessageCard message={t("youDontHaveAnyNew")} />
     </CustomMainChild>
   );
 };
