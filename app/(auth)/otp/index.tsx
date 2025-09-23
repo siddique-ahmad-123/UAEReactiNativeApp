@@ -7,10 +7,11 @@ import {
   spacing,
   spacingVertical,
 } from "@/constants/Metrics";
-import { useAsyncStorage } from "@/hooks/useAsyncStorage"; // ✅ corrected import
+import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 import { useGetExistingCustomerDataMutation } from "@/redux/api/creditCardAPI";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { t } from "i18next";
 import React, { useEffect, useRef, useState } from "react";
 import {
   ImageBackground,
@@ -118,7 +119,7 @@ const OTPScreen: React.FC = () => {
           ) {
             userType = "ETB";
 
-            userName = response.data.customerData[0]?.Name || "Ravish Kumar";
+            userName = response.data.customerData[0]?.Name || t("Ravish Kumar");
           }
 
           storeValue({
@@ -129,11 +130,11 @@ const OTPScreen: React.FC = () => {
           });
           router.replace("/NavScreen");
         } else {
-          alert("Something went wrong!!");
+          alert(t("Something went wrong!!"));
         }
       }
     } else {
-      alert("Invalid OTP. Please try again.");
+      alert(t("Invalid OTP. Please try again."));
     }
     setIsLoading(false);
   };
@@ -241,17 +242,17 @@ const OTPScreen: React.FC = () => {
             style={{ color: theme.colors.statusBarText }}
           />
         </TouchableOpacity>
-        <Text style={styles.cornerText}>Verify OTP</Text>
-        <Text style={styles.cornerText2}>Enter your OTP</Text>
+        <Text style={styles.cornerText}>t(Verify OTP)</Text>
+        <Text style={styles.cornerText2}>t(Enter your OTP)</Text>
       </ImageBackground>
 
       <View style={styles.formContainer}>
         <View style={styles.formContainerChild}>
-          <Text style={styles.sectionTitle}>Enter Verification Code</Text>
+          <Text style={styles.sectionTitle}>t(Enter Verification Code)</Text>
           <Text style={styles.sectionSubtitle}>
             {allFilled
-              ? "We are automatically detecting an SMS sent to your mobile number *****7412"
-              : "We have sent an SMS to your mobile number *****7412"}
+              ? t("We are automatically detecting an SMS sent to your mobile number *****7412")
+              : t("We have sent an SMS to your mobile number *****7412")}
           </Text>
 
           <View style={styles.otpRow}>
@@ -280,15 +281,15 @@ const OTPScreen: React.FC = () => {
             ))}
           </View>
 
-          <Text style={styles.resendLabel}>Did not receive the code?</Text>
-          <Text style={styles.resendText}>Resend Code</Text>
+          <Text style={styles.resendLabel}>t(Did not receive the code?)</Text>
+          <Text style={styles.resendText}>t(Resend Code)</Text>
           <Text style={styles.timer}>{formatTime(secondsLeft)}</Text>
         </View>
 
         <View  style={{ marginBottom: spacingVertical.lg }}>
         {allFilled && (
           <CustomButton
-            title="Continue"
+            title={t("Continue")}
             size="full"
             variant="primary"
             type="filled"

@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { useTheme } from "styled-components/native";
 import { styles } from "../../../components/styles/Notification.Styles";
+import { t } from "i18next";
 
 const RequestScreen = () => {
   const theme = useTheme();
@@ -15,17 +16,17 @@ const { prevStep } = useApplicationStore();
 
   return (
     <CustomMainChild
-      title="Request"
-      subTitle="Find all the requests that you have raised here."
+      title={t("Request")}
+      subTitle={t("Find all the requests that you have raised here.")}
       noOfButtons={1}
-      singleButtonTitle="Back"
+      singleButtonTitle={t("Back")}
       onClose={() => router.push("/(main)/NavScreen")}
       onPressSingleButton={() => router.back()}
     >
       <View
         style={[styles.container, { backgroundColor: theme.colors.background }]}
       >
-        <MessageCard message="You don’t have any new requests as of now" />
+        <MessageCard message={t("You don’t have any new requests as of now")} />
       
       </View>
     </CustomMainChild>

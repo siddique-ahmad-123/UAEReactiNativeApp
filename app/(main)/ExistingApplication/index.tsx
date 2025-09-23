@@ -3,18 +3,19 @@ import MessageCard from "@/components/MessageCard";
 import { router } from "expo-router";
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import { useApplicationStore } from "@/store/applicationStore";
+import { t } from "i18next";
 
 const ExistingApplicantstScreen = () => {
   return (
     <CustomMainChild
-      title="Existing Applications"
-      subTitle="Find all the existing applications here."
+      title={t("Existing Applications")}
+      subTitle={t("Find all the existing applications here.")}
       noOfButtons={1}
-      singleButtonTitle="Back"
+      singleButtonTitle={t("Back")}
       onClose={() => router.push("/(main)/NavScreen")}
       onPressSingleButton={() => router.back()}
     >
-        <MessageCard message="You don’t have any new requests as of now" />
+        <MessageCard message={t("You don’t have any new requests as of now")} />
     </CustomMainChild>
   );
 };

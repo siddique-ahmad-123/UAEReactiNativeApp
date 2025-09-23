@@ -5,6 +5,7 @@ import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 //import { useUserEligibilityCheckMutation } from "@/redux/api/creditCardAPI";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
+import { t } from "i18next";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "styled-components/native";
@@ -26,9 +27,9 @@ const Congratulations = () => {
   };
   return (
     <CustomMainChild
-      title="Submit Application"
+      title={t("Submit Application")}
       noOfButtons={1}
-      singleButtonTitle="Return to Home Page"
+      singleButtonTitle={t("Return to Home Page")}
       onClose={() => router.push("/(main)/NavScreen")}
       onPressSingleButton={() => onSubmitApplication()}
     >
@@ -39,7 +40,7 @@ const Congratulations = () => {
           resizeMode="contain"
         />
         <Text style={[styles.textbox2, { color: theme.colors.textPrimary }]}>
-          Congratulations !!
+          t(Congratulations !!)
         </Text>
         <Text
           style={[
@@ -47,17 +48,17 @@ const Congratulations = () => {
             { color: theme.colors.secondaryText, marginBottom: 30 },
           ]}
         >
-          Your Credit Card will be dispatched in 1 day {"\n"} {"\n"} {"\n"}
+          t(Your Credit Card will be dispatched in 1 day {"\n"} {"\n"} {"\n"}
           You’ll soon receive a confirmation from our side over SMS and Email
           regarding dispatch details.{"\n"} {"\n"} {"\n"}
           {"\n"} Your ‘PIN’ will be available in Mobile App, once the card is
-          delivered
+          delivered)
         </Text>
       </View>
       <View style={styles.linkTextView}>
         <TouchableOpacity onPress={() => {}}>
           <Text style={[styles.linktext, { color: theme.colors.primaryColor }]}>
-            Your Application No is {formData[fieldNames.workItemNumber]}
+            t(Your Application No is) {formData[fieldNames.workItemNumber]}
           </Text>
         </TouchableOpacity>
       </View>

@@ -5,6 +5,7 @@ import { ImagesPath } from "@/constants/Image";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
+import { t } from "i18next";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "styled-components/native";
@@ -18,23 +19,23 @@ const CounterOffer = () => {
 
   const methodOptions = [
     {
-      id: "email",
-      title: "Credit Limit",
+      id: t("email"),
+      title: t("Credit Limit"),
       description: "",
       iconName: "mail-outline",
       amount: formData[fieldNames.cardLimit],
     },
     {
-      id: "sms",
-      title: "Joining Fees",
-      description: "Will be deducted from 1st credit card installment",
+      id: t("sms"),
+      title: t("Joining Fees"),
+      description: t("Will be deducted from 1st credit card installment"),
       iconName: "chatbubble-outline",
       amount: formData[fieldNames.cardJoiningFees],
     },
     {
-      id: "app",
-      title: "Annual Fees",
-      description: "Stay updated in the app",
+      id: t("app"),
+      title: t("Annual Fees"),
+      description: t("Stay updated in the app"),
       iconName: "notifications-outline",
       amount: formData[fieldNames.cardAnualFees],
     },
@@ -42,11 +43,11 @@ const CounterOffer = () => {
 
   return (
     <CustomMainChild
-      title="Submit Application"
+      title={t("Submit Application")}
       noOfButtons={2}
       onClose={() => router.back()}
-      doubleButtonTitle1={"Need higher amount"}
-      doubleButtonTitle2={"Accept Offer"}
+      doubleButtonTitle1={t("Need higher amount")}
+      doubleButtonTitle2={t("Accept Offer")}
       onPressDoubleButton1={() => router.push("/(journey)/creditCard/submitApplication/applicationNotApproved")}
       onPressDoubleButton2={() => router.push("/(journey)/creditCard/submitApplication/congratulations")}
     >
@@ -58,7 +59,7 @@ const CounterOffer = () => {
         />
       </View>
       <Text style={[styles.textbox2, { color: theme.colors.textPrimary }]}>
-        Sorry, Application Not Approved
+        t(Sorry, Application Not Approved)
       </Text>
       <Text
         style={[
@@ -66,20 +67,20 @@ const CounterOffer = () => {
           { color: theme.colors.secondaryText, marginBottom: 30 },
         ]}
       >
-        We’re sorry but your request did not go through with the amount of
-        {formData[fieldNames.selectedRequiredAmount]} AED.
+        t(We’re sorry but your request did not go through with the amount of
+        {formData[fieldNames.selectedRequiredAmount]} AED.)
       </Text>
 
       <View style={styles.linkTextView}>
         <TouchableOpacity onPress={() => {}}>
           <Text style={[styles.linktext, { color: theme.colors.primaryColor }]}>
-            You can choose for counter offer or apply for higher limit with our
-            team
+            t(You can choose for counter offer or apply for higher limit with our
+            team)
           </Text>
         </TouchableOpacity>
       </View>
       <MethodSelector
-        title="Counter Offer"
+        title={t("Counter Offer")}
         options={methodOptions}
         selectedId={selectedMethod}
         onSelect={(id) => setSelectedMethod(id)}

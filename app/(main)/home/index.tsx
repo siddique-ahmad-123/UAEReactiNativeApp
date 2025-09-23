@@ -22,6 +22,7 @@ import {
   spacingVertical,
 } from "@/constants/Metrics";
 import { ImagesPath } from "@/constants/Image";
+import { t } from "i18next";
 type RouteNames = "/Request" | "/Agreement" | "/ExistingApplication";
 const services: {
   id: string;
@@ -31,19 +32,19 @@ const services: {
 }[] = [
   {
     id: "1",
-    title: "Requests",
+    title: t("Requests"),
     iconName: "document-text-outline",
     route: "/Request",
   },
   {
     id: "2",
-    title: "Agreements",
+    title: t("Agreements"),
     iconName: "file-tray-outline",
     route: "/Agreement",
   },
   {
     id: "3",
-    title: "Applications",
+    title: t("Applications"),
     iconName: "clipboard-outline",
     route: "/ExistingApplication",
   },
@@ -52,22 +53,22 @@ const services: {
 const applyNow = [
   {
     id: "1",
-    title: "Credit Card",
+    title: t("Credit Card"),
     imgPath: ImagesPath.mainScreencardImages
   },
   {
     id: "2",
-    title: "Mortgages",
+    title: t("Mortgages"),
     imgPath: ImagesPath.mainScreenMortgageImages
   },
   {
     id: "3",
-    title: "Auto Loans",
+    title: t("Auto Loans"),
     imgPath: ImagesPath.mainScreenAutoLoan
   },
   {
     id: "4",
-    title: "Personal \nLoans",
+    title: t("Personal \nLoans"),
     imgPath: ImagesPath.mainScreenPersonalLoan
   },
 ];
@@ -116,12 +117,12 @@ export default function Dashboard() {
     >
       <View>
         <UserIconName
-          name={loading ? "Loading..." : storedUser?.name ?? "Guest"}
+          name={loading ? t("Loading..."): storedUser?.name ?? t("Guest")}
           imgPath={storedUser?.userType}
         />
       </View>
       <HeroBanner
-        message="Thank you for being associated with us."
+        message={t("Thank you for being associated with us.")}
         backgroundImage={ImagesPath.heroBannerImages}
       />
       <Text style={localStyles.sectionTitle}>My Services</Text>
@@ -135,7 +136,7 @@ export default function Dashboard() {
           />
         ))}
       </View>
-      <Text style={localStyles.sectionTitle}>Apply Now</Text>
+      <Text style={localStyles.sectionTitle}>t(Apply Now)</Text>
       <View style={localStyles.grid}>
         {applyNow.map((item) => (
           <ProductCard

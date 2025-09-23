@@ -5,6 +5,7 @@ import DynamicSliderCard from "@/components/CustomSliderCard/DynamicSliderCard";
 import { spacing, spacingVertical } from "@/constants/Metrics";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 import UserIconName from "@/components/UserProfile/userIconName";
+import { t } from "i18next";
 
 const EMICalculatorScreen: React.FC = () => {
   const theme = useTheme();
@@ -140,7 +141,7 @@ const EMICalculatorScreen: React.FC = () => {
         <View style={styles.container}>
           
           <DynamicSliderCard
-            title="Finance Amount"
+            title={t("Finance Amount")}
             value={financeAmount}
             setValue={setFinanceAmount}
             min={10000}
@@ -149,7 +150,7 @@ const EMICalculatorScreen: React.FC = () => {
             unit="AED"
           />
           <DynamicSliderCard
-            title="Tenure (Months)"
+            title={t("Tenure (Months)")}
             value={tenure}
             setValue={setTenure}
             min={12}
@@ -158,7 +159,7 @@ const EMICalculatorScreen: React.FC = () => {
             unit="Mon"
           />
           <DynamicSliderCard
-            title="Profit Rate"
+            title={t("Profit Rate")}
             value={profitRate}
             setValue={setProfitRate}
             min={1}
@@ -177,7 +178,7 @@ const EMICalculatorScreen: React.FC = () => {
             <Text
               style={[styles.resultLabel, { color: theme.colors.primaryColor }]}
             >
-              Monthly Installment
+              t(Monthly Installment)
             </Text>
             <View
               style={[
@@ -198,7 +199,7 @@ const EMICalculatorScreen: React.FC = () => {
               <Text
                 style={[styles.resultUnit, { color: theme.colors.borderColor }]}
               >
-                AED
+                t(AED)
               </Text>
             </View>
           </View>
