@@ -82,7 +82,7 @@ const ApplicationApproved = () => {
       singleButtonTitle="Accept Offer"
       onClose={() => router.back()}
       onPressSingleButton={onPressAcceptOffer}
-      isLoadingDoubleButton={isLoading}
+      isLoadingSingleButton={isLoading}
     >
       <ScrollView
         contentContainerStyle={{ paddingBottom: 20 }}
