@@ -17,6 +17,7 @@ import {
 import { useTheme } from "styled-components/native";
 import { styles } from "../../../components/styles/onboarding.Styles";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
+import { ImagesPath } from "@/constants/Image";
 
 
 
@@ -37,7 +38,8 @@ const slides: Slide[] = [
     title: "Credit Cards",
     description:
       "Get Credit Cards Approvals instantly and start accessing our innovative offerings.",
-    imgpath: require("../../../assets/images/StaringCarosoul/CreditCard.png"),
+    imgpath: ImagesPath.landingPageImage1,
+    
   },
   {
     id: "2",

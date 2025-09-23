@@ -25,7 +25,7 @@ const ApplicationApproved = () => {
 
   const [createWorkItem] = useCreateWorkItemMutation();
   const [offerLetter] = useOfferLetterMutation();
- 
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -33,8 +33,6 @@ const ApplicationApproved = () => {
     }
     fetchData();
   }, []);
-
-
 
   const methodOptions = [
     {
@@ -61,11 +59,9 @@ const ApplicationApproved = () => {
   ];
 
   const onPressAcceptOffer = async () => {
-    
     console.log("workitem creation");
     // console.log(formData);
-   
-    
+    setIsLoading(true);
     const wiCreationResp = await createWorkItem(formData).unwrap();
     console.log("After wi creation");
     console.log("workitem creation resp: " + wiCreationResp.data);
@@ -74,7 +70,7 @@ const ApplicationApproved = () => {
       updateField(fieldNames.workItemNumber, wiCreationResp.data.winame);
       router.push("/(journey)/creditCard/submitApplication/congratulations");
     }
-    
+    setIsLoading(false);
     // nextStep();
   };
 
@@ -85,6 +81,8 @@ const ApplicationApproved = () => {
       noOfButtons={1}
       singleButtonTitle="Accept Offer"
       onClose={() => router.back()}
+      onPressSingleButton={onPressAcceptOffer}
+      isLoadingSingleButton={isLoading}
     >
       <ScrollView
         contentContainerStyle={{ paddingBottom: 20 }}

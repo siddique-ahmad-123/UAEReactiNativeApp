@@ -3,7 +3,7 @@ import {
   fontWeight,
   radius,
   spacing,
-  spacingVertical
+  spacingVertical,
 } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
@@ -16,7 +16,6 @@ import {
 } from "react-native";
 import { useTheme } from "styled-components/native";
 import CustomButton from "../CustomButton";
-
 interface FormHeaderProps {
   title: string;
   subTitle?: string;
@@ -31,9 +30,7 @@ interface FormHeaderProps {
   isDisableDoubleButton2?: boolean;
   children?: React.ReactNode;
   disableOuterScroll?: boolean;
-  isLoadingDoubleButton?: boolean;
   isLoadingSingleButton?: boolean;
-
 }
 const CustomMainChild = ({
   title,
@@ -49,7 +46,6 @@ const CustomMainChild = ({
   isDisableDoubleButton2 = false,
   children,
   disableOuterScroll = false,
-  isLoadingDoubleButton = false,
   isLoadingSingleButton = false,
 }: FormHeaderProps) => {
   const theme = useTheme();
@@ -159,6 +155,7 @@ const CustomMainChild = ({
                 variant="primary"
                 type="filled"
                 size="full"
+                isloading={isLoadingSingleButton}
               />
             )}
             {noOfButtons === 2 && (
