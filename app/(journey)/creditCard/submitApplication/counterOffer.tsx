@@ -20,22 +20,22 @@ const CounterOffer = () => {
   const methodOptions = [
     {
       id: t("email"),
-      title: t("Credit Limit"),
+      title: t("creditLimit"),
       description: "",
       iconName: "mail-outline",
       amount: formData[fieldNames.cardLimit],
     },
     {
       id: t("sms"),
-      title: t("Joining Fees"),
-      description: t("Will be deducted from 1st credit card installment"),
+      title: t("joiningFees"),
+      description: t("weWillbededucted"),
       iconName: "chatbubble-outline",
       amount: formData[fieldNames.cardJoiningFees],
     },
     {
       id: t("app"),
-      title: t("Annual Fees"),
-      description: t("Stay updated in the app"),
+      title: t("annualFees"),
+      description: t("stayUpdatedinApp"),
       iconName: "notifications-outline",
       amount: formData[fieldNames.cardAnualFees],
     },
@@ -43,11 +43,11 @@ const CounterOffer = () => {
 
   return (
     <CustomMainChild
-      title={t("Submit Application")}
+      title={t("submitApplication")}
       noOfButtons={2}
       onClose={() => router.back()}
-      doubleButtonTitle1={t("Need higher amount")}
-      doubleButtonTitle2={t("Accept Offer")}
+      doubleButtonTitle1={t("needHigherAmount")}
+      doubleButtonTitle2={t("acceptOffer")}
       onPressDoubleButton1={() => router.push("/(journey)/creditCard/submitApplication/applicationNotApproved")}
       onPressDoubleButton2={() => router.push("/(journey)/creditCard/submitApplication/congratulations")}
     >
@@ -59,7 +59,7 @@ const CounterOffer = () => {
         />
       </View>
       <Text style={[styles.textbox2, { color: theme.colors.textPrimary }]}>
-        t(Sorry, Application Not Approved)
+        {t("sorryApplicationNotApproved")}
       </Text>
       <Text
         style={[
@@ -67,20 +67,18 @@ const CounterOffer = () => {
           { color: theme.colors.secondaryText, marginBottom: 30 },
         ]}
       >
-        t(We’re sorry but your request did not go through with the amount of
-        {formData[fieldNames.selectedRequiredAmount]} AED.)
+        {t("weAreSorryButYourRequestThrough")} {formData[fieldNames.selectedRequiredAmount]} AED.
       </Text>
 
       <View style={styles.linkTextView}>
         <TouchableOpacity onPress={() => {}}>
           <Text style={[styles.linktext, { color: theme.colors.primaryColor }]}>
-            t(You can choose for counter offer or apply for higher limit with our
-            team)
+            {t("youCanChooseForCounter")}
           </Text>
         </TouchableOpacity>
       </View>
       <MethodSelector
-        title={t("Counter Offer")}
+        title={t("counterOffer")}
         options={methodOptions}
         selectedId={selectedMethod}
         onSelect={(id) => setSelectedMethod(id)}

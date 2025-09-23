@@ -24,22 +24,22 @@ const ApplicationNotApproved = () => {
   const methodOptions = [
     {
       id: t("email"),
-      title: t("Limit Required"),
+      title: t("limitRequired"),
       description: "",
       iconName: "mail-outline",
       amount: formData[fieldNames.cardLimit],
     },
     {
       id: t("sms"),
-      title: t("Joining Fees"),
-      description: t("Will be deducted from 1st credit card installment"),
+      title: t("joiningFees2"),
+      description: t("weWillbededucted"),
       iconName: "chatbubble-outline",
       amount: formData[fieldNames.cardJoiningFees],
     },
     {
       id: t("app"),
-      title: t("Annual Fees"),
-      description: t("Stay updated in the app"),
+      title: t("annualFees"),
+      description: t("stayUpdatedinApp"),
       iconName: "notifications-outline",
       amount: formData[fieldNames.cardAnualFees],
     },
@@ -48,7 +48,7 @@ const ApplicationNotApproved = () => {
   const theme = useTheme();
   return (
     <CustomMainChild
-      title={t("Submit Application")}
+      title={t("submitApplication")}
       noOfButtons={1}
       singleButtonTitle={t("Return to Home Page")}
       onClose={() => router.push("/(main)/NavScreen")}
@@ -65,7 +65,7 @@ const ApplicationNotApproved = () => {
             resizeMode="contain"
           />
           <Text style={[styles.textbox2, { color: theme.colors.textPrimary }]}>
-            t(Application Submitted)
+            {t("applicationSubmitted")}
           </Text>
         </View>
 
@@ -75,7 +75,7 @@ const ApplicationNotApproved = () => {
             { color: theme.colors.secondaryText, marginBottom: 30 },
           ]}
         >
-          t(Your application has been successfully accepted for AED.)
+          {t("yourApplicationHasBeenSuccessfullyAccepted")}
           <Text style={{ color: theme.colors.primaryColor }}>
             {formData[fieldNames.selectedRequiredAmount]}
           </Text>
@@ -86,16 +86,15 @@ const ApplicationNotApproved = () => {
             <Text
               style={[styles.linktext, { color: theme.colors.primaryColor }]}
             >
-              t(You’ll hear from our team within 1 day about Credit Card
-              application status.)
+              {t("youWillHear")}
             </Text>
           </TouchableOpacity>
           <Text style={[styles.linktext, { color: theme.colors.primaryColor }]}>
-            t(Your Application No is) {formData[fieldNames.workItemNumber]}
+            {t("yourApplicationNumberIs")} {formData[fieldNames.workItemNumber]}
           </Text>
         </View>
         <MethodSelector
-          title={t("Application Details")}
+          title={t("applicationDetails")}
           options={methodOptions}
           selectedId={selectedMethod}
           onSelect={(id) => setSelectedMethod(id)}

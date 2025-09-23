@@ -16,8 +16,8 @@ const { prevStep } = useApplicationStore();
 
   return (
     <CustomMainChild
-      title={t("Request")}
-      subTitle={t("Find all the requests that you have raised here.")}
+      title={t("requests")}
+      subTitle={t("findAllTheRequests")}
       noOfButtons={1}
       singleButtonTitle={t("Back")}
       onClose={() => router.push("/(main)/NavScreen")}
@@ -26,7 +26,7 @@ const { prevStep } = useApplicationStore();
       <View
         style={[styles.container, { backgroundColor: theme.colors.background }]}
       >
-        <MessageCard message={t("You don’t have any new requests as of now")} />
+        <MessageCard message={t("youDontHaveAnyNew")} />
       
       </View>
     </CustomMainChild>

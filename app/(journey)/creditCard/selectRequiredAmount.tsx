@@ -113,7 +113,7 @@ const SelectRequiredAmount = () => {
           />
           <View>
             <Text style={styles.checkboxLabel}>
-              t(I authorize Newgen Bank to access my Bureau and FTS records)
+              {t("iAuthorize")}
             </Text>
           </View>
         </View>

@@ -9,8 +9,8 @@ const NotificationScreen = () => {
   const { prevStep } = useApplicationStore();
   return (
     <CustomMainChild
-      title={t("Notification")}
-      subTitle={t("Find all your notifications here")}
+      title={t("notification")}
+      subTitle={t("findAllNotification")}
       
     >
       <RequestCard

@@ -39,22 +39,22 @@ const ApplicationApproved = () => {
   const methodOptions = [
     {
       id: t("email"),
-      title: t("Credit Limit"),
+      title: t("creditLimit"),
       description: "",
       iconName: t("mail-outline"),
       amount: formData[fieldNames.cardLimit],
     },
     {
       id: t("sms"),
-      title: t("Joining Fees"),
-      description: t("Will be deducted from 1st credit card installment"),
+      title: t("joiningFees2"),
+      description: t("weWillbededucted"),
       iconName: "chatbubble-outline",
       amount: formData[fieldNames.cardJoiningFees],
     },
     {
       id: t("app"),
-      title: t("Annual Fees"),
-      description: t("Stay updated in the app"),
+      title: t("annualFees"),
+      description: t("stayUpdatedinApp"),
       iconName: "notifications-outline",
       amount: formData[fieldNames.cardAnualFees],
     },
@@ -79,9 +79,9 @@ const ApplicationApproved = () => {
   const theme = useTheme();
   return (
     <CustomMainChild
-      title={t("Submit Application")}
+      title={t("submitApplication")}
       noOfButtons={1}
-      singleButtonTitle={t("Accept Offer")}
+      singleButtonTitle={t("acceptOffer")}
       onClose={() => router.back()}
       onPressSingleButton={onPressAcceptOffer}
       isLoadingDoubleButton={isLoading}
@@ -97,7 +97,7 @@ const ApplicationApproved = () => {
             resizeMode="contain"
           />
           <Text style={[styles.textbox2, { color: theme.colors.textPrimary }]}>
-            t(Application Approved)
+            {t("applicationApproved")}
           </Text>
           <Text
             style={[
@@ -105,11 +105,11 @@ const ApplicationApproved = () => {
               { color: theme.colors.secondaryText, marginBottom: 30 },
             ]}
           >
-            t(Your application is approved successfully)
+            {t("yourApplicationIsApproved")}
           </Text>
         </View>
         <MethodSelector
-          title={t("Credit Card Details")}
+          title={t("creditCardDetails")}
           options={methodOptions}
           selectedId={selectedMethod}
           onSelect={(id) => setSelectedMethod(id)}
@@ -118,9 +118,9 @@ const ApplicationApproved = () => {
           <Image
            
             source={
-              formData[fieldNames.cardType] === t("Cashback Credit Card")
+              formData[fieldNames.cardType] === t("cashbackCreditCard")
                 ? ImagesPath.card2Image
-                : formData[fieldNames.cardType] === t("Elite Credit Card")
+                : formData[fieldNames.cardType] === t("eliteCreditCard")
                 ? ImagesPath.card1Image
                 : ImagesPath.card3Image
             }
@@ -130,12 +130,12 @@ const ApplicationApproved = () => {
         </View>
         <View style={{ alignItems: "center", marginTop: 30 }}>
           <Text style={[styles.text, { color: theme.colors.borderColor }]}>
-            You can download your offer letter from below
+          {t("youCanDownload")}
           </Text>
         </View>
         <DocumentDownload
           url={`${process.env.EXPO_PUBLIC_API_URL}/pdfs/UAE-123456/Template.pdf`}
-          documentName="Download Offer Letter"
+          documentName={t("downloadOfferLetter")}
         />
       </ScrollView>
     </CustomMainChild>

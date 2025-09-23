@@ -39,54 +39,54 @@ type CardItem = {
 const cards: CardItem[] = [
   {
     id: "1",
-    title: t("Cashback Credit Card"),
-    description1: t("Minimum Income Requirement: AED 5,000/month."),
+    title: t("cashbackCreditCard"),
+    description1: t("minimumIncomeRequirement"),
     description2:
-      t("Welcome Bonus: AED 500 for new customers (spend ≥AED 5,000 in first 2 months); AED 100 for existing cardholders."),
+      t("welcomeBonus"),
     description3:
-      t("Rewards / Cashback:\n• 5% on dining (local & international)\n• 2% on international spends\n• Up to 1% on local spends\n• 0.33% on govt. payments, utilities, education, \ncharity, fuel, rental, telecom spends"),
+      t("rewardsCashback"),
     description4: "",
     description5: "",
-    description6: t("Joining Fees - Nil"),
-    description7: t("Annual Fees - Nil"),
+    description6: t("joiningFees"),
+    description7: t("annualFees2"),
     image: ImagesPath.card1Image,
-    joiningFees: t("Nil"),
-    anualFees: t("Nil"),
+    joiningFees: t("nil"),
+    anualFees: t("nil"),
   },
   {
     id: "2",
-    title: t("Elite Credit Card"),
-    description1: t("Minimum Income Requirement: AED 10,000/month."),
+    title: t("eliteCreditCard"),
+    description1: t("minimumIncomeRequirement"),
     description2:
-      t("Welcome Bonus: AED 1,200 cashback/spending bonuses (3 transactions ≥ AED 100 within 2 months)"),
+      t("welcomeBonus"),
     description3:
-      t("Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local"),
+      t("rewardpoint3"),
     description4:
-      t("Lifestyle Perks: Global lounge access, airport transfers, Fitness First visits, cinema discounts, concierge benefits, etc."),
+      t("lifeStylePerks"),
     description5:
-      t("Best Rewards: Extensive travel and lifestyle perks; ideal for frequent travelers."),
-    description6: t("Joining Fees - Nil"),
-    description7: t("Annual Fees - AED650"),
+      t("bestRewards"),
+    description6: t("joiningFees"),
+    description7: t("annualFees2"),
     image: ImagesPath.card2Image,
-    joiningFees: t("Nil"),
-    anualFees: t("AED650"),
+    joiningFees: t("nil"),
+    anualFees: "AED650",
   },
   {
     id: "3",
-    title: t("World Credit Card"),
-    description1: t("Minimum Income Requirement: AED 25,000/month."),
+    title: t("worldCreditCard"),
+    description1: t("minimumIncomeRequirement3"),
     description2:
-      t("Welcome Bonus: AED 2,000 cashback after 3 transactions ≥ AED 100 in first 2 months"),
+      t("welcomeBonus3"),
     description3:
-      t("Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local"),
+      t("rewardpoint3"),
     description4:
-      t("Perks: Airport lounges (900+ worldwide, 12 visits/year), villa/pickup, valet, golf, fitness, concierge, cinema, fine dining, etc."),
+      t("perksAirport"),
     description5: t("Best Rewards: Deep perks, elite status travel benefits."),
-    description6: t("Joining Fees - AED250"),
-    description7: t("Annual Fees - AED650"),
+    description6: t("joiningFees"),
+    description7: t("annualFees2"),
     image: ImagesPath.card3Image,
-    joiningFees: t("AED250"),
-    anualFees: t("AED650"),
+    joiningFees: "AED250",
+    anualFees: "AED650",
   },
 ];
 
@@ -179,7 +179,7 @@ const RequestsScreen = () => {
           <Text
             style={[styles.knowMoreText, { color: theme.colors.textPrimary }]}
           >
-            t(Know More)
+            {t("knowMore")}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -194,7 +194,7 @@ const RequestsScreen = () => {
           <Text
             style={[styles.applyText, { color: theme.colors.primaryColor }]}
           >
-            t(Apply Now)
+            {t("applyNow")}
           </Text>
         </TouchableOpacity>
       </View>
@@ -204,9 +204,9 @@ const RequestsScreen = () => {
   return (
     <CustomMainChild
       title={t("Select your credit card")}
-      subTitle={t("We have cards for every need, explore here")}
+      subTitle={t("weHaveCardsForEveryNeedExploreHere")}
       noOfButtons={1}
-      singleButtonTitle={t("Back")}
+      singleButtonTitle={t("back")}
       onClose={() => router.back()}
       onPressSingleButton={() => router.push("/NavScreen")}
     >

@@ -141,7 +141,7 @@ const EMICalculatorScreen: React.FC = () => {
         <View style={styles.container}>
           
           <DynamicSliderCard
-            title={t("Finance Amount")}
+            title={t("financeAmount")}
             value={financeAmount}
             setValue={setFinanceAmount}
             min={10000}
@@ -150,7 +150,7 @@ const EMICalculatorScreen: React.FC = () => {
             unit="AED"
           />
           <DynamicSliderCard
-            title={t("Tenure (Months)")}
+            title={t("tenure(Months)")}
             value={tenure}
             setValue={setTenure}
             min={12}
@@ -159,7 +159,7 @@ const EMICalculatorScreen: React.FC = () => {
             unit="Mon"
           />
           <DynamicSliderCard
-            title={t("Profit Rate")}
+            title={t("profitRate")}
             value={profitRate}
             setValue={setProfitRate}
             min={1}
@@ -178,7 +178,7 @@ const EMICalculatorScreen: React.FC = () => {
             <Text
               style={[styles.resultLabel, { color: theme.colors.primaryColor }]}
             >
-              t(Monthly Installment)
+              {t("monthlyInstallment")}
             </Text>
             <View
               style={[
@@ -199,7 +199,7 @@ const EMICalculatorScreen: React.FC = () => {
               <Text
                 style={[styles.resultUnit, { color: theme.colors.borderColor }]}
               >
-                t(AED)
+                AED
               </Text>
             </View>
           </View>

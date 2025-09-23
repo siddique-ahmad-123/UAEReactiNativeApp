@@ -21,14 +21,14 @@ const RequestCallBack = () => {
   });
  
   const cityOptions = [
-    { label: t("Dubai"), value: t("Dubai") },
-    { label: t("Sharja"), value: t("Sharjha") },
+    { label: "Dubai", value: "Dubai"},
+    { label: "Sharja", value: "Sharjha" },
   ];
  
   const genderOptions = [
-    { label: t("Male"), value: t("Male") },
-    { label: t("Female"), value: t("Female") },
-    { label: t("Others"), value: t("Others") },
+    { label: "Male", value: "Male"},
+    { label: "Female", value: "Female" },
+    { label: "Others", value: "Others"},
   ];
  
   const onSubmit = (values: any) => {
@@ -65,8 +65,8 @@ const RequestCallBack = () => {
  
       <CustomInput
         name={t("refNo")}
-        label={t("Ref no.")}
-        placeholder={t("Enter ref number")}
+        label={t("refNo")}
+        placeholder={t("enterrefNumber")}
         type="text"
         control={control}
         editable={false}
@@ -75,7 +75,7 @@ const RequestCallBack = () => {
       <View style={styles.row}>
         <View style={styles.innerRow}>
           <CustomInput
-            label={t("First Name")}
+            label={t("firstName")}
             placeholder={placeHoldersNames.firstName}
             type="text"
             control={control}
@@ -83,7 +83,7 @@ const RequestCallBack = () => {
         </View>
         <View style={styles.innerRow}>
           <CustomInput
-            label={t("Last Name")}
+            label={t("lastName")}
             placeholder={placeHoldersNames.LastName}
             type="text"
             control={control}
@@ -92,7 +92,7 @@ const RequestCallBack = () => {
       </View>
       <CustomInput
         name={fieldNames.supplementaryCardName}
-        label={t("Email")}
+        label={t("email")}
         placeholder={t(placeHoldersNames.Email)}
         type="text"
         control={control}
@@ -101,7 +101,7 @@ const RequestCallBack = () => {
       <View style={styles.row}>
         <View style={styles.innerRow}>
           <CustomInput
-            label={t("Mobile Number")}
+            label={t("mobileNo")}
             placeholder={t(placeHoldersNames.MobileNumber)}
             type="text"
             control={control}
@@ -109,7 +109,7 @@ const RequestCallBack = () => {
         </View>
         <View style={styles.innerRow}>
           <CustomDropDown
-            label={t("Gender")}
+            label={t("gender")}
             data={genderOptions}
             control={control}
           />
@@ -117,9 +117,9 @@ const RequestCallBack = () => {
       </View>
  
       <SegmentedControl
-        label={t("Marital Status")}
-        options={[t("Single"), t("Married")]}
-        defaultValue={t("Single")}
+        label={t("maritalStatus")}
+        options={[t("single"), t("married")]}
+        defaultValue={t("single")}
         onChange={function (value: string): void {
           console.log("martial status changed");
         }}
@@ -127,14 +127,14 @@ const RequestCallBack = () => {
  
       <CustomDropDown
         name={fieldNames.borrowerGender}
-        label={t("City")}
+        label={t("city")}
         data={cityOptions}
         control={control}
       />
  
       <CustomInput
-        label={t("Description")}
-        placeholder={t("Write your query")}
+        label={t("description")}
+        placeholder={t("writeYourQuery")}
         type="textarea"
         numberOfLines={7}
       />

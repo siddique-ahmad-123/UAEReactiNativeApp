@@ -42,17 +42,16 @@ const LoginScreen: React.FC = () => {
 
   const handleLogin = async () => {
     if (!emiratesId.trim()) {
-      Alert.alert(t("Validation Error", "Please enter your Emirates ID"));
+      Alert.alert(t("alertValidationError"));
       return;
     }
     if (!mobile.trim()) {
-      Alert.alert(t("Validation Error", "Please enter your Mobile Number"));
+      Alert.alert(t("alertValidationMobile"));
       return;
     }
     if (mobile.length < 9) {
       Alert.alert(
-        t("Validation Error",
-        "Mobile number must be at least 10 digits")
+        t("alertMobileMaxLimit")
       );
       return;
     }
@@ -117,20 +116,20 @@ const LoginScreen: React.FC = () => {
         imageStyle={styles.imageStyle}
       >
         <View style={styles.overlay} />
-        <Text style={styles.cornerText}>Welcome !!</Text>
-        <Text style={styles.cornerText2}>Sign in to your account</Text>
+        <Text style={styles.cornerText}>{t("welcome!")}</Text>
+        <Text style={styles.cornerText2}>{t("signInToYourAccount")}</Text>
       </ImageBackground>
 
       <View style={styles.formContainer}>
         <CustomInput
-          label={t("Emirates ID")}
+          label={t("emiratesID")}
           placeholder="0000000000"
           value={emiratesId}
           onChangeText={setEmiratesId}
           maxLength={10}
         />
         <CustomInput
-          label={t("Mobile No")}
+          label={t("mobileNo")}
           placeholder="********"
           value={mobile}
           onChangeText={setMobile}
@@ -140,14 +139,14 @@ const LoginScreen: React.FC = () => {
 
         <View style={styles.row}>
           <CustomButton
-            title={t("Login with UAE-PASS")}
+            title={t("loginWithUAE-PASS")}
             onPress={() => {}}
             variant="secondary"
             type="outlined"
             size="lg"
           />
           <CustomButton
-            title={t("Send OTP")}
+            title={t("sendOtp")}
             onPress={handleLogin}
             variant="primary"
             type="filled"
