@@ -25,10 +25,13 @@ import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import calculateAge from "@/utils/calculateAge";
-import { getUaeFtsCompletedMail, getUaeFtsInitiatedMail } from "@/utils/sendEmailUae";
+import {
+  getUaeFtsCompletedMail,
+  getUaeFtsInitiatedMail,
+} from "@/utils/sendEmailUae";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, View } from "react-native";
@@ -75,6 +78,20 @@ export default function BorrowerIncomeScreen() {
     nextStep();
   };
 
+  useEffect(() => {
+    const currentDate = new Date();
+
+    const formattedCurrentDate = currentDate.toJSON().slice(0, 10);
+
+    const sixMonthsBefore = new Date(currentDate);
+    sixMonthsBefore.setMonth(sixMonthsBefore.getMonth() - 6);
+
+    const formattedSixMonthBefore = sixMonthsBefore.toISOString().slice(0, 10);
+
+    setValue(fieldNames.borrowerStartDateFts, formattedSixMonthBefore);
+    setValue(fieldNames.borrowerEndDateFts, formattedCurrentDate);
+  }, []);
+
   const onChangeBorrowerIncomeType = (value: string) => {
     setValue(fieldNames.borrowerIncomeType, value);
     setValue(fieldNames.borrowerFtsStatus, "");
@@ -82,43 +99,43 @@ export default function BorrowerIncomeScreen() {
 
   const onChangeEmpDetailsFetchMethod = (id: string) => {
     setValue(fieldNames.borrowerEmpDetailFetchMethod, id);
-    setValue(fieldNames.borrowerEmployerName, "");
-    setValue(fieldNames.borrowerEmployedFrom, "");
-    setValue(fieldNames.borrowerCurrentExp, "");
-    setValue(fieldNames.borrowerTotalExp, "");
-    setValue(fieldNames.borrowerEmirates, "");
+    // setValue(fieldNames.borrowerEmployerName, "");
+    // setValue(fieldNames.borrowerEmployedFrom, "");
+    // setValue(fieldNames.borrowerCurrentExp, "");
+    // setValue(fieldNames.borrowerTotalExp, "");
+    // setValue(fieldNames.borrowerEmirates, "");
   };
 
   const onChangeSalaryIncomeDetailFetchMethod = (id: string) => {
     setValue(fieldNames.borrowerSalaryIncomeDetailFetchMethod, id);
-    setValue(fieldNames.borrowerMonthlySalaryBankTransfer, "");
-    setValue(fieldNames.borrowerMonthlySalaryAECB, "");
+    // setValue(fieldNames.borrowerMonthlySalaryBankTransfer, "");
+    // setValue(fieldNames.borrowerMonthlySalaryAECB, "");
     // setSalaryFetched(false);
   };
 
   const onChangeBusinessDetailFetchMethod = (id: string) => {
     setValue(fieldNames.borrowerBusinessDetailFetchMethod, id);
-    setValue(fieldNames.borrowerNameOfBusiness, "");
-    setValue(fieldNames.borrowerLegalForm, "");
-    setValue(fieldNames.borrowerEmiratesBusiness, "");
-    setValue(fieldNames.borrowerDateOfEstabilishment, "");
-    setValue(fieldNames.borrowerVintage, "");
-    setValue(fieldNames.borrowerLicenseNo, "");
-    setValue(fieldNames.borrowerNatureOfBusiness, "");
+    // setValue(fieldNames.borrowerNameOfBusiness, "");
+    // setValue(fieldNames.borrowerLegalForm, "");
+    // setValue(fieldNames.borrowerEmiratesBusiness, "");
+    // setValue(fieldNames.borrowerDateOfEstabilishment, "");
+    // setValue(fieldNames.borrowerVintage, "");
+    // setValue(fieldNames.borrowerLicenseNo, "");
+    // setValue(fieldNames.borrowerNatureOfBusiness, "");
   };
 
   const onChangeSelfIncomeDetailFetchMethod = (id: string) => {
     setValue(fieldNames.borrowerSelfIncomeDetailFetchMethod, id);
-    setValue(fieldNames.borrowerBankName, "");
-    setValue(fieldNames.borrowerAccountNo, "");
-    setValue(fieldNames.borrowerLast6MonthsADB, "");
-    setValue(fieldNames.borrowerLast6MonthsAvgCredit, "");
+    // setValue(fieldNames.borrowerBankName, "");
+    // setValue(fieldNames.borrowerAccountNo, "");
+    // setValue(fieldNames.borrowerLast6MonthsADB, "");
+    // setValue(fieldNames.borrowerLast6MonthsAvgCredit, "");
   };
 
   const fetchEmploymentDetails = async () => {
     setIsLoading2(true);
     console.log(empDetailFetchMethod);
-    if (empDetailFetchMethod == "AECB") {
+    if (empDetailFetchMethod === "AECB") {
       console.log("AECB Case data fetching");
       const customerDataResp = await getCustomerData("501234567").unwrap();
 
@@ -142,45 +159,27 @@ export default function BorrowerIncomeScreen() {
     }
 
     //Case for salary certificate (OCR else db data)
-    if (empDetailFetchMethod == "Salary Certificate") {
+    if (empDetailFetchMethod === "Salary Certificate") {
       const salaryCertificateResponse = await salaryCertificateOCR(
         formData[fieldNames.mobileNo]
       ).unwrap();
       if (salaryCertificateResponse.status == 200) {
-        setValue(
-          fieldNames.borrowerEmployerName,
-          salaryCertificateResponse.data.companyName
-        );
+        setValue("scEmployerName", salaryCertificateResponse.data.companyName);
         let dateOfJoining =
           salaryCertificateResponse.data.dateOfJoining.replace(/\//g, "-");
         let currentExp = Number(calculateAge(dateOfJoining)) * 12;
-        setValue(
-          fieldNames.borrowerEmployedFrom,
-          salaryCertificateResponse.data.dateOf
-        );
-        setValue(fieldNames.borrowerCurrentExp, currentExp);
-        setValue(
-          fieldNames.borrowerEmirates,
-          salaryCertificateResponse.data.nationality
-        );
+        setValue("scEmployedFrom", salaryCertificateResponse.data.dateOf);
+        setValue("scCurrExp", currentExp);
+        setValue("scEmirates", salaryCertificateResponse.data.nationality);
       } else {
         const customerDataResp = await getCustomerData("501234567").unwrap();
 
         if (customerDataResp.status == 200) {
-          setValue(
-            fieldNames.borrowerEmployerName,
-            customerDataResp.data.employerName
-          );
-          setValue(
-            fieldNames.borrowerEmployedFrom,
-            customerDataResp.data.employedFrom
-          );
-          setValue(
-            fieldNames.borrowerCurrentExp,
-            customerDataResp.data.currentExp
-          );
-          setValue(fieldNames.borrowerTotalExp, customerDataResp.data.totalExp);
-          setValue(fieldNames.borrowerEmirates, customerDataResp.data.emirates);
+          setValue("scEmployerName", customerDataResp.data.employerName);
+          setValue("scEmployedFrom", customerDataResp.data.employedFrom);
+          setValue("scCurrExp", customerDataResp.data.currentExp);
+          setValue("scTotalExp", customerDataResp.data.totalExp);
+          setValue("scEmirates", customerDataResp.data.emirates);
         }
       }
     }
@@ -191,16 +190,24 @@ export default function BorrowerIncomeScreen() {
     setIsLoading3(true);
     const customerDataResp = await getCustomerData("501234567").unwrap();
 
-    if (customerDataResp.status == 200) {
-      setValue(
-        fieldNames.borrowerMonthlySalaryBankTransfer,
-        customerDataResp.data.monthlySalaryBankTrans
-      );
-      setValue(
-        fieldNames.borrowerMonthlySalaryAECB,
-        customerDataResp.data.monthlySalaryAECB
-      );
+    if (salaryIncomeDetailFetchMethod === "Salary Transfer") {
+      if (customerDataResp.status == 200) {
+        setValue(
+          fieldNames.borrowerMonthlySalaryBankTransfer,
+          customerDataResp.data.monthlySalaryBankTrans
+        );
+        setValue(
+          fieldNames.borrowerMonthlySalaryAECB,
+          customerDataResp.data.monthlySalaryAECB
+        );
+      }
+    } else if (salaryIncomeDetailFetchMethod === "UAE-FTS") {
+      if (customerDataResp.status == 200) {
+        setValue("ufMonthlyBank", customerDataResp.data.monthlySalaryBankTrans);
+        setValue("ufMonthlyAecb", customerDataResp.data.monthlySalaryAECB);
+      }
     }
+
     // setSalaryFetched(true);
     setIsLoading3(false);
   };
@@ -221,7 +228,6 @@ export default function BorrowerIncomeScreen() {
       } else if (salaryIncomeUaeFtsGetStatusValue === "Initiated") {
         setValue(fieldNames.borrowerFtsStatus, "Pending");
       } else if (salaryIncomeUaeFtsGetStatusValue === "Pending") {
-
         setValue(fieldNames.borrowerFtsStatus, "Completed");
         const body = {
           subject: getUaeFtsCompletedMail(formData[fieldNames.borrowerName])
@@ -285,17 +291,33 @@ export default function BorrowerIncomeScreen() {
 
     const customerDataResp = await getCustomerData("501234567").unwrap();
 
-    if (customerDataResp.status == 200) {
-      setValue(fieldNames.borrowerBankName, customerDataResp.data.bankName);
-      setValue(fieldNames.borrowerAccountNo, customerDataResp.data.accountNo);
-      setValue(
-        fieldNames.borrowerLast6MonthsADB,
-        customerDataResp.data.last6monthsAdb
-      );
-      setValue(
-        fieldNames.borrowerLast6MonthsAvgCredit,
-        customerDataResp.data.last6monthsAvg
-      );
+    if (selfIncomeDetailFetchMethod === "Fetch From Bank") {
+      if (customerDataResp.status == 200) {
+        setValue(fieldNames.borrowerBankName, customerDataResp.data.bankName);
+        setValue(fieldNames.borrowerAccountNo, customerDataResp.data.accountNo);
+        setValue(
+          fieldNames.borrowerLast6MonthsADB,
+          customerDataResp.data.last6monthsAdb
+        );
+        setValue(
+          fieldNames.borrowerLast6MonthsAvgCredit,
+          customerDataResp.data.last6monthsAvg
+        );
+      }
+    } else if (selfIncomeDetailFetchMethod === "Upload Bank Statement") {
+      if (customerDataResp.status == 200) {
+        setValue("ubsBankName", customerDataResp.data.bankName);
+        setValue("ubsAccNo", customerDataResp.data.accountNo);
+        setValue("ubsAdb", customerDataResp.data.last6monthsAdb);
+        setValue("ubsAvgCredit", customerDataResp.data.last6monthsAvg);
+      }
+    } else if (selfIncomeDetailFetchMethod === "UAE-FTS") {
+      if (customerDataResp.status == 200) {
+        setValue("ufBankName", customerDataResp.data.bankName);
+        setValue("ufAccNo", customerDataResp.data.accountNo);
+        setValue("ufAdb", customerDataResp.data.last6monthsAdb);
+        setValue("ufAvgCredit", customerDataResp.data.last6monthsAvg);
+      }
     }
 
     setIsLoading6(false);
@@ -481,38 +503,79 @@ export default function BorrowerIncomeScreen() {
             isloading={isloading2}
           />
 
-          <CustomInput
-            control={control}
-            name={fieldNames.borrowerEmployerName}
-            label="Employer Name"
-            type="text"
-            placeholder={placeHoldersNames.EmployerName}
-          />
-          <CustomDatePicker
-            control={control}
-            name={fieldNames.borrowerEmployedFrom}
-            label="Employed From"
-          />
-          <CustomInput
-            control={control}
-            name={fieldNames.borrowerCurrentExp}
-            label="Current Experience (Months)"
-            placeholder={placeHoldersNames.CurrentExp}
-            type="number"
-          />
-          <CustomInput
-            control={control}
-            name={fieldNames.borrowerTotalExp}
-            label="Total Experience (Months)"
-            placeholder={placeHoldersNames.TotalExperience}
-            type="number"
-          />
-          <CustomDropDown
-            control={control}
-            name={fieldNames.borrowerEmirates}
-            label="Emirates"
-            data={emiratesOptions}
-          />
+          {empDetailFetchMethod === "Salary Certificate" && (
+            <>
+              <CustomInput
+                control={control}
+                name="scEmployerName"
+                label="Employer Name"
+                type="text"
+                placeholder={placeHoldersNames.EmployerName}
+              />
+              <CustomDatePicker
+                control={control}
+                name="scEmployedFrom"
+                label="Employed From"
+              />
+              <CustomInput
+                control={control}
+                name="scCurrExp"
+                label="Current Experience (Months)"
+                placeholder={placeHoldersNames.CurrentExp}
+                type="number"
+              />
+              <CustomInput
+                control={control}
+                name="scTotalExp"
+                label="Total Experience (Months)"
+                placeholder={placeHoldersNames.TotalExperience}
+                type="number"
+              />
+              <CustomDropDown
+                control={control}
+                name="scEmirates"
+                label="Emirates"
+                data={emiratesOptions}
+              />
+            </>
+          )}
+          {empDetailFetchMethod === "AECB" && (
+            <>
+              <CustomInput
+                control={control}
+                name={fieldNames.borrowerEmployerName}
+                label="Employer Name"
+                type="text"
+                placeholder={placeHoldersNames.EmployerName}
+              />
+              <CustomDatePicker
+                control={control}
+                name={fieldNames.borrowerEmployedFrom}
+                label="Employed From"
+              />
+              <CustomInput
+                control={control}
+                name={fieldNames.borrowerCurrentExp}
+                label="Current Experience (Months)"
+                placeholder={placeHoldersNames.CurrentExp}
+                type="number"
+              />
+              <CustomInput
+                control={control}
+                name={fieldNames.borrowerTotalExp}
+                label="Total Experience (Months)"
+                placeholder={placeHoldersNames.TotalExperience}
+                type="number"
+              />
+              <CustomDropDown
+                control={control}
+                name={fieldNames.borrowerEmirates}
+                label="Emirates"
+                data={emiratesOptions}
+              />
+            </>
+          )}
+
           <SectionHeader
             sectionName="Income  Details"
             style={{ marginTop: spacingVertical.md }}
@@ -605,7 +668,60 @@ export default function BorrowerIncomeScreen() {
             </>
           )}
 
-          {salaryIncomeDetailFetchMethod === "Salary Transfer" ||
+          {salaryIncomeDetailFetchMethod === "Salary Transfer" && (
+            <>
+              <CustomButton
+                title="Fetch Salary Details"
+                onPress={fetchSalariedIncomeDetails}
+                isloading={isloading3}
+              />
+              <CustomInput
+                control={control}
+                name={fieldNames.borrowerMonthlySalaryBankTransfer}
+                label="Monthly Salary (Bank Transfer)"
+                placeholder={placeHoldersNames.MonthylySalary}
+                type="number"
+                formatWithCommas={true}
+              />
+              <CustomInput
+                control={control}
+                name={fieldNames.borrowerMonthlySalaryAECB}
+                label="Monthly Salary (AECB)"
+                placeholder="Monthly Salary AECB"
+                type="number"
+                formatWithCommas={true}
+              />
+            </>
+          )}
+
+          {salaryIncomeDetailFetchMethod === "UAE-FTS" &&
+            ftsStatus === "Completed" && (
+              <>
+                <CustomButton
+                  title="Fetch Salary Details"
+                  onPress={fetchSalariedIncomeDetails}
+                  isloading={isloading3}
+                />
+                <CustomInput
+                  control={control}
+                  name="ufMonthlyBank"
+                  label="Monthly Salary (Bank Transfer)"
+                  placeholder={placeHoldersNames.MonthylySalary}
+                  type="number"
+                  formatWithCommas={true}
+                />
+                <CustomInput
+                  control={control}
+                  name="ufMonthlyAecb"
+                  label="Monthly Salary (AECB)"
+                  placeholder="Monthly Salary AECB"
+                  type="number"
+                  formatWithCommas={true}
+                />
+              </>
+            )}
+
+          {/* {salaryIncomeDetailFetchMethod === "Salary Transfer" ||
           (salaryIncomeDetailFetchMethod === "UAE-FTS" &&
             ftsStatus === "Completed") ? (
             <>
@@ -633,7 +749,7 @@ export default function BorrowerIncomeScreen() {
             </>
           ) : (
             <></>
-          )}
+          )} */}
         </>
       ) : (
         <>
@@ -662,10 +778,103 @@ export default function BorrowerIncomeScreen() {
                 onPress={handleFetchDetailsBusiness}
                 isloading={isloading}
               />
+              <CustomInput
+                control={control}
+                name={fieldNames.borrowerNameOfBusiness}
+                label="Name of Business"
+                type="text"
+                placeholder="Enter name of business"
+              />
+              <CustomDropDown
+                control={control}
+                name={fieldNames.borrowerLegalForm}
+                label="Legal Form"
+                data={legalFormOptions}
+              />
+              <CustomDropDown
+                control={control}
+                name={fieldNames.borrowerEmiratesBusiness}
+                label="Emirates"
+                data={emiratesOptions}
+              />
+              <CustomDatePicker
+                control={control}
+                name={fieldNames.borrowerDateOfEstabilishment}
+                label="Date of Establishment"
+              />
+              <CustomInput
+                control={control}
+                name={fieldNames.borrowerVintage}
+                label="Vintage (Months)"
+                placeholder="Enter vintage"
+                type="number"
+              />
+              <CustomInput
+                control={control}
+                name={fieldNames.borrowerLicenseNo}
+                label="License No"
+                type="text"
+                placeholder="Enter your business license no"
+              />
+              <CustomDropDown
+                control={control}
+                name={fieldNames.borrowerNatureOfBusiness}
+                label="Nature of Business"
+                data={natureOfBusinessOptions}
+              />
             </>
           )}
 
-          <CustomInput
+          {businessDetailFetchMethod === "Manually Enter" && (
+            <>
+              <CustomInput
+                control={control}
+                name="mNameOfBusiness"
+                label="Name of Business"
+                type="text"
+                placeholder="Enter name of business"
+              />
+              <CustomDropDown
+                control={control}
+                name="mLegalForm"
+                label="Legal Form"
+                data={legalFormOptions}
+              />
+              <CustomDropDown
+                control={control}
+                name="mEmirates"
+                label="Emirates"
+                data={emiratesOptions}
+              />
+              <CustomDatePicker
+                control={control}
+                name="mDateOfEstb"
+                label="Date of Establishment"
+              />
+              <CustomInput
+                control={control}
+                name="mBusinessVintage"
+                label="Vintage (Months)"
+                placeholder="Enter vintage"
+                type="number"
+              />
+              <CustomInput
+                control={control}
+                name="mLicenseNo"
+                label="License No"
+                type="text"
+                placeholder="Enter your business license no"
+              />
+              <CustomDropDown
+                control={control}
+                name="mNatureOfBusiness"
+                label="Nature of Business"
+                data={natureOfBusinessOptions}
+              />
+            </>
+          )}
+
+          {/* <CustomInput
             control={control}
             name={fieldNames.borrowerNameOfBusiness}
             label="Name of Business"
@@ -708,7 +917,7 @@ export default function BorrowerIncomeScreen() {
             name={fieldNames.borrowerNatureOfBusiness}
             label="Nature of Business"
             data={natureOfBusinessOptions}
-          />
+          /> */}
           <SectionHeader
             sectionName="Income  Details"
             style={{ marginTop: spacingVertical.md }}
@@ -807,7 +1016,127 @@ export default function BorrowerIncomeScreen() {
               )}
             </>
           )}
-          {selfIncomeDetailFetchMethod === "Fetch From Bank" ||
+
+          {selfIncomeDetailFetchMethod === "Fetch From Bank" && (
+            <>
+              <CustomButton
+                title="Fetch Income Details"
+                onPress={selfEmpIncomeDetails}
+                isloading={isloading6}
+              />
+              <CustomInput
+                control={control}
+                name={fieldNames.borrowerBankName}
+                label="Bank Name"
+                placeholder={placeHoldersNames.BankName}
+                type="text"
+              />
+              <CustomInput
+                control={control}
+                name={fieldNames.borrowerAccountNo}
+                label="Account No"
+                placeholder={placeHoldersNames.AccountNumber}
+                type="number"
+              />
+              <CustomInput
+                control={control}
+                name={fieldNames.borrowerLast6MonthsADB}
+                label="Last 6 Months ADB"
+                placeholder="Enter last 6 months ADB"
+                type="number"
+                formatWithCommas={true}
+              />
+              <CustomInput
+                control={control}
+                name={fieldNames.borrowerLast6MonthsAvgCredit}
+                label="Last 6 Months Avg Credit"
+                placeholder="Enter last 6 months avg credit"
+                type="number"
+                formatWithCommas={true}
+              />
+            </>
+          )}
+          {selfIncomeDetailFetchMethod === "Upload Bank Statement" && (
+            <>
+              <CustomButton
+                title="Fetch Income Details"
+                onPress={selfEmpIncomeDetails}
+                isloading={isloading6}
+              />
+              <CustomInput
+                control={control}
+                name="ubsBankName"
+                label="Bank Name"
+                placeholder={placeHoldersNames.BankName}
+                type="text"
+              />
+              <CustomInput
+                control={control}
+                name="ubsAccNo"
+                label="Account No"
+                placeholder={placeHoldersNames.AccountNumber}
+                type="number"
+              />
+              <CustomInput
+                control={control}
+                name="ubsAdb"
+                label="Last 6 Months ADB"
+                placeholder="Enter last 6 months ADB"
+                type="number"
+                formatWithCommas={true}
+              />
+              <CustomInput
+                control={control}
+                name="ubsAvgCredit"
+                label="Last 6 Months Avg Credit"
+                placeholder="Enter last 6 months avg credit"
+                type="number"
+                formatWithCommas={true}
+              />
+            </>
+          )}
+          {selfIncomeDetailFetchMethod === "UAE-FTS" &&
+            ftsStatus === "Completed" && (
+              <>
+                <CustomButton
+                  title="Fetch Income Details"
+                  onPress={selfEmpIncomeDetails}
+                  isloading={isloading6}
+                />
+                <CustomInput
+                  control={control}
+                  name="ufBankName"
+                  label="Bank Name"
+                  placeholder={placeHoldersNames.BankName}
+                  type="text"
+                />
+                <CustomInput
+                  control={control}
+                  name="ufAccNo"
+                  label="Account No"
+                  placeholder={placeHoldersNames.AccountNumber}
+                  type="number"
+                />
+                <CustomInput
+                  control={control}
+                  name="ufAdb"
+                  label="Last 6 Months ADB"
+                  placeholder="Enter last 6 months ADB"
+                  type="number"
+                  formatWithCommas={true}
+                />
+                <CustomInput
+                  control={control}
+                  name="ufAvgCredit"
+                  label="Last 6 Months Avg Credit"
+                  placeholder="Enter last 6 months avg credit"
+                  type="number"
+                  formatWithCommas={true}
+                />
+              </>
+            )}
+
+          {/* {selfIncomeDetailFetchMethod === "Fetch From Bank" ||
           selfIncomeDetailFetchMethod === "Upload Bank Statement" ||
           (selfIncomeDetailFetchMethod === "UAE-FTS" &&
             ftsStatus === "Completed") ? (
@@ -850,7 +1179,7 @@ export default function BorrowerIncomeScreen() {
             </>
           ) : (
             <></>
-          )}
+          )} */}
         </>
       )}
     </FormLayout>
