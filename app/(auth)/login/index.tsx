@@ -130,6 +130,7 @@ const LoginScreen: React.FC = () => {
           value={emiratesId}
           onChangeText={setEmiratesId}
           maxLength={15}
+          keyboardType="numeric"
         />
         <CustomInput
           label="Mobile No"

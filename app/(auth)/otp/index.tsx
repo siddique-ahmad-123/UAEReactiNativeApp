@@ -8,9 +8,12 @@ import {
 } from "@/constants/Metrics";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage"; // ✅ corrected import
 import { useGetExistingCustomerDataMutation } from "@/redux/api/creditCardAPI";
+import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { useApplicationStore } from "@/store/applicationStore";
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   ImageBackground,
   StyleSheet,
@@ -26,7 +29,10 @@ const STORAGE_KEY = "user";
 const OTPScreen: React.FC = () => {
   const router = useRouter();
   const correctOtp = "1234";
-
+  const { nextStep, formData, updateField } = useApplicationStore();
+  const { setValue } = useForm({
+    defaultValues: formData,
+  });
   const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
   const [getExistingCustomerData] = useGetExistingCustomerDataMutation();
   const [isloading, setIsLoading] = useState(false);
@@ -43,16 +49,15 @@ const OTPScreen: React.FC = () => {
     useRef<TextInput>(null),
     useRef<TextInput>(null),
   ];
-const mobile = storedUser?.mobile;
+  const mobile = storedUser?.mobile;
 
+  const getMaskedMobile = (mobileNumber?: string) => {
+    if (!mobileNumber) return "*****";
+    const last4 = mobileNumber.slice(-4); // last 4 digits
+    return "*****" + last4;
+  };
 
-const getMaskedMobile = (mobileNumber?: string) => {
-  if (!mobileNumber) return "*****";
-  const last4 = mobileNumber.slice(-4); // last 4 digits
-  return "*****" + last4;
-};
-
-   const [secondsLeft, setSecondsLeft] = useState(120);
+  const [secondsLeft, setSecondsLeft] = useState(120);
 
   useEffect(() => {
     if (secondsLeft <= 0) return;
@@ -127,6 +132,12 @@ const getMaskedMobile = (mobileNumber?: string) => {
             userName = response.data.customerData[0]?.Name || "Ravish Kumar";
           }
 
+          setValue(fieldNames.borrowerEmiratesId, storedUser?.emiratesId || "");
+          updateField(
+            fieldNames.borrowerEmiratesId,
+            storedUser?.emiratesId || ""
+          );
+
           storeValue({
             userType: userType,
             name: userName,
@@ -185,7 +196,7 @@ const getMaskedMobile = (mobileNumber?: string) => {
       borderTopRightRadius: radius.pill,
       marginTop: -spacingVertical.xxl,
       padding: spacing.md,
-      justifyContent:"space-between"
+      justifyContent: "space-between",
     },
     formContainerChild: {
       flex: 1,
@@ -256,8 +267,12 @@ const getMaskedMobile = (mobileNumber?: string) => {
           <Text style={styles.sectionTitle}>Enter Verification Code</Text>
           <Text style={styles.sectionSubtitle}>
             {allFilled
-              ? `We are automatically detecting an SMS sent to your mobile number ${getMaskedMobile(mobile)}`
-              : `We have sent an SMS to your mobile number ${getMaskedMobile(mobile)}`}
+              ? `We are automatically detecting an SMS sent to your mobile number ${getMaskedMobile(
+                  mobile
+                )}`
+              : `We have sent an SMS to your mobile number ${getMaskedMobile(
+                  mobile
+                )}`}
           </Text>
 
           <View style={styles.otpRow}>
@@ -291,17 +306,17 @@ const getMaskedMobile = (mobileNumber?: string) => {
           <Text style={styles.timer}>{formatTime(secondsLeft)}</Text>
         </View>
 
-        <View  style={{ marginBottom: spacingVertical.lg }}>
-        {allFilled && (
-          <CustomButton
-            title="Continue"
-            size="full"
-            variant="primary"
-            type="filled"
-            onPress={handleVerify}
-            isloading={isloading}
-          />
-        )}
+        <View style={{ marginBottom: spacingVertical.lg }}>
+          {allFilled && (
+            <CustomButton
+              title="Continue"
+              size="full"
+              variant="primary"
+              type="filled"
+              onPress={handleVerify}
+              isloading={isloading}
+            />
+          )}
         </View>
       </View>
     </View>
