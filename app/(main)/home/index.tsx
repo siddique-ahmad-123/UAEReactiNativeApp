@@ -136,7 +136,7 @@ export default function Dashboard() {
           />
         ))}
       </View>
-      <Text style={localStyles.sectionTitle}>t(Apply Now)</Text>
+      <Text style={localStyles.sectionTitle}>{t("applyNow")}</Text>
       <View style={localStyles.grid}>
         {applyNow.map((item) => (
           <ProductCard

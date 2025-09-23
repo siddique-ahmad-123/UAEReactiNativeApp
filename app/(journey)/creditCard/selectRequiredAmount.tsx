@@ -100,8 +100,7 @@ const SelectRequiredAmount = () => {
             color={isChecked ? theme.colors.primaryColor : undefined}
           />
           <Text style={styles.checkboxLabel}>
-           t( I agree with below provided Terms and Conditions, Fees and Charges
-            Sheet and Key Fact Statement.)
+            {t("iAgreeWithBelowProvided")}
           </Text>
         </View>
         <View style={styles.checkboxContainer}>
