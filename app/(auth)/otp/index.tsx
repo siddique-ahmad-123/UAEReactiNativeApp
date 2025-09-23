@@ -10,7 +10,7 @@ import { useAsyncStorage } from "@/hooks/useAsyncStorage"; // ✅ corrected impo
 import { useGetExistingCustomerDataMutation } from "@/redux/api/creditCardAPI";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -44,6 +44,24 @@ const OTPScreen: React.FC = () => {
     useRef<TextInput>(null),
   ];
 
+   const [secondsLeft, setSecondsLeft] = useState(120);
+
+  useEffect(() => {
+    if (secondsLeft <= 0) return;
+    const interval = setInterval(() => {
+      setSecondsLeft((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [secondsLeft]);
+
+  // format MM:SS
+  const formatTime = (secs: number) => {
+    const mins = Math.floor(secs / 60)
+      .toString()
+      .padStart(2, "0");
+    const secsRemain = (secs % 60).toString().padStart(2, "0");
+    return `${mins}:${secsRemain}`;
+  };
   const handleChange = (text: string, index: number) => {
     const newOtp = [...otpDigits];
 
@@ -255,13 +273,14 @@ const OTPScreen: React.FC = () => {
                 autoFocus={index === 0}
                 selectionColor={theme.colors.background}
                 placeholderTextColor={digit ? theme.colors.background : "#000"}
+                secureTextEntry
               />
             ))}
           </View>
 
           <Text style={styles.resendLabel}>Did not receive the code?</Text>
           <Text style={styles.resendText}>Resend Code</Text>
-          <Text style={styles.timer}>02:00</Text>
+          <Text style={styles.timer}>{formatTime(secondsLeft)}</Text>
         </View>
 
         <View  style={{ marginBottom: spacingVertical.lg }}>
