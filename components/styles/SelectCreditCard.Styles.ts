@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semiBold,
     textAlign: "center",
-    marginBottom: spacingVertical.sm,
+    //marginBottom: spacingVertical.sm,
   },
   cardDescription2: {
     fontSize: fontSize.xs,

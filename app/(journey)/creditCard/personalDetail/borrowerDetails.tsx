@@ -211,7 +211,7 @@ const BorrowerPersonalInformation = () => {
         setTimeout(() => {
           setValue("borrowerVerificationStatus", "Verified");
           setIsLoading(false);
-        }, 2000);
+        }, 3000);
       } catch (err) {
         console.error("❌ Failed to capture photo", err);
         setIsLoading(false);
@@ -231,7 +231,7 @@ const BorrowerPersonalInformation = () => {
 
   const residenceCountryOptions = [
     { label: "India", value: "IN" },
-    { label: "UAE", value: "UAE" },
+    { label: "United Arab Emirates", value: "United Arab Emirates" },
     { label: "Sri Lanka", value: "Sri Lanka" },
   ];
 
@@ -260,7 +260,7 @@ const BorrowerPersonalInformation = () => {
 
   const countryOptions = [
     { label: "India", value: "IN" },
-    { label: "UAE", value: "UAE" },
+    { label: "United Arab Emirates", value: "United Arab Emirates" },
     { label: "Germany", value: "DE" },
   ];
 

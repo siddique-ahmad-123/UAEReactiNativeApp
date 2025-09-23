@@ -127,7 +127,7 @@ const LoginScreen: React.FC = () => {
           placeholder="0000000000"
           value={emiratesId}
           onChangeText={setEmiratesId}
-          maxLength={10}
+          maxLength={15}
         />
         <CustomInput
           label="Mobile No"

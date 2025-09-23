@@ -15,25 +15,26 @@ const CounterOffer = () => {
     string | undefined
   >();
 
+
   const methodOptions = [
     {
       id: "email",
       title: "Credit Limit",
       description: "",
       iconName: "mail-outline",
-      amount: formData[fieldNames.cardLimit],
+      amount:  formData[fieldNames.cardLimit]
     },
     {
       id: "sms",
       title: "Joining Fees",
-      description: "Will be deducted from 1st credit card installment",
+      description: "",
       iconName: "chatbubble-outline",
       amount: formData[fieldNames.cardJoiningFees],
     },
     {
       id: "app",
       title: "Annual Fees",
-      description: "Stay updated in the app",
+      description: "",
       iconName: "notifications-outline",
       amount: formData[fieldNames.cardAnualFees],
     },
@@ -48,6 +49,7 @@ const CounterOffer = () => {
       doubleButtonTitle2={"Accept Offer"}
       onPressDoubleButton1={() => router.push("/(journey)/creditCard/submitApplication/applicationNotApproved")}
       onPressDoubleButton2={() => router.push("/(journey)/creditCard/submitApplication/congratulations")}
+      isLoadingDoubleButton={true}
     >
       <View style={styles.image}>
         <Image
@@ -60,14 +62,16 @@ const CounterOffer = () => {
         Sorry, Application Not Approved
       </Text>
       <Text
-        style={[
-          styles.textbox3,
-          { color: theme.colors.secondaryText, marginBottom: 30 },
-        ]}
-      >
-        We’re sorry but your request did not go through with the amount of
-        {formData[fieldNames.selectedRequiredAmount]} AED.
-      </Text>
+  style={[
+    styles.textbox3,
+    { color: theme.colors.secondaryText, marginBottom: 30 },
+  ]}
+>
+  We’re sorry but your request did not go through with the amount of{" "}
+  {Number(formData[fieldNames.selectedRequiredAmount])
+    .toLocaleString("en-US")}{" "}
+  AED.
+</Text>
 
       <View style={styles.linkTextView}>
         <TouchableOpacity onPress={() => {}}>

@@ -8,7 +8,7 @@ import {
   spacingVertical,
 } from "@/constants/Metrics";
 import { useTheme } from "styled-components/native";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -25,6 +25,7 @@ interface FormHeaderProps {
   onInfoPress?: () => void;
   onSaveAndNext: () => void;
   children?: React.ReactNode;
+  isLoading?: boolean;
 }
 
 export default function FormLayout({
@@ -37,10 +38,12 @@ export default function FormLayout({
   onClose,
   onInfoPress,
   onSaveAndNext,
+  isLoading = false,
   children,
 }: FormHeaderProps) {
   const theme = useTheme();
   const { t } = useTranslation();
+
 
   const styles = StyleSheet.create({
     container: { flex: 1, backgroundColor: theme.colors.primaryColor },
@@ -64,6 +67,7 @@ export default function FormLayout({
       backgroundColor: theme.colors.background,
     },
   });
+
 
   return (
       <View style={styles.container}>
@@ -96,6 +100,7 @@ export default function FormLayout({
               variant="secondary"
               type="outlined"
               size="md"
+               
             />
             <CustomButton
               title="Save & Next"
@@ -103,6 +108,7 @@ export default function FormLayout({
               variant="primary"
               type="filled"
               size="md"
+              isloading={isLoading}
             />
           </View>
         </View>

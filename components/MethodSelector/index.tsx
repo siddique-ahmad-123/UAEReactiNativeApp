@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Example icon lib, optional
-import { useTheme } from "styled-components/native";
 import { fontSize, fontWeight, radius, spacing, spacingVertical } from "@/constants/Metrics";
+import { Ionicons } from "@expo/vector-icons"; // Example icon lib, optional
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useTheme } from "styled-components/native";
 
 interface MethodOption {
   id: string;
@@ -123,7 +123,7 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
                     { color: isSelected ? theme.colors.background : theme.colors.primaryColor },
                   ]}
                 >
-                  {option.amount}
+                  AED {Number(option.amount ?? 0).toLocaleString("en-US")}
                 </Text>
               )}
             </TouchableOpacity>
