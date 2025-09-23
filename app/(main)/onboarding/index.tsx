@@ -18,6 +18,7 @@ import { useTheme } from "styled-components/native";
 import { styles } from "../../../components/styles/onboarding.Styles";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 import { ImagesPath } from "@/constants/Image";
+import { t } from "i18next";
 
 
 
@@ -35,28 +36,28 @@ type Slide = {
 const slides: Slide[] = [
   {
     id: "1",
-    title: "Credit Cards",
+    title: t("Credit Cards"),
     description:
-      "Get Credit Cards Approvals instantly and start accessing our innovative offerings.",
+      t("Get Credit Cards Approvals instantly and start accessing our innovative offerings."),
     imgpath: ImagesPath.landingPageImage1,
     
   },
   {
     id: "2",
-    title: "Mortgages",
-    description: "Get Mortgages In Principle Approval instantly and get access to your dream home.",
+    title: t("Mortgages"),
+    description: t("Get Mortgages In Principle Approval instantly and get access to your dream home."),
     imgpath: ImagesPath.landingPageImage2,
   },
   {
     id: "3",
-    title: "Auto Loans",
-    description: "Get Auto Loans In Principle Approval instantly and get access to your dream Car.",
+    title: t("Auto Loans"),
+    description: t("Get Auto Loans In Principle Approval instantly and get access to your dream Car."),
     imgpath: ImagesPath.landingPageImage3
   },
   {
     id: "4",
-    title: "Personal Loans",
-    description: "Get Funds instantly in your account allowing you to access things you love.",
+    title: t("Personal Loans"),
+    description: t("Get Funds instantly in your account allowing you to access things you love."),
     imgpath: ImagesPath.landingPageImage4
   },
 ];
@@ -167,14 +168,14 @@ const Carousel = () => {
       </View>
       <View style={[styles.row, { marginTop: 130, marginBottom: 30 }]}>
         <CustomButton
-          title="Cancel"
+          title={t("Cancel")}
           onPress={exitApp}
           variant="secondary"
           type="outlined"
           size="md"
         />
         <CustomButton
-          title="Get Started"
+          title={t("Get Started")}
           onPress={() => {
             console.log(userData);
             if (userData?.mobile) {

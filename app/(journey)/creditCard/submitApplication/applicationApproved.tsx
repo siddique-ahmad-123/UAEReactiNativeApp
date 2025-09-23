@@ -10,6 +10,7 @@ import {
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
+import { t } from "i18next";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Image, ScrollView, Text, View } from "react-native";
@@ -37,23 +38,23 @@ const ApplicationApproved = () => {
 
   const methodOptions = [
     {
-      id: "email",
-      title: "Credit Limit",
+      id: t("email"),
+      title: t("Credit Limit"),
       description: "",
-      iconName: "mail-outline",
+      iconName: t("mail-outline"),
       amount: formData[fieldNames.cardLimit],
     },
     {
-      id: "sms",
-      title: "Joining Fees",
-      description: "Will be deducted from 1st credit card installment",
+      id: t("sms"),
+      title: t("Joining Fees"),
+      description: t("Will be deducted from 1st credit card installment"),
       iconName: "chatbubble-outline",
       amount: formData[fieldNames.cardJoiningFees],
     },
     {
-      id: "app",
-      title: "Annual Fees",
-      description: "Stay updated in the app",
+      id: t("app"),
+      title: t("Annual Fees"),
+      description: t("Stay updated in the app"),
       iconName: "notifications-outline",
       amount: formData[fieldNames.cardAnualFees],
     },
@@ -78,9 +79,9 @@ const ApplicationApproved = () => {
   const theme = useTheme();
   return (
     <CustomMainChild
-      title="Submit Application"
+      title={t("Submit Application")}
       noOfButtons={1}
-      singleButtonTitle="Accept Offer"
+      singleButtonTitle={t("Accept Offer")}
       onClose={() => router.back()}
       onPressSingleButton={onPressAcceptOffer}
       isLoadingDoubleButton={isLoading}
@@ -96,7 +97,7 @@ const ApplicationApproved = () => {
             resizeMode="contain"
           />
           <Text style={[styles.textbox2, { color: theme.colors.textPrimary }]}>
-            Application Approved
+            t(Application Approved)
           </Text>
           <Text
             style={[
@@ -104,11 +105,11 @@ const ApplicationApproved = () => {
               { color: theme.colors.secondaryText, marginBottom: 30 },
             ]}
           >
-            Your application is approved successfully
+            t(Your application is approved successfully)
           </Text>
         </View>
         <MethodSelector
-          title="Credit Card Details"
+          title={t("Credit Card Details")}
           options={methodOptions}
           selectedId={selectedMethod}
           onSelect={(id) => setSelectedMethod(id)}
@@ -117,9 +118,9 @@ const ApplicationApproved = () => {
           <Image
            
             source={
-              formData[fieldNames.cardType] === "Cashback Credit Card"
+              formData[fieldNames.cardType] === t("Cashback Credit Card")
                 ? ImagesPath.card2Image
-                : formData[fieldNames.cardType] === "Elite Credit Card"
+                : formData[fieldNames.cardType] === t("Elite Credit Card")
                 ? ImagesPath.card1Image
                 : ImagesPath.card3Image
             }

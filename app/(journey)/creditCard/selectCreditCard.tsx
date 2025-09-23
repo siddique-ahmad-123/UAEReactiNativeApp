@@ -5,6 +5,7 @@ import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
+import { t } from "i18next";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -38,54 +39,54 @@ type CardItem = {
 const cards: CardItem[] = [
   {
     id: "1",
-    title: "Cashback Credit Card",
-    description1: "Minimum Income Requirement: AED 5,000/month.",
+    title: t("Cashback Credit Card"),
+    description1: t("Minimum Income Requirement: AED 5,000/month."),
     description2:
-      "Welcome Bonus: AED 500 for new customers (spend ≥AED 5,000 in first 2 months); AED 100 for existing cardholders.",
+      t("Welcome Bonus: AED 500 for new customers (spend ≥AED 5,000 in first 2 months); AED 100 for existing cardholders."),
     description3:
-      "Rewards / Cashback:\n• 5% on dining (local & international)\n• 2% on international spends\n• Up to 1% on local spends\n• 0.33% on govt. payments, utilities, education, \ncharity, fuel, rental, telecom spends",
+      t("Rewards / Cashback:\n• 5% on dining (local & international)\n• 2% on international spends\n• Up to 1% on local spends\n• 0.33% on govt. payments, utilities, education, \ncharity, fuel, rental, telecom spends"),
     description4: "",
     description5: "",
-    description6: "Joining Fees - Nil",
-    description7: "Annual Fees - Nil",
+    description6: t("Joining Fees - Nil"),
+    description7: t("Annual Fees - Nil"),
     image: ImagesPath.card1Image,
-    joiningFees: "Nil",
-    anualFees: "Nil",
+    joiningFees: t("Nil"),
+    anualFees: t("Nil"),
   },
   {
     id: "2",
-    title: "Elite Credit Card",
-    description1: "Minimum Income Requirement: AED 10,000/month.",
+    title: t("Elite Credit Card"),
+    description1: t("Minimum Income Requirement: AED 10,000/month."),
     description2:
-      "Welcome Bonus: AED 1,200 cashback/spending bonuses (3 transactions ≥ AED 100 within 2 months)",
+      t("Welcome Bonus: AED 1,200 cashback/spending bonuses (3 transactions ≥ AED 100 within 2 months)"),
     description3:
-      "Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local",
+      t("Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local"),
     description4:
-      "Lifestyle Perks: Global lounge access, airport transfers, Fitness First visits, cinema discounts, concierge benefits, etc.",
+      t("Lifestyle Perks: Global lounge access, airport transfers, Fitness First visits, cinema discounts, concierge benefits, etc."),
     description5:
-      "Best Rewards: Extensive travel and lifestyle perks; ideal for frequent travelers.",
-    description6: "Joining Fees - Nil",
-    description7: "Annual Fees - AED650",
+      t("Best Rewards: Extensive travel and lifestyle perks; ideal for frequent travelers."),
+    description6: t("Joining Fees - Nil"),
+    description7: t("Annual Fees - AED650"),
     image: ImagesPath.card2Image,
-    joiningFees: "Nil",
-    anualFees: "AED650",
+    joiningFees: t("Nil"),
+    anualFees: t("AED650"),
   },
   {
     id: "3",
-    title: "World Credit Card",
-    description1: "Minimum Income Requirement: AED 25,000/month.",
+    title: t("World Credit Card"),
+    description1: t("Minimum Income Requirement: AED 25,000/month."),
     description2:
-      "Welcome Bonus: AED 2,000 cashback after 3 transactions ≥ AED 100 in first 2 months",
+      t("Welcome Bonus: AED 2,000 cashback after 3 transactions ≥ AED 100 in first 2 months"),
     description3:
-      "Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local",
+      t("Reward Points: 3 points per AED on international expenses; bonus on dining/duty-free; 1 point per AED on local"),
     description4:
-      "Perks: Airport lounges (900+ worldwide, 12 visits/year), villa/pickup, valet, golf, fitness, concierge, cinema, fine dining, etc.",
-    description5: "Best Rewards: Deep perks, elite status travel benefits.",
-    description6: "Joining Fees - AED250",
-    description7: "Annual Fees - AED650",
+      t("Perks: Airport lounges (900+ worldwide, 12 visits/year), villa/pickup, valet, golf, fitness, concierge, cinema, fine dining, etc."),
+    description5: t("Best Rewards: Deep perks, elite status travel benefits."),
+    description6: t("Joining Fees - AED250"),
+    description7: t("Annual Fees - AED650"),
     image: ImagesPath.card3Image,
-    joiningFees: "AED250",
-    anualFees: "AED650",
+    joiningFees: t("AED250"),
+    anualFees: t("AED650"),
   },
 ];
 
@@ -178,7 +179,7 @@ const RequestsScreen = () => {
           <Text
             style={[styles.knowMoreText, { color: theme.colors.textPrimary }]}
           >
-            Know More
+            t(Know More)
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -193,7 +194,7 @@ const RequestsScreen = () => {
           <Text
             style={[styles.applyText, { color: theme.colors.primaryColor }]}
           >
-            Apply Now
+            t(Apply Now)
           </Text>
         </TouchableOpacity>
       </View>
@@ -202,10 +203,10 @@ const RequestsScreen = () => {
   
   return (
     <CustomMainChild
-      title="Select your credit card"
-      subTitle="We have cards for every need, explore here"
+      title={t("Select your credit card")}
+      subTitle={t("We have cards for every need, explore here")}
       noOfButtons={1}
-      singleButtonTitle="Back"
+      singleButtonTitle={t("Back")}
       onClose={() => router.back()}
       onPressSingleButton={() => router.push("/NavScreen")}
     >

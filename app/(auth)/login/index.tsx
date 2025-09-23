@@ -13,6 +13,7 @@ import {
 } from "@/constants/Metrics";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 import { ImagesPath } from "@/constants/Image";
+import { t } from "i18next";
 
 const STORAGE_KEY = "user";
 
@@ -41,17 +42,17 @@ const LoginScreen: React.FC = () => {
 
   const handleLogin = async () => {
     if (!emiratesId.trim()) {
-      Alert.alert("Validation Error", "Please enter your Emirates ID");
+      Alert.alert(t("Validation Error", "Please enter your Emirates ID"));
       return;
     }
     if (!mobile.trim()) {
-      Alert.alert("Validation Error", "Please enter your Mobile Number");
+      Alert.alert(t("Validation Error", "Please enter your Mobile Number"));
       return;
     }
     if (mobile.length < 9) {
       Alert.alert(
-        "Validation Error",
-        "Mobile number must be at least 10 digits"
+        t("Validation Error",
+        "Mobile number must be at least 10 digits")
       );
       return;
     }
@@ -122,14 +123,14 @@ const LoginScreen: React.FC = () => {
 
       <View style={styles.formContainer}>
         <CustomInput
-          label="Emirates ID"
+          label={t("Emirates ID")}
           placeholder="0000000000"
           value={emiratesId}
           onChangeText={setEmiratesId}
           maxLength={10}
         />
         <CustomInput
-          label="Mobile No"
+          label={t("Mobile No")}
           placeholder="********"
           value={mobile}
           onChangeText={setMobile}
@@ -139,14 +140,14 @@ const LoginScreen: React.FC = () => {
 
         <View style={styles.row}>
           <CustomButton
-            title="Login with UAE-PASS"
+            title={t("Login with UAE-PASS")}
             onPress={() => {}}
             variant="secondary"
             type="outlined"
             size="lg"
           />
           <CustomButton
-            title="Send OTP"
+            title={t("Send OTP")}
             onPress={handleLogin}
             variant="primary"
             type="filled"

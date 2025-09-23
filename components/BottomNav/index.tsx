@@ -5,6 +5,7 @@ import {
   radius,
   spacing,
 } from "@/constants/Metrics";
+import { t } from "i18next";
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "styled-components/native";
@@ -13,17 +14,17 @@ const navItems = [
   { id: "1", title: "Home", icon: require("../../assets/icons/home.png") },
   {
     id: "2",
-    title: "Calculator",
+    title: t("Calculator"),
     icon: require("../../assets/icons/mobile.png"),
   },
   {
     id: "3",
-    title: "Need Help",
+    title: t("Need Help"),
     icon: require("../../assets/icons/headphn.png"),
   },
   {
     id: "4",
-    title: "Notifications",
+    title: t("Notifications"),
     icon: require("../../assets/icons/notification.png"),
   },
   { id: "5", title: "Menu", icon: require("../../assets/icons/menu.png") },

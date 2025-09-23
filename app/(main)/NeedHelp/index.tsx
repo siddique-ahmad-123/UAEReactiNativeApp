@@ -7,6 +7,7 @@ import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
+import { t } from "i18next";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { StyleSheet, Text, View } from "react-native";
@@ -20,14 +21,14 @@ const RequestCallBack = () => {
   });
  
   const cityOptions = [
-    { label: "Dubai", value: "Dubai" },
-    { label: "Sharja", value: "Sharjha" },
+    { label: t("Dubai"), value: t("Dubai") },
+    { label: t("Sharja"), value: t("Sharjha") },
   ];
  
   const genderOptions = [
-    { label: "Male", value: "Male" },
-    { label: "Female", value: "Female" },
-    { label: "Others", value: "Others" },
+    { label: t("Male"), value: t("Male") },
+    { label: t("Female"), value: t("Female") },
+    { label: t("Others"), value: t("Others") },
   ];
  
   const onSubmit = (values: any) => {
@@ -39,7 +40,7 @@ const RequestCallBack = () => {
     const min = 10000000;
     const max = 99999999;
     const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-    setValue("refNo", randomNumber.toString());
+    setValue(t("refNo"), randomNumber.toString());
   });
  
   const theme = useTheme();
@@ -63,9 +64,9 @@ const RequestCallBack = () => {
       <Text style={styles.text}>Request Callback</Text>
  
       <CustomInput
-        name="refNo"
-        label="Ref no."
-        placeholder="Enter ref number"
+        name={t("refNo")}
+        label={t("Ref no.")}
+        placeholder={t("Enter ref number")}
         type="text"
         control={control}
         editable={false}
@@ -74,7 +75,7 @@ const RequestCallBack = () => {
       <View style={styles.row}>
         <View style={styles.innerRow}>
           <CustomInput
-            label="First Name"
+            label={t("First Name")}
             placeholder={placeHoldersNames.firstName}
             type="text"
             control={control}
@@ -82,7 +83,7 @@ const RequestCallBack = () => {
         </View>
         <View style={styles.innerRow}>
           <CustomInput
-            label="Last Name"
+            label={t("Last Name")}
             placeholder={placeHoldersNames.LastName}
             type="text"
             control={control}
@@ -91,8 +92,8 @@ const RequestCallBack = () => {
       </View>
       <CustomInput
         name={fieldNames.supplementaryCardName}
-        label="Email"
-        placeholder="Enter email"
+        label={t("Email")}
+        placeholder={t(placeHoldersNames.Email)}
         type="text"
         control={control}
       />
@@ -100,15 +101,15 @@ const RequestCallBack = () => {
       <View style={styles.row}>
         <View style={styles.innerRow}>
           <CustomInput
-            label="Mobile Number"
-            placeholder="Enter number"
+            label={t("Mobile Number")}
+            placeholder={t(placeHoldersNames.MobileNumber)}
             type="text"
             control={control}
           />
         </View>
         <View style={styles.innerRow}>
           <CustomDropDown
-            label={"Gender"}
+            label={t("Gender")}
             data={genderOptions}
             control={control}
           />
@@ -116,9 +117,9 @@ const RequestCallBack = () => {
       </View>
  
       <SegmentedControl
-        label={"Marital Status"}
-        options={["Single", "Married"]}
-        defaultValue={"Single"}
+        label={t("Marital Status")}
+        options={[t("Single"), t("Married")]}
+        defaultValue={t("Single")}
         onChange={function (value: string): void {
           console.log("martial status changed");
         }}
@@ -126,14 +127,14 @@ const RequestCallBack = () => {
  
       <CustomDropDown
         name={fieldNames.borrowerGender}
-        label={"City"}
+        label={t("City")}
         data={cityOptions}
         control={control}
       />
  
       <CustomInput
-        label="Description"
-        placeholder="Write your query"
+        label={t("Description")}
+        placeholder={t("Write your query")}
         type="textarea"
         numberOfLines={7}
       />

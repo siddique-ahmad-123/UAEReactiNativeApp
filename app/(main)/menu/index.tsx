@@ -5,6 +5,7 @@ import CustomButton from "@/components/CustomButton";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useApplicationStore } from "@/store/applicationStore";
+import { t } from "i18next";
 
 const STORAGE_KEY = "user";
 
@@ -30,7 +31,7 @@ const MenuScreen: React.FC = () => {
       <Text style={styles.text}>Menu Screen</Text>
 
       <CustomButton
-        title="Logout"
+        title={t("Logout")}
         onPress={handleLogout}
         variant="secondary"
         type="outlined"

@@ -5,6 +5,7 @@ import { fontSize, spacingVertical } from "@/constants/Metrics";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import Checkbox from "expo-checkbox";
+import { t } from "i18next";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { StyleSheet, Text, View } from "react-native";
@@ -58,10 +59,10 @@ const SelectRequiredAmount = () => {
   });
   return (
     <CustomMainChild
-      title="Select Required Amount"
+      title={t("Select Required Amount")}
       noOfButtons={2}
-      doubleButtonTitle1="Cancel"
-      doubleButtonTitle2="Next"
+      doubleButtonTitle1={t("Cancel")}
+      doubleButtonTitle2={t("Next")}
       onPressDoubleButton1={() => prevStep()}
       onPressDoubleButton2={() => onClickNext()}
       isDisableDoubleButton2={!(isChecked && isChecked2)}
@@ -69,7 +70,7 @@ const SelectRequiredAmount = () => {
       isLoadingDoubleButton={isloading}
     >
       <DynamicSliderCard
-        title="Card Amount"
+        title={t("Card Amount")}
         value={financeAmount}
         setValue={setFinanceAmount}
         min={10000}
@@ -80,15 +81,15 @@ const SelectRequiredAmount = () => {
       <View style={styles.bottomContainer}>
         <DocumentDownload
           url={process.env.EXPO_PUBLIC_TERMS_CONDITIONS_URL}
-          documentName="Download Terms & Conditions"
+          documentName={t("Download Terms & Conditions")}
         />
         <DocumentDownload
           url={process.env.EXPO_PUBLIC_FEES_CHARGES_URL}
-          documentName="Download Fees & Charges"
+          documentName={t("Download Fees & Charges")}
         />
         <DocumentDownload
           url={process.env.EXPO_PUBLIC_KAS_URL}
-          documentName="Download Key Fact Statement"
+          documentName={t("Download Key Fact Statement")}
         />
 
         <View style={styles.checkboxContainer}>
@@ -99,8 +100,8 @@ const SelectRequiredAmount = () => {
             color={isChecked ? theme.colors.primaryColor : undefined}
           />
           <Text style={styles.checkboxLabel}>
-            I agree with below provided Terms and Conditions, Fees and Charges
-            Sheet and Key Fact Statement.
+           t( I agree with below provided Terms and Conditions, Fees and Charges
+            Sheet and Key Fact Statement.)
           </Text>
         </View>
         <View style={styles.checkboxContainer}>
@@ -112,7 +113,7 @@ const SelectRequiredAmount = () => {
           />
           <View>
             <Text style={styles.checkboxLabel}>
-              I authorize Newgen Bank to access my Bureau and FTS records
+              t(I authorize Newgen Bank to access my Bureau and FTS records)
             </Text>
           </View>
         </View>
