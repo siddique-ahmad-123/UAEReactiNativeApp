@@ -28,13 +28,22 @@ const IncomeSummary = () => {
   const borrowerType = watch("borrowerType") ?? "Borrower";
   const borrowerIncomeType = watch(fieldNames.borrowerIncomeType) ?? "Salaried";
   const borrowerSalary = watch(fieldNames.borrowerMonthlySalaryAECB);
+  const borrowerSalCertSalary = watch("ufMonthlyAecb");
   const borrowerSelfIncome = watch(fieldNames.borrowerLast6MonthsADB);
-  const borrowerEmpDetailFetchMethod = watch(
-    fieldNames.borrowerEmpDetailFetchMethod
-  );
-  const borrowerBusinessDetailFetchMethod = watch(
-    fieldNames.borrowerBusinessDetailFetchMethod
-  );
+  const borrowerSelfIncomeUbs = watch("ubsAdb");
+  const borrowerSelfIncomeUf = watch("ufAdb");
+  const borrowerEmpDetailFetchMethod =
+    watch(fieldNames.borrowerEmpDetailFetchMethod) ?? "AECB";
+  const borrowerBusinessDetailFetchMethod =
+    watch(fieldNames.borrowerBusinessDetailFetchMethod) ??
+    "Upload Trade License";
+  const borrowerSelfIncomeDetailFetchMethod = watch(
+    fieldNames.borrowerSelfIncomeDetailFetchMethod
+  ) ?? "Fetch From Bank";
+
+  const borrowerSalaryIncomeDetailFetchMethod =
+    watch(fieldNames.borrowerSalaryIncomeDetailFetchMethod) ??
+    "Salary Transfer";
 
   useEffect(() => {
     if (borrowerIncomeType === "Salaried") {
@@ -55,21 +64,41 @@ const IncomeSummary = () => {
   });
 
   const calculateTotalIncome = (v: string) => {
-    setValue(
-      "borrowerSalaryTotalIncome",
-      parseInt(borrowerSalary) + parseInt(v)
-    );
-    setValue(
-      "borrowerSalaryAvgIncome",
-      (parseInt(borrowerSalary) + parseInt(v)) / 2
-    );
+    if (borrowerEmpDetailFetchMethod === "AECB") {
+      setValue(
+        "borrowerSalaryTotalIncome",
+        parseInt(borrowerSalary) + parseInt(v)
+      );
+      setValue(
+        "borrowerSalaryAvgIncome",
+        (parseInt(borrowerSalary) + parseInt(v)) / 2
+      );
+    } else if (borrowerEmpDetailFetchMethod === "Salary Certificate") {
+      setValue(
+        "borrowerSalaryTotalIncome",
+        parseInt(borrowerSalCertSalary) + parseInt(v)
+      );
+      setValue(
+        "borrowerSalaryAvgIncome",
+        (parseInt(borrowerSalCertSalary) + parseInt(v)) / 2
+      );
+    }
   };
 
   const calculateSelfTotalIncome = (v: string) => {
-    setValue(
-      "selfTotalIncome",
-      parseInt(borrowerSelfIncome) + parseInt(v)
-    );
+    console.log(v);
+    if (borrowerSelfIncomeDetailFetchMethod === "Fetch From Bank") {
+      setValue("selfTotalIncome", parseInt(borrowerSelfIncome) + parseInt(v));
+    } else if (
+      borrowerSelfIncomeDetailFetchMethod === "Upload Bank Statement"
+    ) {
+      setValue(
+        "selfTotalIncome",
+        parseInt(borrowerSelfIncomeUbs) + parseInt(v)
+      );
+    } else if (borrowerSelfIncomeDetailFetchMethod === "UAE-FTS") {
+      setValue("selfTotalIncome", parseInt(borrowerSelfIncomeUf) + parseInt(v));
+    }
   };
 
   const theme = useTheme();
@@ -121,7 +150,92 @@ const IncomeSummary = () => {
               {/* Borrower (Salaried) */}
               <SectionHeader sectionName={"Income Details - Salaried"} />
 
-              <CustomInput
+              {borrowerEmpDetailFetchMethod === "AECB" && (
+                <>
+                  <CustomInput
+                    name={fieldNames.borrowerEmployerName}
+                    label="Employer Name"
+                    type="text"
+                    placeholder="Newgen Software"
+                    control={control}
+                  />
+
+                  <CustomDatePicker
+                    name={fieldNames.borrowerEmployedFrom}
+                    label="Employed From"
+                    control={control}
+                  />
+                  <CustomDropDown
+                    name={fieldNames.borrowerEmirates}
+                    label="Emirates"
+                    data={emiratesOptions}
+                    control={control}
+                  />
+
+                  <CustomInput
+                    name="isSalariedBorrowerVerified"
+                    label="Verification Status"
+                    type="text"
+                    placeholder={placeHoldersNames.Verification}
+                    control={control}
+                  />
+                </>
+              )}
+
+              {borrowerEmpDetailFetchMethod === "Salary Certificate" && (
+                <>
+                  <CustomInput
+                    name="scEmployerName"
+                    label="Employer Name"
+                    type="text"
+                    placeholder="Newgen Software"
+                    control={control}
+                  />
+
+                  <CustomDatePicker
+                    name="scEmployedFrom"
+                    label="Employed From"
+                    control={control}
+                  />
+                  <CustomDropDown
+                    name="scEmirates"
+                    label="Emirates"
+                    data={emiratesOptions}
+                    control={control}
+                  />
+
+                  <CustomInput
+                    name="isSalariedBorrowerVerified"
+                    label="Verification Status"
+                    type="text"
+                    placeholder={placeHoldersNames.Verification}
+                    control={control}
+                  />
+                </>
+              )}
+
+              {borrowerSalaryIncomeDetailFetchMethod === "Salary Transfer" && (
+                <CustomInput
+                  name={fieldNames.borrowerMonthlySalaryAECB}
+                  label="Monthly Salary Income"
+                  placeholder={placeHoldersNames.Number}
+                  type="number"
+                  control={control}
+                  formatWithCommas={true}
+                />
+              )}
+              {borrowerSalaryIncomeDetailFetchMethod === "UAE-FTS" && (
+                <CustomInput
+                  name="ufMonthlyAecb"
+                  label="Monthly Salary Income"
+                  placeholder={placeHoldersNames.Number}
+                  type="number"
+                  control={control}
+                  formatWithCommas={true}
+                />
+              )}
+
+              {/* <CustomInput
                 name={fieldNames.borrowerEmployerName}
                 label="Employer Name"
                 type="text"
@@ -156,7 +270,7 @@ const IncomeSummary = () => {
                 type="number"
                 control={control}
                 formatWithCommas={true}
-              />
+              /> */}
               <CustomInput
                 name="borrowerAddIncome"
                 label="Monthly Additional Income"
@@ -187,7 +301,78 @@ const IncomeSummary = () => {
             <>
               {/* Borrower (Self-Employed) */}
               <SectionHeader sectionName={"Income Details - Self Employed"} />
-              <CustomInput
+
+              {formData[fieldNames.borrowerBusinessDetailFetchMethod] ===
+                "Upload Trade License" && (
+                <>
+                  <CustomInput
+                    name={fieldNames.borrowerNameOfBusiness}
+                    label="Business Name"
+                    placeholder="Business Name"
+                    type="text"
+                    control={control}
+                  />
+                  <CustomDropDown
+                    name={fieldNames.borrowerLegalForm}
+                    label="Legal Form"
+                    data={legalFormOptions}
+                    control={control}
+                  />
+                  <CustomInput
+                    name={fieldNames.borrowerLicenseNo}
+                    label="License No"
+                    type="text"
+                    placeholder="DLT34554"
+                    control={control}
+                  />
+                  <CustomDatePicker
+                    name={fieldNames.borrowerDateOfEstabilishment}
+                    label="Date of Establishment"
+                    control={control}
+                  />
+                  <CustomDatePicker
+                    name={fieldNames.borrowerDateOfEstabilishment}
+                    label="Date of Expiry"
+                    control={control}
+                  />
+                </>
+              )}
+              {formData[fieldNames.borrowerBusinessDetailFetchMethod] ===
+                "Manually Enter" && (
+                <>
+                  <CustomInput
+                    name="mNameOfBusiness"
+                    label="Business Name"
+                    placeholder="Business Name"
+                    type="text"
+                    control={control}
+                  />
+                  <CustomDropDown
+                    name="mLegalForm"
+                    label="Legal Form"
+                    data={legalFormOptions}
+                    control={control}
+                  />
+                  <CustomInput
+                    name="mLicenseNo"
+                    label="License No"
+                    type="text"
+                    placeholder="DLT34554"
+                    control={control}
+                  />
+                  <CustomDatePicker
+                    name="mDateOfEstb"
+                    label="Date of Establishment"
+                    control={control}
+                  />
+                  <CustomDatePicker
+                    name="mDateOfEstb"
+                    label="Date of Expiry"
+                    control={control}
+                  />
+                </>
+              )}
+              {/* <CustomInput
                 name={fieldNames.borrowerNameOfBusiness}
                 label="Business Name"
                 placeholder="Business Name"
@@ -216,7 +401,7 @@ const IncomeSummary = () => {
                 name={fieldNames.borrowerDateOfEstabilishment}
                 label="Date of Expiry"
                 control={control}
-              />
+              /> */}
 
               <CustomInput
                 name="isSelfBorrowerVerified"
@@ -225,14 +410,52 @@ const IncomeSummary = () => {
                 placeholder={placeHoldersNames.Verification}
                 control={control}
               />
-              <CustomInput
+
+              {borrowerSelfIncomeDetailFetchMethod === "Fetch From Bank" && (
+                <>
+                  <CustomInput
+                    name={fieldNames.borrowerLast6MonthsADB}
+                    label="Monthly Business Income"
+                    placeholder={placeHoldersNames.Number}
+                    type="number"
+                    control={control}
+                    formatWithCommas={true}
+                  />
+                </>
+              )}
+              {borrowerSelfIncomeDetailFetchMethod ===
+                "Upload Bank Statement" && (
+                <>
+                  <CustomInput
+                    name="ubsAdb"
+                    label="Monthly Business Income"
+                    placeholder={placeHoldersNames.Number}
+                    type="number"
+                    control={control}
+                    formatWithCommas={true}
+                  />
+                </>
+              )}
+              {borrowerSelfIncomeDetailFetchMethod === "UAE-FTS" && (
+                <>
+                  <CustomInput
+                    name="ufAdb"
+                    label="Monthly Business Income"
+                    placeholder={placeHoldersNames.Number}
+                    type="number"
+                    control={control}
+                    formatWithCommas={true}
+                  />
+                </>
+              )}
+              {/* <CustomInput
                 name={fieldNames.borrowerLast6MonthsADB}
                 label="Monthly Business Income"
                 placeholder={placeHoldersNames.Number}
                 type="number"
                 control={control}
                 formatWithCommas={true}
-              />
+              /> */}
               <CustomInput
                 name="monthlySelfAdditionalIncome"
                 label="Monthly Additional Income"
