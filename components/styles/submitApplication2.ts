@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
   },
   linktext: {
     alignItems: "center",
-    fontSize: fontSize.md,
+    fontSize: fontSize.sm,
     fontWeight: fontWeight.bold,
   },
 });

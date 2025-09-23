@@ -16,7 +16,6 @@ import {
 } from "react-native";
 import { useTheme } from "styled-components/native";
 import CustomButton from "../CustomButton";
-
 interface FormHeaderProps {
   title: string;
   subTitle?: string;
@@ -31,7 +30,6 @@ interface FormHeaderProps {
   isDisableDoubleButton2?: boolean;
   children?: React.ReactNode;
   disableOuterScroll?: boolean;
-  isLoadingDoubleButton?: boolean;
   isLoadingSingleButton?: boolean;
 }
 const CustomMainChild = ({
@@ -48,7 +46,6 @@ const CustomMainChild = ({
   isDisableDoubleButton2 = false,
   children,
   disableOuterScroll = false,
-  isLoadingDoubleButton = false,
   isLoadingSingleButton = false,
 }: FormHeaderProps) => {
   const theme = useTheme();
@@ -170,9 +167,10 @@ const CustomMainChild = ({
                       onPressDoubleButton1();
                     }
                   }}
+                  isloading={isLoadingSingleButton}
                   variant="secondary"
                   type="outlined"
-                  size="md"
+                  size="lg"
                 />
                 <CustomButton
                   title={doubleButtonTitle2 ? doubleButtonTitle2 : ""}
@@ -182,10 +180,10 @@ const CustomMainChild = ({
                       onPressDoubleButton2();
                     }
                   }}
-                  isloading={isLoadingDoubleButton}
+                  isloading={isLoadingSingleButton}
                   variant="primary"
                   type="filled"
-                  size="md"
+                  size="lg"
                 />
               </>
             )}

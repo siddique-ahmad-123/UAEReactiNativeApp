@@ -9,7 +9,7 @@ import {
 import { useAsyncStorage } from "@/hooks/useAsyncStorage"; // ✅ corrected import
 import { useGetExistingCustomerDataMutation } from "@/redux/api/creditCardAPI";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import {
   ImageBackground,
@@ -43,6 +43,14 @@ const OTPScreen: React.FC = () => {
     useRef<TextInput>(null),
     useRef<TextInput>(null),
   ];
+const mobile = storedUser?.mobile;
+
+
+const getMaskedMobile = (mobileNumber?: string) => {
+  if (!mobileNumber) return "*****";
+  const last4 = mobileNumber.slice(-4); // last 4 digits
+  return "*****" + last4;
+};
 
    const [secondsLeft, setSecondsLeft] = useState(120);
 
@@ -248,8 +256,8 @@ const OTPScreen: React.FC = () => {
           <Text style={styles.sectionTitle}>Enter Verification Code</Text>
           <Text style={styles.sectionSubtitle}>
             {allFilled
-              ? "We are automatically detecting an SMS sent to your mobile number *****7412"
-              : "We have sent an SMS to your mobile number *****7412"}
+              ? `We are automatically detecting an SMS sent to your mobile number ${getMaskedMobile(mobile)}`
+              : `We have sent an SMS to your mobile number ${getMaskedMobile(mobile)}`}
           </Text>
 
           <View style={styles.otpRow}>

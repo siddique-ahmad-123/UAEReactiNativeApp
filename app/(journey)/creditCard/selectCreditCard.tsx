@@ -4,7 +4,7 @@ import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Dimensions,
@@ -14,7 +14,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Carousel from "react-native-reanimated-carousel";
 import { useTheme } from "styled-components/native";
 
 const { width, height } = Dimensions.get("screen");
@@ -48,8 +47,8 @@ const cards: CardItem[] = [
     description6: "Joining Fees - Nil",
     description7: "Annual Fees - Nil",
     image: require("../../../assets/images/card2.png"),
-    joiningFees: "Nil",
-    anualFees: "Nil",
+    joiningFees: "0",
+    anualFees: "0",
   },
   {
     id: "2",
@@ -66,8 +65,8 @@ const cards: CardItem[] = [
     description6: "Joining Fees - Nil",
     description7: "Annual Fees - AED650",
     image: require("../../../assets/images/card1.png"),
-    joiningFees: "Nil",
-    anualFees: "AED650",
+    joiningFees: "0",
+    anualFees: "650",
   },
   {
     id: "3",
@@ -83,8 +82,8 @@ const cards: CardItem[] = [
     description6: "Joining Fees - AED250",
     description7: "Annual Fees - AED650",
     image: require("../../../assets/images/card3.png"),
-    joiningFees: "AED250",
-    anualFees: "AED650",
+    joiningFees: "250",
+    anualFees: "650",
   },
 ];
 

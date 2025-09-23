@@ -30,14 +30,14 @@ const ApplicationNotApproved = () => {
     {
       id: "sms",
       title: "Joining Fees",
-      description: "Will be deducted from 1st credit card installment",
+      description: "",
       iconName: "chatbubble-outline",
-      amount: formData[fieldNames.cardJoiningFees],
+      amount: Number(formData[fieldNames.cardJoiningFees] || 0),
     },
     {
       id: "app",
       title: "Annual Fees",
-      description: "Stay updated in the app",
+      description: "",
       iconName: "notifications-outline",
       amount: formData[fieldNames.cardAnualFees],
     },
@@ -73,10 +73,10 @@ const ApplicationNotApproved = () => {
             { color: theme.colors.secondaryText, marginBottom: 30 },
           ]}
         >
-          Your application has been successfully accepted for AED.
-          <Text style={{ color: theme.colors.primaryColor }}>
-            {formData[fieldNames.selectedRequiredAmount]}
-          </Text>
+          Your application has been successfully accepted for AED{" "}
+         <Text style={{ color: theme.colors.primaryColor }}>
+       {(formData[fieldNames.selectedRequiredAmount] ?? 0).toLocaleString("en-US")}
+        </Text>
         </Text>
 
         <View style={styles.linkTextView}>

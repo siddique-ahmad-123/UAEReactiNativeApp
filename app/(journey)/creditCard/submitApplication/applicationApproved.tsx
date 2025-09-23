@@ -45,14 +45,14 @@ const ApplicationApproved = () => {
     {
       id: "sms",
       title: "Joining Fees",
-      description: "Will be deducted from 1st credit card installment",
+      description: "",
       iconName: "chatbubble-outline",
       amount: formData[fieldNames.cardJoiningFees],
     },
     {
       id: "app",
       title: "Annual Fees",
-      description: "Stay updated in the app",
+      description: "",
       iconName: "notifications-outline",
       amount: formData[fieldNames.cardAnualFees],
     },
@@ -111,10 +111,10 @@ const ApplicationApproved = () => {
           options={methodOptions}
           selectedId={selectedMethod}
           onSelect={(id) => setSelectedMethod(id)}
+          titleCenter
         />
         <View style={{ alignItems: "center", marginTop: 30 }}>
           <Image
-            // source={require(`../../../../assets/images/${cardNumber}.png`)}
             source={
               formData[fieldNames.cardType] === "Cashback Credit Card"
                 ? require("../../../../assets/images/card2.png")

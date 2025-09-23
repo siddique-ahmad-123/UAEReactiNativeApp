@@ -86,7 +86,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
   },
-  linktext: { alignItems: "center", fontSize: 16, fontWeight: "700",marginBottom:50 },
+  linktext: { alignItems: "center", fontSize: 16, fontWeight: "700",marginBottom:50,textAlign:"center"},
     row: {
     flexDirection: "row",
     justifyContent: "space-between",

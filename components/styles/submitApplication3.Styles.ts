@@ -10,8 +10,8 @@ export const styles = StyleSheet.create({
   },
   header: {
     paddingHorizontal: spacing.md,
-        paddingTop: spacing.xxxl,
-        paddingBottom: spacing.xxl,
+    paddingTop: spacing.xxxl,
+    paddingBottom: spacing.xxl,
   },
   headerTop: {
     flexDirection: "row",
@@ -31,10 +31,10 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-        borderTopLeftRadius: radius.pill,
-        borderTopRightRadius: radius.pill,
-        paddingTop: spacing.xxl,
-        paddingHorizontal: spacing.md,
+    borderTopLeftRadius: radius.pill,
+    borderTopRightRadius: radius.pill,
+    paddingTop: spacing.xxl,
+    paddingHorizontal: spacing.md,
   },
   image: {
     alignItems: "center",
@@ -55,8 +55,14 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
   },
-  linktext: { alignItems: "center", fontSize: 16, fontWeight: "700",marginBottom:50 },
-    row: {
+  linktext: {
+    alignItems: "center",
+    fontSize: 16,
+    fontWeight: "700",
+    marginBottom: 50,
+    textAlign: "center",
+  },
+  row: {
     flexDirection: "row",
     justifyContent: "space-between",
   },

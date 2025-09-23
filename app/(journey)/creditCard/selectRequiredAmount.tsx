@@ -41,15 +41,16 @@ const SelectRequiredAmount = () => {
       flexDirection: "row",
       alignItems: "center",
       marginTop: 20,
+       marginVertical: 10,
       gap: 8,
     },
     checkboxLabel: {
-      flex: 1,
+      flexShrink: 1,
       fontSize: fontSize.xs,
       color: theme.colors.primaryColor,
     },
     checkbox: {
-      margin: 8,
+      marginRight: 8,
     },
     bottomContainer: {
       flex: 1,

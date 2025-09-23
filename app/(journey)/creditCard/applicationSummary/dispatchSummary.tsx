@@ -17,7 +17,7 @@ import { useTheme } from "styled-components/native";
 
 const DispatchSummary = () => {
   const { updateField, formData } = useApplicationStore();
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, watch } = useForm({
     // resolver: zodResolver(personalDetailsSchema),
     defaultValues: formData,
   });
@@ -52,8 +52,8 @@ const DispatchSummary = () => {
   ];
 
   const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(
-    formData[fieldNames.dispatchBranchName],
-    { skip: !formData[fieldNames.dispatchBranchName] }
+    watch(fieldNames.dispatchEmirates),
+    { skip: !watch(fieldNames.dispatchEmirates) }
   );
 
   const emiratesBranches = emiratesBranch?.data ?? [

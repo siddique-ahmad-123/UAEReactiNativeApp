@@ -8,7 +8,10 @@ import {
   spacing,
   spacingVertical,
 } from "@/constants/Metrics";
-import { useGetEmiratesBranchDropDownValuesQuery, useGetEmiratesDropDownValuesQuery } from "@/redux/api/creditCardAPI";
+import {
+  useGetEmiratesBranchDropDownValuesQuery,
+  useGetEmiratesDropDownValuesQuery,
+} from "@/redux/api/creditCardAPI";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
@@ -35,9 +38,15 @@ const DispatchDetails = () => {
 
   const dispatchType = watch("dispatchType") ?? "Mailing Address";
 
+  const dispatchEmirates = watch(fieldNames.dispatchEmirates) ?? "Dubai";
+
+  // useEffect(() => {
+  //   getBranchOptions();
+  // }, [dispatchEmirates]);
+
   const { data: emirates } = useGetEmiratesDropDownValuesQuery();
 
- const emiratesOptions = emirates?.data ?? [
+  const emiratesOptions = emirates?.data ?? [
     {
       label: "Abu Dhabi",
       value: "Abu Dhabi",
@@ -52,24 +61,35 @@ const DispatchDetails = () => {
     },
   ];
   const countryOptions = [
+    { label: "United Arab Emirates", value: "United Arab Emirates" },
     { label: "India", value: "IN" },
     { label: "United States", value: "US" },
     { label: "Germany", value: "DE" },
   ];
 
-   const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(formData[fieldNames.dispatchBranchName],{skip:!formData[fieldNames.dispatchBranchName]});
+  const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(
+    formData[fieldNames.dispatchBranchName],
+    { skip: !formData[fieldNames.dispatchBranchName] }
+  );
 
-     const emiratesBranches = emiratesBranch?.data ?? [
-       {
-            "label": "Ajman Corniche",
-            "value": "Ajman Corniche"
-        },
-        {
-            "label": "Ajman Free Zone",
-            "value": "Ajman Free Zone"
-        }
+  // const getBranchOptions = () => {
+  //   const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(
+  //     formData[fieldNames.dispatchBranchName],
+  //     { skip: !formData[fieldNames.dispatchBranchName] }
+  //   );
+  // };
+
+  const emiratesBranches = emiratesBranch?.data ?? [
+    {
+      label: "Ajman Corniche",
+      value: "Ajman Corniche",
+    },
+    {
+      label: "Ajman Free Zone",
+      value: "Ajman Free Zone",
+    },
   ];
-  
+
   const [modifyName, setModifyName] = useState(false);
   const [needSupCard, setNeedSupCard] = useState(false);
   const [mailing, setMailing] = useState(false);
@@ -114,7 +134,7 @@ const DispatchDetails = () => {
         label="Name"
         placeholder={placeHoldersNames.Name}
         type="text"
-        editable={modifyName} 
+        editable={modifyName}
       />
       <View style={styles.checkBoxContainer}>
         <Checkbox
@@ -184,27 +204,27 @@ const DispatchDetails = () => {
               <CustomInput
                 control={control}
                 name={fieldNames.dispatchAddressLine1}
-                label="Address Line 1"
+                label={fieldNames.borrowerAddressLine1}
                 placeholder={placeHoldersNames.Address}
                 type="text"
               />
               <CustomInput
                 control={control}
                 name={fieldNames.dispatchAddressLine2}
-                label="Address Line 2"
+                label={fieldNames.borrowerAddressLine2}
                 placeholder={placeHoldersNames.Address}
                 type="text"
               />
 
               <CustomDropDown
                 name={fieldNames.dispatchEmirates}
-                label={"Emirates"}
+                label={fieldNames.borrowerEmirates}
                 data={emiratesOptions}
                 control={control}
               />
               <CustomDropDown
                 name={fieldNames.dispatchCountry}
-                label={"Country"}
+                label={fieldNames.borrowerCountry}
                 data={countryOptions}
                 control={control}
               />
@@ -261,5 +281,4 @@ const DispatchDetails = () => {
     </FormLayout>
   );
 };
-
 export default DispatchDetails;
