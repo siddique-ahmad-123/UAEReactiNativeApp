@@ -1,7 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ImageBackground, Alert } from "react-native";
-import { useRouter } from "expo-router";
-import { useTheme } from "styled-components/native";
 import CustomButton from "@/components/CustomButton";
 import CustomInput from "@/components/CustomInput";
 import {
@@ -10,10 +6,13 @@ import {
   radius,
   spacing,
   spacingVertical,
+  width,
 } from "@/constants/Metrics";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
-import { useForm } from "react-hook-form";
-import { fieldNames } from "@/schemas/creditCard/allFieldNames";
+import { useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { Alert, ImageBackground, StyleSheet, Text, View } from "react-native";
+import { useTheme } from "styled-components/native";
 
 const STORAGE_KEY = "user";
 
@@ -105,7 +104,10 @@ const LoginScreen: React.FC = () => {
     },
     row: {
       flexDirection: theme.flexRow.flexDirection,
-      justifyContent: "space-between"
+      justifyContent: "space-between",
+    },
+    button: {
+      width: width.md,
     },
   });
 
@@ -144,14 +146,16 @@ const LoginScreen: React.FC = () => {
             onPress={() => {}}
             variant="secondary"
             type="outlined"
-            size="lg"
+            // size="lg"
+            style={styles.button}
           />
           <CustomButton
             title="Send OTP"
             onPress={handleLogin}
             variant="primary"
             type="filled"
-            size="lg"
+            // size="lg"
+            style={styles.button}
             disabled={mobile.trim().length < 9}
           />
         </View>
