@@ -1,4 +1,12 @@
-import React, { useState } from "react";
+import {
+  fontSize,
+  fontWeight,
+  radius,
+  spacing,
+  spacingVertical,
+} from "@/constants/Metrics";
+import { Ionicons } from "@expo/vector-icons";
+import React from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -8,15 +16,6 @@ import {
 } from "react-native";
 import { useTheme } from "styled-components/native";
 import CustomButton from "../CustomButton";
-import {
-  fontSize,
-  fontWeight,
-  radius,
-  spacing,
-  spacingVertical,
-  width,
-} from "@/constants/Metrics";
-import { Ionicons } from "@expo/vector-icons";
 
 interface FormHeaderProps {
   title: string;
@@ -32,7 +31,8 @@ interface FormHeaderProps {
   isDisableDoubleButton2?: boolean;
   children?: React.ReactNode;
   disableOuterScroll?: boolean;
-  isLoadingDoubleButton?:boolean;
+  isLoadingDoubleButton?: boolean;
+  isLoadingSingleButton?: boolean;
 }
 const CustomMainChild = ({
   title,
@@ -49,6 +49,7 @@ const CustomMainChild = ({
   children,
   disableOuterScroll = false,
   isLoadingDoubleButton = false,
+  isLoadingSingleButton = false,
 }: FormHeaderProps) => {
   const theme = useTheme();
   const styles = StyleSheet.create({
@@ -87,14 +88,13 @@ const CustomMainChild = ({
       borderTopRightRadius: radius.pill,
       borderTopLeftRadius: radius.pill,
       justifyContent: "space-between",
-      overflow:"hidden",
+      overflow: "hidden",
     },
-    fixedViewContainer:{
-     flex:1,
-     padding: spacing.md,
-     justifyContent:"space-between",
-     gap: spacingVertical.md,
-
+    fixedViewContainer: {
+      flex: 1,
+      padding: spacing.md,
+      justifyContent: "space-between",
+      gap: spacingVertical.md,
     },
     scrollViewContainer: {
       flex: 1,
@@ -158,6 +158,7 @@ const CustomMainChild = ({
                 variant="primary"
                 type="filled"
                 size="full"
+                isloading={isLoadingSingleButton}
               />
             )}
             {noOfButtons === 2 && (
@@ -181,7 +182,7 @@ const CustomMainChild = ({
                       onPressDoubleButton2();
                     }
                   }}
-                  isloading = {isLoadingDoubleButton}
+                  isloading={isLoadingDoubleButton}
                   variant="primary"
                   type="filled"
                   size="md"
