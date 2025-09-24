@@ -68,8 +68,8 @@ const DispatchDetails = () => {
   ];
 
   const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(
-    formData[fieldNames.dispatchBranchName],
-    { skip: !formData[fieldNames.dispatchBranchName] }
+    watch(fieldNames.dispatchEmirates),
+    { skip: !watch(fieldNames.dispatchEmirates) }
   );
 
   // const getBranchOptions = () => {
@@ -203,28 +203,28 @@ const DispatchDetails = () => {
             <>
               <CustomInput
                 control={control}
-                name={fieldNames.dispatchAddressLine1}
-                label={fieldNames.borrowerAddressLine1}
+                name={fieldNames.borrowerAddressLine1}
+                label="Address Line 1"
                 placeholder={placeHoldersNames.Address}
                 type="text"
               />
               <CustomInput
                 control={control}
-                name={fieldNames.dispatchAddressLine2}
-                label={fieldNames.borrowerAddressLine2}
+                name={fieldNames.borrowerAddressLine2}
+                label="Address Line 2"
                 placeholder={placeHoldersNames.Address}
                 type="text"
               />
 
               <CustomDropDown
-                name={fieldNames.dispatchEmirates}
-                label={fieldNames.borrowerEmirates}
+                name={fieldNames.borrowerEmirates}
+                label="Emirates"
                 data={emiratesOptions}
                 control={control}
               />
               <CustomDropDown
-                name={fieldNames.dispatchCountry}
-                label={fieldNames.borrowerCountry}
+                name={fieldNames.borrowerCountry}
+                label="Country"
                 data={countryOptions}
                 control={control}
               />

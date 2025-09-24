@@ -1,18 +1,16 @@
 import { FormHeader } from "@/components/Form/Header/FormHeader";
-import ScreenWrapper from "@/components/ScreenWrapper";
 import {
-  fontSize,
-  fontWeight,
   radius,
   spacing,
-  spacingVertical,
+  spacingVertical
 } from "@/constants/Metrics";
-import { useTheme } from "styled-components/native";
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useTheme } from "styled-components/native";
 import CustomButton from "../CustomButton";
+
 
 interface FormHeaderProps {
   stepNumber: number;
@@ -102,6 +100,7 @@ export default function FormLayout({
               size="md"
                
             />
+            <Text/>
             <CustomButton
               title="Save & Next"
               onPress={onSaveAndNext}

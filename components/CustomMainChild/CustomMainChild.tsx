@@ -30,6 +30,7 @@ interface FormHeaderProps {
   isDisableDoubleButton2?: boolean;
   children?: React.ReactNode;
   disableOuterScroll?: boolean;
+  isLoadingDoubleButton?: boolean;
   isLoadingSingleButton?: boolean;
 }
 const CustomMainChild = ({
@@ -46,6 +47,7 @@ const CustomMainChild = ({
   isDisableDoubleButton2 = false,
   children,
   disableOuterScroll = false,
+  isLoadingDoubleButton = false,
   isLoadingSingleButton = false,
 }: FormHeaderProps) => {
   const theme = useTheme();
@@ -170,8 +172,9 @@ const CustomMainChild = ({
                   isloading={isLoadingSingleButton}
                   variant="secondary"
                   type="outlined"
-                  size="lg"
+                  size="md"
                 />
+                <Text/>
                 <CustomButton
                   title={doubleButtonTitle2 ? doubleButtonTitle2 : ""}
                   disabled={isDisableDoubleButton2}
@@ -180,10 +183,10 @@ const CustomMainChild = ({
                       onPressDoubleButton2();
                     }
                   }}
-                  isloading={isLoadingSingleButton}
+                  isloading={isLoadingDoubleButton}
                   variant="primary"
                   type="filled"
-                  size="lg"
+                  size="md"
                 />
               </>
             )}
