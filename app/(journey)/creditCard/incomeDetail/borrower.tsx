@@ -168,7 +168,7 @@ export default function BorrowerIncomeScreen() {
         let dateOfJoining =
           salaryCertificateResponse.data.dateOfJoining.replace(/\//g, "-");
         let currentExp = Number(calculateAge(dateOfJoining)) * 12;
-        setValue("scEmployedFrom", salaryCertificateResponse.data.dateOf);
+        setValue("scEmployedFrom", salaryCertificateResponse.data.dateOfJoining);
         setValue("scCurrExp", currentExp);
         setValue("scEmirates", salaryCertificateResponse.data.nationality);
       } else {
