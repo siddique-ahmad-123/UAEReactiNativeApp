@@ -13,7 +13,7 @@ const NotificationScreen = () => {
   const { prevStep } = useApplicationStore();
   return (
     <CustomMainChild
-      title={t("notification")}
+      title={t("notifications")}
       subTitle={t("findAllNotification")}
       noOfButtons={1}
       singleButtonTitle={t("back")}
@@ -33,7 +33,7 @@ const NotificationScreen = () => {
 
       <CustomInput
         label={t("resolutionProvided")}
-        placeholder={t("Pending..")}
+        placeholder={t("Pending")}
         type="textarea"
         numberOfLines={9}
       />

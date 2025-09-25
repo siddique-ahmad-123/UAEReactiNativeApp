@@ -16,7 +16,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Carousel from "react-native-reanimated-carousel";
 import { useTheme } from "styled-components/native";
 
 const { width, height } = Dimensions.get("screen");
@@ -81,7 +80,7 @@ const cards: CardItem[] = [
       t("rewardpoint3"),
     description4:
       t("perksAirport"),
-    description5: t("Best Rewards: Deep perks, elite status travel benefits."),
+    description5: t("bestRewards3"),
     description6: t("joiningFees"),
     description7: t("annualFees2"),
     image: ImagesPath.card3Image,
@@ -203,7 +202,7 @@ const RequestsScreen = () => {
   
   return (
     <CustomMainChild
-      title={t("Select your credit card")}
+      title={t("selectYourCreditCard")}
       subTitle={t("weHaveCardsForEveryNeedExploreHere")}
       noOfButtons={1}
       singleButtonTitle={t("back")}

@@ -23,6 +23,7 @@ import {
 } from "@/constants/Metrics";
 import { ImagesPath } from "@/constants/Image";
 import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 type RouteNames = "/Request" | "/Agreement" | "/ExistingApplication";
 const services: {
   id: string;
@@ -78,7 +79,7 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("1");
   const theme = useTheme();
   const { goToStep, stepIndex } = useApplicationStore();
-
+const { t } = useTranslation();
   const { value: storedUser, loading } = useAsyncStorage<{
     emiratesId: string;
     mobile: string;
@@ -136,7 +137,7 @@ export default function Dashboard() {
           />
         ))}
       </View>
-      <Text style={localStyles.sectionTitle}>t(Apply Now)</Text>
+      <Text style={localStyles.sectionTitle}>{t("applyNow")}</Text>
       <View style={localStyles.grid}>
         {applyNow.map((item) => (
           <ProductCard

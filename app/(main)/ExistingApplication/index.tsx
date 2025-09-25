@@ -11,7 +11,7 @@ const ExistingApplicantstScreen = () => {
       title={t("existingApplications")}
       subTitle={t("findAllTheRequests")}
       noOfButtons={1}
-      singleButtonTitle={t("Back")}
+      singleButtonTitle={t("back")}
       onClose={() => router.push("/(main)/NavScreen")}
       onPressSingleButton={() => router.back()}
     >

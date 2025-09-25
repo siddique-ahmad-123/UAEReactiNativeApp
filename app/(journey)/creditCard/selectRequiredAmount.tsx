@@ -59,10 +59,10 @@ const SelectRequiredAmount = () => {
   });
   return (
     <CustomMainChild
-      title={t("Select Required Amount")}
+      title={t("selectRequiredAmount")}
       noOfButtons={2}
-      doubleButtonTitle1={t("Cancel")}
-      doubleButtonTitle2={t("Next")}
+      doubleButtonTitle1={t("cancel")}
+      doubleButtonTitle2={t("next")}
       onPressDoubleButton1={() => prevStep()}
       onPressDoubleButton2={() => onClickNext()}
       isDisableDoubleButton2={!(isChecked && isChecked2)}
@@ -70,7 +70,7 @@ const SelectRequiredAmount = () => {
       isLoadingDoubleButton={isloading}
     >
       <DynamicSliderCard
-        title={t("Card Amount")}
+        title={t("cardAmount")}
         value={financeAmount}
         setValue={setFinanceAmount}
         min={10000}
@@ -81,15 +81,15 @@ const SelectRequiredAmount = () => {
       <View style={styles.bottomContainer}>
         <DocumentDownload
           url={process.env.EXPO_PUBLIC_TERMS_CONDITIONS_URL}
-          documentName={t("Download Terms & Conditions")}
+          documentName={t("downloadTermsAndConditions")}
         />
         <DocumentDownload
           url={process.env.EXPO_PUBLIC_FEES_CHARGES_URL}
-          documentName={t("Download Fees & Charges")}
+          documentName={t("downloadFeesCharges")}
         />
         <DocumentDownload
           url={process.env.EXPO_PUBLIC_KAS_URL}
-          documentName={t("Download Key Fact Statement")}
+          documentName={t("downloadKeyFactStatement")}
         />
 
         <View style={styles.checkboxContainer}>
@@ -100,8 +100,7 @@ const SelectRequiredAmount = () => {
             color={isChecked ? theme.colors.primaryColor : undefined}
           />
           <Text style={styles.checkboxLabel}>
-           t( I agree with below provided Terms and Conditions, Fees and Charges
-            Sheet and Key Fact Statement.)
+            {t("iAgreeWithBelowProvided")}
           </Text>
         </View>
         <View style={styles.checkboxContainer}>

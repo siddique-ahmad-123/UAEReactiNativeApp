@@ -29,7 +29,7 @@ const Congratulations = () => {
     <CustomMainChild
       title={t("submitApplication")}
       noOfButtons={1}
-      singleButtonTitle={t("Return to Home Page")}
+      singleButtonTitle={t("returnToHomePage")}
       onClose={() => router.push("/(main)/NavScreen")}
       onPressSingleButton={() => onSubmitApplication()}
     >
