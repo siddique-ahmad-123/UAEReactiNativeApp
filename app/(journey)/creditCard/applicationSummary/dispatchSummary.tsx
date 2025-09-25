@@ -49,6 +49,7 @@ const DispatchSummary = () => {
     { label: "India", value: "IN" },
     { label: "United States", value: "US" },
     { label: "Germany", value: "DE" },
+    { label: "United Arab Emirates", value: "United Arab Emirates" },
   ];
 
   const { data: emiratesBranch } = useGetEmiratesBranchDropDownValuesQuery(
@@ -101,27 +102,27 @@ const DispatchSummary = () => {
         <>
           <CustomInput
             control={control}
-            name={fieldNames.dispatchAddressLine1}
+            name={fieldNames.borrowerAddressLine1}
             label="Address Line 1"
             placeholder={placeHoldersNames.Address}
             type="text"
           />
           <CustomInput
             control={control}
-            name={fieldNames.dispatchAddressLine2}
+            name={fieldNames.borrowerAddressLine2}
             label="Address Line 2"
             placeholder={placeHoldersNames.Address}
             type="text"
           />
 
           <CustomDropDown
-            name={fieldNames.dispatchEmirates}
+            name={fieldNames.borrowerEmirates}
             label={"Emirates"}
             data={emiratesOptions}
             control={control}
           />
           <CustomDropDown
-            name={fieldNames.dispatchCountry}
+            name={fieldNames.borrowerCountry}
             label={"Country"}
             data={countryOptions}
             control={control}

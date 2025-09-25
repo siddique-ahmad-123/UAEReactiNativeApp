@@ -357,7 +357,7 @@ const BorrowerPersonalInformation = () => {
       />
       <CustomInput
         control={control}
-        name={fieldNames.borrowerEidaNo}
+        name={fieldNames.borrowerEmiratesId}
         label="EIDA No"
         placeholder={placeHoldersNames.EIDA}
         type="number"
