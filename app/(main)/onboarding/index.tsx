@@ -19,6 +19,7 @@ import { styles } from "../../../components/styles/onboarding.Styles";
 import { useAsyncStorage } from "@/hooks/useAsyncStorage";
 import { ImagesPath } from "@/constants/Image";
 import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -33,7 +34,37 @@ type Slide = {
 
 
 
-const slides: Slide[] = [
+// const slides: Slide[] = [
+//   {
+//     id: "1",
+//     title: t("creditCards"),
+//     description:
+//       t("getCreditCardsApproval"),
+//     imgpath: ImagesPath.landingPageImage1,
+    
+//   },
+//   {
+//     id: "2",
+//     title: t("mortgages"),
+//     description: t("getMortgagesInPrincipleApproval"),
+//     imgpath: ImagesPath.landingPageImage2,
+//   },
+//   {
+//     id: "3",
+//     title: t("autoLoans"),
+//     description: t("getAutoLoansInPrincipleApprovalr"),
+//     imgpath: ImagesPath.landingPageImage3
+//   },
+//   {
+//     id: "4",
+//     title: t("personalLoans"),
+//     description: t("getFundsInstantly"),
+//     imgpath: ImagesPath.landingPageImage4
+//   },
+// ];
+
+const Carousel = () => {
+  const slides: Slide[] = [
   {
     id: "1",
     title: t("creditCards"),
@@ -62,10 +93,10 @@ const slides: Slide[] = [
   },
 ];
 
-const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
   const theme = useTheme();
+ 
 
   const handleScroll = (event: any) => {
     const index = Math.round(event.nativeEvent.contentOffset.x / width);

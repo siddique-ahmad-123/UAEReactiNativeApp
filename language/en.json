@@ -132,6 +132,7 @@
   "weAreSorryButYourRequestThrough": "We’re sorry but your request did not go through with the amount of 45,000 AED. You can choose for counter offer or apply for higher limit with our team",
   "fetchDetails": "Fetch Details",
   "back": "Back",
+  "next":"Next",
   "saveAndNext": "Save & Next",
   "cardType": "Card Type",
   "selectedRequiredAmount": "Selected Required Amount",
@@ -271,5 +272,6 @@
   "needHigherAmount":"Need higher amount",
   "youCanChooseForCounter":"You can choose for counter offer or apply for higher limit with our team",
   "counterOffer":"CounterOffer",
-  "personName":"Ravish Kumar"
+  "personName":"Ravish Kumar",
+  "bestRewards3":"Best Rewards: Deep perks, elite status travel benefits."
 }

@@ -41,7 +41,7 @@ const ApplicationApproved = () => {
       id: t("email"),
       title: t("creditLimit"),
       description: "",
-      iconName: t("mail-outline"),
+      iconName: "mail-outline",
       amount: formData[fieldNames.cardLimit],
     },
     {
