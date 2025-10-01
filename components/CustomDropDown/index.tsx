@@ -23,7 +23,7 @@ interface CustomDropDownProps {
   mandatory?: boolean;
   control?: any; // react-hook-form control
   name?: string; // required if using control
-  disable?:boolean;
+  disable?: boolean;
 }
 
 const CustomDropDown = ({
@@ -67,7 +67,10 @@ const CustomDropDown = ({
       fontSize: fontSize.md,
       fontWeight: fontWeight.medium,
     },
-    labelLine: { height: 1.5, marginLeft: spacing.md },
+    labelLine: {
+      height: 1.5,
+      // marginLeft: spacing.md,
+    },
     dropdown: { height: spacingVertical.lg },
     placeholderStyle: { fontSize: fontSize.md, color: "#999" },
     selectedTextStyle: { fontSize: fontSize.md },

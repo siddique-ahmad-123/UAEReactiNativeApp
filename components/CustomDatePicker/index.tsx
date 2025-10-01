@@ -8,7 +8,6 @@ import {
   width,
 } from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons";
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import React, { useState } from "react";
 import { Controller } from "react-hook-form";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -24,7 +23,7 @@ interface CustomDatePickerProps {
   maxDate?: Date;
   variant?: "full" | "half";
   mandatory?: boolean;
-  onChangePicker?:(date:Date | null)=>void;
+  onChangePicker?: (date: Date | null) => void;
 }
 
 const CustomDatePicker = ({
@@ -36,7 +35,7 @@ const CustomDatePicker = ({
   maxDate,
   variant = "full",
   mandatory = false,
-  onChangePicker
+  onChangePicker,
 }: CustomDatePickerProps) => {
   const [localDate, setLocalDate] = useState<Date | null>(null);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -52,13 +51,12 @@ const CustomDatePicker = ({
     }
   };
 
- const handleConfirm = (date: Date, onChange?: (d: Date) => void) => {
-  const normalizedDate = new Date(date); // always convert
-  onChange ? onChange(normalizedDate) : setLocalDate(normalizedDate);
-  setDatePickerVisibility(false);
-  onChangePicker?.(normalizedDate);
-};
-
+  const handleConfirm = (date: Date, onChange?: (d: Date) => void) => {
+    const normalizedDate = new Date(date); // always convert
+    onChange ? onChange(normalizedDate) : setLocalDate(normalizedDate);
+    setDatePickerVisibility(false);
+    onChangePicker?.(normalizedDate);
+  };
 
   const styles = StyleSheet.create({
     container: {
@@ -83,7 +81,9 @@ const CustomDatePicker = ({
       fontSize: fontSize.md,
       fontWeight: fontWeight.medium,
     },
-    labelLine: { marginLeft: spacing.md },
+    labelLine: {
+      // marginLeft: spacing.md,
+    },
     inputBox: {
       flexDirection: theme.flexRow.flexDirection,
       justifyContent: "space-between",
@@ -166,7 +166,6 @@ const CustomDatePicker = ({
           onConfirm={(date) => handleConfirm(date, onChange)}
           onCancel={() => setDatePickerVisibility(false)}
         />
-        
       </View>
 
       {/* Error message */}

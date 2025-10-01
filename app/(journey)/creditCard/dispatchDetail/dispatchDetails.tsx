@@ -18,7 +18,7 @@ import { useApplicationStore } from "@/store/applicationStore";
 import Checkbox from "expo-checkbox";
 import { router } from "expo-router";
 import { t } from "i18next";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "styled-components/native";
@@ -39,10 +39,6 @@ const DispatchDetails = () => {
   const dispatchType = watch("dispatchType") ?? "Mailing Address";
 
   const dispatchEmirates = watch(fieldNames.dispatchEmirates) ?? "Dubai";
-
-  // useEffect(() => {
-  //   getBranchOptions();
-  // }, [dispatchEmirates]);
 
   const { data: emirates } = useGetEmiratesDropDownValuesQuery();
 
@@ -94,6 +90,26 @@ const DispatchDetails = () => {
   const [needSupCard, setNeedSupCard] = useState(false);
   const [mailing, setMailing] = useState(false);
   const [branch, setBranch] = useState(false);
+
+  useEffect(() => {
+    if (mailing) {
+      setValue(
+        "mailingAddressLine1",
+        formData[fieldNames.borrowerAddressLine1]
+      );
+      setValue(
+        "mailingAddressLine2",
+        formData[fieldNames.borrowerAddressLine2]
+      );
+      setValue("mailingEmirates", formData[fieldNames.borrowerEmirates]);
+      setValue("mailingCountry", formData[fieldNames.borrowerCountry]);
+    } else {
+      setValue("mailingAddressLine1", "");
+      setValue("mailingAddressLine2", "");
+      setValue("mailingEmirates", "");
+      setValue("mailingCountry", "");
+    }
+  }, [mailing]);
 
   const styles = StyleSheet.create({
     text: {
@@ -199,43 +215,43 @@ const DispatchDetails = () => {
               Select Mailing Address to Dispatch Card
             </Text>
           </View>
-          {mailing ? (
-            <>
-              <CustomInput
-                control={control}
-                name={fieldNames.borrowerAddressLine1}
-                label="Address Line 1"
-                placeholder={placeHoldersNames.Address}
-                type="text"
-              />
-              <CustomInput
-                control={control}
-                name={fieldNames.borrowerAddressLine2}
-                label="Address Line 2"
-                placeholder={placeHoldersNames.Address}
-                type="text"
-              />
+          {/* {mailing ? (
+            <> */}
+          <CustomInput
+            control={control}
+            name="mailingAddressLine1"
+            label="Address Line 1"
+            placeholder={placeHoldersNames.Address}
+            type="text"
+          />
+          <CustomInput
+            control={control}
+            name="mailingAddressLine2"
+            label="Address Line 2"
+            placeholder={placeHoldersNames.Address}
+            type="text"
+          />
 
-              <CustomDropDown
-                name={fieldNames.borrowerEmirates}
-                label="Emirates"
-                data={emiratesOptions}
-                control={control}
-              />
-              <CustomDropDown
-                name={fieldNames.borrowerCountry}
-                label="Country"
-                data={countryOptions}
-                control={control}
-              />
-            </>
+          <CustomDropDown
+            name="mailingEmirates"
+            label="Emirates"
+            data={emiratesOptions}
+            control={control}
+          />
+          <CustomDropDown
+            name="mailingCountry"
+            label="Country"
+            data={countryOptions}
+            control={control}
+          />
+          {/* </>
           ) : (
             <></>
-          )}
+          )} */}
         </>
       ) : (
         <>
-          <View style={styles.checkBoxContainer}>
+          {/* <View style={styles.checkBoxContainer}>
             <Checkbox
               value={branch}
               onValueChange={() => setBranch(!branch)}
@@ -247,35 +263,35 @@ const DispatchDetails = () => {
           </View>
 
           {branch ? (
-            <>
-              <CustomDropDown
-                name={fieldNames.dispatchEmirates}
-                label={"Emirates"}
-                data={emiratesOptions}
-                control={control}
-              />
-              <CustomDropDown
-                name={fieldNames.dispatchBranchName}
-                label={"Branch Name"}
-                data={emiratesBranches}
-                control={control}
-              />
+            <> */}
+          <CustomDropDown
+            name={fieldNames.dispatchEmirates}
+            label={"Emirates"}
+            data={emiratesOptions}
+            control={control}
+          />
+          <CustomDropDown
+            name={fieldNames.dispatchBranchName}
+            label={"Branch Name"}
+            data={emiratesBranches}
+            control={control}
+          />
 
-              <View>
-                <Text style={{ textAlign: "center" }}>
-                  Collection Timings - 9 AM to 4 PM (Monday to Friday)
-                </Text>
-              </View>
-              <View>
-                <Text style={{ textAlign: "center" }}>
-                  Card will be re-dispatched to Head Office if not collected
-                  within 30 days
-                </Text>
-              </View>
-            </>
+          <View>
+            <Text style={{ textAlign: "center" }}>
+              Collection Timings - 9 AM to 4 PM (Monday to Friday)
+            </Text>
+          </View>
+          <View>
+            <Text style={{ textAlign: "center" }}>
+              Card will be re-dispatched to Head Office if not collected within
+              30 days
+            </Text>
+          </View>
+          {/* </>
           ) : (
             <></>
-          )}
+          )} */}
         </>
       )}
     </FormLayout>

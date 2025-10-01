@@ -360,6 +360,7 @@ const BorrowerPersonalInformation = () => {
         name={fieldNames.borrowerEmiratesId}
         label="EIDA No"
         placeholder={placeHoldersNames.EIDA}
+        maxLength={15}
         type="number"
       />
       <CustomDatePicker

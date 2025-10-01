@@ -64,21 +64,21 @@ const PersonalSummary = () => {
   ];
 
   const { data: emirates } = useGetEmiratesDropDownValuesQuery();
-      
-      const emiratesOptions = emirates?.data ?? [
-        {
-          label: "Abu Dhabi",
-          value: "Abu Dhabi",
-        },
-        {
-          label: "Ajman",
-          value: "Ajman",
-        },
-        {
-          label: "Dubai",
-          value: "Dubai",
-        },
-      ];
+
+  const emiratesOptions = emirates?.data ?? [
+    {
+      label: "Abu Dhabi",
+      value: "Abu Dhabi",
+    },
+    {
+      label: "Ajman",
+      value: "Ajman",
+    },
+    {
+      label: "Dubai",
+      value: "Dubai",
+    },
+  ];
 
   const validityOptions = [
     { label: "Yes", value: "Yes" },
@@ -132,6 +132,7 @@ const PersonalSummary = () => {
             label="Emirates ID"
             placeholder={placeHoldersNames.EIDA}
             type="number"
+            maxLength={15}
             control={control}
           />
 

@@ -91,7 +91,7 @@ const RequestsScreen = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const theme = useTheme();
   const _imageWidth = width * 0.8;
-  const _spacing = 16; 
+  const _spacing = 16;
   const handleMomentumScrollEnd = (event: any) => {
     const offsetX = event.nativeEvent.contentOffset.x;
     const index = Math.round(offsetX / (_imageWidth + _spacing));
@@ -102,6 +102,12 @@ const RequestsScreen = () => {
   const { setValue } = useForm({
     defaultValues: formData,
   });
+  const { value: storedUser, storeValue } = useAsyncStorage<{
+    emiratesId: string;
+    mobile: string;
+    userType: string;
+    name: string;
+  }>("user");
   const onClickApply = (
     value: string,
     joiningFees: string,
@@ -118,11 +124,18 @@ const RequestsScreen = () => {
     updateField(fieldNames.mobileNo, mobilenumber?.mobile);
     setValue(fieldNames.userType, mobilenumber?.userType);
     updateField(fieldNames.userType, mobilenumber?.userType);
+    setValue(fieldNames.borrowerEmiratesId, storedUser?.emiratesId || "");
+    updateField(fieldNames.borrowerEmiratesId, storedUser?.emiratesId || "");
     console.log("Store formData:", formData);
     nextStep();
   };
   const renderItem = (item: CardItem) => (
-    <View style={[styles.card, { backgroundColor: theme.colors.background,width:_imageWidth }]}>
+    <View
+      style={[
+        styles.card,
+        { backgroundColor: theme.colors.background, width: _imageWidth },
+      ]}
+    >
       <Image
         source={item.image}
         style={styles.cardImage}
@@ -197,7 +210,7 @@ const RequestsScreen = () => {
       </View>
     </View>
   );
-  
+
   return (
     <CustomMainChild
       title="Select your credit card"
@@ -219,7 +232,6 @@ const RequestsScreen = () => {
           gap: _spacing,
           padding: 16,
         }}
-        
         showsHorizontalScrollIndicator={false}
         onMomentumScrollEnd={handleMomentumScrollEnd}
       />

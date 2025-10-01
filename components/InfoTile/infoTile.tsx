@@ -1,4 +1,10 @@
-import { fontSize, fontWeight, radius, spacing, spacingVertical } from "@/constants/Metrics";
+import {
+    fontSize,
+    fontWeight,
+    radius,
+    spacing,
+    spacingVertical,
+} from "@/constants/Metrics";
 import { Ionicons } from "@expo/vector-icons"; // Example icon lib, optional
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -12,7 +18,7 @@ interface MethodOption {
   amount?: string; // for future use
 }
 
-interface MethodSelectorProps {
+interface InfoTileProps {
   title?: string;
   titleCenter?: boolean;
   options: MethodOption[];
@@ -20,17 +26,16 @@ interface MethodSelectorProps {
   onSelect: (id: string) => void;
 }
 
-const MethodSelector: React.FC<MethodSelectorProps> = ({
+const InfoTile: React.FC<InfoTileProps> = ({
   title = "Select Method",
   options,
   titleCenter = false,
   selectedId,
   onSelect,
 }) => {
-  
   const handleSelect = (id: string) => {
     onSelect(id);
-  }
+  };
   const theme = useTheme();
   const styles = StyleSheet.create({
     title: {
@@ -51,10 +56,11 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
       borderRadius: radius.lg,
       padding: spacing.md,
       justifyContent: "center",
-      elevation: 2, 
-      shadowColor: theme.colors.shadowColor, 
+      elevation: 2,
+      shadowColor: theme.colors.shadowColor,
       shadowOpacity: 0.1,
       shadowRadius: radius.sm,
+      alignItems: "center",
     },
     cardDefault: {
       backgroundColor: theme.colors.primaryLightColor,
@@ -66,15 +72,17 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
       fontSize: fontSize.md,
       fontWeight: fontWeight.bold,
       marginBottom: spacingVertical.xs,
+      textAlign: "center",
     },
     cardDescription: {
       fontSize: fontSize.xxs,
     },
-    cardAmount:{
+    cardAmount: {
       fontSize: fontSize.sm,
       fontWeight: fontWeight.bold,
       marginBottom: spacingVertical.xs,
-    }
+      textAlign: "center",
+    },
   });
   return (
     <View>
@@ -89,21 +97,29 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
                 styles.card,
                 isSelected ? styles.cardSelected : styles.cardDefault,
               ]}
-              onPress={() => handleSelect(option.id)}
+              //   onPress={() => handleSelect(option.id)}
               activeOpacity={0.8}
             >
               {option.iconName && (
                 <Ionicons
                   name={option.iconName as any}
                   size={28}
-                  color={isSelected ? theme.colors.background : theme.colors.primaryColor}
+                  color={
+                    isSelected
+                      ? theme.colors.background
+                      : theme.colors.primaryColor
+                  }
                   style={{ marginBottom: 8 }}
                 />
               )}
               <Text
                 style={[
                   styles.cardTitle,
-                  { color: isSelected ?theme.colors.background : theme.colors.primaryColor},
+                  {
+                    color: isSelected
+                      ? theme.colors.background
+                      : theme.colors.primaryColor,
+                  },
                 ]}
               >
                 {option.title}
@@ -111,7 +127,11 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
               <Text
                 style={[
                   styles.cardDescription,
-                  { color: isSelected ? theme.colors.background : theme.colors.primaryColor },
+                  {
+                    color: isSelected
+                      ? theme.colors.background
+                      : theme.colors.primaryColor,
+                  },
                 ]}
               >
                 {option.description}
@@ -120,10 +140,15 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
                 <Text
                   style={[
                     styles.cardAmount,
-                    { color: isSelected ? theme.colors.background : theme.colors.primaryColor },
+                    {
+                      color: isSelected
+                        ? theme.colors.background
+                        : theme.colors.primaryColor,
+                    },
                   ]}
                 >
-                  AED{"\n"} {Number(option.amount ?? 0).toLocaleString("en-US")}
+                  AED{"\n"}
+                  {Number(option.amount ?? 0).toLocaleString("en-US")}
                 </Text>
               )}
             </TouchableOpacity>
@@ -134,4 +159,4 @@ const MethodSelector: React.FC<MethodSelectorProps> = ({
   );
 };
 
-export default MethodSelector;
+export default InfoTile;
