@@ -87,7 +87,7 @@ const CustomInput = ({
       fontWeight: fontWeight.medium,
     },
     labelLine: {
-      marginLeft: spacing.md,
+      // marginLeft: spacing.md,
     },
     input: {
       fontSize: fontSize.md,
@@ -108,6 +108,9 @@ const CustomInput = ({
       minHeight: numberOfLines * 22,
       paddingTop: spacing.sm,
     },
+    disabled: {
+      backgroundColor: theme.colors.borderColor,
+    },
   });
 
   const getVariantStyle = () => {
@@ -117,6 +120,12 @@ const CustomInput = ({
       case "full":
       default:
         return styles.full;
+    }
+  };
+  const getDisableStyle = () => {
+    switch (editable) {
+      case false:
+        return styles.disabled;
     }
   };
 

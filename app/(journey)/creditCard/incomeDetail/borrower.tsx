@@ -25,6 +25,7 @@ import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { placeHoldersNames } from "@/schemas/creditCard/allFieldsPlaceholder";
 import { useApplicationStore } from "@/store/applicationStore";
 import calculateAge from "@/utils/calculateAge";
+import { parseFromDDMMYYYYWithSlash } from "@/utils/dateParser";
 import {
   getUaeFtsCompletedMail,
   getUaeFtsInitiatedMail,
@@ -165,11 +166,19 @@ export default function BorrowerIncomeScreen() {
       ).unwrap();
       if (salaryCertificateResponse.status == 200) {
         setValue("scEmployerName", salaryCertificateResponse.data.companyName);
-        let dateOfJoining =
-          salaryCertificateResponse.data.dateOfJoining.replace(/\//g, "-");
+
+        let dateOfJoiningStr = salaryCertificateResponse.data.dateOfJoining;
+        let [day, month, year] = dateOfJoiningStr.split("/").map(Number);
+        let dateOfJoining = new Date(year, month - 1, day);
         let currentExp = Number(calculateAge(dateOfJoining)) * 12;
-        setValue("scEmployedFrom", salaryCertificateResponse.data.dateOfJoining);
-        setValue("scCurrExp", currentExp);
+
+        setValue("scCurrExp", currentExp.toString());
+        setValue(
+          "scEmployedFrom",
+          parseFromDDMMYYYYWithSlash(
+            salaryCertificateResponse.data.dateOfJoining
+          )
+        );
         setValue("scEmirates", salaryCertificateResponse.data.nationality);
       } else {
         const customerDataResp = await getCustomerData("501234567").unwrap();

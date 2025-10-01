@@ -1,7 +1,8 @@
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
 import DocumentDownload from "@/components/DocumentDownload";
-import MethodSelector from "@/components/MethodSelector";
+import InfoTile from "@/components/InfoTile/infoTile";
 import { styles } from "@/components/styles/submitApplication.Styles";
+import { fontSize, spacing } from "@/constants/Metrics";
 import {
   useCreateWorkItemMutation,
   useOfferLetterMutation,
@@ -39,21 +40,21 @@ const ApplicationApproved = () => {
       id: "email",
       title: "Credit Limit",
       description: "",
-      iconName: "mail-outline",
+      iconName: "wallet",
       amount: formData[fieldNames.cardLimit],
     },
     {
       id: "sms",
-      title: "Joining Fees",
+      title: "Joining Fees*",
       description: "",
-      iconName: "chatbubble-outline",
+      iconName: "cash",
       amount: formData[fieldNames.cardJoiningFees],
     },
     {
       id: "app",
-      title: "Annual Fees",
+      title: "Annual Fees**",
       description: "",
-      iconName: "notifications-outline",
+      iconName: "receipt",
       amount: formData[fieldNames.cardAnualFees],
     },
   ];
@@ -106,14 +107,22 @@ const ApplicationApproved = () => {
             Your application is approved successfully
           </Text>
         </View>
-        <MethodSelector
+        <InfoTile
           title="Credit Card Details"
           options={methodOptions}
           selectedId={selectedMethod}
           onSelect={(id) => setSelectedMethod(id)}
           titleCenter
         />
-        <View style={{ alignItems: "center", marginTop: 30 }}>
+        <View style={{ margin: spacing.md }}>
+          <Text style={{ fontStyle: "italic", fontSize: fontSize.xs }}>
+            *Joining Fees will be deducted from 1st credit card statement
+          </Text>
+          <Text style={{ fontStyle: "italic", fontSize: fontSize.xs }}>
+            **Annual Fees will be deducted anually from your credit card
+          </Text>
+        </View>
+        <View style={{ alignItems: "center", marginTop: spacing.xs }}>
           <Image
             source={
               formData[fieldNames.cardType] === "Cashback Credit Card"
@@ -128,7 +137,7 @@ const ApplicationApproved = () => {
         </View>
         <View style={{ alignItems: "center", marginTop: 30 }}>
           <Text style={[styles.text, { color: theme.colors.borderColor }]}>
-            You can download your offer letter from below
+            {/* You can download your offer letter from below */}
           </Text>
         </View>
         <DocumentDownload

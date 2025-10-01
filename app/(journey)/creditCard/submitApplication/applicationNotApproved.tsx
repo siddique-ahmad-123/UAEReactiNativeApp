@@ -1,6 +1,7 @@
 import CustomMainChild from "@/components/CustomMainChild/CustomMainChild";
-import MethodSelector from "@/components/MethodSelector";
+import InfoTile from "@/components/InfoTile/infoTile";
 import { styles } from "@/components/styles/submitApplication4.Styles";
+import { fontSize, spacing } from "@/constants/Metrics";
 import { fieldNames } from "@/schemas/creditCard/allFieldNames";
 import { useApplicationStore } from "@/store/applicationStore";
 import { router } from "expo-router";
@@ -24,21 +25,21 @@ const ApplicationNotApproved = () => {
       id: "email",
       title: "Limit Required",
       description: "",
-      iconName: "mail-outline",
+      iconName: "wallet",
       amount: formData[fieldNames.cardLimit],
     },
     {
       id: "sms",
       title: "Joining Fees",
       description: "",
-      iconName: "chatbubble-outline",
-      amount: Number(formData[fieldNames.cardJoiningFees] || 0),
+      iconName: "cash",
+      amount: formData[fieldNames.cardJoiningFees],
     },
     {
       id: "app",
       title: "Annual Fees",
       description: "",
-      iconName: "notifications-outline",
+      iconName: "receipt",
       amount: formData[fieldNames.cardAnualFees],
     },
   ];
@@ -74,9 +75,11 @@ const ApplicationNotApproved = () => {
           ]}
         >
           Your application has been successfully accepted for AED{" "}
-         <Text style={{ color: theme.colors.primaryColor }}>
-       {(formData[fieldNames.selectedRequiredAmount] ?? 0).toLocaleString("en-US")}
-        </Text>
+          <Text style={{ color: theme.colors.primaryColor }}>
+            {(formData[fieldNames.selectedRequiredAmount] ?? 0).toLocaleString(
+              "en-US"
+            )}
+          </Text>
         </Text>
 
         <View style={styles.linkTextView}>
@@ -92,13 +95,21 @@ const ApplicationNotApproved = () => {
             Your Application No is {formData[fieldNames.workItemNumber]}
           </Text>
         </View>
-        <MethodSelector
+        <InfoTile
           title="Application Details"
           options={methodOptions}
           selectedId={selectedMethod}
           onSelect={(id) => setSelectedMethod(id)}
           titleCenter
         />
+        <View style={{ margin: spacing.md }}>
+          <Text style={{ fontStyle: "italic", fontSize: fontSize.xs }}>
+            *Joining Fees will be deducted from 1st credit card statement
+          </Text>
+          <Text style={{ fontStyle: "italic", fontSize: fontSize.xs }}>
+            **Annual Fees will be deducted anually from your credit card
+          </Text>
+        </View>
       </ScrollView>
     </CustomMainChild>
   );

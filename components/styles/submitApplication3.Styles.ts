@@ -1,5 +1,3 @@
-import { useTheme } from "styled-components/native";
-import React from "react";
 import { Dimensions, StyleSheet } from "react-native";
 
 import { radius, spacing } from "@/constants/Metrics";
@@ -53,13 +51,13 @@ export const styles = StyleSheet.create({
   },
   linkTextView: {
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 10,
   },
   linktext: {
     alignItems: "center",
     fontSize: 16,
     fontWeight: "700",
-    marginBottom: 50,
+    // marginBottom: 50,
     textAlign: "center",
   },
   row: {
