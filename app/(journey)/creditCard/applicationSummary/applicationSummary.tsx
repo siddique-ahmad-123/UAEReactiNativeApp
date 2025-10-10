@@ -29,7 +29,6 @@ const ApplicationSummary = () => {
   };
 
   const onSubmitApplication = async () => {
-   
     const response = await uaeCreditCard(formData).unwrap();
     console.log("✅ Server Response:", response);
 
