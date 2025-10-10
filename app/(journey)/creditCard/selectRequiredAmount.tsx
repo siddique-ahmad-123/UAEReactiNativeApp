@@ -15,7 +15,7 @@ const SelectRequiredAmount = () => {
   const theme = useTheme();
   const { nextStep, formData, prevStep, updateField } = useApplicationStore();
   const [financeAmount, setFinanceAmount] = useState<number>(
-    formData?.[fieldNames.selectedRequiredAmount] || 10000
+    formData?.[fieldNames.selectedRequiredAmount] || 50000
   );
   const [isChecked, setChecked] = useState(
     formData?.[fieldNames.isCheckedTermandCond] || false

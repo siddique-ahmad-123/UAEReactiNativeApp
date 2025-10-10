@@ -103,6 +103,7 @@ const CustomMainChild = ({
       padding: spacing.md,
       paddingBottom: spacingVertical.xl, // give room at bottom for keyboard
       gap: spacingVertical.md,
+      paddingTop:spacing.xxl
     },
     buttonRow: {
       flexDirection: theme.flexRow.flexDirection,
@@ -132,7 +133,6 @@ const CustomMainChild = ({
       </View>
       <View style={styles.dataViewContainer}>
         {disableOuterScroll ? (
-          // no outer ScrollView — just a container; carousel will handle inner scrolling
           <View style={styles.fixedViewContainer}>{children}</View>
         ) : (
           <ScrollView
